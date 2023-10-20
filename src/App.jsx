@@ -43,16 +43,16 @@ class App extends React.Component {
   }
 
   getTerritoriesFromCSV(year,week){
-    console.log("Attempting to access "+window.location.href+"csv/y"+year+"/territoryAssignments-wk"+week+".csv");
-      fetch(window.location.href+"csv/y"+year+"/territoryAssignments-wk"+week+".csv")
+      fetch("./csv/y"+year+"/territoryAssignments-wk"+week+".csv")
       .then(response => response.text())
       .then(text => {
+      console.log(text);
       let lines = text.split("\n");
   
       this.setState ({ weekTitle: lines[0],
                       territoryLabelFontSize: lines[1].trim()});
       
-      console.log("Week "+week+": "+this.state.weekTitle);
+      console.log("Week "+week+": "+ lines[0]);
   
       for (let i = 3; i < lines.length; i++){
           let splitLine = lines[i].split(",");
@@ -75,25 +75,18 @@ class App extends React.Component {
 
     prepareTerritoryDOM(){
       
-      this.setState({territoriesDOMElement:
-        (<div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
-          <>
-          {this.state.territories.map((territory) => <>{territory}</>)}
-          </>
-        </div>)});
-  
-      console.log(this.state.territoriesDOMElement)
       this.setState({
           display: <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
                       top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
-                      {this.state.territoriesDOMElement}
+                      {(<div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
+                          <>
+                          {this.state.territories.map((territory) => <>{territory}</>)}
+                          </>
+                        </div>)}
                    </div>
         });
-
-        console.log(this.state.display);
       }
   
-
   render(){
     return (
     <>

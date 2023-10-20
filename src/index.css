@@ -26,6 +26,10 @@ body:active{
     cursor:grabbing;
 }
 
+#root {
+    height:100%;
+}
+
 h1 {
     position:absolute;
     text-shadow: 0.05em 0.05em rgba(0,0,0,0.1);

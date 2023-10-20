@@ -36,10 +36,14 @@ class Territory extends React.Component {
     }
   }
 
+  getPlusOrMinus(val){
+    return val >= 0 ? "+" : "-";
+  }
+
   render(){
     return (
     <>
-     <div className={"territory "+ this.state.alignment} id={this.state.id} style={{left:"calc(0% +("+this.state.emPosX+"em))",top:"calc(0% +("+this.state.emPosY+"em))"}}>
+     <div className={"territory "+ this.state.alignment} id={this.state.id} style={{left:"calc(0% "+this.getPlusOrMinus(this.state.emPosX) + " " + Math.abs(this.state.emPosX)+"em)",top:"calc(0% "+this.getPlusOrMinus(this.state.emPosY) + " " + Math.abs(this.state.emPosY)+"em)"}}>
         <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:this.state.territoryLabelFontSize}}>
             {this.state.name}
         </div>
