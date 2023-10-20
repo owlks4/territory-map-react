@@ -85,7 +85,7 @@ class App extends React.Component {
       fetch("./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv")
       .then(response => response.text())
       .then(text => {
-        if (text != ""){
+        if (text != "" && text[0] != "<"){
           let lines = text.split("\n");
           newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i});
         }
