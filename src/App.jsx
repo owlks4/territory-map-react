@@ -16,30 +16,55 @@ class App extends React.Component {
 
   constructor(props){
     super(props);
-    let mapAdjustLeft = "54%";
-    let mapAdjustTop = "40%";
-
     this.state = {
       territories: [],
       adjacencies: [],
       year: props.year,
       week: props.week,
-      displayTop: 0,
-      displayLeft: -225,
       territoryLabelFontSize: "1em",
       weekTitle: "",
-      mapAdjustLeft: mapAdjustLeft,
-      mapAdjustTop: mapAdjustTop,
+      dragging: false,
+      displayTop: 0,
+      displayLeft: -225,
+      mapAdjustLeft: "54%",
+      mapAdjustTop: "40%",
       touchStartX: 0,
       touchStartY: 0,
-      fontSizeEm: 0.89,
-      dragging: false,
-      canvas:  <canvas id="canvas" width="1920" height="1080"></canvas>       
+      fontSizeEm: 0.89
+    }
+  }
+
+  onMouseMove(event) {
+    
+    if (this.state.dragging){
+        this.setState({displayLeft: this.state.displayLeft + event.movementX,
+                                  displayTop: this.state.displayTop + event.movementY});
+      //  app.updateCanvasPosition();
+    }
+  }
+
+  onTouchMove(event) {
+    if (this.state.dragging){
+        let touch = event.touches[0];
+        this.setState({displayLeft: this.state.displayLeft + (touch.clientX - this.state.touchStartX),
+                                  displayTop:  this.state.displayTop + (touch.clientY - this.state.touchStartY),
+                                  touchStartX: touch.clientX,
+                                  touchStartY: touch.clientY});
+       // app.updateCanvasPosition();
     }
   }
 
   componentDidMount(){
+    console.log(this.state);
     this.getTerritoriesFromCSV(this.state.year,this.state.week);
+
+    document.addEventListener('mousedown', () => {this.setState({dragging: true})});
+    document.addEventListener("mousemove", (event) => {this.onMouseMove(event)});
+    document.addEventListener("mouseup", () => {this.setState({dragging: false})});
+    document.addEventListener("wheel", (ev) => {let change = ev.deltaY/1000; (this.state.fontSizeEm - change > 0.5) && (this.state.fontSizeEm - change < 3) ? this.setState({fontSizeEm: this.state.fontSizeEm - change}) : null; /*app.updateCanvasPosition()*/});
+    document.addEventListener("touchmove", this.onTouchMove);
+    document.addEventListener("touchstart", ev => {this.setState({dragging: true}); let touch = ev.touches[0]; this.setState({touchStartX: touch.clientX, touchStartY: touch.clientY});});
+    document.addEventListener("touchend",() => {this.setState({dragging: false});});
   }
 
   getTerritoriesFromCSV(year,week){
@@ -68,24 +93,8 @@ class App extends React.Component {
               this.state.territories.push(<Territory name={splitLine[0].trim()} alignment={splitLine[1].trim().toLowerCase()} holder={splitLine[2].trim()} emPosX={splitLine[3].trim()} emPosY={splitLine[4].trim()}/>);
           }
       }
-
-      this.prepareTerritoryDOM();
     });
     }
-
-    prepareTerritoryDOM(){
-      
-      this.setState({
-          display: <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
-                      top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
-                      {(<div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
-                          <>
-                          {this.state.territories.map((territory) => <>{territory}</>)}
-                          </>
-                        </div>)}
-                   </div>
-        });
-      }
   
   render(){
     return (
@@ -94,7 +103,13 @@ class App extends React.Component {
         <h1>
             Territory Map
         </h1>
-        {this.state.display}
+        <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
+            top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
+            <div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
+              <>{this.state.territories.map((territory) => <>{territory}</>)}</>
+            </div>
+          <>{this.state.displayLeft}</>
+        </div>
         <div id="panel">
             <br/>
             <hr/>
