@@ -43,7 +43,8 @@ class App extends React.Component {
   }
 
   getTerritoriesFromCSV(year,week){
-      fetch("./csv/y"+year+"/territoryAssignments-wk"+week+".csv")
+    console.log("Attempting to access "+window.location.href+"csv/y"+year+"/territoryAssignments-wk"+week+".csv");
+      fetch(window.location.href+"csv/y"+year+"/territoryAssignments-wk"+week+".csv")
       .then(response => response.text())
       .then(text => {
       let lines = text.split("\n");
