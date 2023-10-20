@@ -9,11 +9,18 @@ html {
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
-    width: 100vw;
+    user-select: none;    
     height: 100vh;
     cursor:grab;
 }
+@media only screen and (max-width: 1000px) and (orientation: portrait)
+    {
+        html {
+            transform: rotate(90deg);
+            transform-origin: left top;
+        }    
+    }
+
 
 body {
     overflow: hidden;
@@ -144,16 +151,23 @@ canvas {
 }
 
 #panel {
-    position: relative;
-    height: 100%;
-    cursor: default;
-    float: right;
-    font-family: sans-serif;
-    border: 2px solid rgb(221, 221, 221);
-    background-color: rgba(245, 245, 245, 0.9);
-    box-shadow: 0.05em 0.05em rgba(0,0,0,0.5);
-    z-index: 5;
+    display: none;
 }
+
+@media only screen and (min-width: 1000px) {
+    #panel {
+        display:inherit;
+        position: relative;
+        height: 100%;
+        cursor: default;
+        float: right;
+        font-family: sans-serif;
+        border: 2px solid rgb(221, 221, 221);
+        background-color: rgba(245, 245, 245, 0.9);
+        box-shadow: 0.05em 0.05em rgba(0,0,0,0.5);
+        z-index: 5;
+    }
+} 
 
 .pull{
     position:absolute;
