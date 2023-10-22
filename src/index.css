@@ -23,6 +23,15 @@ html {
         }    
     }
 
+@media only screen and (max-width: 1000px) and (orientation: landscape)
+    {
+        #displayParent {
+            height:100%;
+            transform:  scale(0.45) translate(225px,0);
+            transform-origin: center;
+        }    
+    }
+
 body {
     overflow: hidden;
     margin: 0;
@@ -36,15 +45,6 @@ body:active{
 
 #root {
     height:100%;
-}
-
-h1 {
-    position:absolute;
-    text-shadow: 0.05em 0.05em rgba(0,0,0,0.1);
-    margin:0;
-    padding: 0.5em 1em;
-    z-index:3;
-    width: fit-content;
 }
 
 canvas {
@@ -155,13 +155,13 @@ canvas {
     display: none;
 }
 
-h2 {
+h1 {
     display: none;
 }
 
 @media only screen and (min-width: 1000px) {
     #panel {
-        display:inherit;
+        display: inherit;
         position: relative;
         height: 100%;
         cursor: default;
@@ -174,14 +174,14 @@ h2 {
         padding-left: 0.75em;
     }
 
-    h2 {
-        margin: 1em 4em 0em 1em;
-        color: rgb(121, 121, 121);
-        text-align: left;
-        font-size: 1.06em;
-        font-weight: normal;
-        letter-spacing: 0.05em;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    h1 {
+        display: inherit;
+        position: absolute;
+        text-shadow: 0.05em 0.05em rgba(0,0,0,0.1);
+        margin:0;
+        padding: 0.5em 1em;
+        z-index:3;
+        width: fit-content;
     }
 } 
 
@@ -213,7 +213,7 @@ h2 {
     color: rgba(0,0,0,0.6)
 }
 
-h2 {
+h2{
     margin: 1em 4em 0em 1em;
     color: rgb(121, 121, 121);
     text-align: left;
