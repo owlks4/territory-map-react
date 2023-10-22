@@ -142,11 +142,11 @@ class App extends React.Component {
   render(){
     return (
     <>
-        {this.state.canvas}        
-        <h1>
-            Territory Map
+        {this.state.canvas}
+        <h1 className="hideOnMobile">
+            Territory Map History
         </h1>
-        <h1 className="h1" style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
+        <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
             {isReady ? null : "LOADING..."}
           </h1>
         <div id="displayParent">
@@ -158,9 +158,39 @@ class App extends React.Component {
             <>{SHOW_DEBUG_COORDS_IN_CENTRE ? this.state.displayLeft + " " + this.state.displayTop : null}</>
           </div>
         </div>
-        <div id="panel">
+        <p className="hideOnMobile" style={{color:"rgb(180,180,180)", margin: "2em 0 2em 6em", width: "100%", bottom:0, position:"absolute"}}>
+            Disclaimer: This is unofficial, and for comparing changes from past weeks - it's definitely not live!
+          </p>
+        <div id="panel" className="hideOnMobile">
             <br/>
-            <h2>Select week</h2>
+            <br/>
+            <h2>Legend</h2>
+            <hr/>
+            <div id="key">
+              <div>
+                <div className="territory ventrue inline-territory">Ventrue</div>
+                <div className="territory daeva inline-territory">Daeva</div>
+                <div className="territory mekhet inline-territory">Mekhet</div>
+                <div className="territory gangrel inline-territory">Gangrel</div>
+                <div className="territory nosferatu inline-territory">Nos</div>
+              </div>
+              <div style={{marginTop:"0.25em"}}>
+                <div className="territory invictus inline-territory">Invictus</div>
+                <div className="territory carthian inline-territory">Carthian</div>
+                <div className="territory lance inline-territory">Lance</div>
+                <div className="territory crone inline-territory">Crone</div>
+                <div className="territory ordo inline-territory">Ordo</div>
+              </div>
+              <div style={{marginTop:"0.5em"}}>
+                <div className="territory court inline-territory">Court</div>
+                <div className="territory personal inline-territory">Personal</div>
+                <div className="territory enemy inline-territory">Enemy</div>
+                <div className="territory unclaimed inline-territory">Unclaimed</div>
+              </div>
+            </div>
+            <br/>   
+            <br/>
+            <h2>Select past week</h2>
             <hr/>
             <div className="weeksScroll">
               <>{this.state.loadedWeeks.map((week) => <><h4 className={"weekOption"+ (week.weekNumber == this.state.week ? " selected" : "")} onClick={() => this.state.week != week.weekNumber ? this.changeWeek(week.weekNumber) : null}>{week.title}</h4></>)}</>
