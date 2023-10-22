@@ -21,7 +21,6 @@ html {
         }    
     }
 
-
 body {
     overflow: hidden;
     margin: 0;
@@ -198,8 +197,21 @@ canvas {
 }
 
 h2 {
-    margin: 1em 4em;
-    color: rgba(0,0,0,0.85);
+    margin: 1em 4em 0em 1em;
+    color: rgb(121, 121, 121);
+    text-align: left;
+    font-size: 1.25em;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h4 {
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0 71em 0 0;
+    width: 20em;
 }
 
 hr {
@@ -216,7 +228,7 @@ hr {
     cursor:pointer;
     margin: 0.5em 2em 0.5em 1em;
     border-radius:0.1em;
-    padding: 1em 0 1em 2em;
+    padding: 1em 0em 1em 2em;
     vertical-align: center;
     background-color: rgb(238,238,238);
     box-shadow: 0.15em 0.15em rgba(0,0,0,0.2);
@@ -228,4 +240,10 @@ hr {
 .weekOption:hover {
     transform: translate(0,-0.1em);
     background-color: rgb(220,220,220);
+}
+
+.weekOption.selected {
+    transition: transform 0.2s;
+    background-color: rgb(174, 236, 190);
+    box-shadow: 0.15em 0.15em rgba(0,0,0,0.4);
 }
