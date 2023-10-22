@@ -133,7 +133,7 @@ canvas {
 }
 
 .personal {
-    color: black;
+    color: rgb(84, 90 ,100);
     background-color: rgb(178,185,186);
 }
 
@@ -151,17 +151,35 @@ canvas {
     border: 0.33em dashed red;
 }
 
-#panel {
-    display: none;
+#key {
+    margin-left: 1em;
+
 }
 
-h1 {
-    display: none;
+.inline-territory {
+    display:inline-block;
+    position:relative;
+    transform: none;
+    margin: 0 0.1em;
+    padding: 0.25em 0.5em;
+}
+
+.crone.inline-territory, .court.inline-territory {
+    color: white;
+}
+
+.court.inline-territory, .enemy.inline-territory{
+    padding: 0.25em 1em;
+}
+
+@media only screen and (max-width: 1000px) {
+    .hideOnMobile {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 1000px) {
     #panel {
-        display: inherit;
         position: relative;
         min-width:20.9%;
         height: 100%;
@@ -176,7 +194,6 @@ h1 {
     }
 
     h1 {
-        display: inherit;
         position: absolute;
         text-shadow: 0.05em 0.05em rgba(0,0,0,0.1);
         margin:0;
@@ -215,7 +232,7 @@ h1 {
 }
 
 h2{
-    margin: 1em 4em 0em 1em;
+    margin: 0em 4em 0em 1em;
     color: rgb(121, 121, 121);
     text-align: left;
     font-size: 1.06em;
