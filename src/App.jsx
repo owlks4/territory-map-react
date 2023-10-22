@@ -6,6 +6,8 @@ const DEFAULT_YEAR = 6;
 const DEFAULT_WEEK = 1;
 const SHOW_DEBUG_COORDS_IN_CENTRE = false;
 
+let isReady = false;
+
 class Adjacency {
   constructor(x1,y1,x2,y2,a1){
       this.x1 = x1;
@@ -103,6 +105,7 @@ class App extends React.Component {
     }
     newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)          
     this.setState({year:newYearNumber, week: highestWeekFound, loadedWeeks:newLoadedWeeks});
+    isReady = true;
   }
 
   changeWeek(newWeekNumber){    
@@ -142,6 +145,9 @@ class App extends React.Component {
         <h1>
             Territory Map
         </h1>
+        <h1 className="h1" style={{marginTop: "2em", top:"45%", left:"45%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
+            {isReady ? null : "LOADING..."}
+          </h1>
         <div id="displayParent">
           <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
               top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
