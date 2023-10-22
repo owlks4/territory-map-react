@@ -5,6 +5,7 @@ import Territory from './Territory.jsx';
 const DEFAULT_YEAR = 6;
 const DEFAULT_WEEK = 1;
 const SHOW_DEBUG_COORDS_IN_CENTRE = false;
+const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for this many CSVs in the given folder. It's unlikely to ever be that many, but that's the upper bound here.
 
 let isReady = false;
 
@@ -89,7 +90,7 @@ class App extends React.Component {
     let newLoadedWeeks = [];
     let highestWeekFound = -1;
 
-    for (let i = 1; i < 30; i++){
+    for (let i = 1; i < MAX_SPECULATIVE_CSV_CHECK_NUMBER; i++){
       await fetch("./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv")
       .then(response => response.text())
       .then(text => {
@@ -145,7 +146,7 @@ class App extends React.Component {
         <h1>
             Territory Map
         </h1>
-        <h1 className="h1" style={{marginTop: "2em", top:"45%", left:"45%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
+        <h1 className="h1" style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
             {isReady ? null : "LOADING..."}
           </h1>
         <div id="displayParent">
