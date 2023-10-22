@@ -3,7 +3,7 @@ import './index.css'
 import Territory from './Territory.jsx';
 
 const DEFAULT_YEAR = 6;
-const DEFAULT_WEEK = 3;
+const DEFAULT_WEEK = 1;
 const SHOW_DEBUG_COORDS_IN_CENTRE = false;
 
 class Adjacency {
@@ -75,10 +75,9 @@ class App extends React.Component {
     document.addEventListener("wheel", (ev) => {let change = ev.deltaY/1000; (this.state.fontSizeEm - change > 0.5) && (this.state.fontSizeEm - change < 3) ? this.setState({fontSizeEm: this.state.fontSizeEm - change}) : null; /*app.updateCanvasPosition()*/});
     
     this.changeYear(DEFAULT_YEAR);
-    this.changeWeek(DEFAULT_WEEK);
   }
 
-  changeYear(newYearNumber){
+  async changeYear(newYearNumber){
 
     if (this.state.year == newYearNumber){
       console.log("Did not attempt to change year, because that year was already selected.");
@@ -86,23 +85,24 @@ class App extends React.Component {
     }
     
     let newLoadedWeeks = [];
+    let highestWeekFound = -1;
 
     for (let i = 1; i < 30; i++){
-      fetch("./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv")
+      await fetch("./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv")
       .then(response => response.text())
       .then(text => {
         if (text != "" && text[0] != "<"){
           let lines = text.split("\n");
           newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i});
           this.getTerritoriesFromCSV(lines, i);
+          if (i > highestWeekFound){
+            highestWeekFound = i;
+          }
         }
-      })
-      .then(() => {
-        newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
       });
     }
-
-    this.setState({year:newYearNumber, week:1, loadedWeeks:newLoadedWeeks});
+    newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)          
+    this.setState({year:newYearNumber, week: highestWeekFound, loadedWeeks:newLoadedWeeks});
   }
 
   changeWeek(newWeekNumber){    
@@ -142,18 +142,19 @@ class App extends React.Component {
         <h1>
             Territory Map
         </h1>
-        <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
-            top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
-            <div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
-              {this.state.territories.map((t) => t.week == this.state.week ? (<><Territory name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week}/></>) : null)}
-            </div>
-          <>{SHOW_DEBUG_COORDS_IN_CENTRE ? this.state.displayLeft + " " + this.state.displayTop : null}</>
+        <div id="displayParent">
+          <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
+              top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
+              <div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
+                {this.state.territories.map((t) => t.week == this.state.week ? (<><Territory name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week}/></>) : null)}
+              </div>
+            <>{SHOW_DEBUG_COORDS_IN_CENTRE ? this.state.displayLeft + " " + this.state.displayTop : null}</>
+          </div>
         </div>
         <div id="panel">
             <br/>
-            <h2>DISPLAY OPTIONS</h2>
+            <h2>Select week</h2>
             <hr/>
-            <br/>
             <div className="weeksScroll">
               <>{this.state.loadedWeeks.map((week) => <><h4 className={"weekOption"+ (week.weekNumber == this.state.week ? " selected" : "")} onClick={() => this.state.week != week.weekNumber ? this.changeWeek(week.weekNumber) : null}>{week.title}</h4></>)}</>
             </div>
