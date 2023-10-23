@@ -8,6 +8,7 @@ const SHOW_DEBUG_COORDS_IN_CENTRE = false;
 const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for this many CSVs in the given folder. It's unlikely to ever be that many, but that's the upper bound here.
 
 let isReady = false;
+let mouseIsOverPanel = false;
 
 class Adjacency {
   constructor(x1,y1,x2,y2,a1){
@@ -52,7 +53,7 @@ class App extends React.Component {
 
   onMouseMove(event) {
     
-    if (this.state.dragging){
+    if (this.state.dragging && isReady){
         this.setState({displayLeft: this.state.displayLeft + event.movementX,
                        displayTop: this.state.displayTop + event.movementY,
                       territories: this.state.territories});
@@ -60,19 +61,8 @@ class App extends React.Component {
     }
   }
 
-  onTouchMove(event) {
-    if (this.state.dragging){
-        let touch = event.touches[0];
-        this.setState({displayLeft: this.state.displayLeft + (touch.clientX - this.state.touchStartX),
-                       displayTop:  this.state.displayTop + (touch.clientY - this.state.touchStartY),
-                       touchStartX: touch.clientX,
-                       touchStartY: touch.clientY});
-       // app.updateCanvasPosition();
-    }
-  }
-
   componentDidMount(){
-    document.addEventListener('mousedown', () => {this.setState({dragging: true})});
+    document.addEventListener('mousedown', () => {this.setState({dragging: true && !mouseIsOverPanel})});
     document.addEventListener("mousemove", (event) => {this.onMouseMove(event)});
     document.addEventListener("mouseup", () => {this.setState({dragging: false})});
     document.addEventListener("wheel", (ev) => {let change = ev.deltaY/1000; (this.state.fontSizeEm - change > 0.5) && (this.state.fontSizeEm - change < 3) ? this.setState({fontSizeEm: this.state.fontSizeEm - change}) : null; /*app.updateCanvasPosition()*/});
@@ -155,13 +145,17 @@ class App extends React.Component {
               <div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
                 {this.state.territories.map((t) => t.week == this.state.week ? (<><Territory name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week}/></>) : null)}
               </div>
-            <>{SHOW_DEBUG_COORDS_IN_CENTRE ? this.state.displayLeft + " " + this.state.displayTop : null}</>
+              <>{SHOW_DEBUG_COORDS_IN_CENTRE ? this.state.displayLeft + " " + this.state.displayTop : null}</>
+              <svg width = {(100 * this.state.fontSizeEm) + "vw"}  height = {(150 * this.state.fontSizeEm) + "vh"}
+                  style={{position:'absolute', left: (-50 * this.state.fontSizeEm) +"vw", top: (-50 * this.state.fontSizeEm) +"vh"}}>
+              </svg>
           </div>
+         
         </div>
         <p className="hideOnMobile" style={{color:"rgb(180,180,180)", margin: "2em 0 2em 6em", width: "100%", bottom:0, position:"absolute"}}>
             Disclaimer: This is unofficial, and for comparing changes from past weeks - it's definitely not live!
           </p>
-        <div id="panel" className="hideOnMobile">
+        <div id="panel" className="hideOnMobile" onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
             <br/>
             <br/>
             <h2>Legend</h2>
