@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
+import { Color } from 'three';
 
 const DEFAULT_YEAR = 6;
 const DEFAULT_WEEK = 1;
@@ -9,14 +10,31 @@ const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it wil
 
 let isReady = false;
 let mouseIsOverPanel = false;
+let canvas = null;
 
 class Adjacency {
-  constructor(x1,y1,x2,y2,a1){
-      this.x1 = x1;
-      this.y1 = y1;
-      this.x2 = x2;
-      this.y2 = y2;
-      this.a1 = a1;
+  constructor(week,x1,y1,x2,y2,sideOrTop1, sideOrTop2){
+      this.week = week;
+      this.x1 = parseFloat(x1);
+      this.y1 = parseFloat(y1);
+      this.x2 = parseFloat(x2);
+      this.y2 = parseFloat(y2);
+
+      if (sideOrTop1 == "side"){
+        this.a1 = (this.x1 + this.x2) / 2
+        this.b1 = parseFloat(y1);
+      } else {
+        this.a1 =  parseFloat(x1);
+        this.b1 = (this.y1 + this.y2) / 2;
+      }
+
+      if (sideOrTop2 == "side"){
+        this.a2 = (this.x1 + this.x2) / 2
+        this.b2 = parseFloat(y2);
+      } else {
+        this.a2 =  parseFloat(x2);
+        this.b2 = (this.y1 + this.y2) / 2;
+      }
   }
 }
 
@@ -47,7 +65,8 @@ class App extends React.Component {
       touchStartX: 0,
       touchStartY: 0,
       fontSizeEm: 0.89,
-      loadedWeeks: []
+      loadedWeeks: [],
+      weekBounds: []
     }
   }
 
@@ -85,8 +104,8 @@ class App extends React.Component {
       .then(response => response.text())
       .then(text => {
         if (text != "" && text[0] != "<"){
-          let lines = text.split("\n");
-          newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i});
+          let lines = text.trim().split("\n");
+          newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i, minX:null, maxX:null, minY:null, maxY:null});
           this.getTerritoriesFromCSV(lines, i);
           if (i > highestWeekFound){
             highestWeekFound = i;
@@ -94,61 +113,147 @@ class App extends React.Component {
         }
       });
     }
-    newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)          
+    newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
     this.setState({year:newYearNumber, week: highestWeekFound, loadedWeeks:newLoadedWeeks});
     isReady = true;
+    this.redrawCanvasAccordingToWeek(highestWeekFound);
   }
 
   changeWeek(newWeekNumber){    
     this.setState({week:newWeekNumber});
+    this.redrawCanvasAccordingToWeek(newWeekNumber);
+  }
+
+  redrawCanvasAccordingToWeek(week){
+    if (canvas == null){
+      return;
+    }
+    
+      let ctx = canvas.getContext("2d");
+      ctx.imageSmoothingEnabled = true;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "#505050";
+      ctx.lineWidth = 1.5;
+
+      for (let i = 0; i < this.state.adjacencies.length; i++){        
+        let a = this.state.adjacencies[i];
+        if (a.week != week){
+          continue;
+        }
+        ctx.beginPath();        
+        ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
+        ctx.bezierCurveTo((a.a1/100) * canvas.width, (a.b1/100) * canvas.height,
+                          (a.a2/100) * canvas.width, (a.b2/100) * canvas.height, 
+                          (a.x2/100) * canvas.width, (a.y2/100) * canvas.height);
+        ctx.stroke();
+      }
   }
 
   getTerritoriesFromCSV(lines, week){
 
+    let line1Split = lines[1].split(",");
+
       this.setState ({ weekTitle: lines[0],
-                      territoryLabelFontSize: lines[1].trim()});
+                      territoryLabelFontSize: line1Split[0].trim()
+                    });
       
+      this.state.weekBounds.push({
+        week: week,
+        minX: parseFloat(line1Split[1].trim()),
+        maxX: parseFloat(line1Split[2].trim()),
+        minY: parseFloat(line1Split[3].trim()),
+        maxY: parseFloat(line1Split[4].trim())});
+
       for (let i = 3; i < lines.length; i++){
-          let splitLine = lines[i].split(",");
-          if (splitLine[0].trim() == "ADJACENCY"){
+          let splitLine = lines[i].replaceAll("%","").split(",");
+          if (splitLine[0].trim().includes("ADJ")){
             this.state.adjacencies.push(
                   new Adjacency(
+                      week,
                       splitLine[1].trim(),
                       splitLine[2].trim(),
                       splitLine[3].trim(),
                       splitLine[4].trim(),
-                      splitLine[5].trim()));
+                      splitLine[5].trim(),
+                      splitLine[6].trim()));
           } else {
-            this.state.territories.push({name:splitLine[0].trim(),
-                                   alignment:splitLine[1].trim().toLowerCase(),
-                                   holder:splitLine[2].trim(),
-                                   emPosX:splitLine[3].trim(),
-                                   emPosY:splitLine[4].trim(),
-                                   week:week});
-          }
+              let t = {
+                name:splitLine[0].trim(),
+                alignment:splitLine[1].trim().toLowerCase(),
+                holder:splitLine[2].trim(),
+                emPosX:splitLine[3].trim(),
+                emPosY:splitLine[4].trim(),
+                week:week,
+                ref:null
+              }
+
+              this.state.territories.push(t);
+            }
         }
     }
   
+  getTerritoryByName(name){
+    for (let i = 0; i < this.state.territories.length; i++){
+      if (this.state.territories[i].name == name){
+        return this.state.territories[i];
+      }
+    }
+    return null;
+  }
+
+  getCurrentWeekBounds(week){
+
+    for(let i = 0; i < this.state.weekBounds.length; i++){
+      if (this.state.weekBounds[i].week == week){
+        return this.state.weekBounds[i];
+      }
+    }
+    return null;
+  }
+
+  makeRelative(coord, isYAxis){
+    if (isYAxis){
+      return ((coord * this.state.fontSizeEm) + this.state.displayTop) * 0.01;
+    } else {
+      return ((coord * this.state.fontSizeEm) + this.state.displayLeft) * 0.01;
+    }
+  }
+
   render(){
+
+    let currentWeekBounds = this.getCurrentWeekBounds(this.state.week);
+    if (canvas == null){
+      canvas = document.getElementById("canvas");
+      if (canvas != null){
+        this.redrawCanvasAccordingToWeek(this.state.week);
+      }
+    }
+
     return (
     <>
-        {this.state.canvas}
         <h1 className="hideOnMobile">
             Territory Map History
         </h1>
         <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
-            {isReady ? null : "LOADING..."}
-          </h1>
+            {isReady ? null : (window.innerWidth < 1000 ? "I strongly suggest you view this on PC instead." : "LOADING...")}
+        </h1>
         <div id="displayParent">
           <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
               top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
               <div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
-                {this.state.territories.map((t) => t.week == this.state.week ? (<><Territory name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week}/></>) : null)}
+                {this.state.territories.map((t) => t.week == this.state.week ? (<><Territory t={t} name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week} territoryLabelFontSize={this.state.territoryLabelFontSize}/></>) : null)}
               </div>
               <>{SHOW_DEBUG_COORDS_IN_CENTRE ? this.state.displayLeft + " " + this.state.displayTop : null}</>
-              <svg width = {(100 * this.state.fontSizeEm) + "vw"}  height = {(150 * this.state.fontSizeEm) + "vh"}
-                  style={{position:'absolute', left: (-50 * this.state.fontSizeEm) +"vw", top: (-50 * this.state.fontSizeEm) +"vh"}}>
-              </svg>
+              {
+                currentWeekBounds != null
+                ?
+                <canvas id="canvas" width="1920" height="1080" style={{position:'absolute', left:currentWeekBounds.minX+"em",
+                                           top:currentWeekBounds.minY+"em",                         
+                                           width:(currentWeekBounds.maxX - currentWeekBounds.minX)+"em",
+                                           height:(currentWeekBounds.maxY - currentWeekBounds.minY)+"em"}}></canvas>
+                : null                
+              }
+              
           </div>
          
         </div>

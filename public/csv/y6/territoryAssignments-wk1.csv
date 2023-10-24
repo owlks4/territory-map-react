@@ -1,26 +1,26 @@
 New Domain, Old Problems
-1em
+1em,-55,45,-25,35
 territory,alignment,holder,emPosX,emPosY
 Kingstanding,unclaimed,Unclaimed,-5.5,-19
-Erdington,unclaimed,Unclaimed,12,-16
+Erdington,unclaimed,Unclaimed,11,-16
 Witton,enemy,???,0,-13
-Perry Barr,enemy,???,-17,-11.5
+Perry Barr,enemy,???,-18,-12
 Handsworth,unclaimed,Unclaimed,-46,-10
 Lozells,enemy,???,-32.5,-7
 Aston,enemy,???,-19.5,-4
 City Centre,enemy,???,-9.5,-1.5
 Nechells,enemy,???,-1,-6
-Ward End,enemy,???,8,-2
-Hodge Hill,unclaimed,Unclaimed,18,-4
-Castle Bromwich,enemy,???,24,-11
-Lea Hall,enemy,???,33,-1
+Ward End,enemy,???,9,-3
+Hodge Hill,unclaimed,Unclaimed,20,-4
+Castle Bromwich,enemy,???,22,-11
+Lea Hall,enemy,???,33,-2
 Summerfield,enemy,???,-32,2
 Ladywood,enemy,???,-20,6
 The Rack,court,NONE,-9,4.5
 Sparkbrook,enemy,???,1,7.5
 Bordesley Green,enemy,???,13,5
 Yardley,unclaimed,Unclaimed,25,5
-Marston Green,enemy,???,35,11
+Marston Green,enemy,???,37,7.5
 Acocks Green,unclaimed,Unclaimed,22,14
 Tyseley,enemy,???,10,13
 Yardley Wood,enemy,???,12,22
@@ -35,4 +35,6 @@ Quinton,unclaimed,Unclaimed,-45,9
 Bartley Green,enemy,???,-46,17
 Weoley,unclaimed,Unclaimed,-33,18
 Northfield,enemy,???,-39,26
-ADJACENCY,810,90,730,275,0.75
+ADJACENCY,52%,9.6%,65%,15%,side,side
+ADJACENCY,46%,9.6%,40%,20%,side,side
+ADJACENCY,40%,21.5%,52.5%,20%,side,side

@@ -1,60 +1,57 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './index.css'
 
-class Territory extends React.Component {
-
-  constructor(props){
-    super(props);
-
-    let alignment = props.alignment;
-
-    if (alignment == "nos"){
-        alignment = "nosferatu";
-    } else if (alignment == "carthians"){
-        alignment = "carthian";
-    } else if (alignment == "circle"){
-        alignment = "crone";
-    } else if (alignment == "ordo dracul"){
-        alignment = "ordo";
-    } else if (alignment == "lancea"){
-        alignment = "lance";
-    }
-
-    let holder = props.holder;
-
-    if (holder == "NONE"){
-        holder = null;
-    }
-
-    this.state = {
-        name: props.name,
-        alignment: alignment,
-        holder: holder,
-        emPosX: props.emPosX,
-        emPosY: props.emPosY,
-        id: props.name.toLowerCase().replaceAll(" ","-"),
-        week: props.week
-    }
-  }
-
-  getPlusOrMinus(val){
+function getPlusOrMinus(val){
     return val >= 0 ? "+" : "-";
   }
 
-  render(){
+function Territory (props) {
+
+    let _alignment = props.alignment;
+
+    if (_alignment == "nos"){
+        _alignment = "nosferatu";
+    } else if (_alignment == "carthians"){
+        _alignment = "carthian";
+    } else if (_alignment == "circle"){
+        _alignment = "crone";
+    } else if (_alignment == "ordo dracul"){
+        _alignment = "ordo";
+    } else if (_alignment == "lancea"){
+        _alignment = "lance";
+    }
+
+    let _holder = props.holder;
+
+    if (_holder == "NONE"){
+        _holder = null;
+    }
+
+    let [name] = useState(props.name);
+    let [alignment] = useState(_alignment);
+    let [holder] = useState(_holder);
+    let [emPosX] = useState(props.emPosX);
+    let [emPosY] = useState(props.emPosY);
+    let [id] = useState(props.name.toLowerCase().replaceAll(" ","-"));
+    let [week] = useState(props.week);
+    let [territoryLabelFontSize] = useState(props.territoryLabelFontSize)
+
+    const myRef = useRef(null);
+    props.t.ref = myRef;
+
     return (
     <>
-     <div className={"territory "+ this.state.alignment} id={this.state.id} style={{left:"calc(0% "+this.getPlusOrMinus(this.state.emPosX) + " " + Math.abs(this.state.emPosX)+"em)",top:"calc(0% "+this.getPlusOrMinus(this.state.emPosY) + " " + Math.abs(this.state.emPosY)+"em)"}}>
-        <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:this.state.territoryLabelFontSize}}>
-            {this.state.name}
+     <div ref={myRef} className={"territory "+ alignment} id={id} style={{left:"calc(0% "+getPlusOrMinus(emPosX) + " " + Math.abs(emPosX)+"em)",top:"calc(0% "+getPlusOrMinus(emPosY) + " " + Math.abs(emPosY)+"em)"}}>
+        <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:territoryLabelFontSize}}>
+            {name}
         </div>
-        {this.state.holder != null ? 
-            <div className="territoryText" style={{fontSize:this.state.territoryLabelFontSize}}>
-                {"("+this.state.holder+")"}
+        {holder != null ? 
+            <div className="territoryText" style={{fontSize:territoryLabelFontSize}}>
+                {"("+holder+")"}
             </div> : null}
     </div>
     </>
-  )}
+  )
 }
 
 export default Territory
