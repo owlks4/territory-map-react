@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
-import { Color } from 'three';
 
 const DEFAULT_YEAR = 6;
 const DEFAULT_WEEK = 1;
@@ -11,6 +10,7 @@ const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it wil
 let isReady = false;
 let mouseIsOverPanel = false;
 let canvas = null;
+let hasDrawnToCanvasForFirstTime = false;
 
 class Adjacency {
   constructor(week,x1,y1,x2,y2,sideOrTop1, sideOrTop2){
@@ -73,11 +73,20 @@ class App extends React.Component {
   onMouseMove(event) {
     
     if (this.state.dragging && isReady){
-        this.setState({displayLeft: this.state.displayLeft + event.movementX,
+      this.tryInitialiseCanvas();
+      this.setState({displayLeft: this.state.displayLeft + event.movementX,
                        displayTop: this.state.displayTop + event.movementY,
                       territories: this.state.territories});
-      //  app.updateCanvasPosition();
     }
+  }
+
+  tryInitialiseCanvas(){
+    if (!hasDrawnToCanvasForFirstTime){
+      canvas = document.getElementById("canvas");
+       if (canvas != null){
+          this.redrawCanvasAccordingToWeek(this.state.week);
+          }
+        }
   }
 
   componentDidMount(){
@@ -116,7 +125,8 @@ class App extends React.Component {
     newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
     this.setState({year:newYearNumber, week: highestWeekFound, loadedWeeks:newLoadedWeeks});
     isReady = true;
-    this.redrawCanvasAccordingToWeek(highestWeekFound);
+
+    this.tryInitialiseCanvas();  
   }
 
   changeWeek(newWeekNumber){    
@@ -128,25 +138,26 @@ class App extends React.Component {
     if (canvas == null){
       return;
     }
-    
-      let ctx = canvas.getContext("2d");
-      ctx.imageSmoothingEnabled = true;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = "#505050";
-      ctx.lineWidth = 1.5;
 
-      for (let i = 0; i < this.state.adjacencies.length; i++){        
-        let a = this.state.adjacencies[i];
-        if (a.week != week){
+    let ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = true;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "#505050";
+    ctx.lineWidth = 1.5;
+
+    for (let i = 0; i < this.state.adjacencies.length; i++){
+      hasDrawnToCanvasForFirstTime = true;
+      let a = this.state.adjacencies[i];
+      if (a.week != week){
           continue;
         }
-        ctx.beginPath();        
-        ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
-        ctx.bezierCurveTo((a.a1/100) * canvas.width, (a.b1/100) * canvas.height,
-                          (a.a2/100) * canvas.width, (a.b2/100) * canvas.height, 
-                          (a.x2/100) * canvas.width, (a.y2/100) * canvas.height);
-        ctx.stroke();
-      }
+      ctx.beginPath();        
+      ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
+      ctx.bezierCurveTo((a.a1/100) * canvas.width, (a.b1/100) * canvas.height,
+                        (a.a2/100) * canvas.width, (a.b2/100) * canvas.height, 
+                        (a.x2/100) * canvas.width, (a.y2/100) * canvas.height);
+      ctx.stroke();
+    }
   }
 
   getTerritoriesFromCSV(lines, week){
@@ -208,6 +219,7 @@ class App extends React.Component {
         return this.state.weekBounds[i];
       }
     }
+
     return null;
   }
 
@@ -222,12 +234,8 @@ class App extends React.Component {
   render(){
 
     let currentWeekBounds = this.getCurrentWeekBounds(this.state.week);
-    if (canvas == null){
-      canvas = document.getElementById("canvas");
-      if (canvas != null){
-        this.redrawCanvasAccordingToWeek(this.state.week);
-      }
-    }
+
+    this.tryInitialiseCanvas();
 
     return (
     <>
