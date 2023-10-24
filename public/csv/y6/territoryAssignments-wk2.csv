@@ -41,7 +41,7 @@ ADJ_KNG_PBR,46%,9.6%,38%,19%,side,side
 ADJ_PBR_WTN,38%,21%,52.5%,20%,side,side
 ADJ_WTN_ERD,56.5%,20%,64%,16.5%,side,side
 ADJ_ERD_CTB,69%,15%,77%,23%,side,top
-ADJ_CTB_HHL,77%,26%,75.5%,31.5%,top,top
+ADJ_CTB_HHL,77%,26%,75.5%,32.5%,top,top
 ADJ_HHL_LEA,76%,35%,87%,37%,side,side
 ADJ_LEA_MGR,88.5%,41%,91%,53%,top,top
 ADJ_MGR_YDL,89%,54%,81%,49%,side,side
@@ -62,7 +62,7 @@ ADJ_PBR_LZS,35%,20.75%,24%,31%,side,top
 ADJ_LZS_AST,25%,31.5%,34%,33.5%,side,side
 ADJ_HDS_LZS,10%,28%,20%,31.5%,side,side
 ADJ_LZS_SMR,22.5%,33.5%,22%,42.5%,top,top
-ADJ_HDS_QTN,7.5%,27%,8.5%,57%,top,top
+ADJ_HDS_QTN,7.5%,30%,8.5%,57%,top,top
 ADJ_SMR_QTN,21%,45%,11%,57%,top,top
 ADJ_AST_LDY,34%,34.5%,35%,49%,top,top
 ADJ_SMR_LDY,24%,44.5%,32%,51.5%,side,side
@@ -74,7 +74,7 @@ ADJ_WDN_BDG,65%,39%,68%,49%,top,top
 ADJ_SMR_HBN,23%,46%,22.5%,56%,top,top
 ADJ_QTN_HBN,13%,56.5%,21%,58%,side,side
 ADJ_LDY_EDG,35.25%,54%,43%,59%,top,side
-ADJ_RCK_EDG,46%,49%,46.25%,58%,top,top
+ADJ_RCK_EDG,46%,51%,46.25%,58%,top,top
 ADJ_EDG_SPK,49%,59%,55.5%,56%,side,top
 ADJ_HBN_SLY,22%,60%,34%,66%,side,side
 ADJ_SLY_EDG,39%,66%,45.5%,61%,side,top
@@ -90,10 +90,10 @@ ADJ_BNV_MSY,42%,77%,53%,68%,side,side
 ADJ_SLY_BNV,36%,68%,39%,75%,top,top
 ADJ_BNV_KSN,38%,78.5%,35%,86.5%,top,top
 ADJ_KSN_KGH,37%,88%,50%,85%,side,side
-ADJ_SLY_WLY,34%,68%,26%,71.5%,top,side
+ADJ_SLY_WLY,34%,68%,25%,71.5%,top,side
 ADJ_HBN_WLY,23%,60%,22%,69.5%,top,top
 ADJ_QTN_BTG,9.5%,59%,9%,68%,top,top
-ADJ_BTG_WLY,11.5%,70%,18%,72%,side,side
+ADJ_BTG_WLY,11.5%,70%,19%,72%,side,side
 ADJ_BTG_NTH,9%,72%,13%,85%,top,side
 ADJ_NTH_WLY,17%,84%,22%,73%,top,top
 ADJ_NTH_KSN,19%,85%,31%,88%,side,side

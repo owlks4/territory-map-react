@@ -164,9 +164,15 @@ canvas {
     display:inline-block;
     position:relative;
     transform: none;
+    vertical-align: center;
+    text-align: center;
     margin: 0 0.1em;
     padding: 0.25em 0.5em;
     cursor: pointer;
+}
+
+.inline-territory:hover {
+    transform: scale(1.05)
 }
 
 .crone.inline-territory, .court.inline-territory {

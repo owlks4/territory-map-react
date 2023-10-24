@@ -269,22 +269,24 @@ class App extends React.Component {
             <br/>
             <h2>Legend</h2>
             <hr/>
-            <div id="key" onMouseLeave={() => {this.setHighlightedCategory(null,this)}}>
-              <div>
-                <LegendElement alignment="Ventrue" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Daeva" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Mekhet" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Gangrel" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Nos" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+            <div id="key">
+              <div onMouseLeave={() => {this.setHighlightedCategory(null,this)}}>
+                <div>
+                  <LegendElement alignment="Ventrue" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Daeva" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Mekhet" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Gangrel" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Nos" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                </div>
+                <div style={{marginTop:"0.25em"}}>
+                  <LegendElement alignment="Invictus" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Carthian" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Lance" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Crone" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Ordo" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                </div>
               </div>
-              <div style={{marginTop:"0.25em"}}>
-                <LegendElement alignment="Invictus" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Carthian" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Lance" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Crone" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Ordo" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-              </div>
-              <div style={{marginTop:"0.5em"}}>
+              <div style={{marginTop:"0.5em"}} onMouseLeave={() => {this.setHighlightedCategory(null,this)}}>
                 <LegendElement alignment="Court" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
                 <LegendElement alignment="Personal" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
                 <LegendElement alignment="Enemy" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
