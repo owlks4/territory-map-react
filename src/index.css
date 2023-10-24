@@ -20,7 +20,12 @@ html {
             height:100%;
             transform:  rotate(90deg) scale(0.4) translate(225px,0);
             transform-origin: center;
-        }    
+        }   
+        
+        #svg {
+            transform: rotate(90deg) translate(225px,0);
+            transform-origin: center;
+        }   
     }
 
 @media only screen and (max-width: 1000px) and (orientation: landscape)
@@ -29,7 +34,7 @@ html {
             height:100%;
             transform:  scale(0.4) translate(225px,0);
             transform-origin: center;
-        }    
+        }   
     }
 
 body {
