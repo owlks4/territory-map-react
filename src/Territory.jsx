@@ -41,7 +41,10 @@ function Territory (props) {
 
     return (
     <>
-     <div ref={myRef} className={"territory "+ alignment} id={id} style={{left:"calc(0% "+getPlusOrMinus(emPosX) + " " + Math.abs(emPosX)+"em)",top:"calc(0% "+getPlusOrMinus(emPosY) + " " + Math.abs(emPosY)+"em)"}}>
+     <div ref={myRef} className={"territory "+ alignment} id={id}
+     style={{left:"calc(0% "+getPlusOrMinus(emPosX) + " " + Math.abs(emPosX)+"em)",
+     top:"calc(0% "+getPlusOrMinus(emPosY) + " " + Math.abs(emPosY)+"em)",
+     opacity:props.fadedOut ? 0.025 : 1}}>
         <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:territoryLabelFontSize}}>
             {name}
         </div>
