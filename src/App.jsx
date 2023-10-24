@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
+import LegendElement from './legendElement.jsx';
 
 const DEFAULT_YEAR = 6;
 const DEFAULT_WEEK = 1;
@@ -66,7 +67,8 @@ class App extends React.Component {
       touchStartY: 0,
       fontSizeEm: 0.89,
       loadedWeeks: [],
-      weekBounds: []
+      weekBounds: [],
+      highlightedCategory: null
     }
   }
 
@@ -223,12 +225,8 @@ class App extends React.Component {
     return null;
   }
 
-  makeRelative(coord, isYAxis){
-    if (isYAxis){
-      return ((coord * this.state.fontSizeEm) + this.state.displayTop) * 0.01;
-    } else {
-      return ((coord * this.state.fontSizeEm) + this.state.displayLeft) * 0.01;
-    }
+  setHighlightedCategory(newValue,app){
+    app.setState({highlightedCategory:newValue}); //'app' is basically synonymous with 'this', but because this function is called from another element, the 'app' reference has to be used instead, because otherwise, it would misinterpret the 'this'.
   }
 
   render(){
@@ -249,7 +247,7 @@ class App extends React.Component {
           <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
               top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
               <div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
-                {this.state.territories.map((t) => t.week == this.state.week ? (<><Territory t={t} name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week} territoryLabelFontSize={this.state.territoryLabelFontSize}/></>) : null)}
+                {this.state.territories.map((t) => t.week == this.state.week ? (<><Territory fadedOut={this.state.highlightedCategory == null ? false : (this.state.highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week} territoryLabelFontSize={this.state.territoryLabelFontSize}/></>) : null)}
               </div>
               <>{SHOW_DEBUG_COORDS_IN_CENTRE ? this.state.displayLeft + " " + this.state.displayTop : null}</>
               {
@@ -261,38 +259,36 @@ class App extends React.Component {
                                            height:(currentWeekBounds.maxY - currentWeekBounds.minY)+"em"}}></canvas>
                 : null                
               }
-              
           </div>
-         
         </div>
         <p className="hideOnMobile" style={{color:"rgb(180,180,180)", margin: "2em 0 2em 6em", width: "100%", bottom:0, position:"absolute"}}>
-            Disclaimer: This is unofficial, and for comparing changes from past weeks - it's definitely not live!
-          </p>
+          Disclaimer: This is unofficial, and for comparing changes from past weeks - it's definitely not live!
+        </p>
         <div id="panel" className="hideOnMobile" onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
             <br/>
             <br/>
             <h2>Legend</h2>
             <hr/>
-            <div id="key">
+            <div id="key" onMouseLeave={() => {this.setHighlightedCategory(null,this)}}>
               <div>
-                <div className="territory ventrue inline-territory">Ventrue</div>
-                <div className="territory daeva inline-territory">Daeva</div>
-                <div className="territory mekhet inline-territory">Mekhet</div>
-                <div className="territory gangrel inline-territory">Gangrel</div>
-                <div className="territory nosferatu inline-territory">Nos</div>
+                <LegendElement alignment="Ventrue" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Daeva" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Mekhet" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Gangrel" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Nos" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
               </div>
               <div style={{marginTop:"0.25em"}}>
-                <div className="territory invictus inline-territory">Invictus</div>
-                <div className="territory carthian inline-territory">Carthian</div>
-                <div className="territory lance inline-territory">Lance</div>
-                <div className="territory crone inline-territory">Crone</div>
-                <div className="territory ordo inline-territory">Ordo</div>
+                <LegendElement alignment="Invictus" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Carthian" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Lance" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Crone" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Ordo" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
               </div>
               <div style={{marginTop:"0.5em"}}>
-                <div className="territory court inline-territory">Court</div>
-                <div className="territory personal inline-territory">Personal</div>
-                <div className="territory enemy inline-territory">Enemy</div>
-                <div className="territory unclaimed inline-territory">Unclaimed</div>
+                <LegendElement alignment="Court" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Personal" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Enemy" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                <LegendElement alignment="Unclaimed" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
               </div>
             </div>
             <br/>   
