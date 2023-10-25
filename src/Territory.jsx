@@ -17,6 +17,8 @@ function Territory (props) {
         _alignment = "crone";
     } else if (_alignment == "ordo dracul"){
         _alignment = "ordo";
+    } else if (_alignment == "vics"){
+        _alignment = "invictus";
     } else if (_alignment == "lancea"){
         _alignment = "lance";
     }

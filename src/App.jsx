@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
 import LegendElement from './legendElement.jsx';
@@ -6,7 +6,7 @@ import LegendElement from './legendElement.jsx';
 const DEFAULT_YEAR = 6;
 const DEFAULT_WEEK = 1;
 const SHOW_DEBUG_COORDS_IN_CENTRE = false;
-const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 23;  //as in, in any given year, it will look for this many CSVs in the given folder. It should be unlikely to ever reach this limit; this is just the most that it checks for.
+const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
 
 let isReady = false;
 let mouseIsOverPanel = false;
@@ -40,14 +40,6 @@ class Adjacency {
   }
 }
 
-class Week {
-  constructor(year,week,title){
-    this.year=year;
-    this.week=week;
-    this.title=title;
-  }
-}
-
 function App (props){
 
   let [territories,setTerritories] = useState([]);
@@ -74,9 +66,9 @@ function App (props){
       changeYear(DEFAULT_YEAR);
       tryInitialiseCanvas();
       redrawCanvasAccordingToWeek(week);
-    }, []);
+    }, []); //ignore intelliense and keep this empty array; it makes this useEffect run only after the very first render, which is intended behaviour
 
-    useEffect(() => {   //runs after render all the time, but only actually does anything once. It's required to get the canvas to realise it needs to display the adjacencies after the (async) territories are rendered
+    useEffect(() => {   //runs after render all the time, but only actually does anything once. It's required to get the canvas to realise it needs to redraw to display the adjacencies after the (async) territories are rendered
       tryInitialiseCanvas();
     });
 
@@ -100,6 +92,7 @@ function App (props){
       let highestWeekFound = -1;
     
       for (let i = 1; i < MAX_SPECULATIVE_CSV_CHECK_NUMBER; i++){
+        let shouldBreakLoop = false;
         await fetch("./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv")
         .then(response => response.text())
         .then(text => {
@@ -110,8 +103,13 @@ function App (props){
             if (i > highestWeekFound){
               highestWeekFound = i;
             }
+          } else {
+            shouldBreakLoop = true;
           }
         });
+        if (shouldBreakLoop){
+          break;
+        }
       }
       newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
       setYear(newYearNumber);
@@ -125,15 +123,6 @@ function App (props){
     function changeWeek(newWeekNumber){    
       setWeek(newWeekNumber);
       redrawCanvasAccordingToWeek(newWeekNumber);
-    }
-
-    function getTerritoryByName(name){
-      for (let i = 0; i < territories.length; i++){
-        if (territories[i].name == name){
-          return territories[i];
-        }
-      }
-      return null;
     }
 
     function getTerritoriesFromCSV(lines, week){
@@ -222,15 +211,9 @@ function App (props){
       }
     }
 
-    function setHighlightedCategoryFromTerritory(newValue){
-      setHighlightedCategory(newValue);
-    }
-
     let currentWeekBounds = getCurrentWeekBounds(week);
-
     tryInitialiseCanvas();
 
-       
     return (
     <>
         <h1 className="hideOnMobile">
@@ -266,27 +249,27 @@ function App (props){
             <h2>Legend</h2>
             <hr/>
             <div id="key" style={{width:"fit-content"}}>
-              <div onMouseLeave={() => {setHighlightedCategoryFromTerritory(null,this)}}>
+              <div onMouseLeave={() => {setHighlightedCategory(null)}}>
                 <div>
-                  <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                  <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                  <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                  <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                  <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategory}/>
                 </div>
                 <div style={{marginTop:"0.25em"}}>
-                  <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                  <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                  <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                  <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                  <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory}/>
                 </div>
               </div>
-              <div style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategoryFromTerritory(null,this)}}>
-                <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
-                <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+              <div style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
+                <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory}/>
+                <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory}/>
+                <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory}/>
+                <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory}/>
               </div>
             </div>
             <br/>   
