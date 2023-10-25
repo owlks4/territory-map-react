@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
 import LegendElement from './legendElement.jsx';
@@ -6,12 +6,13 @@ import LegendElement from './legendElement.jsx';
 const DEFAULT_YEAR = 6;
 const DEFAULT_WEEK = 1;
 const SHOW_DEBUG_COORDS_IN_CENTRE = false;
-const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for this many CSVs in the given folder. It's unlikely to ever be that many, but that's the upper bound here.
+const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 23;  //as in, in any given year, it will look for this many CSVs in the given folder. It should be unlikely to ever reach this limit; this is just the most that it checks for.
 
 let isReady = false;
 let mouseIsOverPanel = false;
 let canvas = null;
 let hasDrawnToCanvasForFirstTime = false;
+let dragging = false;
 
 class Adjacency {
   constructor(week,x1,y1,x2,y2,sideOrTop1, sideOrTop2){
@@ -47,194 +48,189 @@ class Week {
   }
 }
 
-class App extends React.Component {
+function App (props){
 
-  constructor(props){
-    super(props);
-    this.state = {
-      territories: [],
-      adjacencies: [],
-      year: -1,
-      week: -1,
-      territoryLabelFontSize: "1em",
-      weekTitle: "",
-      dragging: false,
-      displayTop: 0,
-      displayLeft: -225,
-      mapAdjustLeft: "54%",
-      mapAdjustTop: "40%",
-      touchStartX: 0,
-      touchStartY: 0,
-      fontSizeEm: 0.89,
-      loadedWeeks: [],
-      weekBounds: [],
-      highlightedCategory: null
-    }
-  }
+  let [territories,setTerritories] = useState([]);
+  let [adjacencies,setAdjacencies] = useState([]);
+  let [year,setYear] = useState(-1);
+  let [week,setWeek] = useState(-1);
+  let [territoryLabelFontSize,setTerritoryLabelFontSize] = useState("1em");
+  let [weekTitle,setWeekTitle] = useState("");
+  let [displayTop,setDisplayTop] = useState(0);
+  let [displayLeft,setDisplayLeft] = useState(-225);
+  let [mapAdjustLeft,setMapAdjustLeft] = useState("54%");
+  let [mapAdjustTop,setMapAdjustTop] = useState("40%");
+  let [fontSizeEm,setFontSizeEm] = useState(0.89);
+  let [loadedWeeks,setLoadedWeeks] = useState([]);
+  let [weekBounds,setWeekBounds] = useState([]);
+  let [highlightedCategory,setHighlightedCategory] = useState(null);
 
-  onMouseMove(event) {
-    
-    if (this.state.dragging && isReady){
-      this.tryInitialiseCanvas();
-      this.setState({displayLeft: this.state.displayLeft + event.movementX,
-                       displayTop: this.state.displayTop + event.movementY,
-                      territories: this.state.territories});
-    }
-  }
+  document.addEventListener('mousedown', (ev) => {dragging = (true && !mouseIsOverPanel)});
+  document.addEventListener("mousemove", (ev) => {onMouseMove(ev)});
+  document.addEventListener("mouseup", (ev) => {dragging = false;});
+  document.addEventListener("wheel", (ev) => {let change = ev.deltaY/1000; (fontSizeEm - change > 0.5) && (fontSizeEm - change < 3) ? setFontSizeEm(fontSizeEm - change) : null;});
 
-  tryInitialiseCanvas(){
-    if (!hasDrawnToCanvasForFirstTime){
-      canvas = document.getElementById("canvas");
-       if (canvas != null){
-          this.redrawCanvasAccordingToWeek(this.state.week);
-          }
-        }
-  }
+    useEffect(() => { //Only runs after initial render
+      changeYear(DEFAULT_YEAR);
+      tryInitialiseCanvas();
+      redrawCanvasAccordingToWeek(week);
+    }, []);
 
-  componentDidMount(){
-    document.addEventListener('mousedown', () => {this.setState({dragging: true && !mouseIsOverPanel})});
-    document.addEventListener("mousemove", (event) => {this.onMouseMove(event)});
-    document.addEventListener("mouseup", () => {this.setState({dragging: false})});
-    document.addEventListener("wheel", (ev) => {let change = ev.deltaY/1000; (this.state.fontSizeEm - change > 0.5) && (this.state.fontSizeEm - change < 3) ? this.setState({fontSizeEm: this.state.fontSizeEm - change}) : null; /*app.updateCanvasPosition()*/});
-    
-    this.changeYear(DEFAULT_YEAR);
-  }
+    useEffect(() => {   //runs after render all the time, but only actually does anything once. It's required to get the canvas to realise it needs to display the adjacencies after the (async) territories are rendered
+      tryInitialiseCanvas();
+    });
 
-  async changeYear(newYearNumber){
-
-    if (this.state.year == newYearNumber){
-      console.log("Did not attempt to change year, because that year was already selected.");
-      return;
-    }
-    
-    let newLoadedWeeks = [];
-    let highestWeekFound = -1;
-
-    for (let i = 1; i < MAX_SPECULATIVE_CSV_CHECK_NUMBER; i++){
-      await fetch("./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv")
-      .then(response => response.text())
-      .then(text => {
-        if (text != "" && text[0] != "<"){
-          let lines = text.trim().split("\n");
-          newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i, minX:null, maxX:null, minY:null, maxY:null});
-          this.getTerritoriesFromCSV(lines, i);
-          if (i > highestWeekFound){
-            highestWeekFound = i;
-          }
-        }
-      });
-    }
-    newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
-    this.setState({year:newYearNumber, week: highestWeekFound, loadedWeeks:newLoadedWeeks});
-    isReady = true;
-
-    this.tryInitialiseCanvas();  
-  }
-
-  changeWeek(newWeekNumber){    
-    this.setState({week:newWeekNumber});
-    this.redrawCanvasAccordingToWeek(newWeekNumber);
-  }
-
-  redrawCanvasAccordingToWeek(week){
-    if (canvas == null){
-      return;
+    function onMouseMove(event) {
+      if (dragging && isReady){
+        tryInitialiseCanvas();
+        setDisplayLeft(displayLeft + event.movementX);
+        setDisplayTop(displayTop + event.movementY);
+        setTerritories(territories);
+      }
     }
 
-    let ctx = canvas.getContext("2d");
-    ctx.imageSmoothingEnabled = true;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "#505050";
-    ctx.lineWidth = 1.5;
+    async function changeYear(newYearNumber){
 
-    for (let i = 0; i < this.state.adjacencies.length; i++){
-      hasDrawnToCanvasForFirstTime = true;
-      let a = this.state.adjacencies[i];
-      if (a.week != week){
-          continue;
-        }
-      ctx.beginPath();        
-      ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
-      ctx.bezierCurveTo((a.a1/100) * canvas.width, (a.b1/100) * canvas.height,
-                        (a.a2/100) * canvas.width, (a.b2/100) * canvas.height, 
-                        (a.x2/100) * canvas.width, (a.y2/100) * canvas.height);
-      ctx.stroke();
-    }
-  }
-
-  getTerritoriesFromCSV(lines, week){
-
-    let line1Split = lines[1].split(",");
-
-      this.setState ({ weekTitle: lines[0],
-                      territoryLabelFontSize: line1Split[0].trim()
-                    });
+      if (year == newYearNumber){
+        console.log("Did not attempt to change year, because that year was already selected.");
+        return;
+      }
       
-      this.state.weekBounds.push({
-        week: week,
-        minX: parseFloat(line1Split[1].trim()),
-        maxX: parseFloat(line1Split[2].trim()),
-        minY: parseFloat(line1Split[3].trim()),
-        maxY: parseFloat(line1Split[4].trim())});
-
-      for (let i = 3; i < lines.length; i++){
-          let splitLine = lines[i].replaceAll("%","").split(",");
-          if (splitLine[0].trim().includes("ADJ")){
-            this.state.adjacencies.push(
-                  new Adjacency(
-                      week,
-                      splitLine[1].trim(),
-                      splitLine[2].trim(),
-                      splitLine[3].trim(),
-                      splitLine[4].trim(),
-                      splitLine[5].trim(),
-                      splitLine[6].trim()));
-          } else {
-              let t = {
-                name:splitLine[0].trim(),
-                alignment:splitLine[1].trim().toLowerCase(),
-                holder:splitLine[2].trim(),
-                emPosX:splitLine[3].trim(),
-                emPosY:splitLine[4].trim(),
-                week:week,
-                ref:null
-              }
-
-              this.state.territories.push(t);
+      let newLoadedWeeks = [];
+      let highestWeekFound = -1;
+    
+      for (let i = 1; i < MAX_SPECULATIVE_CSV_CHECK_NUMBER; i++){
+        await fetch("./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv")
+        .then(response => response.text())
+        .then(text => {
+          if (text != "" && text[0] != "<"){
+            let lines = text.trim().split("\n");
+            newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i, minX:null, maxX:null, minY:null, maxY:null});
+            getTerritoriesFromCSV(lines, i);
+            if (i > highestWeekFound){
+              highestWeekFound = i;
             }
+          }
+        });
+      }
+      newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
+      setYear(newYearNumber);
+      setWeek(highestWeekFound);
+      setLoadedWeeks(newLoadedWeeks);
+      isReady = true;
+    
+      tryInitialiseCanvas();  
+    }
+
+    function changeWeek(newWeekNumber){    
+      setWeek(newWeekNumber);
+      redrawCanvasAccordingToWeek(newWeekNumber);
+    }
+
+    function getTerritoryByName(name){
+      for (let i = 0; i < territories.length; i++){
+        if (territories[i].name == name){
+          return territories[i];
         }
+      }
+      return null;
     }
-  
-  getTerritoryByName(name){
-    for (let i = 0; i < this.state.territories.length; i++){
-      if (this.state.territories[i].name == name){
-        return this.state.territories[i];
+
+    function getTerritoriesFromCSV(lines, week){
+
+      let line1Split = lines[1].split(",");
+    
+        setWeekTitle(lines[0]);
+        setTerritoryLabelFontSize(line1Split[0].trim());
+        
+        weekBounds.push({
+          week: week,
+          minX: parseFloat(line1Split[1].trim()),
+          maxX: parseFloat(line1Split[2].trim()),
+          minY: parseFloat(line1Split[3].trim()),
+          maxY: parseFloat(line1Split[4].trim())});
+    
+        for (let i = 3; i < lines.length; i++){
+            let splitLine = lines[i].replaceAll("%","").split(",");
+            if (splitLine[0].trim().includes("ADJ")){
+              adjacencies.push(
+                    new Adjacency(
+                        week,
+                        splitLine[1].trim(),
+                        splitLine[2].trim(),
+                        splitLine[3].trim(),
+                        splitLine[4].trim(),
+                        splitLine[5].trim(),
+                        splitLine[6].trim()));
+            } else {
+                let t = {
+                  name:splitLine[0].trim(),
+                  alignment:splitLine[1].trim().toLowerCase(),
+                  holder:splitLine[2].trim(),
+                  emPosX:splitLine[3].trim(),
+                  emPosY:splitLine[4].trim(),
+                  week:week,
+                  ref:null
+                }
+    
+                territories.push(t);
+              }
+          }
+      }
+
+    function getCurrentWeekBounds(week){
+      for(let i = 0; i < weekBounds.length; i++){
+        if (weekBounds[i].week == week){
+          return weekBounds[i];
+        }
+      }
+      return null;
+    }
+
+    function tryInitialiseCanvas(){
+      if (!hasDrawnToCanvasForFirstTime){
+        canvas = document.getElementById("canvas");
+         if (canvas != null){
+            redrawCanvasAccordingToWeek(week);
+            }
+          }
+    }
+
+    function redrawCanvasAccordingToWeek(week){
+      if (canvas == null){
+        return;
+      }
+      setAdjacencies(adjacencies);
+      let ctx = canvas.getContext("2d");
+      ctx.imageSmoothingEnabled = true;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "#505050";
+      ctx.lineWidth = 1.5;
+    
+      for (let i = 0; i < adjacencies.length; i++){
+        hasDrawnToCanvasForFirstTime = true;
+        let a = adjacencies[i];
+        if (a.week != week){
+            continue;
+          }
+        ctx.beginPath();        
+        ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
+        ctx.bezierCurveTo((a.a1/100) * canvas.width, (a.b1/100) * canvas.height,
+                          (a.a2/100) * canvas.width, (a.b2/100) * canvas.height, 
+                          (a.x2/100) * canvas.width, (a.y2/100) * canvas.height);
+        ctx.stroke();
       }
     }
-    return null;
-  }
 
-  getCurrentWeekBounds(week){
-
-    for(let i = 0; i < this.state.weekBounds.length; i++){
-      if (this.state.weekBounds[i].week == week){
-        return this.state.weekBounds[i];
-      }
+    function setHighlightedCategoryFromTerritory(newValue){
+      setHighlightedCategory(newValue);
     }
 
-    return null;
-  }
+    let currentWeekBounds = getCurrentWeekBounds(week);
 
-  setHighlightedCategory(newValue,app){
-    app.setState({highlightedCategory:newValue}); //'app' is basically synonymous with 'this', but because this function is called from another element, the 'app' reference has to be used instead, because otherwise, it would misinterpret the 'this'.
-  }
+    tryInitialiseCanvas();
 
-  render(){
-
-    let currentWeekBounds = this.getCurrentWeekBounds(this.state.week);
-
-    this.tryInitialiseCanvas();
-
+       
     return (
     <>
         <h1 className="hideOnMobile">
@@ -244,12 +240,12 @@ class App extends React.Component {
             {isReady ? null : (window.innerWidth < 1000 ? "I strongly suggest you view this on PC instead." : "LOADING...")}
         </h1>
         <div id="displayParent">
-          <div id="display" style={{position:'absolute',left:"calc("+this.state.mapAdjustLeft+" + "+this.state.displayLeft+"px)",
-              top:"calc("+this.state.mapAdjustTop+" + "+this.state.displayTop+"px)",fontSize:this.state.fontSizeEm+"em"}}>
-              <div id="territories" style={{position:'absolute', left:this.state.mapAdjustLeft, top:this.state.mapAdjustTop}}>
-                {this.state.territories.map((t) => t.week == this.state.week ? (<><Territory fadedOut={this.state.highlightedCategory == null ? false : (this.state.highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week} territoryLabelFontSize={this.state.territoryLabelFontSize}/></>) : null)}
+          <div id="display" style={{position:'absolute',left:"calc("+mapAdjustLeft+" + "+displayLeft+"px)",
+              top:"calc("+mapAdjustTop+" + "+displayTop+"px)",fontSize:fontSizeEm+"em"}}>
+              <div id="territories" style={{position:'absolute', left:mapAdjustLeft, top:mapAdjustTop}}>
+                {territories.map((t) => t.week == week ? (<><Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week} territoryLabelFontSize={territoryLabelFontSize}/></>) : null)}
               </div>
-              <>{SHOW_DEBUG_COORDS_IN_CENTRE ? this.state.displayLeft + " " + this.state.displayTop : null}</>
+              <>{SHOW_DEBUG_COORDS_IN_CENTRE ? displayLeft + " " + displayTop : null}</>
               {
                 currentWeekBounds != null
                 ?
@@ -269,28 +265,28 @@ class App extends React.Component {
             <br/>
             <h2>Legend</h2>
             <hr/>
-            <div id="key">
-              <div onMouseLeave={() => {this.setHighlightedCategory(null,this)}}>
+            <div id="key" style={{width:"fit-content"}}>
+              <div onMouseLeave={() => {setHighlightedCategoryFromTerritory(null,this)}}>
                 <div>
-                  <LegendElement alignment="Ventrue" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                  <LegendElement alignment="Daeva" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                  <LegendElement alignment="Mekhet" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                  <LegendElement alignment="Gangrel" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                  <LegendElement alignment="Nos" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
                 </div>
                 <div style={{marginTop:"0.25em"}}>
-                  <LegendElement alignment="Invictus" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                  <LegendElement alignment="Carthian" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                  <LegendElement alignment="Lance" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                  <LegendElement alignment="Crone" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                  <LegendElement alignment="Ordo" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+                  <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                  <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
                 </div>
               </div>
-              <div style={{marginTop:"0.5em"}} onMouseLeave={() => {this.setHighlightedCategory(null,this)}}>
-                <LegendElement alignment="Court" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Personal" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Enemy" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
-                <LegendElement alignment="Unclaimed" app={this} setHighlightedCategory={this.setHighlightedCategory}/>
+              <div style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategoryFromTerritory(null,this)}}>
+                <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
+                <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategoryFromTerritory}/>
               </div>
             </div>
             <br/>   
@@ -298,11 +294,11 @@ class App extends React.Component {
             <h2>Select past week</h2>
             <hr/>
             <div className="weeksScroll">
-              <>{this.state.loadedWeeks.map((week) => <><h4 className={"weekOption"+ (week.weekNumber == this.state.week ? " selected" : "")} onClick={() => this.state.week != week.weekNumber ? this.changeWeek(week.weekNumber) : null}>{week.title}</h4></>)}</>
+              <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => week != wk.weekNumber ? changeWeek(wk.weekNumber) : null}>{wk.title}</h4></>)}</>
             </div>
         </div>
     </>
-  )}
+  )
 }
 
 export default App

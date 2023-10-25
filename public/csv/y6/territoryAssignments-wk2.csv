@@ -1,5 +1,5 @@
 Ghost-al Vote
-1em,-55,45,-25,35
+0.95em,-55,45,-25,35
 territory,alignment,holder,emPosX,emPosY
 Kingstanding,nos,Mr Streed,-5.5,-19
 Erdington,lance,Axel Warden,11,-16
@@ -58,7 +58,7 @@ ADJ_NCH_AST,52%,30.5%,37%,32%,side,side
 ADJ_AST_CTC,37%,34.5%,42.5%,39%,top,side
 ADJ_CTC_RCK,45.5%,42%,45.75%,49%,top,top
 ADJ_PBR_HDS,32%,19%,9%,27%,side,top
-ADJ_PBR_LZS,35%,20.75%,24%,31%,side,top
+ADJ_PBR_LZS,32%,20.75%,24%,31%,side,top
 ADJ_LZS_AST,25%,31.5%,34%,33.5%,side,side
 ADJ_HDS_LZS,10%,28%,20%,31.5%,side,side
 ADJ_LZS_SMR,22.5%,33.5%,22%,42.5%,top,top
@@ -76,7 +76,7 @@ ADJ_QTN_HBN,13%,56.5%,21%,58%,side,side
 ADJ_LDY_EDG,35.25%,54%,43%,59%,top,side
 ADJ_RCK_EDG,46%,51%,46.25%,58%,top,top
 ADJ_EDG_SPK,49%,59%,55.5%,56%,side,top
-ADJ_HBN_SLY,22%,60%,34%,66%,side,side
+ADJ_HBN_SLY,25%,59%,34%,66%,side,side
 ADJ_SLY_EDG,39%,66%,45.5%,61%,side,top
 ADJ_EDG_MSY,47%,61.5%,53%,66%,top,top
 ADJ_SPK_TYS,58.5%,55%,64%,61%,side,top
