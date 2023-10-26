@@ -49,7 +49,7 @@ function App (props){
   let [territoryLabelFontSize,setTerritoryLabelFontSize] = useState("1em");
   let [weekTitle,setWeekTitle] = useState("");
   let [displayTop,setDisplayTop] = useState(0);
-  let [displayLeft,setDisplayLeft] = useState(window.innerWidth > 1000 ? -16 : -48);
+  let [displayLeft,setDisplayLeft] = useState(window.innerWidth > 1000 ? -16 : -16);
   let [mapAdjustLeft,setMapAdjustLeft] = useState("54%");
   let [mapAdjustTop,setMapAdjustTop] = useState("40%");
   let [fontSizeEm,setFontSizeEm] = useState(0.89);
@@ -65,9 +65,7 @@ function App (props){
   window.addEventListener("resize", (ev) => {changeWindowFontSize()});
 
     function changeWindowFontSize(){
-      console.log("w "+window.innerWidth);
-      console.log("h "+window.innerHeight);
-      setWindowFontSize(window.innerWidth < window.innerHeight ? (window.innerHeight/1920) +"em" : (window.innerHeight/927) +"em");
+      setWindowFontSize(window.innerWidth < window.innerHeight ? (window.innerHeight/2400) +"em" : (window.innerHeight/927) +"em");
     }
 
     useEffect(() => { //Only runs after initial render
@@ -75,9 +73,6 @@ function App (props){
       tryInitialiseCanvas();
       redrawCanvasAccordingToWeek(week);
       changeWindowFontSize();
-      if (screen.width < 1000){
-        alert("Hi\n\nThe page layout sometimes misbehaves on mobile, especially in portrait.\n\nIf in doubt - visit again on a computer. :D");
-      }
     }, []); //ignore intelliense and keep this empty array; it makes this useEffect run only after the very first render, which is intended behaviour
 
     useEffect(() => {   //runs after render all the time, but only actually does anything once. It's required to get the canvas to realise it needs to redraw to display the adjacencies after the (async) territories are rendered
@@ -173,7 +168,7 @@ function App (props){
                   week:week,
                   ref:null
                 }
-    
+
                 territories.push(t);
               }
           }
@@ -269,7 +264,7 @@ function App (props){
                     <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
                     <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
                     <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment={screen.orientation.type == "portrait-primary" ? "Nosferatu" : "Nos"} setHighlightedCategory={setHighlightedCategory}/>
                   </div>
                   <div style={{marginTop:"0.25em"}}>
                     <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
@@ -292,7 +287,7 @@ function App (props){
               <hr/>
               <div className="weeksScroll">
                 <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => week != wk.weekNumber ? changeWeek(wk.weekNumber) : null}>
-                                                {window.innerWidth > 1000 ? wk.title : "Week "+wk.weekNumber}
+                                                {window.innerWidth > 1000 ? wk.title : (screen.orientation.type == "portrait-primary" ? "Wk" : "Week ")+wk.weekNumber}
                                             </h4></>)}</>
               </div>
             </div>
