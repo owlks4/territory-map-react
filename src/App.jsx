@@ -49,7 +49,7 @@ function App (props){
   let [territoryLabelFontSize,setTerritoryLabelFontSize] = useState("1em");
   let [weekTitle,setWeekTitle] = useState("");
   let [displayTop,setDisplayTop] = useState(0);
-  let [displayLeft,setDisplayLeft] = useState(window.innerWidth > 1000 ? -225 : -135);
+  let [displayLeft,setDisplayLeft] = useState(window.innerWidth > 1000 ? -16 : -48);
   let [mapAdjustLeft,setMapAdjustLeft] = useState("54%");
   let [mapAdjustTop,setMapAdjustTop] = useState("40%");
   let [fontSizeEm,setFontSizeEm] = useState(0.89);
@@ -75,6 +75,9 @@ function App (props){
       tryInitialiseCanvas();
       redrawCanvasAccordingToWeek(week);
       changeWindowFontSize();
+      if (screen.width < 1000){
+        alert("Hi\n\nThe page layout sometimes misbehaves on mobile, especially in portrait.\n\nIf in doubt - visit again on a computer. :D");
+      }
     }, []); //ignore intelliense and keep this empty array; it makes this useEffect run only after the very first render, which is intended behaviour
 
     useEffect(() => {   //runs after render all the time, but only actually does anything once. It's required to get the canvas to realise it needs to redraw to display the adjacencies after the (async) territories are rendered
@@ -84,7 +87,7 @@ function App (props){
     function onMouseMove(event) {
       if (dragging && isReady){
         tryInitialiseCanvas();
-        setDisplayLeft(displayLeft + event.movementX);
+        setDisplayLeft(displayLeft + (event.movementX / 16));
         setDisplayTop(displayTop + event.movementY);
         setTerritories(territories);
       }
@@ -225,14 +228,16 @@ function App (props){
 
     return (
     <>
-        <h1 style={window.innerWidth < 1000 ? {width:"100%",backgroundColor:"white", border:"2px solid rgb(220,220,220)"}: {}}>
+        <h1 style={window.innerWidth < 1000 ? {display:'none'}: {}}>
             {window.innerWidth > 1000 ? "Territory Map History" : "I recommend you use this on PC instead"}
         </h1>
-        <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
-            {isReady ? null : (window.innerWidth < 1000 ? "LOADING..." : "LOADING...")}
-        </h1>
+        {isReady ? null : 
+          <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
+              LOADING...
+          </h1>
+        }
         <div id="displayParent" style={{fontSize:windowFontSize}}>
-          <div id="display" style={{position:'absolute',left:"calc("+mapAdjustLeft+" + "+displayLeft+"px)",
+          <div id="display" style={{position:'absolute',left:"calc("+mapAdjustLeft+" + "+displayLeft+"em)",
               top:"calc("+mapAdjustTop+" + "+displayTop+"px)",fontSize:fontSizeEm+"em"}}>
               <div id="territories" style={{position:'absolute', left:mapAdjustLeft, top:mapAdjustTop}}>
                 {territories.map((t) => t.week == week ? (<><Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week} territoryLabelFontSize={territoryLabelFontSize}/></>) : null)}
@@ -252,41 +257,44 @@ function App (props){
         <p className="hideOnMobile" style={{color:"rgb(180,180,180)", margin: "2em 0 2em 6em", width: "100%", bottom:0, position:"absolute"}}>
           Disclaimer: This is unofficial, and for comparing changes from past weeks - it's definitely not live!
         </p>
-        <div id="panel" onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
-            <br/>
-            <br/>
-            <h2>Legend</h2>
-            <hr/>
-            <div id="key" style={{overflow:'auto', width:"fit-content"}}>
-              <div onMouseLeave={() => {setHighlightedCategory(null)}}>
-                <div>
-                  <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategory}/>
+        <div id="panel" className="flex"
+            onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
+            <div id="legend" className="panelBox" style={{height:"fit-content"}}>
+              <h2>Legend</h2>
+              <hr/>
+              <div id="key" style={{overflow:'auto', width:"fit-content"}}>
+                <div onMouseLeave={() => {setHighlightedCategory(null)}}>
+                  <div>
+                    <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategory}/>
+                  </div>
+                  <div style={{marginTop:"0.25em"}}>
+                    <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategory}/>
+                    <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory}/>
+                  </div>
                 </div>
-                <div style={{marginTop:"0.25em"}}>
-                  <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory}/>
+                <div style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
+                  <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory}/>
+                  <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory}/>
                 </div>
-              </div>
-              <div style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
-                <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory}/>
-                <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory}/>
-                <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory}/>
-                <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory}/>
               </div>
             </div>
-            <br/>   
-            <br/>
-            <h2>Select past week</h2>
-            <hr/>
-            <div className="weeksScroll">
-              <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => week != wk.weekNumber ? changeWeek(wk.weekNumber) : null}>{wk.title}</h4></>)}</>
+            <div id="pastWeeks" className="panelBox">
+              <h2 style={{whiteSpace:"nowrap"}}>Select past week</h2>
+              <hr/>
+              <div className="weeksScroll">
+                <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => week != wk.weekNumber ? changeWeek(wk.weekNumber) : null}>
+                                                {window.innerWidth > 1000 ? wk.title : "Week "+wk.weekNumber}
+                                            </h4></>)}</>
+              </div>
             </div>
         </div>
     </>

@@ -90,10 +90,10 @@ ADJ_BNV_MSY,42%,77%,53%,68%,side,side
 ADJ_SLY_BNV,36%,68%,39%,75%,top,top
 ADJ_BNV_KSN,38%,78.5%,35%,86.5%,top,top
 ADJ_KSN_KGH,37%,88%,50%,85%,side,side
-ADJ_SLY_WLY,34%,68%,26%,71.5%,top,side
+ADJ_SLY_WLY,34%,68%,25%,71.5%,top,side
 ADJ_HBN_WLY,23%,60%,22%,69.5%,top,top
 ADJ_QTN_BTG,9.5%,59%,9%,68%,top,top
-ADJ_BTG_WLY,11.5%,70%,18%,72%,side,side
+ADJ_BTG_WLY,11.5%,70%,19%,72%,side,side
 ADJ_BTG_NTH,9%,72%,13%,85%,top,side
 ADJ_NTH_WLY,17%,84%,22%,73%,top,top
 ADJ_NTH_KSN,19%,85%,31%,88%,side,side
