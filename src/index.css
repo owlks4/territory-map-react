@@ -15,22 +15,6 @@ html {
     height:100vh;
 }
 
-@media only screen and (max-width: 1000px) and (orientation: portrait)
-    {
-        #displayParent {
-            transform:  rotate(90deg) translate(16em,25em);
-            transform-origin: center;
-        }   
-    }
-
-@media only screen and (max-width: 1000px) and (orientation: landscape)
-    {
-        #displayParent {
-            transform: translate(0em,24em);
-            transform-origin: center;
-        }   
-    }
-
 body {
     overflow: hidden;
     margin: 0;
@@ -193,11 +177,10 @@ canvas {
     font-family: sans-serif;
     border-left: 2px solid rgb(221, 221, 221);
     background-color: rgba(245, 245, 245, 0.9);
-    z-index: 5;
-    padding-left: 0.75em;
+    z-index: 5;    
     overflow: hidden auto;
     flex-direction:column;
-    padding-right: 0.25em;
+    padding: 0 0.25em 1em 0.75em;
     align-content: flex-start;
 }
 
@@ -257,6 +240,13 @@ h2 {
     letter-spacing: 0.05em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+@media only screen and ((max-width: 1000px))
+    {
+        h2 {
+            font-size: 0.95em;
+            font-weight: 550;
+        }
+    }
 
 h4 {
     font-weight: normal;
@@ -312,7 +302,7 @@ hr {
     box-shadow: 0.15em 0.15em rgba(0,0,0,0.4);
 }
 
-@media only screen and ((max-width: 1000px))
+@media only screen and (max-width: 1000px)
     {
     .weeksScroll {
         flex-direction: row;
@@ -322,7 +312,7 @@ hr {
         overflow: hidden auto;
         }
     .weekOption {
-        width: 20%;
+        width: 22.5%;
         padding: 0.7em 1.1em;
         font-size: 0.75em;
         white-space: nowrap;
@@ -335,4 +325,42 @@ hr {
     .inline-territory {
         font-size: 0.7em;
         }
+    }
+
+@media only screen and (max-width: 1000px) and (orientation: portrait)
+    {
+        #displayParent {
+            transform: translate(13.75em,70em) scale(0.75);
+            transform-origin: center;
+        }   
+
+        #panel {
+            width:100%;
+            float: none;
+            max-width: none;
+            height:unset;
+            flex-direction:row;
+            border-bottom: 2px solid rgb(221, 221, 221);
+        }
+
+        #key {
+            margin: 0;
+        }
+
+        .weekOption {
+            width: 15%;
+        }
+
+        .inline-territory {
+            font-size: 0.6em;
+            margin: 0 0.05em;
+            }
+    }
+
+@media only screen and (max-width: 1000px) and (orientation: landscape)
+    {
+        #displayParent {
+            transform: translate(-17em,24em) scale(0.8);
+            transform-origin: center;
+        }   
     }
