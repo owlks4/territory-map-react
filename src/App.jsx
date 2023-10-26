@@ -49,23 +49,32 @@ function App (props){
   let [territoryLabelFontSize,setTerritoryLabelFontSize] = useState("1em");
   let [weekTitle,setWeekTitle] = useState("");
   let [displayTop,setDisplayTop] = useState(0);
-  let [displayLeft,setDisplayLeft] = useState(-225);
+  let [displayLeft,setDisplayLeft] = useState(window.innerWidth > 1000 ? -225 : -135);
   let [mapAdjustLeft,setMapAdjustLeft] = useState("54%");
   let [mapAdjustTop,setMapAdjustTop] = useState("40%");
   let [fontSizeEm,setFontSizeEm] = useState(0.89);
   let [loadedWeeks,setLoadedWeeks] = useState([]);
   let [weekBounds,setWeekBounds] = useState([]);
   let [highlightedCategory,setHighlightedCategory] = useState(null);
+  let [windowFontSize,setWindowFontSize] = useState(window.innerWidth < window.innerHeight ? (window.innerHeight/1920) +"em" : (window.innerWidth/927) +"em");
 
   document.addEventListener('mousedown', (ev) => {dragging = (true && !mouseIsOverPanel)});
   document.addEventListener("mousemove", (ev) => {onMouseMove(ev)});
   document.addEventListener("mouseup", (ev) => {dragging = false;});
   document.addEventListener("wheel", (ev) => {let change = ev.deltaY/1000; (fontSizeEm - change > 0.5) && (fontSizeEm - change < 3) ? setFontSizeEm(fontSizeEm - change) : null;});
+  window.addEventListener("resize", (ev) => {changeWindowFontSize()});
+
+    function changeWindowFontSize(){
+      console.log("w "+window.innerWidth);
+      console.log("h "+window.innerHeight);
+      setWindowFontSize(window.innerWidth < window.innerHeight ? (window.innerHeight/1920) +"em" : (window.innerHeight/927) +"em");
+    }
 
     useEffect(() => { //Only runs after initial render
       changeYear(DEFAULT_YEAR);
       tryInitialiseCanvas();
       redrawCanvasAccordingToWeek(week);
+      changeWindowFontSize();
     }, []); //ignore intelliense and keep this empty array; it makes this useEffect run only after the very first render, which is intended behaviour
 
     useEffect(() => {   //runs after render all the time, but only actually does anything once. It's required to get the canvas to realise it needs to redraw to display the adjacencies after the (async) territories are rendered
@@ -216,13 +225,13 @@ function App (props){
 
     return (
     <>
-        <h1 className="hideOnMobile">
-            Territory Map History
+        <h1 style={window.innerWidth < 1000 ? {width:"100%",backgroundColor:"white", border:"2px solid rgb(220,220,220)"}: {}}>
+            {window.innerWidth > 1000 ? "Territory Map History" : "I recommend you use this on PC instead"}
         </h1>
         <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
-            {isReady ? null : (window.innerWidth < 1000 ? "I strongly suggest you view this on PC instead." : "LOADING...")}
+            {isReady ? null : (window.innerWidth < 1000 ? "LOADING..." : "LOADING...")}
         </h1>
-        <div id="displayParent">
+        <div id="displayParent" style={{fontSize:windowFontSize}}>
           <div id="display" style={{position:'absolute',left:"calc("+mapAdjustLeft+" + "+displayLeft+"px)",
               top:"calc("+mapAdjustTop+" + "+displayTop+"px)",fontSize:fontSizeEm+"em"}}>
               <div id="territories" style={{position:'absolute', left:mapAdjustLeft, top:mapAdjustTop}}>
@@ -243,12 +252,12 @@ function App (props){
         <p className="hideOnMobile" style={{color:"rgb(180,180,180)", margin: "2em 0 2em 6em", width: "100%", bottom:0, position:"absolute"}}>
           Disclaimer: This is unofficial, and for comparing changes from past weeks - it's definitely not live!
         </p>
-        <div id="panel" className="hideOnMobile" onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
+        <div id="panel" onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
             <br/>
             <br/>
             <h2>Legend</h2>
             <hr/>
-            <div id="key" style={{width:"fit-content"}}>
+            <div id="key" style={{overflow:'auto', width:"fit-content"}}>
               <div onMouseLeave={() => {setHighlightedCategory(null)}}>
                 <div>
                   <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>

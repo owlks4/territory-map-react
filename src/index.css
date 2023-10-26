@@ -17,25 +17,11 @@ html {
 @media only screen and (max-width: 1000px) and (orientation: portrait)
     {
         #displayParent {
-            height:100%;
-            transform:  rotate(90deg) scale(0.4) translate(225px,0);
-            transform-origin: center;
-        }   
-        
-        #svg {
-            transform: rotate(90deg) translate(225px,0);
-            transform-origin: center;
+            transform:  rotate(90deg) translate(225px,-26em);
+            transform-origin: top left;
         }   
     }
 
-@media only screen and (max-width: 1000px) and (orientation: landscape)
-    {
-        #displayParent {
-            height:100%;
-            transform:  scale(0.4) translate(225px,0);
-            transform-origin: center;
-        }   
-    }
 
 body {
     overflow: hidden;
@@ -184,38 +170,32 @@ canvas {
     padding: 0.25em 1em;
 }
 
-@media only screen and (max-width: 1000px) {
-    .hideOnMobile {
-        display: none;
-    }
+#panel {
+    position: relative;
+    min-width:20.9%;
+    max-width:40%;
+    height: 100%;
+    cursor: default;
+    float: right;
+    font-family: sans-serif;
+    border-left: 2px solid rgb(221, 221, 221);
+    background-color: rgba(245, 245, 245, 0.9);
+    box-shadow: 0.05em 0.05em rgba(0,0,0,0.5);
+    z-index: 5;
+    padding-left: 0.75em;
+    overflow: hidden auto;
 }
 
-@media only screen and (min-width: 1000px) {
-    #panel {
-        position: relative;
-        min-width:20.9%;
-        height: 100%;
-        cursor: default;
-        float: right;
-        font-family: sans-serif;
-        border-left: 2px solid rgb(221, 221, 221);
-        background-color: rgba(245, 245, 245, 0.9);
-        box-shadow: 0.05em 0.05em rgba(0,0,0,0.5);
-        z-index: 5;
-        padding-left: 0.75em;
-    }
+h1 {
+    position: absolute;
+    text-shadow: 0.05em 0.05em rgba(0,0,0,0.1);
+    margin:0;
+    padding: 0.5em 1em;
+    z-index:7;
+    width: fit-content;
+}
 
-    h1 {
-        position: absolute;
-        text-shadow: 0.05em 0.05em rgba(0,0,0,0.1);
-        margin:0;
-        padding: 0.5em 1em;
-        z-index:3;
-        width: fit-content;
-    }
-} 
-
-.pull{
+.pull {
     position:absolute;
     top: 1%;
     left: -3em;
@@ -243,7 +223,7 @@ canvas {
     color: rgba(0,0,0,0.6)
 }
 
-h2{
+h2 {
     margin: 0em 4em 0em 1em;
     color: rgb(121, 121, 121);
     text-align: left;
@@ -266,9 +246,16 @@ hr {
 }
 
 .weeksScroll {
-    overflow: auto;
+    overflow: hidden auto;
     max-height: 85%;
 }
+
+@media only screen and (max-width: 1000px)
+    {
+        .hideOnMobile {
+            display:none;
+        }
+    }
 
 .weekOption {
     cursor:pointer;
