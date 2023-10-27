@@ -306,6 +306,14 @@ hr {
     box-shadow: 0.15em 0.15em rgba(0,0,0,0.4);
 }
 
+.bigFlex {
+    display: flex;
+    flex-direction: row;
+    height:100%;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
 @media only screen and (max-width: 1000px)
     {
     .weeksScroll {
@@ -330,19 +338,27 @@ hr {
     .panelBox {
         margin-top: 0.75em;
         -webkit-overflow-scrolling: touch;
-        overflow-y: scroll;
         }
     .inline-territory {
         font-size: 0.7em;
+        }
+    #key {
+            margin: 0;
         }
     }
 
 @media only screen and (max-width: 1000px) and (orientation: portrait)
     {
         #displayParent {
-            transform: translate(3vw,55vh) scale(0.7);
+            transform: translate(0vw,55vh);
             transform-origin: center;
         }   
+
+        .bigFlex {
+            flex-direction: column;
+            justify-content:flex-start;
+            align-content: flex-start;
+        }
 
         #panel {
             width:100%;
@@ -355,10 +371,6 @@ hr {
 
         #panelFlex {
             flex-direction:row;
-        }
-
-        #key {
-            margin: 0;
         }
 
         .inline-territory {
@@ -374,7 +386,7 @@ hr {
 @media only screen and (max-width: 1000px) and (orientation: landscape)
     {
         #displayParent {
-            transform: translate(-20vw,33vh) scale(0.8);
+            transform: translate(0vw,33vh);
             transform-origin: center;
         }   
     }

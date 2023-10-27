@@ -163,12 +163,11 @@ function App (props){
                   name:splitLine[0].trim(),
                   alignment:splitLine[1].trim().toLowerCase(),
                   holder:splitLine[2].trim(),
-                  emPosX:splitLine[3].trim(),
-                  emPosY:splitLine[4].trim(),
-                  week:week,
-                  ref:null
+                  posX:splitLine[3].trim() + "%",
+                  posY:splitLine[4].trim() + "%",
+                  width:splitLine[5].trim(),
+                  week:week
                 }
-
                 territories.push(t);
               }
           }
@@ -231,76 +230,90 @@ function App (props){
               LOADING...
           </h1>
         }
-        <div id="displayParent" style={{fontSize:windowFontSize}}>
-          <div id="display" style={{position:'absolute',left:"calc("+mapAdjustLeft+" + "+displayLeft+"em)",
-              top:"calc("+mapAdjustTop+" + "+displayTop+"px)",fontSize:fontSizeEm+"em"}}>
-              <div id="territories" style={{position:'absolute', left:mapAdjustLeft, top:mapAdjustTop}}>
-                {territories.map((t) => t.week == week ? (<><Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} emPosX={t.emPosX} emPosY={t.emPosY} week={t.week} territoryLabelFontSize={territoryLabelFontSize}/></>) : null)}
-              </div>
-              <>{SHOW_DEBUG_COORDS_IN_CENTRE ? displayLeft + " " + displayTop : null}</>
-              {
-                currentWeekBounds != null
-                ?
-                <canvas id="canvas" width="1920" height="1080" style={{position:'absolute',
-                                           left:currentWeekBounds.minX+"em",
-                                           top:currentWeekBounds.minY+"em",                         
-                                           width:(currentWeekBounds.maxX - currentWeekBounds.minX)+"em",
-                                           height:(currentWeekBounds.maxY - currentWeekBounds.minY)+"em"}}></canvas>
-                : null                
-              }
-          </div>
-        </div>
-        <p className="hideOnMobile" style={{color:"rgb(180,180,180)", margin: "2em 0 2em 6em", width: "100%", bottom:0, position:"absolute"}}>
-          Disclaimer: This is unofficial, and for comparing changes from past weeks - it's definitely not live!
-        </p>
-        <div id="panel" onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
-            <h2 className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
-              Territory Map History
-              <hr style={{marginBottom:"0em", opacity:"0.5"}}/>
-            </h2>
-            <div id="panelFlex" className="flex" >
-              <div id="legend" className="panelBox" style={{height:"fit-content"}}>
-                <h2 style={{fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                  Legend
-                </h2>
-                <hr/>
-                <div id="key" style={{overflow:'auto', width:"fit-content"}}>
-                  <div onMouseLeave={() => {setHighlightedCategory(null)}}>
-                    <div>
-                      <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>
-                      <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
-                      <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
-                      <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
-                      <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategory}/>
+        <div className="bigFlex">
+          <div style={{width:"65%"}}>
+            <div id="displayParent" style={{fontSize:windowFontSize, width:"100%"}}>
+              <div id="display" style={{position:'absolute',left:"calc("+mapAdjustLeft+" + "+displayLeft+"em)",
+                  top:"calc("+mapAdjustTop+" + "+displayTop+"px)",fontSize:fontSizeEm+"em"}}>
+                  {
+                    currentWeekBounds != null
+                    ?
+                  <div id="territories" style={{position:'absolute',left:currentWeekBounds.minX+"em", top:currentWeekBounds.minY+"em",width:(currentWeekBounds.maxX - currentWeekBounds.minX)+"em",height:(currentWeekBounds.maxY - currentWeekBounds.minY)+"em"}}>
+                    {territories.map((t) => t.week == week ? (<><Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} posX={t.posX} posY={t.posY} week={t.week} width={t.width} territoryLabelFontSize={territoryLabelFontSize}/></>) : null)}
+                    <>{SHOW_DEBUG_COORDS_IN_CENTRE ? displayLeft + " " + displayTop : null}</>
+                    <canvas id="canvas" width="1920" height="1080" style={{width:"100%", height: "100%"}}></canvas>
                     </div>
-                    <div style={{marginTop:"0.25em"}}>
-                      <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
-                      <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory}/>
-                      <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory}/>
-                      <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategory}/>
-                      <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory}/>
-                    </div>
-                  </div>
-                  <div style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
-                    <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory}/>
-                  </div>
-                </div>
-              </div>
-              <div id="pastWeeks" className="panelBox">
-                <h2 style={{whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                  Select past week
-                </h2>
-                <hr/>
-                <div className="weeksScroll">
-                  <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => week != wk.weekNumber ? changeWeek(wk.weekNumber) : null}>
-                                                  {window.innerWidth > 1000 ? wk.title : "Wk"+wk.weekNumber}
-                                              </h4></>)}</>
-                </div>
+                    : null                
+                  }
               </div>
             </div>
+            <p className="hideOnMobile" style={{color:"rgb(180,180,180)", margin: "2em 0 2em 6em", width: "100%", bottom:0, position:"absolute"}}>
+              Disclaimer: This is unofficial, and for comparing changes from past weeks - it's definitely not live!
+            </p>
+          </div>
+          <div id="panel" onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
+              <h2 className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
+                Territory Map History
+                <hr style={{marginBottom:"0em", opacity:"0.5"}}/>
+              </h2>
+              <div id="panelFlex" className="flex" >
+                <div id="legend" className="panelBox" style={{height:"fit-content"}}>
+                  <h2 style={{fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+                    Legend
+                  </h2>
+                  <hr/>
+                  <div id="key" style={{overflow:'auto', width:"fit-content"}}>
+                    <div onMouseLeave={() => {setHighlightedCategory(null)}}>
+                      <div>
+                        <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategory}/>
+                      </div>
+                      <div style={{marginTop:"0.25em"}}>
+                        <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory}/>
+                      </div>
+                    </div>
+                    <div style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
+                      <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory}/>
+                      <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory}/>
+                      <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory}/>
+                      <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory}/>
+                    </div>
+                  </div>
+                </div>
+                <div id="pastWeeks" className="panelBox">
+                  <h2 style={{whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+                    Select past week
+                  </h2>
+                  <hr/>
+                  <div className="weeksScroll">
+                    <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => week != wk.weekNumber ? changeWeek(wk.weekNumber) : null}>
+                                                    {window.innerWidth > 1000 ? wk.title : "Wk"+wk.weekNumber}
+                                                </h4></>)}</>
+                  </div>
+                  {
+                    screen.orientation.type.includes("landscape") ? 
+                    <>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <br/>
+                    </>
+                    : null
+                  }
+                  
+                </div>
+              </div>
+          </div>
         </div>
     </>
   )

@@ -1,40 +1,40 @@
 New Domain, Old Problems
-0.95em,-55,45,-25,35
-territory,alignment,holder,emPosX,emPosY
-Kingstanding,unclaimed,Unclaimed,-5.5,-19
-Erdington,unclaimed,Unclaimed,11,-16
-Witton,enemy,???,-0.5,-13
-Perry Barr,enemy,???,-20,-13
-Handsworth,unclaimed,Unclaimed,-46,-8
-Lozells,enemy,???,-32.5,-6
-Aston,enemy,???,-19.5,-5
-City Centre,enemy,???,-9.5,-0.5
-Nechells,enemy,???,-1,-6
-Ward End,enemy,???,9,-3
-Hodge Hill,unclaimed,Unclaimed,20,-4
-Castle Bromwich,enemy,???,22,-11
-Lea Hall,enemy,???,33,-2
-Summerfield,enemy,???,-33,2
-Ladywood,enemy,???,-20,6
-The Rack,court,NONE,-9,4.5
-Sparkbrook,enemy,???,1,7
-Bordesley Green,enemy,???,13,5
-Yardley,unclaimed,Unclaimed,25,5
-Marston Green,enemy,???,37,7.5
-Acocks Green,unclaimed,Unclaimed,22,14
-Tyseley,enemy,???,10,13
-Yardley Wood,enemy,???,12,22
-Kings Heath,unclaimed,Unclaimed,-2,26
-Moseley,enemy,???,-1,16
-Kings Norton,enemy,???,-21,28
-Bournville,unclaimed,Unclaimed,-16,21
-Selly Oak,enemy,???,-19,14.5
-Edgbaston,enemy,???,-9,10.5
-Harborne,enemy,???,-32,10
-Quinton,unclaimed,Unclaimed,-45,9
-Bartley Green,enemy,???,-46,17
-Weoley,unclaimed,Unclaimed,-33,18
-Northfield,enemy,???,-39,26
+0.85em,-55,45,-25,35
+territory,alignment,holder,emPosX,emPosY,maxWidth
+Kingstanding,unclaimed,Unclaimed,49.5%,10%,0em
+Erdington,unclaimed,Unclaimed,66%,15.5%,0em
+Witton,enemy,???,54.5%,20%,0em
+Perry Barr,enemy,???,35%,20%,0em
+Handsworth,unclaimed,Unclaimed,9%,28.4%,0em
+Lozells,enemy,???,22.5%,31.6%,0em
+Aston,enemy,???,35.5%,33.4%,0em
+City Centre,enemy,???,45.5%,40.9%,0em
+Nechells,enemy,???,54%,31.8%,6.25em
+Ward End,enemy,???,64%,36.5%,8em
+Hodge Hill,unclaimed,Unclaimed,75%,35%,7em
+Castle Bromwich,enemy,???,77%,23.3%,0em
+Lea Hall,enemy,???,88%,38.25%,0em
+Summerfield,enemy,???,22%,45%,0em
+Ladywood,enemy,???,35%,51.6%,0em
+The Rack,court,NONE,46%,49.2%,0em
+Sparkbrook,enemy,???,56%,53.4%,7em
+Bordesley Green,enemy,???,68%,50%,0em
+Yardley,unclaimed,Unclaimed,80%,50%,0em
+Marston Green,enemy,???,92%,54.25%,0em
+Acocks Green,unclaimed,Unclaimed,77%,65%,0em
+Tyseley,enemy,???,65%,63.4%,0em
+Yardley Wood,enemy,???,67%,78.25%,8.25em
+Kings Heath,unclaimed,Unclaimed,53%,85%,7.5em
+Moseley,enemy,???,54%,68.4%,0em
+Kings Norton,enemy,???,34%,88.4%,0em
+Bournville,unclaimed,Unclaimed,39%,76.7%,0em
+Selly Oak,enemy,???,36%,65.8%,0em
+Edgbaston,enemy,???,46%,59.1%,0em
+Harborne,enemy,???,23%,58.35%,0em
+Quinton,unclaimed,Unclaimed,10%,56.7%,0em
+Bartley Green,enemy,???,9%,70%,0em
+Weoley,unclaimed,Unclaimed,22%,71.6%,0em
+Northfield,enemy,???,16%,85%,0em
 ADJ_KNG_ERD,52%,9.6%,64%,14%,side,side
 ADJ_KNG_WTN,49.5%,11.5%,54%,18%,top,top
 ADJ_KNG_PBR,46%,9.6%,38%,19%,side,side
