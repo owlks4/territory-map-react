@@ -1,40 +1,40 @@
 The Peacocks Will Continue Until Morale Improves
-0.95em,-55,45,-25,35
-territory,alignment,holder,emPosX,emPosY
-Kingstanding,nos,Mr Streed,-5.5,-19
-Erdington,lance,Axel Warden,11,-16
-Witton,nos,Skitter,-0.5,-13
-Perry Barr,enemy,???,-20,-13
-Handsworth,invictus,Madame Lee,-46,-8
-Lozells,invictus,Mr Hawthorn,-32.5,-6
-Aston,invictus,Unassigned,-19.5,-5
-City Centre,enemy,???,-9.5,-0.5
-Nechells,lance,Axel Warden,-1,-6
-Ward End,lance,Jane Bodkin Adams,9,-3
-Hodge Hill,ventrue,Madame Simmons,20,-4
-Castle Bromwich,enemy,???,22,-11
-Lea Hall,enemy,???,33,-2
-Summerfield,personal,Axel Warden,-33,2
-Ladywood,invictus,Lady Themis,-20,6
-The Rack,court,NONE,-9,4.5
-Sparkbrook,carthian,Julius Cheyne,1,7
-Bordesley Green,enemy,???,13,5
-Yardley,mekhet,Vesper Raeden,25,5
-Marston Green,enemy,???,37,7.5
-Acocks Green,gangrel,Lykofron,22,14
-Tyseley,enemy,???,10,13
-Yardley Wood,gangrel,Alice Maddocks,12,22
-Kings Heath,ordo,Chester Willard,-2,26
-Moseley,crone,Fang,-1,16
-Kings Norton,ordo,Isadora Jones,-21,28
-Bournville,crone,Keir of Haworth,-16,21
-Selly Oak,carthian,Acacia Smith,-19,14.5
-Edgbaston,enemy,???,-9,10.5
-Harborne,enemy,???,-32,10
-Quinton,daeva,Acacia Smith,-45,9
-Bartley Green,enemy,???,-46,17
-Weoley,carthian,Cora Gettins,-33,18
-Northfield,enemy,???,-39,26
+0.85em,-55,45,-25,35
+territory,alignment,holder,emPosX,emPosY,maxWidth
+Kingstanding,nos,Mr Streed,49.5%,10%,0em
+Erdington,lance,Axel Warden,66%,15.5%,0em
+Witton,nos,Skitter,54.5%,20%,0em
+Perry Barr,enemy,???,35%,20%,0em
+Handsworth,invictus,Madame Lee,9%,28.4%,0em
+Lozells,invictus,Mr Hawthorn,22.5%,31.6%,0em
+Aston,invictus,Unassigned,35.5%,33.4%,0em
+City Centre,enemy,???,45.5%,40.9%,0em
+Nechells,lance,Axel Warden,54%,31.8%,6.25em
+Ward End,lance,Jane Bodkin Adams,64%,36.5%,8em
+Hodge Hill,ventrue,Madame Simmons,75%,35%,6.5em
+Castle Bromwich,enemy,???,77%,23.3%,0em
+Lea Hall,enemy,???,88%,38.25%,0em
+Summerfield,personal,Axel Warden,22%,45%,0em
+Ladywood,invictus,Lady Themis,35%,51.6%,0em
+The Rack,court,NONE,46%,49.2%,0em
+Sparkbrook,carthian,Julius Cheyne,56%,53.4%,7em
+Bordesley Green,enemy,???,68%,50%,0em
+Yardley,mekhet,Vesper Raeden,80%,50%,6em
+Marston Green,enemy,???,92%,54.25%,0em
+Acocks Green,gangrel,Lykofron,77%,65%,0em
+Tyseley,enemy,???,65%,63.4%,0em
+Yardley Wood,gangrel,Alice Maddocks,67%,78.25%,8.25em
+Kings Heath,ordo,Chester Willard,53%,85%,7.5em
+Moseley,crone,Fang,54%,68.4%,0em
+Kings Norton,ordo,Isadora Jones,34%,88.4%,0em
+Bournville,crone,Keir of Haworth,39%,76.7%,0em
+Selly Oak,carthian,Acacia Smith,36%,65.8%,0em
+Edgbaston,enemy,???,46%,59.1%,0em
+Harborne,enemy,???,23%,58.35%,0em
+Quinton,daeva,Acacia Smith,10%,56.7%,0em
+Bartley Green,enemy,???,9%,70%,0em
+Weoley,carthian,Cora Gettins,22%,71.6%,0em
+Northfield,enemy,???,16%,85%,0em
 ADJ_KNG_ERD,52%,9.6%,64%,14%,side,side
 ADJ_KNG_WTN,49.5%,11.5%,54%,18%,top,top
 ADJ_KNG_PBR,46%,9.6%,38%,19%,side,side

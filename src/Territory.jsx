@@ -1,9 +1,5 @@
-import React, { useRef, useState } from 'react'
+import { useState } from 'react'
 import './index.css'
-
-function getPlusOrMinus(val){
-    return val >= 0 ? "+" : "-";
-  }
 
 function Territory (props) {
 
@@ -32,21 +28,17 @@ function Territory (props) {
     let [name] = useState(props.name);
     let [alignment] = useState(_alignment);
     let [holder] = useState(_holder);
-    let [emPosX] = useState(props.emPosX);
-    let [emPosY] = useState(props.emPosY);
+    let [posX] = useState(props.posX);
+    let [posY] = useState(props.posY);
     let [id] = useState(props.name.toLowerCase().replaceAll(" ","-"));
     let [week] = useState(props.week);
     let [territoryLabelFontSize] = useState(props.territoryLabelFontSize)
-
-    const myRef = useRef(null);
-    props.t.ref = myRef;
+    let [mouseOver, setMouseOver] = useState(false);
 
     return (
     <>
-     <div ref={myRef} className={"territory "+ alignment} id={id}
-     style={{left:"calc(0% "+getPlusOrMinus(emPosX) + " " + Math.abs(emPosX)+"em)",
-     top:"calc(0% "+getPlusOrMinus(emPosY) + " " + Math.abs(emPosY)+"em)",
-     opacity:props.fadedOut ? 0.025 : 1}}>
+     <div className={"territory "+ alignment} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
+     style={{left:posX, top:posY, zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
         <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:territoryLabelFontSize}}>
             {name}
         </div>
