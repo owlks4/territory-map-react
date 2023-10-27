@@ -1,5 +1,5 @@
 New Domain, Old Problems
-0.95em,-55,45,-25,35
+0.85em,-55,45,-25,35
 territory,alignment,holder,emPosX,emPosY,maxWidth
 Kingstanding,unclaimed,Unclaimed,49.5%,10%,0em
 Erdington,unclaimed,Unclaimed,66%,15.5%,0em
@@ -11,7 +11,7 @@ Aston,enemy,???,35.5%,33.4%,0em
 City Centre,enemy,???,45.5%,40.9%,0em
 Nechells,enemy,???,54%,31.8%,6.25em
 Ward End,enemy,???,64%,36.5%,8em
-Hodge Hill,unclaimed,Unclaimed,75%,35%,6.5em
+Hodge Hill,unclaimed,Unclaimed,75%,35%,7em
 Castle Bromwich,enemy,???,77%,23.3%,0em
 Lea Hall,enemy,???,88%,38.25%,0em
 Summerfield,enemy,???,22%,45%,0em
