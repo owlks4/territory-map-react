@@ -162,7 +162,7 @@ function App (props){
         let key = Object.keys(dict)[i];
         if (isClan(key)){
           if (dict[key] == highestClanNumber){
-            highestClan += ", "+ toTitleCase(key);
+            highestClan += " vs "+ toTitleCase(key);
             maxConcurrentClans++;
           } else if (dict[key] > highestClanNumber){
             highestClan = toTitleCase(key);
@@ -171,7 +171,7 @@ function App (props){
           }
         } else if (isCovenant(key)){
           if (dict[key] == highestCovenantNumber){
-            highestCovenant += ", "+ toTitleCase(key);
+            highestCovenant += " vs "+ toTitleCase(key);
             maxConcurrentCovenants++;
           } else if (dict[key] > highestCovenantNumber){
             highestCovenant = toTitleCase(key);
@@ -414,7 +414,7 @@ function App (props){
                 </div>
                 <div id="pastWeeks" className="panelBox">
                   <h2 style={{whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                    Select past week
+                    {window.innerWidth < 1000 ? "Select past week:" : "Select past week"}
                   </h2>
                   <hr/>
                   <div className="weeksScroll">
