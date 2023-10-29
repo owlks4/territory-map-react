@@ -7,6 +7,7 @@ const DEFAULT_YEAR = 6;
 const DEFAULT_WEEK = 1;
 const SHOW_DEBUG_COORDS_IN_CENTRE = false;
 const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
+const DEFAULT_PRECEDENCE = "N/A by territory";
 
 let isReady = false;
 let mouseIsOverPanel = false;
@@ -55,6 +56,8 @@ function App (props){
   let [fontSizeEm,setFontSizeEm] = useState(0.89);
   let [loadedWeeks,setLoadedWeeks] = useState([]);
   let [weekBounds,setWeekBounds] = useState([]);
+  let [clanPrecedence,setClanPrecedence] = useState(DEFAULT_PRECEDENCE);
+  let [covenantPrecedence,setCovenantPrecedence] = useState(DEFAULT_PRECEDENCE);
   let [highlightedCategory,setHighlightedCategory] = useState(null);
   let [windowFontSize,setWindowFontSize] = useState(window.innerWidth < window.innerHeight ? (window.innerHeight/1920) +"em" : (window.innerWidth/927) +"em");
 
@@ -121,6 +124,7 @@ function App (props){
       newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
       setYear(newYearNumber);
       setWeek(highestWeekFound);
+      updatePrecedence(highestWeekFound);
       setLoadedWeeks(newLoadedWeeks);
       isReady = true;
     
@@ -129,7 +133,115 @@ function App (props){
 
     function changeWeek(newWeekNumber){    
       setWeek(newWeekNumber);
+      updatePrecedence(newWeekNumber);
       redrawCanvasAccordingToWeek(newWeekNumber);
+    }
+
+    function updatePrecedence(newWeekNumber){
+      let dict = {};
+      let highestClan = DEFAULT_PRECEDENCE;
+      let highestClanNumber = 0;
+      let maxConcurrentClans = 0;
+
+      let highestCovenant = DEFAULT_PRECEDENCE;
+      let highestCovenantNumber = 0;
+      let maxConcurrentCovenants = 0;
+
+      for (let i = 0; i < territories.length; i++){
+        let t = territories[i];
+        if (t.week == newWeekNumber){
+          if (t.alignment in dict){
+            dict[t.alignment]++;
+          } else {
+            dict[t.alignment] = 1;
+          }
+        }
+      }
+
+      for (let i = 0; i < Object.keys(dict).length; i++){
+        let key = Object.keys(dict)[i];
+        if (isClan(key)){
+          if (dict[key] == highestClanNumber){
+            highestClan += ", "+ toTitleCase(key);
+            maxConcurrentClans++;
+          } else if (dict[key] > highestClanNumber){
+            highestClan = toTitleCase(key);
+            highestClanNumber = dict[key];
+            maxConcurrentClans = 1;
+          }
+        } else if (isCovenant(key)){
+          if (dict[key] == highestCovenantNumber){
+            highestCovenant += ", "+ toTitleCase(key);
+            maxConcurrentCovenants++;
+          } else if (dict[key] > highestCovenantNumber){
+            highestCovenant = toTitleCase(key);
+            highestCovenantNumber = dict[key];
+            maxConcurrentCovenants = 1;
+          }
+        }
+      }
+
+      if (maxConcurrentClans >= 5){
+        highestClan = DEFAULT_PRECEDENCE;
+      }
+      if (maxConcurrentCovenants >= 5){
+        highestCovenant = DEFAULT_PRECEDENCE;
+      }
+
+      setClanPrecedence(highestClan);
+      setCovenantPrecedence(highestCovenant);
+    }
+
+    function toTitleCase(input){
+      let firstLetter = input.substr(0, 1);
+      let restOfString = input.substr(1);
+        
+      return firstLetter.toUpperCase() + restOfString;
+    }
+
+    function adjustClanOrCovenantSpelling(input){
+      input = input.toLowerCase();
+
+      if (input == "nos"){
+        input = "nosferatu";
+      } else if (input == "carthians"){
+        input = "carthian";
+      } else if (input == "circle"){
+        input = "crone";
+      } else if (input == "ordo dracul"){
+        input = "ordo";
+      } else if (input == "vics"){
+        input = "invictus";
+      } else if (input == "lancea"){
+        input = "lance";
+      }
+      return input;
+    }
+
+    function isClan(input){
+      switch (input){
+        case "ventrue":
+        case "daeva":
+        case "mekhet":
+        case "gangrel":
+        case "nosferatu":
+          return true;
+        default:
+          return false;
+      }
+    }
+
+    function isCovenant(input){
+      switch (input){
+        case "invictus":
+        case "carthian":
+        case "crone":
+        case "lance":
+        case "ordo":
+          return true;
+        default:
+          return false;
+      }
     }
 
     function getTerritoriesFromCSV(lines, week){
@@ -161,11 +273,11 @@ function App (props){
             } else {
                 let t = {
                   name:splitLine[0].trim(),
-                  alignment:splitLine[1].trim().toLowerCase(),
+                  alignment:adjustClanOrCovenantSpelling(splitLine[1].trim()),
                   holder:splitLine[2].trim(),
                   posX:splitLine[3].trim() + "%",
                   posY:splitLine[4].trim() + "%",
-                  width:splitLine[5].trim(),
+                  maxHolderLineLength:parseFloat(splitLine[5].trim()),
                   week:week
                 }
                 territories.push(t);
@@ -239,7 +351,7 @@ function App (props){
                     currentWeekBounds != null
                     ?
                   <div id="territories" style={{position:'absolute',left:currentWeekBounds.minX+"em", top:currentWeekBounds.minY+"em",width:(currentWeekBounds.maxX - currentWeekBounds.minX)+"em",height:(currentWeekBounds.maxY - currentWeekBounds.minY)+"em"}}>
-                    {territories.map((t) => t.week == week ? (<><Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} posX={t.posX} posY={t.posY} week={t.week} width={t.width} territoryLabelFontSize={territoryLabelFontSize}/></>) : null)}
+                    {territories.map((t) => t.week == week ? (<><Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} posX={t.posX} posY={t.posY} week={t.week} maxHolderLineLength={t.maxHolderLineLength} territoryLabelFontSize={territoryLabelFontSize}/></>) : null)}
                     <>{SHOW_DEBUG_COORDS_IN_CENTRE ? displayLeft + " " + displayTop : null}</>
                     <canvas id="canvas" width="1920" height="1080" style={{width:"100%", height: "100%"}}></canvas>
                     </div>
@@ -269,7 +381,7 @@ function App (props){
                         <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
                         <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
                         <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
-                        <LegendElement alignment="Nos" setHighlightedCategory={setHighlightedCategory}/>
+                        <LegendElement alignment="Nosferatu" setHighlightedCategory={setHighlightedCategory}/>
                       </div>
                       <div style={{marginTop:"0.25em"}}>
                         <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
@@ -286,6 +398,19 @@ function App (props){
                       <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory}/>
                     </div>
                   </div>
+                  <br/>
+                  <h2 style={{width:"100%", maxWidth:"100%", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+                    Clan precedence:
+                  </h2>
+                  <h2 style={{marginTop: "0.15em", color:"black", marginBottom: "1em", width:"100%", maxWidth:"100%", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
+                    {clanPrecedence}
+                  </h2>
+                  <h2 style={{width:"100%", maxWidth:"100%", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+                    Covenant precedence:
+                  </h2>
+                  <h2 style={{marginTop: "0.15em", color:"black", width:"100%", maxWidth:"100%", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
+                    {covenantPrecedence}
+                  </h2>
                 </div>
                 <div id="pastWeeks" className="panelBox">
                   <h2 style={{whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>

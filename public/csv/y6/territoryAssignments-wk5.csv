@@ -1,40 +1,40 @@
-Zoo Fast, Zoo Furious
+(Week 5 name)
 0.85em,-55,45,-25,35
 territory,alignment,holder,emPosX,emPosY,maxHolderLineLength
-Kingstanding,nos,Mr Streed,49.5%,10%,0
+Kingstanding,nos,Mr Streed,49.5%,10%,12
 Erdington,lance,Axel Warden,66%,15.5%,0
-Witton,enemy,???,54.5%,20%,0
-Perry Barr,enemy,???,35%,20%,0
+Witton,nos,Skitter,54.5%,20%,0
+Perry Barr,nos,Agis,35%,20%,0
 Handsworth,invictus,Madame Lee,9%,28.4%,0
 Lozells,invictus,Mr Hawthorn,22.5%,31.6%,0
-Aston,enemy,???,35.5%,33.4%,0
-City Centre,enemy,???,45.5%,40.9%,0
-Nechells,enemy,???,54%,31.8%,0
-Ward End,enemy contested,Lance vs Ventrue,64%,36.5%,0
-Hodge Hill,ventrue,Madame Simmons,75%,35%,0
-Castle Bromwich,enemy,???,77%,23.3%,0
-Lea Hall,enemy,???,88%,38.25%,0
-Summerfield,personal,Jasper Carlyle,22%,45%,0
-Ladywood,invictus,Madame Lee,35%,51.6%,0
-The Rack,court,NONE,46%,49.2%,0
-Sparkbrook,enemy,???,56%,53.4%,0
-Bordesley Green,enemy,???,68%,50%,0
-Yardley,mekhet,Vesper Raeden,80%,50%,0
+Aston,invictus,Lord James,35.5%,33.4%,0
+City Centre,invictus,Lady Dee,45.5%,40.9%,0
+Nechells,lance,Nollaig Archambault,54%,31.8%,7
+Ward End,lance,Dr Jane Bodkin Adams,64%,36.5%,8
+Hodge Hill,ventrue,Madame Simmons,75%,35%,6.5
+Castle Bromwich,ventrue,Dr Jane Bodkin Adams,77%,23.3%,15
+Lea Hall,enemy,???,88%,38.25%,12
+Summerfield,personal,Axel Warden,22%,45%,12
+Ladywood,invictus,Lady Themis,35%,51.6%,12
+The Rack,court,NONE,46%,49.2%,12
+Sparkbrook,carthian,Kai Smith,56%,53.4%,12
+Bordesley Green,ventrue,Lady Carrington,68%,50%,0
+Yardley,mekhet,Vesper Raeden,80%,50%,6
 Marston Green,enemy,???,92%,54.25%,0
 Acocks Green,gangrel,Lykofron,77%,65%,0
-Tyseley,enemy,???,65%,63.4%,0
-Yardley Wood,gangrel,Alice Maddocks,67%,78.25%,0
-Kings Heath,ordo,Chester Willard,53%,85%,0
+Tyseley,gangrel,Lykofron,65%,63.4%,0
+Yardley Wood,gangrel,Alice Maddocks,67%,78.25%,8.25
+Kings Heath,ordo,Chester Willard,53%,85%,7.5
 Moseley,crone,Fang,54%,68.4%,0
-Kings Norton,enemy,???,34%,88.4%,0
+Kings Norton,ordo,Isadora Jones,34%,88.4%,0
 Bournville,crone,Keir of Haworth,39%,76.7%,0
-Selly Oak,carthian,Acacia Smith,36%,65.8%,0
-Edgbaston,enemy,???,46%,59.1%,0
+Selly Oak,carthian,Levi Rose,36%,65.8%,0
+Edgbaston,crone,Zoey Walker,46%,59.1%,0
 Harborne,enemy,???,23%,58.35%,0
 Quinton,daeva,Acacia Smith,10%,56.7%,0
 Bartley Green,enemy,???,9%,70%,0
 Weoley,carthian,Cora Gettins,22%,71.6%,0
-Northfield,enemy,???,16%,85%,0
+Northfield,daeva,Acacia Smith,16%,85%,0
 ADJ_KNG_ERD,52%,9.6%,64%,14%,side,side
 ADJ_KNG_WTN,49.5%,11.5%,54%,18%,top,top
 ADJ_KNG_PBR,46%,9.6%,38%,19%,side,side
@@ -54,8 +54,8 @@ ADJ_ERD_WDN,66%,18%,63.75%,37%,top,top
 ADJ_WTN_NCH,54.5%,22.5%,54%,30%,top,top
 ADJ_NCH_WDN,55%,30%,62%,36%,side,side
 ADJ_NCH_CTC,52%,34.5%,48%,39%,top,side
-ADJ_NCH_AST,52%,30.5%,37%,32%,side,side
-ADJ_AST_CTC,37%,34.5%,42.5%,39%,top,side
+ADJ_NCH_AST,52%,30.5%,39%,32%,side,side
+ADJ_AST_CTC,38%,34.5%,42.5%,39%,top,side
 ADJ_CTC_RCK,45.5%,42%,45.75%,49%,top,top
 ADJ_PBR_HDS,32%,19%,9%,27%,side,top
 ADJ_PBR_LZS,32%,20.75%,24%,31%,side,top
