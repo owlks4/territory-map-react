@@ -3,48 +3,58 @@ import './index.css'
 
 function Territory (props) {
 
-    let _alignment = props.alignment;
-
-    if (_alignment == "nos"){
-        _alignment = "nosferatu";
-    } else if (_alignment == "carthians"){
-        _alignment = "carthian";
-    } else if (_alignment == "circle"){
-        _alignment = "crone";
-    } else if (_alignment == "ordo dracul"){
-        _alignment = "ordo";
-    } else if (_alignment == "vics"){
-        _alignment = "invictus";
-    } else if (_alignment == "lancea"){
-        _alignment = "lance";
-    }
-
     let _holder = props.holder;
 
     if (_holder == "NONE"){
         _holder = null;
     }
 
-    let [name] = useState(props.name);
-    let [alignment] = useState(_alignment);
-    let [holder] = useState(_holder);
-    let [posX] = useState(props.posX);
-    let [posY] = useState(props.posY);
+    let splitHolder = ("("+_holder+")").replaceAll("  "," ").split(" ");
+    
+    let holderSegments = [];
+    let curSegment = "";
+    let holderFullSegment = null;
+
+    if (props.maxHolderLineLength > 0){
+        for (let i = 0; i < splitHolder.length; i++){       //breaks up the holder name onto separate lines
+            if (curSegment.length + splitHolder[i].length <= props.maxHolderLineLength){
+                curSegment += splitHolder[i] + " ";
+                if (i == splitHolder.length - 1){
+                    holderSegments.push(<>{curSegment+""}</>);
+                    holderSegments.push(<br/>);
+                }
+            }
+            else {
+                if (curSegment != ""){
+                    holderSegments.push(<>{curSegment+""}</>);
+                    holderSegments.push(<br/>);
+                }
+                curSegment = splitHolder[i] + " "; //this is the segment that we decided wouldn't fit on the end of this line, so it instead forms the basis for the next line.""
+                if (i == splitHolder.length - 1){
+                    holderSegments.push(<>{curSegment+""}</>);
+                    holderSegments.push(<br/>);
+                }
+            }
+        }
+        holderFullSegment = <>{holderSegments.map((s) => s)}</>
+    } else {
+        holderFullSegment = <>{"("+_holder+")"}</>
+    }
+
     let [id] = useState(props.name.toLowerCase().replaceAll(" ","-"));
     let [week] = useState(props.week);
-    let [territoryLabelFontSize] = useState(props.territoryLabelFontSize)
     let [mouseOver, setMouseOver] = useState(false);
 
     return (
     <>
-     <div className={"territory "+ alignment} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
-     style={{left:posX, top:posY, zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
-        <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:territoryLabelFontSize}}>
-            {name}
+     <div className={"territory "+ props.alignment} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
+     style={{left:props.posX, top:props.posY, zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
+        <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:props.territoryLabelFontSize}}>
+            {props.name}
         </div>
-        {holder != null ? 
-            <div className="territoryText" style={{fontSize:territoryLabelFontSize}}>
-                {"("+holder+")"}
+        {_holder != null ? 
+            <div className="territoryText" style={{fontSize:props.territoryLabelFontSize}}>
+                {holderFullSegment}
             </div> : null}
     </div>
     </>
