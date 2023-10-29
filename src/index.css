@@ -342,6 +342,9 @@ hr {
     .inline-territory {
         font-size: 0.7em;
         }
+    .court.inline-territory, .enemy.inline-territory{
+        padding: 0.25em 0.5em;
+        }
     #key {
             margin: 0;
         }
@@ -350,7 +353,7 @@ hr {
 @media only screen and (max-width: 1000px) and (orientation: portrait)
     {
         #displayParent {
-            transform: translate(0vw,55vh);
+            transform: translate(3vw,55vh);
             transform-origin: center;
         }   
 
@@ -376,10 +379,6 @@ hr {
         .inline-territory {
             font-size: 0.5em;
             margin: 0 0.05em;
-            }
-
-        .court.inline-territory, .enemy.inline-territory{
-            padding: 0.25em 0.5em;
             }
     }
 
