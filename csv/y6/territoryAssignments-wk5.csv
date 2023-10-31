@@ -45,7 +45,7 @@ ADJ_CTB_HHL,77%,26%,75.5%,32.5%,top,top
 ADJ_HHL_LEA,76%,35%,87%,37%,side,side
 ADJ_LEA_MGR,88.5%,41%,91%,53%,top,top
 ADJ_MGR_YDL,89%,54%,81%,49%,side,side
-ADJ_MGR_ACK,91%,57%,81%,65%,top,side
+ADJ_MGR_ACK,91%,57%,80%,65%,top,side
 ADJ_ACK_YDL,77%,64%,79.5%,52%,top,top
 ADJ_LEA_YDL,87%,39.25%,80%,49%,side,top
 ADJ_BDG_YDL,72%,50%,79%,49.5%,side,side
