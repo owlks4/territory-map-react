@@ -54,7 +54,6 @@ function App (props){
   let [displayLeft,setDisplayLeft] = useState(0);
   let [fontSizeEm,setFontSizeEm] = useState(0.89);
   let [loadedWeeks,setLoadedWeeks] = useState([]);
-  let [weekBounds,setWeekBounds] = useState([]);
   let [clanPrecedence,setClanPrecedence] = useState(DEFAULT_PRECEDENCE);
   let [covenantPrecedence,setCovenantPrecedence] = useState(DEFAULT_PRECEDENCE);
   let [highlightedCategory,setHighlightedCategory] = useState(null);
@@ -249,13 +248,6 @@ function App (props){
     
         setWeekTitle(lines[0]);
         setTerritoryLabelFontSize(line1Split[0].trim());
-        
-        weekBounds.push({
-          week: week,
-          minX: parseFloat(line1Split[1].trim()),
-          maxX: parseFloat(line1Split[2].trim()),
-          minY: parseFloat(line1Split[3].trim()),
-          maxY: parseFloat(line1Split[4].trim())});
     
         for (let i = 3; i < lines.length; i++){
             let splitLine = lines[i].replaceAll("%","").split(",");
@@ -283,15 +275,6 @@ function App (props){
               }
           }
       }
-
-    function getCurrentWeekBounds(week){
-      for(let i = 0; i < weekBounds.length; i++){
-        if (weekBounds[i].week == week){
-          return weekBounds[i];
-        }
-      }
-      return null;
-    }
 
     function tryInitialiseCanvas(){
       if (!hasDrawnToCanvasForFirstTime){
@@ -334,7 +317,6 @@ function App (props){
         }
     }
 
-    let currentWeekBounds = getCurrentWeekBounds(week);
     tryInitialiseCanvas();
 
     return (
@@ -350,9 +332,9 @@ function App (props){
         <div className="bigFlex">
           <div style={{width:"65%"}}>
             <div id="displayParent" style={{fontSize:windowFontSize, width:"100%"}}>
-              <div id="display" style={{position:'absolute',left:"calc("+displayLeft+"px)", top:"calc("+displayTop+"px)",fontSize:fontSizeEm+"em"}}>
+              <div id="display" style={{position:'absolute',left:displayLeft+"px", top:displayTop+"px",fontSize:fontSizeEm+"em"}}>
                   {
-                    currentWeekBounds != null
+                    isReady
                     ?
                   <div id="territories" style={{position:'absolute',width:WIDTH_OF_MAP_IN_VW+"vw",height:(0.6*WIDTH_OF_MAP_IN_VW)+"vw"}}>
                     {territories.map((t) => t.week == week ? (<>
