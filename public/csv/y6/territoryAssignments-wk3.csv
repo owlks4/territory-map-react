@@ -19,7 +19,7 @@ Ladywood,invictus,Madame Lee,35%,51.6%,0
 The Rack,court,NONE,46%,49.2%,0
 Sparkbrook,enemy,???,56%,53.4%,0
 Bordesley Green,enemy,???,68%,50%,0
-Yardley,mekhet,Vesper Raeden,80%,50%,0
+Yardley,mekhet,Vesper Raeden,80%,50%,6
 Marston Green,enemy,???,92%,54.25%,0
 Acocks Green,gangrel,Lykofron,77%,65%,0
 Tyseley,enemy,???,65%,63.4%,0
@@ -37,15 +37,15 @@ Weoley,carthian,Cora Gettins,22%,71.6%,0
 Northfield,enemy,???,16%,85%,0
 ADJ_KNG_ERD,52%,9.6%,64%,14%,side,side
 ADJ_KNG_WTN,49.5%,11.5%,54%,18%,top,top
-ADJ_KNG_PBR,46%,9.6%,38%,19%,side,side
-ADJ_PBR_WTN,38%,21%,52.5%,20%,side,side
+ADJ_KNG_PBR,46%,9.6%,37%,19%,side,side
+ADJ_PBR_WTN,37%,21%,52.5%,20%,side,side
 ADJ_WTN_ERD,56.5%,20%,64%,16.5%,side,side
 ADJ_ERD_CTB,69%,15%,77%,23%,side,top
 ADJ_CTB_HHL,77%,26%,75.5%,32.5%,top,top
 ADJ_HHL_LEA,76%,35%,87%,37%,side,side
 ADJ_LEA_MGR,88.5%,41%,91%,53%,top,top
 ADJ_MGR_YDL,89%,54%,81%,49%,side,side
-ADJ_MGR_ACK,91%,57%,81%,65%,top,side
+ADJ_MGR_ACK,91%,57%,80%,65%,top,side
 ADJ_ACK_YDL,77%,64%,79.5%,52%,top,top
 ADJ_LEA_YDL,87%,39.25%,80%,49%,side,top
 ADJ_BDG_YDL,72%,50%,79%,49.5%,side,side
@@ -57,8 +57,8 @@ ADJ_NCH_CTC,52%,34.5%,48%,39%,top,side
 ADJ_NCH_AST,52%,30.5%,37%,32%,side,side
 ADJ_AST_CTC,37%,34.5%,42.5%,39%,top,side
 ADJ_CTC_RCK,45.5%,42%,45.75%,49%,top,top
-ADJ_PBR_HDS,32%,19%,9%,27%,side,top
-ADJ_PBR_LZS,32%,20.75%,24%,31%,side,top
+ADJ_PBR_HDS,33%,19%,9%,27%,side,top
+ADJ_PBR_LZS,33%,20.75%,24%,31%,side,top
 ADJ_LZS_AST,25%,31.5%,34%,33.5%,side,side
 ADJ_HDS_LZS,10%,28%,20%,31.5%,side,side
 ADJ_LZS_SMR,22.5%,33.5%,22%,42.5%,top,top
