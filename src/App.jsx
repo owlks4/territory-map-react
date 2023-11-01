@@ -8,7 +8,7 @@ const SHOW_DEBUG_COORDS_IN_CENTRE = false;
 const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
 const DEFAULT_PRECEDENCE = "N/A by territory";
 
-const WIDTH_OF_MAP_IN_VW = window.innerWidth > 1000 ? 80 : (screen.orientation.type.includes("landscape") ? 65 : 100);
+let WIDTH_OF_MAP_IN_VW = window.innerWidth > 1000 ? 80 : (screen.orientation.type.includes("landscape") ? 65 : 100);
 
 let isReady = false;
 let mouseIsOverPanel = false;
@@ -64,6 +64,7 @@ function App (props){
   document.addEventListener("mouseup", (ev) => {dragging = false;});
   document.addEventListener("wheel", (ev) => {let change = ev.deltaY/1000; (fontSizeEm - change > 0.5) && (fontSizeEm - change < 3) ? setFontSizeEm(fontSizeEm - change) : null;});
   window.addEventListener("resize", (ev) => {changeWindowFontSize()});
+  window.addEventListener("orientationchange", (event) => { WIDTH_OF_MAP_IN_VW = window.innerWidth > 1000 ? 80 : (event.target.screen.orientation.type.includes("landscape") ? 65 : 100); });
 
     function changeWindowFontSize(){
       setWindowFontSize((window.innerWidth < 1000 ? (window.innerWidth/2500) : (window.innerWidth/1920)) +"em");
