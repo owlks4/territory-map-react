@@ -13,15 +13,14 @@ function Territory (props) {
     
     let holderSegments = [];
     let curSegment = "";
-    let holderFullSegment = null;
+    let holderFull = null;
 
-    if (props.maxHolderLineLength > 0){
-        for (let i = 0; i < splitHolder.length; i++){       //breaks up the holder name onto separate lines
+    if (props.maxHolderLineLength > 0){       //breaks up the holder name onto separate lines
+        for (let i = 0; i < splitHolder.length; i++){      
             if (curSegment.length + splitHolder[i].length <= props.maxHolderLineLength){
                 curSegment += splitHolder[i] + " ";
                 if (i == splitHolder.length - 1){
                     holderSegments.push(<>{curSegment+""}</>);
-                    holderSegments.push(<br/>);
                 }
             }
             else {
@@ -32,13 +31,12 @@ function Territory (props) {
                 curSegment = splitHolder[i] + " "; //this is the segment that we decided wouldn't fit on the end of this line, so it instead forms the basis for the next line.""
                 if (i == splitHolder.length - 1){
                     holderSegments.push(<>{curSegment+""}</>);
-                    holderSegments.push(<br/>);
                 }
             }
         }
-        holderFullSegment = <>{holderSegments.map((s) => s)}</>
+        holderFull = <>{holderSegments.map((s) => s)}</>
     } else {
-        holderFullSegment = <>{"("+_holder+")"}</>
+        holderFull = <>{"("+_holder+")"}</>
     }
 
     let [id] = useState(props.name.toLowerCase().replaceAll(" ","-"));
@@ -48,13 +46,13 @@ function Territory (props) {
     return (
     <>
      <div className={"territory "+ props.alignment} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
-     style={{left:props.posX, top:props.posY, zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
+     style={{left:props.posX+ "%", top:props.posY+ "%", zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
         <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:props.territoryLabelFontSize}}>
             {props.name}
         </div>
         {_holder != null ? 
             <div className="territoryText" style={{fontSize:props.territoryLabelFontSize}}>
-                {holderFullSegment}
+                {holderFull}
             </div> : null}
     </div>
     </>

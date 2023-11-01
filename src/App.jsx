@@ -4,10 +4,11 @@ import Territory from './Territory.jsx';
 import LegendElement from './legendElement.jsx';
 
 const DEFAULT_YEAR = 6;
-const DEFAULT_WEEK = 1;
 const SHOW_DEBUG_COORDS_IN_CENTRE = false;
 const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
 const DEFAULT_PRECEDENCE = "N/A by territory";
+
+const WIDTH_OF_MAP_IN_VW = window.innerWidth > 1000 ? 80 : (screen.orientation.type.includes("landscape") ? 60 : 100);
 
 let isReady = false;
 let mouseIsOverPanel = false;
@@ -50,7 +51,7 @@ function App (props){
   let [territoryLabelFontSize,setTerritoryLabelFontSize] = useState("1em");
   let [weekTitle,setWeekTitle] = useState("");
   let [displayTop,setDisplayTop] = useState(0);
-  let [displayLeft,setDisplayLeft] = useState(window.innerWidth > 1000 ? -16 : 0);
+  let [displayLeft,setDisplayLeft] = useState(0);
   let [mapAdjustLeft,setMapAdjustLeft] = useState("54%");
   let [mapAdjustTop,setMapAdjustTop] = useState("40%");
   let [fontSizeEm,setFontSizeEm] = useState(0.89);
@@ -275,8 +276,8 @@ function App (props){
                   name:splitLine[0].trim(),
                   alignment:adjustClanOrCovenantSpelling(splitLine[1].trim()),
                   holder:splitLine[2].trim(),
-                  posX:splitLine[3].trim() + "%",
-                  posY:splitLine[4].trim() + "%",
+                  posX:splitLine[3].trim(),
+                  posY:splitLine[4].trim(),
                   maxHolderLineLength:parseFloat(splitLine[5].trim()),
                   week:week
                 }
@@ -303,6 +304,12 @@ function App (props){
           }
     }
 
+    function scaleAboutCentre(input){
+      input -= 50;
+      input *= fontSizeEm;
+      return input + 50;
+    }
+
     function redrawCanvasAccordingToWeek(week){
       if (canvas == null){
         return;
@@ -326,16 +333,16 @@ function App (props){
                           (a.a2/100) * canvas.width, (a.b2/100) * canvas.height, 
                           (a.x2/100) * canvas.width, (a.y2/100) * canvas.height);
         ctx.stroke();
-      }
+        }
     }
 
     let currentWeekBounds = getCurrentWeekBounds(week);
     tryInitialiseCanvas();
 
-    return (
+    return (    //width:"100%",height:"100%",backgroundColor:"rgba(255,255,255,0.7)"
     <>
-        <h1 style={window.innerWidth < 1000 ? {display:'none'}: {}}>
-            {window.innerWidth > 1000 ? "Territory Map History" : "I recommend you use this on PC instead"}
+        <h1 style={window.innerWidth < 1000 ? {display:"none"}: {}}>
+            {window.innerWidth > 1000 ? "Territory Map History" : "I recommend you use this on PC instead!"}
         </h1>
         {isReady ? null : 
           <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
@@ -345,15 +352,17 @@ function App (props){
         <div className="bigFlex">
           <div style={{width:"65%"}}>
             <div id="displayParent" style={{fontSize:windowFontSize, width:"100%"}}>
-              <div id="display" style={{position:'absolute',left:"calc("+mapAdjustLeft+" + "+displayLeft+"em)",
-                  top:"calc("+mapAdjustTop+" + "+displayTop+"px)",fontSize:fontSizeEm+"em"}}>
+              <div id="display" style={{position:'absolute',left:"calc("+displayLeft+"em)", top:"calc("+displayTop+"px)",fontSize:fontSizeEm+"em"}}>
                   {
                     currentWeekBounds != null
                     ?
-                  <div id="territories" style={{position:'absolute',left:currentWeekBounds.minX+"em", top:currentWeekBounds.minY+"em",width:(currentWeekBounds.maxX - currentWeekBounds.minX)+"em",height:(currentWeekBounds.maxY - currentWeekBounds.minY)+"em"}}>
-                    {territories.map((t) => t.week == week ? (<><Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder} posX={t.posX} posY={t.posY} week={t.week} maxHolderLineLength={t.maxHolderLineLength} territoryLabelFontSize={territoryLabelFontSize}/></>) : null)}
+                  <div id="territories" style={{position:'absolute',width:WIDTH_OF_MAP_IN_VW+"vw",height:(0.6*WIDTH_OF_MAP_IN_VW)+"vw"}}>
+                    {territories.map((t) => t.week == week ? (<>
+                      <Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment}
+                      holder={t.holder} posX={scaleAboutCentre(t.posX)} posY={scaleAboutCentre(t.posY)} week={t.week} maxHolderLineLength={t.maxHolderLineLength} territoryLabelFontSize={territoryLabelFontSize}/>
+                    </>) : null)}
                     <>{SHOW_DEBUG_COORDS_IN_CENTRE ? displayLeft + " " + displayTop : null}</>
-                    <canvas id="canvas" width="1920" height="1080" style={{width:"100%", height: "100%"}}></canvas>
+                    <canvas id="canvas" width="1920" height="1080" style={{left:(WIDTH_OF_MAP_IN_VW/2)+"vw",top:(0.6*(WIDTH_OF_MAP_IN_VW/2))+"vw",width:100*fontSizeEm+"%", height: 100*fontSizeEm+"%"}}></canvas>
                     </div>
                     : null                
                   }
@@ -366,6 +375,8 @@ function App (props){
           <div id="panel" onMouseEnter={() => {mouseIsOverPanel = true;}} onMouseLeave={() => {mouseIsOverPanel = false;}}>
               <h2 className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
                 Territory Map History
+                <br/>
+                (Works better on PC)
                 <hr style={{marginBottom:"0em", opacity:"0.5"}}/>
               </h2>
               <div id="panelFlex" className="flex" >
@@ -402,13 +413,13 @@ function App (props){
                   <h2 style={{width:"100%", maxWidth:"100%", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
                     Clan precedence:
                   </h2>
-                  <h2 style={{marginTop: "0.15em", color:"black", marginBottom: "1em", width:"100%", maxWidth:"100%", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
+                  <h2 style={{marginTop: "0.15em", color:"black", marginBottom: "1em", width:"fit-content", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
                     {clanPrecedence}
                   </h2>
                   <h2 style={{width:"100%", maxWidth:"100%", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
                     Covenant precedence:
                   </h2>
-                  <h2 style={{marginTop: "0.15em", color:"black", width:"100%", maxWidth:"100%", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
+                  <h2 style={{marginTop: "0.15em", color:"black", width:"fit-content", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
                     {covenantPrecedence}
                   </h2>
                 </div>
@@ -425,17 +436,10 @@ function App (props){
                   {
                     screen.orientation.type.includes("landscape") ? 
                     <>
-                      <br/>
-                      <br/>
-                      <br/>
-                      <br/>
-                      <br/>
-                      <br/>
-                      <br/>
+                      <br/><br/><br/><br/><br/><br/><br/>
                     </>
                     : null
                   }
-                  
                 </div>
               </div>
           </div>

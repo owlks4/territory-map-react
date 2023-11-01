@@ -34,7 +34,9 @@ body:active{
 }
 
 canvas {
-    position: absolute;    width:100%;
+    position: absolute;
+    width:100%;
+    transform: translate(-50%,-50%)
 }
 
 .territory {
@@ -353,7 +355,7 @@ hr {
 @media only screen and (max-width: 1000px) and (orientation: portrait)
     {
         #displayParent {
-            transform: translate(3vw,55vh);
+            transform: translate(0vw,40vh);
             transform-origin: center;
         }   
 
@@ -361,6 +363,11 @@ hr {
             flex-direction: column;
             justify-content:flex-start;
             align-content: flex-start;
+        }
+
+        canvas {
+            -webkit-overflow-scrolling: touch;
+            overflow-x: scroll;
         }
 
         #panel {
@@ -380,12 +387,4 @@ hr {
             font-size: 0.5em;
             margin: 0 0.05em;
             }
-    }
-
-@media only screen and (max-width: 1000px) and (orientation: landscape)
-    {
-        #displayParent {
-            transform: translate(0vw,33vh);
-            transform-origin: center;
-        }   
     }
