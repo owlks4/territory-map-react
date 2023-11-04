@@ -339,7 +339,7 @@ function App (props){
                     ?
                   <div id="territories" style={{position:'absolute',width:WIDTH_OF_MAP_IN_VW+"vw",height:(0.6*WIDTH_OF_MAP_IN_VW)+"vw"}}>
                     {territories.map((t) => t.week == week ? (<>
-                      <Territory fadedOut={highlightedCategory == null ? false : (highlightedCategory != t.alignment)} t={t} name={t.name} alignment={t.alignment} holder={t.holder}
+                      <Territory fadedOut={highlightedCategory == null ? false : (!t.alignment.includes(highlightedCategory))} t={t} name={t.name} alignment={t.alignment} holder={t.holder}
                                  posX={scaleAboutCentre(t.posX)} posY={scaleAboutCentre(t.posY)} week={t.week} maxHolderLineLength={t.maxHolderLineLength} territoryLabelFontSize={territoryLabelFontSize}/>
                     </>) : null)}
                     <>{SHOW_DEBUG_COORDS_IN_CENTRE ? displayLeft + " " + displayTop : null}</>
