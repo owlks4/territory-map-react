@@ -149,10 +149,11 @@ function App (props){
       for (let i = 0; i < territories.length; i++){
         let t = territories[i];
         if (t.week == newWeekNumber){
-          if (t.alignment in dict){
-            dict[t.alignment]++;
+          let alignment = t.alignment.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
+          if (alignment[0] in dict){
+            dict[alignment[0]]++;
           } else {
-            dict[t.alignment] = 1;
+            dict[alignment[0]] = 1;
           }
         }
       }
