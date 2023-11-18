@@ -1,4 +1,4 @@
-Deal with the Devil
+No title yet
 0.85em
 territory,alignment,holder,emPosX,emPosY,maxHolderLineLength
 Kingstanding,nos,Mr Streed,49.5%,10%,12
@@ -13,28 +13,28 @@ Nechells,lance,Nollaig Archambault,54%,31.8%,7
 Ward End,lance,Jane Bodkin Adams,64%,36.5%,12
 Hodge Hill,ventrue,Madame Simmons,75%,35%,7
 Castle Bromwich,ventrue,Jane Bodkin Adams,77%,23.3%,15
-Lea Hall,enemy,???,88%,38.25%,12
-Summerfield,personal,Axel Warden,22%,45%,0
+Lea Hall,mekhet,Isaac Sterling,88%,38.25%,0
+Summerfield,daeva,Axel Warden,22%,45%,0
 Ladywood,invictus,Lady Themis,35%,51.6%,12
 The Rack,court,NONE,46%,49.2%,12
 Sparkbrook,carthian,Kai Smith,56%,53.4%,12
 Bordesley Green,ventrue,Lady Carrington,68%,50%,0
 Yardley,mekhet,Vesper Raeden,80%,50%,6
-Marston Green,enemy,???,92%,54.25%,0
-Acocks Green,gangrel,Lykofron,77%,65%,0
+Marston Green,mekhet,Robert Whyteside,92%,54.25%,12
+Acocks Green,gangrel,Stargazer Fairfax,77%,65%,0
 Tyseley,gangrel,Lykofron,65%,63.4%,0
 Yardley Wood,gangrel,Alice Maddocks,67%,78.25%,8.25
 Kings Heath,ordo,Chester Willard,53%,85%,7.5
 Moseley,crone,Fang,54%,68.4%,0
 Kings Norton,ordo,Isadora Jones,34%,88.4%,0
 Bournville,crone,Keir of Haworth,39%,76.7%,0
-Selly Oak,carthian,Levi Rose,36%,65.8%,0
+Selly Oak,daeva,Levi Rose,36%,65.8%,0
 Edgbaston,crone,Zoey Walker,46%,59.1%,0
-Harborne,enemy,???,23%,58.35%,0
-Quinton,daeva,Acacia Smith,10%,56.7%,0
-Bartley Green,enemy,???,9%,70%,0
+Harborne,gangrel,Lord James,23%,58.35%,0
+Quinton,daeva,Peter Mitchell,10%,56.7%,0
+Bartley Green,daeva,Barty Crane,9%,70%,0
 Weoley,carthian,Cora Gettins,22%,71.6%,0
-Northfield,daeva,Acacia Smith,16%,85%,0
+Northfield,daeva,Kai Smith,16%,85%,0
 ADJ_KNG_ERD,52%,9.6%,64%,14%,side,side
 ADJ_KNG_WTN,49.5%,11.5%,54%,18%,top,top
 ADJ_KNG_PBR,46%,9.6%,37%,19%,side,side
