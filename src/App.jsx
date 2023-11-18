@@ -62,7 +62,7 @@ function App (props){
   document.addEventListener('mousedown', (ev) => {dragging = (true && !mouseIsOverPanel)});
   document.addEventListener("mousemove", (ev) => {onMouseMove(ev)});
   document.addEventListener("mouseup", (ev) => {dragging = false;});
-  document.addEventListener("wheel", (ev) => {let change = ev.deltaY/1000; (fontSizeEm - change > 0.5) && (fontSizeEm - change < 3) ? setFontSizeEm(fontSizeEm - change) : null;});
+  document.addEventListener("wheel", (ev) => {let change =  mouseIsOverPanel ? 0 : ev.deltaY/1000; (fontSizeEm - change > 0.5) && (fontSizeEm - change < 3) ? setFontSizeEm(fontSizeEm - change) : null;});
   window.addEventListener("resize", (ev) => {changeWindowFontSize()});
   window.addEventListener("orientationchange", (event) => { WIDTH_OF_MAP_IN_VW = window.innerWidth > 1000 ? 80 : (event.target.screen.orientation.type.includes("landscape") ? 65 : 100); });
 
