@@ -140,6 +140,10 @@ canvas {
     border: 0.33em dashed red;
 }
 
+.invictus.contested, .carthian.contested {
+    border: 0.33em dashed rgb(150,11,11);
+}
+
 #key {
     margin-left: 1em;
     padding-top: 0.05em;
