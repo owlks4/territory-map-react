@@ -192,6 +192,30 @@ function App (props){
       setCovenantPrecedence(highestCovenant);
     }
 
+    function ClanCovPrecedence(props){
+      return (<div style = {{width: screen.orientation.type.includes("portrait") ? "200%": "100%"}}>
+                        <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
+                          <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+                            Clan precedence:
+                          </h2>
+                          <h2 style={{marginTop: "0.15em", marginRight:"0em", marginBottom: "1em", color:"black",
+                                      whiteSpace:"break-spaces", width:"fit-content", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
+                            {clanPrecedence}
+                          </h2>
+                        </div>
+                        <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
+                          <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:0, fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+                            Covenant precedence:
+                          </h2>
+                          <h2 style={{marginTop: "0.15em", marginRight:"0em", color:"black", width:"fit-content", 
+                                    whiteSpace:"break-spaces", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
+                            {covenantPrecedence}
+                          </h2>
+                        </div>
+                      </div>
+                      );
+    }
+
     function toTitleCase(input){
       let firstLetter = input.substr(0, 1);
       let restOfString = input.substr(1);
@@ -392,26 +416,7 @@ function App (props){
                     </div>
                   </div>
                   <br/>
-                  <div style = {{width: screen.orientation.type.includes("portrait") ? "200%": "100%"}}>
-                    <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
-                      <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                        Clan precedence:
-                      </h2>
-                      <h2 style={{marginTop: "0.15em", marginRight:"0em", marginBottom: "1em", color:"black",
-                                  whiteSpace:"break-spaces", width:"fit-content", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
-                        {clanPrecedence}
-                      </h2>
-                    </div>
-                    <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
-                      <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:0, fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                        Covenant precedence:
-                      </h2>
-                      <h2 style={{marginTop: "0.15em", marginRight:"0em", color:"black", width:"fit-content", 
-                                whiteSpace:"break-spaces", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
-                        {covenantPrecedence}
-                      </h2>
-                    </div>
-                  </div>
+                  {window.innerWidth >= 1000 ? <ClanCovPrecedence/> : <></>}
                 </div>
                 <div id="pastWeeks" className="panelBox">
                   <h2 style={{whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
@@ -432,6 +437,7 @@ function App (props){
                   }
                 </div>
               </div>
+              {window.innerWidth < 1000 ? <ClanCovPrecedence/> : <></>}
           </div>
         </div>
     </>
