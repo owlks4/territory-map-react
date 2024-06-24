@@ -327,6 +327,9 @@ hr {
         flex-wrap: wrap;
         padding-right: 0em;
         align-content: flex-start;
+        height:3.5em;
+        border-bottom: 2px solid rgb(242,243,245);
+        margin-bottom: 2px;
         overflow: hidden auto;
         }
     .weekOption {
