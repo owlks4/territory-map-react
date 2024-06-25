@@ -46,12 +46,12 @@ function Territory (props) {
     return (
     <>
      <div className={"territory "+ props.alignment} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
-     style={{left:props.posX+ "%", top:props.posY+ "%", zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
-        <div className="territoryText" style={{whiteSpace:"nowrap",fontSize:props.territoryLabelFontSize}}>
+     style={{zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
+        <div className="territoryText" style={{whiteSpace:"nowrap"}}>
             {props.name}
         </div>
         {_holder != null ? 
-            <div className="territoryText" style={{fontSize:props.territoryLabelFontSize}}>
+            <div className="territoryText">
                 {holderFull}
             </div> : null}
     </div>
