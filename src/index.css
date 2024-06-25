@@ -1,5 +1,5 @@
 html {
-    background-color: rgba(245, 245, 245, 1);
+    background-color: ffffff;
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -10,7 +10,6 @@ html {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;    
-    cursor:grab;
     width:100vw;
     height:100vh;
 }
@@ -21,10 +20,6 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-}
-
-body:active{
-    cursor:grabbing;
 }
 
 #root {
@@ -189,7 +184,6 @@ canvas {
     border-left: 2px solid rgb(221, 221, 221);
     background-color: rgba(245, 245, 245, 0.9);
     z-index: 5;    
-    overflow: hidden auto;
     padding: 0 0.25em 1em 0;
 }
 
@@ -198,14 +192,16 @@ canvas {
     align-content: flex-start;
     padding-left: 0.75em;
     border-top:2px solid lightgrey;
+    height:100%;
 }
 
 h1 {
     text-shadow: 0.05em 0.05em rgba(0,0,0,0.1);
-    margin:0 auto;
+    margin:0.1em 1em;
     padding: 0.4em 0 0.35em 0;
     z-index:7;
     width: fit-content;
+    cursor:pointer;
 }
 
 .flex {
@@ -213,7 +209,7 @@ h1 {
 }
 
 .panelBox {
-    margin-top: 2.25em;
+    margin-top: 1.5em;
     width: 100%;
     height:100%;
 }
@@ -290,6 +286,8 @@ hr {
         .hideOnMobile {
             display:none;
         }
+
+     
     }
 
 .weekOption {
@@ -325,8 +323,15 @@ hr {
     justify-content: space-between;
 }
 
+#pastWeeks {
+    overflow-y: auto;
+}
+
 @media only screen and (max-width: 1000px)
     {
+    #pastWeeks {
+        overflow-y: unset;
+    }
     .weeksScroll {
         flex-direction: row;
         flex-wrap: wrap;
@@ -398,6 +403,7 @@ hr {
         }
 
         #panelFlex {
+            height:unset;
             flex-direction:row;
         }
 
