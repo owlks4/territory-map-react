@@ -1,5 +1,5 @@
 html {
-    background-color: rgb(242,243,245);
+    background-color: rgba(245, 245, 245, 1);
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -33,6 +33,11 @@ body:active{
     overflow: hidden;
 }
 
+.leaflet-div-icon {
+    background: transparent;
+    border: none;
+}  
+
 canvas {
     position: absolute;
     width:100%;
@@ -40,8 +45,8 @@ canvas {
 }
 
 .territory {
+    display:block;
     box-sizing: border-box;
-    position: absolute;
     border-radius: 0.5em;
     padding: 0.5em;
     text-align:center;
@@ -192,13 +197,13 @@ canvas {
     flex-direction:column;
     align-content: flex-start;
     padding-left: 0.75em;
+    border-top:2px solid lightgrey;
 }
 
 h1 {
-    position: absolute;
     text-shadow: 0.05em 0.05em rgba(0,0,0,0.1);
-    margin:0;
-    padding: 0.5em 1em;
+    margin:0 auto;
+    padding: 0.4em 0 0.35em 0;
     z-index:7;
     width: fit-content;
 }
@@ -359,11 +364,16 @@ hr {
         }
     }
 
+#displayParent {
+    display:flex;
+    flex-direction: column;
+}
+
 @media only screen and (max-width: 1000px) and (orientation: portrait)
     {
         #displayParent {
-            transform: translate(0vw,47.5vh);
-            transform-origin: center;
+            display:flex;
+            flex-direction: column;
         }   
 
         .bigFlex {
@@ -382,6 +392,7 @@ hr {
             float: none;
             max-width: none;
             height:unset;
+            min-height:14em;
             flex-direction:row;
             border-bottom: 2px solid rgb(221, 221, 221);
         }
