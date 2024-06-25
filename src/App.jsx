@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
 import LegendElement from './legendElement.jsx';
-import { MapContainer, LayerGroup, Marker } from 'react-leaflet'
+import { MapContainer, LayerGroup, Marker, useMapEvents } from 'react-leaflet'
 import { divIcon, CRS } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 const DEFAULT_YEAR = 6;
+const VALID_YEARS = [6,7];
 const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
 const DEFAULT_PRECEDENCE = "N/A by territory";
 
@@ -96,6 +97,16 @@ function App (props){
       updatePrecedence(highestWeekFound);
       setLoadedWeeks(newLoadedWeeks);
       isReady = true;
+    }
+
+    function cycleYear(){
+      let index = VALID_YEARS.indexOf(year);
+      if (index < VALID_YEARS.length - 1){
+        index++;
+      } else {
+        index = 0;
+      }
+      changeYear(VALID_YEARS[index]);
     }
 
     function changeWeek(newWeekNumber){    
@@ -358,36 +369,50 @@ function App (props){
       );
     }
 
+    function MapTerritory(props) {
+      let [territoryFontSize, setTerritoryFontSize] = useState(1);
+
+      const mapEvents = useMapEvents({
+          zoomend: () => {
+              setTerritoryFontSize((1 - ((10 - mapEvents.getZoom()) / 3)) + "em");
+          },
+      });      
+
+      return (
+      <Marker position={props.position} icon={
+        divIcon({
+          html:"<div style=font-size:"+territoryFontSize+";>"+renderToStaticMarkup(
+          <Territory fadedOut={highlightedCategory == null ? false : (!props.t.alignment.includes(highlightedCategory))} t={props.t}/>)+"</div>"
+            })
+        } style={{fontSize:10}}/>
+      );
+    }
+
+    let mapCentre = [-0.5 * 0.85, 0.5 * 1.3];
+
     return (
     <>
-        <h1 style={window.innerWidth < 1000 ? {display:"none"}: {}}>
-           {window.innerWidth > 1000 ? "Territory Map History" : "I recommend you use this on PC instead!"}
-        </h1>
         <div className="bigFlex">
         {window.innerWidth < 1000 ? <Panel/> : <></>}
-          <div id="displayParent" style={{fontSize:windowFontSize, width:"100%", height:"100vh"}}>
+          <div id="displayParent" style={{fontSize:windowFontSize, width:"100%", height:"100%"}}>
+              <h1 onClick={()=>{cycleYear();}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
+                {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " ("+year+")")) : "I recommend you use this on PC instead!"}
+              </h1>
               <div style={{height:'100%'}}>
-                <MapContainer style={{height:"100%", backgroundColor:'white', borderTop:'2px solid lightgrey'}}
-                                      center={[-0.5 * 0.67, 0.5]} zoom={10} crs={CRS.Simple} zoomDelta={0.5} minZoom={8} maxZoom={10.5}>
+                <MapContainer style={{height:"100%", backgroundColor:'#ffffff', borderTop:"1px solid #ddd"}}
+                                      center={mapCentre} zoom={10} crs={CRS.Simple} zoomDelta={0.5} minZoom={8} maxZoom={10.5}>
                   {
                   isReady
-                    ?
-                  <LayerGroup>
+                    ?                  
+                    <LayerGroup>
                     {territories.map((t) => t.week == week ? (<>
-                    <Marker position={[-t.posY * 0.01 * 0.67, t.posX * 0.01]} icon={
-                      divIcon({
-                        html:"<div style=font-size:1em;>"+renderToStaticMarkup(
-                        <Territory fadedOut={highlightedCategory == null ? false : (!t.alignment.includes(highlightedCategory))} t={t} name={t.name} alignment={t.alignment} holder={t.holder}
-                                 week={t.week} maxHolderLineLength={t.maxHolderLineLength}/>)+"</div>"
-                          })
-                      }>
-                    </Marker>
+                    <MapTerritory position={[-t.posY * 0.01 * 0.8, t.posX * 0.01 * 1.3]} t={t}/>
                     </>) : null)}
-                  </LayerGroup>
+                    </LayerGroup>
                     : 
-                    <Marker icon={divIcon({html:"<div></div>"})} position={[-0.5 * 0.67, 0.5]}>
+                    <Marker icon={divIcon({html:"<div></div>"})} position={mapCentre}>
                         <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
-                          LOADING... PLEASE WAIT...
+                          Loading... <br/>(Should take about 5 seconds at most)
                         </h1>
                     </Marker>
                   }

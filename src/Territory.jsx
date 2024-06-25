@@ -3,7 +3,7 @@ import './index.css'
 
 function Territory (props) {
 
-    let _holder = props.holder;
+    let _holder = props.t.holder;
 
     if (_holder == "NONE"){
         _holder = null;
@@ -15,9 +15,9 @@ function Territory (props) {
     let curSegment = "";
     let holderFull = null;
 
-    if (props.maxHolderLineLength > 0){       //breaks up the holder name onto separate lines
+    if (props.t.maxHolderLineLength > 0){       //breaks up the holder name onto separate lines
         for (let i = 0; i < splitHolder.length; i++){      
-            if (curSegment.length + splitHolder[i].length <= props.maxHolderLineLength){
+            if (curSegment.length + splitHolder[i].length <= props.t.maxHolderLineLength){
                 curSegment += splitHolder[i] + " ";
                 if (i == splitHolder.length - 1){
                     holderSegments.push(<>{curSegment+""}</>);
@@ -39,16 +39,16 @@ function Territory (props) {
         holderFull = <>{"("+_holder+")"}</>
     }
 
-    let [id] = useState(props.name.toLowerCase().replaceAll(" ","-"));
-    let [week] = useState(props.week);
+    let [id] = useState(props.t.name.toLowerCase().replaceAll(" ","-"));
+    let [week] = useState(props.t.week);
     let [mouseOver, setMouseOver] = useState(false);
 
     return (
     <>
-     <div className={"territory "+ props.alignment} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
+     <div className={"territory "+ props.t.alignment} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
      style={{zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
         <div className="territoryText" style={{whiteSpace:"nowrap"}}>
-            {props.name}
+            {props.t.name}
         </div>
         {_holder != null ? 
             <div className="territoryText">
