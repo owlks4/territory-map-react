@@ -171,7 +171,7 @@ function App (props){
     }
 
     function ClanCovPrecedence(props){
-      return (<div style = {{width: screen.orientation.type.includes("portrait") ? "200%": "100%"}}>
+      return (<div>
                         <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
                           <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
                             Clan precedence:
@@ -306,11 +306,11 @@ function App (props){
 
     function Panel (){
       return (<div id="panel">
-          <h2 className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
+          <h2 className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", marginBottom:'0.5em',
+            color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
             Territory Map History
             <br/>
             (Works better on PC)
-            <hr style={{marginBottom:"0em", opacity:"0.5"}}/>
           </h2>
           <div id="panelFlex" className="flex" >
             <div id="legend" className="panelBox" style={{height:"fit-content"}}>
