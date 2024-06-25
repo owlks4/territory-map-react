@@ -67,7 +67,8 @@ function App (props){
         console.log("Did not attempt to change year, because that year was already selected.");
         return;
       }
-      
+      isReady = false;
+
       let newLoadedWeeks = [];
       let highestWeekFound = -1;
     
@@ -395,7 +396,7 @@ function App (props){
         <div className="bigFlex">
         {window.innerWidth < 1000 ? <Panel/> : <></>}
           <div id="displayParent" style={{fontSize:windowFontSize, width:"100%", height:"100%"}}>
-              <h1 onClick={()=>{cycleYear();}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
+              <h1 onClick={()=>{if(isReady){cycleYear();}}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
                 {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " ("+year+")")) : "I recommend you use this on PC instead!"}
               </h1>
               <div style={{height:'100%'}}>
@@ -405,14 +406,14 @@ function App (props){
                   isReady
                     ?                  
                     <LayerGroup>
-                    {territories.map((t) => t.week == week ? (<>
-                    <MapTerritory position={[-t.posY * 0.01 * 0.8, t.posX * 0.01 * 1.3]} t={t}/>
-                    </>) : null)}
+                      {territories.map((t) => t.week == week ? (<>
+                      <MapTerritory position={[-t.posY * 0.01 * 0.8, t.posX * 0.01 * 1.3]} t={t}/>
+                      </>) : null)}
                     </LayerGroup>
                     : 
                     <Marker icon={divIcon({html:"<div></div>"})} position={mapCentre}>
                         <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
-                          Loading... <br/>(Should take about 5 seconds at most)
+                          Loading... <br/>(Should take 5 seconds at most)
                         </h1>
                     </Marker>
                   }
