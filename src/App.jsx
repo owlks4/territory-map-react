@@ -18,6 +18,8 @@ let weeksScrollPosition = 0;
 
 let csvCache = {};
 
+let storedTerritoryFontSize = "1em";
+
 let canvas = document.createElement("canvas");
 canvas.width = 1920;
 canvas.height = 1080;
@@ -418,11 +420,12 @@ function App (props){
     }
 
     function MapTerritory(props) {
-      let [territoryFontSize, setTerritoryFontSize] = useState(1);
-
+      let [territoryFontSize, setTerritoryFontSize] = useState(storedTerritoryFontSize);
+    
       const mapEvents = useMapEvents({
           zoomend: () => {
-              setTerritoryFontSize((1 - ((10 - mapEvents.getZoom()) / 3)) + "em");
+            storedTerritoryFontSize = (1 - ((10 - mapEvents.getZoom()) / 3)) + "em";
+            setTerritoryFontSize(storedTerritoryFontSize);
           },
       });      
 
