@@ -11,6 +11,8 @@ const VALID_YEARS = [6,7];
 const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
 const DEFAULT_PRECEDENCE = "N/A by territory";
 
+let csvCache = {};
+
 let isReady = false;
 
 class Adjacency {
@@ -71,23 +73,41 @@ function App (props){
 
       let newLoadedWeeks = [];
       let highestWeekFound = -1;
-    
+      
+      let csvCacheKeys = Object.keys(csvCache);
+
+      while (territories.length > 0){
+        territories.pop();
+      }
+
       for (let i = 1; i < MAX_SPECULATIVE_CSV_CHECK_NUMBER; i++){
         let shouldBreakLoop = false;
-        await fetch("./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv")
-        .then(response => response.text())
-        .then(text => {
-          if (text != "" && text[0] != "<"){
-            let lines = text.trim().split("\n");
-            newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i, minX:null, maxX:null, minY:null, maxY:null});
-            getTerritoriesFromCSV(lines, i);
-            if (i > highestWeekFound){
-              highestWeekFound = i;
-            }
-          } else {
-            shouldBreakLoop = true;
+        let speculativeFilename = "./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv";
+
+        if (csvCacheKeys.includes(speculativeFilename)){ //if we already looked up this file, don't read it in again
+          let lines = csvCache[speculativeFilename];
+          newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i, minX:null, maxX:null, minY:null, maxY:null});
+          getTerritoriesFromCSV(lines, i);
+          if (i > highestWeekFound){
+            highestWeekFound = i;
           }
-        });
+        } else {     //otherwise, look for this file anew
+          await fetch(speculativeFilename)
+          .then(response => response.text())
+          .then(text => {
+            if (text != "" && text[0] != "<"){
+              let lines = text.trim().split("\n");
+              csvCache[speculativeFilename] = lines;
+              newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i, minX:null, maxX:null, minY:null, maxY:null});
+              getTerritoriesFromCSV(lines, i);
+              if (i > highestWeekFound){
+                highestWeekFound = i;
+              }
+            } else {
+              shouldBreakLoop = true;
+            }
+          });
+        }
         if (shouldBreakLoop){
           break;
         }
@@ -172,7 +192,7 @@ function App (props){
     }
 
     function ClanCovPrecedence(props){
-      return (<div>
+      return (<div onMouseEnter={() => {setHighlightedCategory(null)}}>
                         <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
                           <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
                             Clan precedence:
@@ -319,7 +339,7 @@ function App (props){
                 Legend
               </h2>
               <hr/>
-              <div id="key" style={{overflow:'auto', width:"fit-content"}}>
+              <div onMouseLeave={() => {setHighlightedCategory(null)}} id="key" style={{overflow:'auto', width:"fit-content"}}>
                 <div onMouseLeave={() => {setHighlightedCategory(null)}}>
                   <div>
                     <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>
@@ -399,17 +419,17 @@ function App (props){
               <h1 onClick={()=>{if(isReady){cycleYear();}}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
                 {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " ("+year+")")) : "I recommend you use this on PC instead!"}
               </h1>
-              <div style={{height:'100%'}}>
+              <div onMouseEnter={() => {setHighlightedCategory(null)}} style={{height:'100%'}}>
                 <MapContainer style={{height:"100%", backgroundColor:'#ffffff', borderTop:"1px solid #ddd"}}
                                       center={mapCentre} zoom={10} crs={CRS.Simple} zoomDelta={0.5} minZoom={8} maxZoom={10.5}>
                   {
                   isReady
                     ?                  
-                    <LayerGroup>
+                    <>
                       {territories.map((t) => t.week == week ? (<>
                       <MapTerritory position={[-t.posY * 0.01 * 0.8, t.posX * 0.01 * 1.3]} t={t}/>
                       </>) : null)}
-                    </LayerGroup>
+                    </>
                     : 
                     <Marker icon={divIcon({html:"<div></div>"})} position={mapCentre}>
                         <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
