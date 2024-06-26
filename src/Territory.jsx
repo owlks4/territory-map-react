@@ -15,8 +15,6 @@ function Territory (props) {
     let curSegment = "";
     let holderFull = null;
 
-    console.log(props.t.maxHolderLineLength)
-
     if (props.t.maxHolderLineLength > 0){       //breaks up the holder name onto separate lines
         for (let i = 0; i < splitHolder.length; i++){      
             if (curSegment.length + splitHolder[i].length <= props.t.maxHolderLineLength){
