@@ -342,7 +342,7 @@ function App (props){
     class Panel extends Component {
 
       componentDidMount() {
-        let existingWeeksScrollElement = document.getElementById("pastWeeks");
+        let existingWeeksScrollElement =  window.innerWidth > 1000 ? document.getElementById("pastWeeks") : document.getElementById("weeks-scroll-mobile");
         if (existingWeeksScrollElement != null){
           existingWeeksScrollElement.scrollTop = weeksScrollPosition;
           }
@@ -394,10 +394,10 @@ function App (props){
                 {window.innerWidth < 1000 ? "Select past week:" : "Select past week"}
               </h2>
               <hr/>
-              <div className="weeksScroll">
+              <div className="weeksScroll" id="weeks-scroll-mobile">
                 <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")}
                                                  onClick={() => { 
-                                                    let existingWeeksScrollElement = document.getElementById("pastWeeks");
+                                                    let existingWeeksScrollElement = window.innerWidth > 1000 ? document.getElementById("pastWeeks") : document.getElementById("weeks-scroll-mobile");
                                                     weeksScrollPosition = existingWeeksScrollElement == null ? 0 : existingWeeksScrollElement.scrollTop;
                                                     week != wk.weekNumber ? changeWeek(wk.weekNumber) : null;
                                                     }}>

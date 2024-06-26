@@ -321,7 +321,7 @@ hr {
     justify-content: space-between;
 }
 
-#pastWeeks {
+#pastWeeks {         /* The element that scrolls when on PC. Mobile has a different one (weeksScroll). */
     overflow-y: auto;
 }
 
