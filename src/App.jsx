@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Component } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
 import LegendElement from './legendElement.jsx';
@@ -10,6 +10,8 @@ const DEFAULT_YEAR = 6;
 const VALID_YEARS = [6,7];
 const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
 const DEFAULT_PRECEDENCE = "N/A by territory";
+
+let weeksScrollPosition = 0;
 
 let csvCache = {};
 
@@ -325,8 +327,17 @@ function App (props){
         }
     }
 
-    function Panel (){
-      return (<div id="panel">
+    class Panel extends Component {
+
+      componentDidMount() {
+        let existingWeeksScrollElement = document.getElementById("pastWeeks");
+        if (existingWeeksScrollElement != null){
+          existingWeeksScrollElement.scrollTop = weeksScrollPosition;
+          }
+      }
+
+      render() {
+        return (<div id="panel">
           <h2 className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", marginBottom:'0.5em',
             color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
             Territory Map History
@@ -372,7 +383,11 @@ function App (props){
               </h2>
               <hr/>
               <div className="weeksScroll">
-                <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => week != wk.weekNumber ? changeWeek(wk.weekNumber) : null}>
+                <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => { 
+                                                                                                    let existingWeeksScrollElement = document.getElementById("pastWeeks");
+                                                                                                    weeksScrollPosition = existingWeeksScrollElement == null ? 0 : existingWeeksScrollElement.scrollTop;
+                                                                                                    week != wk.weekNumber ? changeWeek(wk.weekNumber) : null;
+                                                                                                    }}>
                                                 {window.innerWidth > 1000 ? wk.title : "Wk"+wk.weekNumber}
                                             </h4></>)}</>
               </div>
@@ -388,6 +403,7 @@ function App (props){
           {window.innerWidth < 1000 ? <ClanCovPrecedence/> : <></>}
       </div>
       );
+      }
     }
 
     function MapTerritory(props) {
@@ -417,7 +433,7 @@ function App (props){
         {window.innerWidth < 1000 ? <Panel/> : <></>}
           <div id="displayParent" style={{fontSize:windowFontSize, width:"100%", height:"100%"}}>
               <h1 onClick={()=>{if(isReady){cycleYear();}}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
-                {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " ("+year+")")) : "I recommend you use this on PC instead!"}
+                {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")) : "I recommend you use this on PC instead!"}
               </h1>
               <div onMouseEnter={() => {setHighlightedCategory(null)}} style={{height:'100%'}}>
                 <MapContainer style={{height:"100%", backgroundColor:'#ffffff', borderTop:"1px solid #ddd"}}
