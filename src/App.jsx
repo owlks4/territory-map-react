@@ -32,9 +32,6 @@ class Adjacency {
       this.x2 = parseFloat(x2)
       this.y2 = parseFloat(y2)
 
-      this.bounds = [[this.y1 <= this.y2 ? this.y1 : this.y2, this.x1 <= this.x2 ? this.x1 : this.x2],  //NE
-                     [this.y1 > this.y2 ? this.y1 : this.y2, this.x1 > this.x2 ? this.x1 : this.x2]]    //SW
-
       if (sideOrTop1 == "side"){
         this.a1 = (this.x1 + this.x2) / 2
         this.b1 = parseFloat(y1);
@@ -50,10 +47,6 @@ class Adjacency {
         this.a2 =  parseFloat(x2);
         this.b2 = (this.y1 + this.y2) / 2;
       }
-
-      let end = [((this.x2-this.x1)) * 1000, ((this.y2-this.y1) * -1000)]
-
-      this.pathSequence = "M "+0+" "+0+" C "+end[0]+" "+end[1]+", 0 0, "+end[0]+" "+end[1];
   }
 }
 
@@ -325,8 +318,6 @@ function App (props){
         return;
       }
 
-      console.log("Supposedly the canvas updates here.")
-
       setAdjacencies(adjacencies);
       let ctx = canvas.getContext("2d");
       ctx.imageSmoothingEnabled = true;
@@ -339,7 +330,6 @@ function App (props){
         if (a.week != week){
             continue;
           }
-        console.log(a);
         ctx.beginPath();        
         ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
         ctx.bezierCurveTo((a.a1/100) * canvas.width, (a.b1/100) * canvas.height,
@@ -405,11 +395,12 @@ function App (props){
               </h2>
               <hr/>
               <div className="weeksScroll">
-                <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")} onClick={() => { 
-                                                                                                    let existingWeeksScrollElement = document.getElementById("pastWeeks");
-                                                                                                    weeksScrollPosition = existingWeeksScrollElement == null ? 0 : existingWeeksScrollElement.scrollTop;
-                                                                                                    week != wk.weekNumber ? changeWeek(wk.weekNumber) : null;
-                                                                                                    }}>
+                <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")}
+                                                 onClick={() => { 
+                                                    let existingWeeksScrollElement = document.getElementById("pastWeeks");
+                                                    weeksScrollPosition = existingWeeksScrollElement == null ? 0 : existingWeeksScrollElement.scrollTop;
+                                                    week != wk.weekNumber ? changeWeek(wk.weekNumber) : null;
+                                                    }}>
                                                 {window.innerWidth > 1000 ? wk.title : "Wk"+wk.weekNumber}
                                             </h4></>)}</>
               </div>
@@ -458,7 +449,7 @@ function App (props){
                 {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")) : "I recommend you use this on PC instead!"}
               </h1>
               <div onMouseEnter={() => {setHighlightedCategory(null)}} style={{height:'100%'}}>
-                <MapContainer style={{height:"100%", backgroundColor:'#ffffff', borderTop:"1px solid #ddd"}}
+                <MapContainer style={{height:"100%", maxWidth:"100vw", backgroundColor:'#ffffff', borderTop:"1px solid #ddd"}}
                                       center={mapCentre} zoom={10} crs={CRS.Simple} zoomDelta={0.5} minZoom={8} maxZoom={10.5}>
                   {
                   isReady

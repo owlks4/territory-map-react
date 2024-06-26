@@ -58,6 +58,7 @@ body {
     text-align: center;
     font-size: 1em;
     transition: font-size 0s;
+    white-space: nowrap;
 }
 
 .territory:hover .territoryText {
