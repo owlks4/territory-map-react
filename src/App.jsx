@@ -2,7 +2,7 @@ import { useState, useEffect, Component } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
 import LegendElement from './legendElement.jsx';
-import { MapContainer, LayerGroup, Marker, useMapEvents } from 'react-leaflet'
+import { MapContainer, LayerGroup, Marker, useMapEvents, ImageOverlay } from 'react-leaflet'
 import { divIcon, CRS } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
 
@@ -11,19 +11,29 @@ const VALID_YEARS = [6,7];
 const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
 const DEFAULT_PRECEDENCE = "N/A by territory";
 
+const HORIZONTAL_SCALE_FACTOR = 1.3;
+const VERTICAL_SCALE_FACTOR = 0.8;
+
 let weeksScrollPosition = 0;
 
 let csvCache = {};
+
+let canvas = document.createElement("canvas");
+canvas.width = 1920;
+canvas.height = 1080;
 
 let isReady = false;
 
 class Adjacency {
   constructor(week,x1,y1,x2,y2,sideOrTop1, sideOrTop2){
       this.week = week;
-      this.x1 = parseFloat(x1);
-      this.y1 = parseFloat(y1);
-      this.x2 = parseFloat(x2);
-      this.y2 = parseFloat(y2);
+      this.x1 = parseFloat(x1)
+      this.y1 = parseFloat(y1)
+      this.x2 = parseFloat(x2)
+      this.y2 = parseFloat(y2)
+
+      this.bounds = [[this.y1 <= this.y2 ? this.y1 : this.y2, this.x1 <= this.x2 ? this.x1 : this.x2],  //NE
+                     [this.y1 > this.y2 ? this.y1 : this.y2, this.x1 > this.x2 ? this.x1 : this.x2]]    //SW
 
       if (sideOrTop1 == "side"){
         this.a1 = (this.x1 + this.x2) / 2
@@ -40,6 +50,10 @@ class Adjacency {
         this.a2 =  parseFloat(x2);
         this.b2 = (this.y1 + this.y2) / 2;
       }
+
+      let end = [((this.x2-this.x1)) * 1000, ((this.y2-this.y1) * -1000)]
+
+      this.pathSequence = "M "+0+" "+0+" C "+end[0]+" "+end[1]+", 0 0, "+end[0]+" "+end[1];
   }
 }
 
@@ -72,10 +86,11 @@ function App (props){
         return;
       }
       isReady = false;
+      weeksScrollPosition = 0;
 
       let newLoadedWeeks = [];
       let highestWeekFound = -1;
-      
+
       let csvCacheKeys = Object.keys(csvCache);
 
       while (territories.length > 0){
@@ -88,7 +103,7 @@ function App (props){
 
         if (csvCacheKeys.includes(speculativeFilename)){ //if we already looked up this file, don't read it in again
           let lines = csvCache[speculativeFilename];
-          newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i, minX:null, maxX:null, minY:null, maxY:null});
+          newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i});
           getTerritoriesFromCSV(lines, i);
           if (i > highestWeekFound){
             highestWeekFound = i;
@@ -100,7 +115,7 @@ function App (props){
             if (text != "" && text[0] != "<"){
               let lines = text.trim().split("\n");
               csvCache[speculativeFilename] = lines;
-              newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i, minX:null, maxX:null, minY:null, maxY:null});
+              newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i});
               getTerritoriesFromCSV(lines, i);
               if (i > highestWeekFound){
                 highestWeekFound = i;
@@ -117,6 +132,7 @@ function App (props){
       newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
       setYear(newYearNumber);
       setWeek(highestWeekFound);
+      redrawCanvasAccordingToWeek(highestWeekFound);
       updatePrecedence(highestWeekFound);
       setLoadedWeeks(newLoadedWeeks);
       isReady = true;
@@ -133,6 +149,7 @@ function App (props){
     }
 
     function changeWeek(newWeekNumber){    
+      redrawCanvasAccordingToWeek(newWeekNumber);
       setWeek(newWeekNumber);
       updatePrecedence(newWeekNumber);
     }
@@ -303,9 +320,13 @@ function App (props){
       }
 
     function redrawCanvasAccordingToWeek(week){
+
       if (canvas == null){
         return;
       }
+
+      console.log("Supposedly the canvas updates here.")
+
       setAdjacencies(adjacencies);
       let ctx = canvas.getContext("2d");
       ctx.imageSmoothingEnabled = true;
@@ -318,6 +339,7 @@ function App (props){
         if (a.week != week){
             continue;
           }
+        console.log(a);
         ctx.beginPath();        
         ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
         ctx.bezierCurveTo((a.a1/100) * canvas.width, (a.b1/100) * canvas.height,
@@ -425,7 +447,7 @@ function App (props){
       );
     }
 
-    let mapCentre = [-0.5 * 0.85, 0.5 * 1.3];
+    let mapCentre = [-0.5 * VERTICAL_SCALE_FACTOR, 0.5 * HORIZONTAL_SCALE_FACTOR];
 
     return (
     <>
@@ -442,9 +464,19 @@ function App (props){
                   isReady
                     ?                  
                     <>
-                      {territories.map((t) => t.week == week ? (<>
-                      <MapTerritory position={[-t.posY * 0.01 * 0.8, t.posX * 0.01 * 1.3]} t={t}/>
-                      </>) : null)}
+                      <LayerGroup>
+                        <ImageOverlay
+                          url={canvas.toDataURL()}
+                          bounds={[[-VERTICAL_SCALE_FACTOR,0],[0,HORIZONTAL_SCALE_FACTOR]]}
+                          opacity={0.5}
+                          zIndex={10}
+                        />
+                      </LayerGroup>
+                      <LayerGroup>
+                        {territories.map((t) => t.week == week ? (<>
+                        <MapTerritory position={[-t.posY * 0.01 * VERTICAL_SCALE_FACTOR, t.posX * 0.01 * HORIZONTAL_SCALE_FACTOR]} t={t}/>
+                        </>) : null)}
+                      </LayerGroup>
                     </>
                     : 
                     <Marker icon={divIcon({html:"<div></div>"})} position={mapCentre}>
