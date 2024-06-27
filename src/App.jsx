@@ -206,7 +206,7 @@ function App (props){
     }
 
     function ClanCovPrecedence(props){
-      return (<div onMouseEnter={() => {setHighlightedCategory(null)}}>
+      return (<div style = {screen.orientation.type.includes("portrait") ? {maxHeight:"4em", overflowY:"auto"} : {}} onMouseEnter={() => {setHighlightedCategory(null)}}>
                         <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
                           <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
                             Clan precedence:
@@ -473,7 +473,7 @@ function App (props){
                     : 
                     <Marker icon={divIcon({html:"<div></div>"})} position={mapCentre}>
                         <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
-                          Loading... <br/>(Should take 5 seconds at most)
+                          Loading... <br/>(May take up to 5 seconds)
                         </h1>
                     </Marker>
                   }
