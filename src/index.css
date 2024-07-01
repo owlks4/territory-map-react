@@ -150,6 +150,13 @@ body {
     padding-bottom: 0.1em;
 }
 
+.legend-territories-row {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    white-space:nowrap;
+}
+
 .inline-territory {
     display:inline-block;
     position:relative;
@@ -157,6 +164,7 @@ body {
     vertical-align: center;
     text-align: center;
     margin: 0 0.1em;
+    width:100%;
     padding: 0.25em 0.5em;
     cursor: pointer;
 }
@@ -404,5 +412,7 @@ hr {
         .inline-territory {
             font-size: 0.5em;
             margin: 0 0.05em;
+            width:100%;
             }
     }
+    
