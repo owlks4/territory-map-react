@@ -352,9 +352,9 @@ function App (props){
 
       render() {
         return (<div id="panel">
-          <h2 className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", marginBottom:'0.5em',
+          <h2 onClick={()=>{if(isReady){cycleYear();}}} className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", marginBottom:'0.5em',
             color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
-            Territory Map History
+            {"Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")}
           </h2>
           <div id="panelFlex" className="flex" >
             <div id="legend" className="panelBox" style={{height:"fit-content"}}>
@@ -364,14 +364,14 @@ function App (props){
               <hr/>
               <div onMouseLeave={() => {setHighlightedCategory(null)}} id="key" style={{overflow:'auto', width:"fit-content"}}>
                 <div onMouseLeave={() => {setHighlightedCategory(null)}}>
-                  <div style={{whiteSpace:"nowrap"}}>
+                  <div className="legend-territories-row">
                     <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>
                     <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
                     <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
                     <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
                     <LegendElement alignment="Nosferatu" setHighlightedCategory={setHighlightedCategory}/>
                   </div>
-                  <div style={{whiteSpace:"nowrap", marginTop:"0.25em"}}>
+                  <div className="legend-territories-row" style={{marginTop:"0.25em"}}>
                     <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
                     <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory}/>
                     <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory}/>
@@ -379,7 +379,7 @@ function App (props){
                     <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory}/>
                   </div>
                 </div>
-                <div style={{whiteSpace:"nowrap", marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
+                <div className="legend-territories-row" style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
                   <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory}/>
                   <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory}/>
                   <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory}/>
