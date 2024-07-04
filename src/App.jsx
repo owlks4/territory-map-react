@@ -1,8 +1,9 @@
 import { useState, useEffect, Component } from 'react'
 import './index.css'
 import Territory from './Territory.jsx';
+import Gantt from './Gantt.jsx';
 import LegendElement from './legendElement.jsx';
-import { MapContainer, LayerGroup, Marker, useMapEvents, ImageOverlay } from 'react-leaflet'
+import { MapContainer, LayerGroup, Marker, useMapEvents, ImageOverlay, Popup} from 'react-leaflet'
 import { divIcon, CRS } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
 
@@ -114,7 +115,7 @@ function App (props){
                   territoryChange.posY = territoryChange.posY == null ? null : parseFloat(territoryChange.posY.replace("%",""));
                   territoryChange.maxHolderLineLength = parseFloat(territoryChange.maxHolderLineLength);
                 });
-                newLoadedWeeks.push({weekNumber:weekIndex+1, title:week.title});
+                newLoadedWeeks.push({weekNumber:weekIndex+1, title:"Week "+(weekIndex+1)+" - "+week.title});
               });
             }
           });
@@ -451,7 +452,11 @@ function App (props){
           html:"<div style=font-size:"+territoryFontSize+";>"+renderToStaticMarkup(
           <Territory fadedOut={highlightedCategory == null ? false : (!props.t.alignment.includes(highlightedCategory))} t={props.t}/>)+"</div>"
             })
-        } style={{fontSize:10}}/>
+        } style={{fontSize:10}}>
+          <Popup>
+            <Gantt t={props.t} weekNumber={week} weeks={currentYearJson.weeks}/>
+          </Popup>
+          </Marker>
       );
     }
 

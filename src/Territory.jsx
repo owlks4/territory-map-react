@@ -5,7 +5,7 @@ function Territory (props) {
 
     let _holder = props.t.holder;
 
-    if (_holder == "NONE"){
+    if (_holder == "Praxis"){
         _holder = null;
     }
 
