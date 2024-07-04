@@ -18,7 +18,7 @@
                 {"territoryName":"Lea Hall", "alignment":"enemy", "holder":"???", "posX":"88%", "posY":"38.25%", "maxHolderLineLength":"0"},
                 {"territoryName":"Summerfield", "alignment":"enemy", "holder":"???", "posX":"22%", "posY":"45%", "maxHolderLineLength":"0"},
                 {"territoryName":"Ladywood", "alignment":"enemy", "holder":"???", "posX":"35%", "posY":"51.6%", "maxHolderLineLength":"0"},
-                {"territoryName":"The Rack", "alignment":"court", "holder":"NONE", "posX":"46%", "posY":"50%", "maxHolderLineLength":"0"},
+                {"territoryName":"The Rack", "alignment":"court", "holder":"Praxis", "posX":"46%", "posY":"50%", "maxHolderLineLength":"0"},
                 {"territoryName":"Sparkbrook", "alignment":"enemy", "holder":"???", "posX":"56%", "posY":"53.4%", "maxHolderLineLength":"0"},
                 {"territoryName":"Bordesley Green", "alignment":"enemy", "holder":"???", "posX":"68%", "posY":"50%", "maxHolderLineLength":"0"},
                 {"territoryName":"Yardley", "alignment":"unclaimed", "holder":"Unclaimed", "posX":"80%", "posY":"50%", "maxHolderLineLength":"0"},
