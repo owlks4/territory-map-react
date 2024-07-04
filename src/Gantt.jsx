@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './index.css'
 
 function getTerritoryByName(territoryChanges, requiredTerritoryName){
@@ -11,15 +10,15 @@ function getTerritoryByName(territoryChanges, requiredTerritoryName){
     return null;
 }
 
-const holderTenureCols = ['#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'];
+const holderTenureCols = ['#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080'];
 
-function getHolderTenuresColor(holderName){
-    switch(holderName.toLowerCase()){
+function getHolderTenuresColor(tenure, holderTenures){
+    switch(tenure.holder.toLowerCase()){
         case "???":
         case "unclaimed":
             return "rgb(58,65,74)";
         default:
-            return holderTenureCols[holderName.length % holderTenureCols.length - 1]
+            return holderTenureCols[holderTenures.indexOf(tenure) % (holderTenureCols.length - 1)]
     }
 }
 
@@ -84,7 +83,7 @@ function Gantt(props) {
      <div style={{display:'flex', border:"1px solid black", width:"290px", height:"1.5em"}}>
         {
             alignmentTenures.map((tenure) => <>{
-                <div title={tenure.alignment +", "+tenure.numWeeks+" weeks"} className={tenure.alignment} style={{cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
+                <div title={tenure.alignment +", "+tenure.numWeeks+" weeks"} className={tenure.alignment} style={{boxSizing:"border-box", cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
                 </div>
             }</>)
         }
@@ -94,8 +93,8 @@ function Gantt(props) {
      <div className="gantt-area">
         {
             holderTenures.map((tenure) => <>{
-                <div title={tenure.holder +", "+tenure.numWeeks+" weeks"}
-                style={{backgroundColor:getHolderTenuresColor(tenure.holder), cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
+                <div title={tenure.holder +", "+tenure.numWeeks+" weeks"} style={{boxSizing:"border-box", backgroundColor:getHolderTenuresColor(tenure, holderTenures),
+                cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
                 </div>
             }</>)
         }
