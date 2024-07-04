@@ -8,15 +8,15 @@ import { renderToStaticMarkup } from 'react-dom/server';
 
 const DEFAULT_YEAR = 6;
 const VALID_YEARS = [6,7];
-const MAX_SPECULATIVE_CSV_CHECK_NUMBER = 30;  //as in, in any given year, it will look for a maximum of this many CSVs in the given folder. It should be a sensible limit that it is unlikely to ever reach, without being too high.
+
+let currentYearJson = null;
+
 const DEFAULT_PRECEDENCE = "N/A by territory";
 
 const HORIZONTAL_SCALE_FACTOR = 1.3;
 const VERTICAL_SCALE_FACTOR = 0.8;
 
 let weeksScrollPosition = 0;
-
-let csvCache = {};
 
 let storedTerritoryFontSize = "1em";
 
@@ -27,28 +27,34 @@ canvas.height = 1080;
 let isReady = false;
 
 class Adjacency {
-  constructor(week,x1,y1,x2,y2,sideOrTop1, sideOrTop2){
-      this.week = week;
-      this.x1 = parseFloat(x1)
-      this.y1 = parseFloat(y1)
-      this.x2 = parseFloat(x2)
-      this.y2 = parseFloat(y2)
+  constructor(adjacencyChange){
+      this.adjacencyName = adjacencyChange.adjacencyName;
+      this.refresh(adjacencyChange)
+  }
 
-      if (sideOrTop1 == "side"){
-        this.a1 = (this.x1 + this.x2) / 2
-        this.b1 = parseFloat(y1);
-      } else {
-        this.a1 =  parseFloat(x1);
-        this.b1 = (this.y1 + this.y2) / 2;
-      }
+  refresh(adjacencyChange){
+    this.adjacencyName = adjacencyChange.adjacencyName;
 
-      if (sideOrTop2 == "side"){
-        this.a2 = (this.x1 + this.x2) / 2
-        this.b2 = parseFloat(y2);
-      } else {
-        this.a2 =  parseFloat(x2);
-        this.b2 = (this.y1 + this.y2) / 2;
-      }
+    this.x1 = parseFloat(adjacencyChange.x1)
+    this.y1 = parseFloat(adjacencyChange.y1)
+    this.x2 = parseFloat(adjacencyChange.x2)
+    this.y2 = parseFloat(adjacencyChange.y2)
+
+    if (adjacencyChange.sideOrTop1 == "side"){
+      this.a1 = (this.x1 + this.x2) / 2
+      this.b1 = this.y1;
+    } else {
+      this.a1 =  this.x1;
+      this.b1 = (this.y1 + this.y2) / 2;
+    }
+
+    if (adjacencyChange.sideOrTop2 == "side"){
+      this.a2 = (this.x1 + this.x2) / 2
+      this.b2 = this.y2;
+    } else {
+      this.a2 = this.x2;
+      this.b2 = (this.y1 + this.y2) / 2;
+    }
   }
 }
 
@@ -86,47 +92,31 @@ function App (props){
       let newLoadedWeeks = [];
       let highestWeekFound = -1;
 
-      let csvCacheKeys = Object.keys(csvCache);
-
       while (territories.length > 0){
         territories.pop();
       }
 
-      for (let i = 1; i < MAX_SPECULATIVE_CSV_CHECK_NUMBER; i++){
-        let shouldBreakLoop = false;
-        let speculativeFilename = "./csv/y"+newYearNumber+"/territoryAssignments-wk"+i+".csv";
-
-        if (csvCacheKeys.includes(speculativeFilename)){ //if we already looked up this file, don't read it in again
-          let lines = csvCache[speculativeFilename];
-          newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i});
-          getTerritoriesFromCSV(lines, i);
-          if (i > highestWeekFound){
-            highestWeekFound = i;
-          }
-        } else {     //otherwise, look for this file anew
-          await fetch(speculativeFilename)
-          .then(response => response.text())
-          .then(text => {
-            if (text != "" && text[0] != "<"){
-              let lines = text.trim().split("\n");
-              csvCache[speculativeFilename] = lines;
-              newLoadedWeeks.push({title: "Week "+i+" - "+lines[0], weekNumber:i});
-              getTerritoriesFromCSV(lines, i);
-              if (i > highestWeekFound){
-                highestWeekFound = i;
-              }
-            } else {
-              shouldBreakLoop = true;
+      let filename = "./json/y"+newYearNumber+".json";
+      await fetch(filename)
+          .then(response => response.json())
+          .then(json => {
+            if (json != ""){
+              currentYearJson = json;
+              highestWeekFound = json.weeks.length;
+              json.weeks.forEach((week, weekIndex) => {
+                week.territoryChanges.forEach((territoryChange) => { //Some one-off input sanitising on first load
+                  territoryChange.alignment = adjustClanOrCovenantSpelling(territoryChange.alignment);
+                  territoryChange.posX = territoryChange.posX == null ? null : parseFloat(territoryChange.posX.replace("%",""));
+                  territoryChange.posY = territoryChange.posY == null ? null : parseFloat(territoryChange.posY.replace("%",""));
+                  territoryChange.maxHolderLineLength = parseFloat(territoryChange.maxHolderLineLength);
+                });
+                newLoadedWeeks.push({weekNumber:weekIndex+1, title:"Week "+(weekIndex+1)+" - "+week.title});
+              });
             }
           });
-        }
-        if (shouldBreakLoop){
-          break;
-        }
-      }
-      newLoadedWeeks = newLoadedWeeks.sort((a, b) => a.weekNumber - b.weekNumber)
+
       setYear(newYearNumber);
-      setWeek(highestWeekFound);
+      changeWeek(highestWeekFound);
       redrawCanvasAccordingToWeek(highestWeekFound);
       updatePrecedence(highestWeekFound);
       setLoadedWeeks(newLoadedWeeks);
@@ -145,11 +135,12 @@ function App (props){
 
     function changeWeek(newWeekNumber){    
       redrawCanvasAccordingToWeek(newWeekNumber);
+      setTerritoriesFromJSON(currentYearJson, newWeekNumber)
       setWeek(newWeekNumber);
-      updatePrecedence(newWeekNumber);
+      updatePrecedence();
     }
 
-    function updatePrecedence(newWeekNumber){
+    function updatePrecedence(){
       let dict = {};
       let highestClan = DEFAULT_PRECEDENCE;
       let highestClanNumber = 0;
@@ -161,13 +152,11 @@ function App (props){
 
       for (let i = 0; i < territories.length; i++){
         let t = territories[i];
-        if (t.week == newWeekNumber){
-          let alignment = t.alignment.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
-          if (alignment[0] in dict){
-            dict[alignment[0]]++;
-          } else {
-            dict[alignment[0]] = 1;
-          }
+        let alignment = t.alignment.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
+        if (alignment[0] in dict){
+          dict[alignment[0]]++;
+        } else {
+          dict[alignment[0]] = 1;
         }
       }
 
@@ -206,27 +195,27 @@ function App (props){
     }
 
     function ClanCovPrecedence(props){
-      return (<div style = {screen.orientation.type.includes("portrait") ? {maxHeight:"4em", overflowY:"auto"} : {}} onMouseEnter={() => {setHighlightedCategory(null)}}>
-                        <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
-                          <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                            Clan precedence:
-                          </h2>
-                          <h2 style={{marginTop: "0.15em", marginRight:"0em", marginBottom: "1em", color:"black",
-                                      whiteSpace:"break-spaces", width:"fit-content", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
-                            {clanPrecedence}
-                          </h2>
-                        </div>
-                        <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
-                          <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:0, fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                            Covenant precedence:
-                          </h2>
-                          <h2 style={{marginTop: "0.15em", marginRight:"0em", color:"black", width:"fit-content", 
-                                    whiteSpace:"break-spaces", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
-                            {covenantPrecedence}
-                          </h2>
-                        </div>
-                      </div>
-                      );
+      return (
+      <div style = {screen.orientation.type.includes("portrait") ? {maxHeight:"4em", overflowY:"auto"} : {}} onMouseEnter={() => {setHighlightedCategory(null)}}>
+        <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
+          <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+            Clan precedence:
+          </h2>
+          <h2 style={{marginTop: "0.15em", marginRight:"0em", marginBottom: "1em", color:"black", whiteSpace:"break-spaces",
+            width:"fit-content", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
+            {clanPrecedence}
+          </h2>
+        </div>
+        <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
+          <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:0, fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+            Covenant precedence:
+          </h2>
+          <h2 style={{marginTop: "0.15em", marginRight:"0em", color:"black", width:"fit-content", whiteSpace:"break-spaces", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
+            {covenantPrecedence}
+          </h2>
+        </div>
+      </div>
+      );
     }
 
     function toTitleCase(input){
@@ -281,38 +270,63 @@ function App (props){
       }
     }
 
-    function getTerritoriesFromCSV(lines, week){
-
-      let line1Split = lines[1].split(",");
-    
-        setWeekTitle(lines[0]);
-    
-        for (let i = 3; i < lines.length; i++){
-            let splitLine = lines[i].replaceAll("%","").split(",");
-            if (splitLine[0].trim().includes("ADJ")){
-              adjacencies.push(
-                    new Adjacency(
-                        week,
-                        splitLine[1].trim(),
-                        splitLine[2].trim(),
-                        splitLine[3].trim(),
-                        splitLine[4].trim(),
-                        splitLine[5].trim(),
-                        splitLine[6].trim()));
-            } else {
-                let t = {
-                  name:splitLine[0].trim(),
-                  alignment:adjustClanOrCovenantSpelling(splitLine[1].trim()),
-                  holder:splitLine[2].trim(),
-                  posX:splitLine[3].trim(),
-                  posY:splitLine[4].trim(),
-                  maxHolderLineLength:parseFloat(splitLine[5].trim()),
-                  week:week
-                }
-                territories.push(t);
-              }
-          }
+      function getTerritoryByName(territoryName){
+        for (let i = 0; i < territories.length; i++){
+            let t = territories[i];
+            if (t.territoryName == territoryName){
+                return t;
+            }
+        }
+        return null;
       }
+
+      function getAdjacencyByName(adjacencyName){
+        for (let i = 0; i < adjacencies.length; i++){
+            let a = adjacencies[i];
+            if (a.adjacencyName == adjacencyName){
+                return a;
+            }
+        }
+        return null;
+      }
+
+      function setTerritoriesFromJSON(json, requiredWeek){
+
+          //process all the weeks up until that point too, so that we get the combined result of all the changes up to that point.
+         //it's fine that requiredWeek is actually one more than the index of that week; it cancels out nicely with being the upper bound in the for loop.
+
+          for (let i = 0; i < requiredWeek; i++){
+              let week = json.weeks[i];
+
+              week.territoryChanges.forEach((territoryChange) => {
+                  let alreadyExistingVersion = getTerritoryByName(territoryChange.territoryName);
+                  if (alreadyExistingVersion == null){   //then push a new one
+                      territories.push(territoryChange);
+                  } else {    //then just update its properties
+                    alreadyExistingVersion.alignment = territoryChange.alignment;
+                    alreadyExistingVersion.holder = territoryChange.holder;
+                    if (territoryChange.posX != null){
+                      alreadyExistingVersion.posX = territoryChange.posX;
+                    }
+                    if (territoryChange.posY != null){
+                      alreadyExistingVersion.posY = territoryChange.posY;
+                    }
+                    alreadyExistingVersion.maxHolderLineLength = territoryChange.maxHolderLineLength;
+                  }
+              });
+
+              week.adjacencyChanges.forEach((adjacencyChange) => {
+                let alreadyExistingVersion = getAdjacencyByName(adjacencyChange.adjacencyName);
+                if (alreadyExistingVersion == null){   //then push a new one
+                    adjacencies.push(new Adjacency(adjacencyChange));
+                } else {    //then just update its properties
+                  alreadyExistingVersion.refresh(adjacencyChange);
+                }
+              }
+              );
+            }
+          setWeekTitle(json.weeks[requiredWeek-1].title);
+        }
 
     function redrawCanvasAccordingToWeek(week){
 
@@ -329,9 +343,7 @@ function App (props){
     
       for (let i = 0; i < adjacencies.length; i++){
         let a = adjacencies[i];
-        if (a.week != week){
-            continue;
-          }
+
         ctx.beginPath();        
         ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
         ctx.bezierCurveTo((a.a1/100) * canvas.width, (a.b1/100) * canvas.height,
@@ -427,7 +439,7 @@ function App (props){
             storedTerritoryFontSize = (1 - ((10 - mapEvents.getZoom()) / 3)) + "em";
             setTerritoryFontSize(storedTerritoryFontSize);
           },
-      });      
+      });
 
       return (
       <Marker position={props.position} icon={
@@ -465,15 +477,15 @@ function App (props){
                         />
                       </LayerGroup>
                       <LayerGroup>
-                        {territories.map((t) => t.week == week ? (<>
+                        {territories.map((t) => <>
                         <MapTerritory position={[-t.posY * 0.01 * VERTICAL_SCALE_FACTOR, t.posX * 0.01 * HORIZONTAL_SCALE_FACTOR]} t={t}/>
-                        </>) : null)}
+                        </>)}
                       </LayerGroup>
                     </>
                     : 
                     <Marker icon={divIcon({html:"<div></div>"})} position={mapCentre}>
                         <h1 style={{marginTop: "2em", position:"absolute", top:"35%", textAlign:"center", width:"100%", display:"inherit", zIndex:"0"}}>
-                          Loading... <br/>(May take up to 5 seconds)
+                          Loading... <br/>(If it hasn't loaded after five seconds, check the JSON syntax)
                         </h1>
                     </Marker>
                   }

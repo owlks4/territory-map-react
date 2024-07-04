@@ -39,8 +39,7 @@ function Territory (props) {
         holderFull = <>{"("+_holder+")"}</>
     }
 
-    let [id] = useState(props.t.name.toLowerCase().replaceAll(" ","-"));
-    let [week] = useState(props.t.week);
+    let [id] = useState(props.t.territoryName.toLowerCase().replaceAll(" ","-"));
     let [mouseOver, setMouseOver] = useState(false);
 
     return (
@@ -48,7 +47,7 @@ function Territory (props) {
      <div className={"territory "+ props.t.alignment} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
      style={{zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
         <div className="territoryText" style={{whiteSpace:"nowrap"}}>
-            {props.t.name}
+            {props.t.territoryName}
         </div>
         {_holder != null ? 
             <div className="territoryText">
