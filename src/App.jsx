@@ -26,6 +26,10 @@ canvas.height = 1080;
 
 let isReady = false;
 
+function deepCopyJSON(json){
+  return JSON.parse(JSON.stringify(json));
+}
+
 class Adjacency {
   constructor(adjacencyChange){
       this.adjacencyName = adjacencyChange.adjacencyName;
@@ -110,7 +114,7 @@ function App (props){
                   territoryChange.posY = territoryChange.posY == null ? null : parseFloat(territoryChange.posY.replace("%",""));
                   territoryChange.maxHolderLineLength = parseFloat(territoryChange.maxHolderLineLength);
                 });
-                newLoadedWeeks.push({weekNumber:weekIndex+1, title:"Week "+(weekIndex+1)+" - "+week.title});
+                newLoadedWeeks.push({weekNumber:weekIndex+1, title:week.title});
               });
             }
           });
@@ -301,7 +305,7 @@ function App (props){
               week.territoryChanges.forEach((territoryChange) => {
                   let alreadyExistingVersion = getTerritoryByName(territoryChange.territoryName);
                   if (alreadyExistingVersion == null){   //then push a new one
-                      territories.push(territoryChange);
+                      territories.push(deepCopyJSON(territoryChange)); //but ensure a deep copy if pushing this territory for the first time. Otherwise it would gradually degrade the ground truth data.
                   } else {    //then just update its properties
                     alreadyExistingVersion.alignment = territoryChange.alignment;
                     alreadyExistingVersion.holder = territoryChange.holder;
@@ -318,7 +322,7 @@ function App (props){
               week.adjacencyChanges.forEach((adjacencyChange) => {
                 let alreadyExistingVersion = getAdjacencyByName(adjacencyChange.adjacencyName);
                 if (alreadyExistingVersion == null){   //then push a new one
-                    adjacencies.push(new Adjacency(adjacencyChange));
+                    adjacencies.push(new Adjacency(deepCopyJSON(adjacencyChange)));
                 } else {    //then just update its properties
                   alreadyExistingVersion.refresh(adjacencyChange);
                 }

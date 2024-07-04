@@ -1,7 +1,7 @@
 {
    "weeks":[
-        {
-            "title":"New Domain, Old Problems",
+        {   
+            "title":"Week 1 - New Domain, Old Problems",
             "territoryChanges":[
                 {"territoryName":"Kingstanding", "alignment":"unclaimed", "holder":"Unclaimed", "posX":"49.5%", "posY":"10%", "maxHolderLineLength":"0"},
                 {"territoryName":"Erdington", "alignment":"unclaimed", "holder":"Unclaimed", "posX":"66%", "posY":"15.5%", "maxHolderLineLength":"0"},
@@ -104,7 +104,7 @@
             ]
         },
         {
-            "title":"Ghost-al Vote",
+            "title":"Week 2 - Ghost-al Vote",
             "territoryChanges":[
                 {"territoryName":"Kingstanding", "alignment":"nos", "holder":"Mr Streed", "posX":"49.5%", "posY":"10%", "maxHolderLineLength":"0"},
                 {"territoryName":"Erdington", "alignment":"lance", "holder":"Axel Warden", "posX":"66%", "posY":"15.5%", "maxHolderLineLength":"0"},
@@ -122,7 +122,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Zoo Fast, Zoo Furious",
+            "title":"Week 3 - Zoo Fast, Zoo Furious",
             "territoryChanges":[
                 {"territoryName":"Lozells", "alignment":"invictus", "holder":"Mr Hawthorn", "posX":"22.5%", "posY":"31.6%", "maxHolderLineLength":"0"},
                 {"territoryName":"Ward End", "alignment":"enemy contested", "holder":"Lance vs Ventrue", "posX":"64%", "posY":"36.5%", "maxHolderLineLength":"9"},
@@ -134,7 +134,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"The Peacocks Will Continue Until Morale Improves",
+            "title":"Week 4 - The Peacocks Will Continue Until Morale Improves",
             "territoryChanges":[
                 {"territoryName":"Witton", "alignment":"nos", "holder":"Skitter", "posX":"54.5%", "posY":"20%", "maxHolderLineLength":"0"},
                 {"territoryName":"Nechells", "alignment":"lance", "holder":"Axel Warden", "posX":"54%", "posY":"31.8%", "maxHolderLineLength":"0"},
@@ -149,7 +149,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Deal with the Devil",
+            "title":"Week 5 - Deal with the Devil",
             "territoryChanges":[
                 {"territoryName":"Perry Barr", "alignment":"nos", "holder":"Agis", "posX":"35%", "posY":"20%", "maxHolderLineLength":"0"},
                 {"territoryName":"Castle Bromwich", "alignment":"ventrue", "holder":"Jane Bodkin Adams", "posX":"77%", "posY":"23.3%", "maxHolderLineLength":"15"},
@@ -167,7 +167,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Pride and Privileges",
+            "title":"Week 6 - Pride and Privileges",
             "territoryChanges":[
                 {"territoryName":"Harborne", "alignment":"enemy contested", "holder":"Daeva vs Gangrel", "posX":"23%", "posY":"58.35%", "maxHolderLineLength":"9"},
                 {"territoryName":"Quinton", "alignment":"daeva", "holder":"Kai Smith", "posX":"10%", "posY":"56.7%", "maxHolderLineLength":"0"},
@@ -178,7 +178,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"It's all kicking off",
+            "title":"Week 7 - It's all kicking off",
             "territoryChanges":[
                 {"territoryName":"Bartley Green", "alignment":"enemy contested", "holder":"Daeva vs Nosferatu", "posX":"9%", "posY":"70%", "maxHolderLineLength":"12"},
                 {"territoryName":"Quinton", "alignment":"daeva", "holder":"Peter Mitchell", "posX":"10%", "posY":"56.7%", "maxHolderLineLength":"0"},
@@ -190,7 +190,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Dungeons and Dragons",
+            "title":"Week 8 - Dungeons and Dragons",
             "territoryChanges":[
                 {"territoryName":"Bartley Green", "alignment":"daeva", "holder":"Barty Crane", "posX":"9%", "posY":"70%", "maxHolderLineLength":"0"},
                 {"territoryName":"Lea Hall", "alignment":"mekhet", "holder":"Isaac Sterling", "posX":"88%", "posY":"38.25%", "maxHolderLineLength":"0"},
@@ -199,32 +199,32 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Draughir Means Never Having To Say Sorry",
+            "title":"Week 9 - Draughir Means Never Having To Say Sorry",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Pomp and Sea-remony",
+            "title":"Week 10 - Pomp and Sea-remony",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Mo Nos, Mo Problems",
+            "title":"Week 11 - Mo Nos, Mo Problems",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Raising the Stakes",
+            "title":"Week 12 - Raising the Stakes",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"From the Birmingham Hippodrome: The Blue Nos Group",
+            "title":"Week 13 - From the Birmingham Hippodrome: The Blue Nos Group",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Raeden Shadow Legends",
+            "title":"Week 14 - Raeden Shadow Legends",
             "territoryChanges":[
                 {"territoryName":"Erdington", "alignment":"lance", "holder":"Father Ward", "posX":"66%", "posY":"15.5%", "maxHolderLineLength":"0"},
                 {"territoryName":"Hodge Hill", "alignment":"personal", "holder":"Lucy Dee", "posX":"75%", "posY":"35%", "maxHolderLineLength":"0"},
@@ -234,7 +234,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Divinnia Intervention",
+            "title":"Week 15 - Divinnia Intervention",
             "territoryChanges":[
                 {"territoryName":"Hodge Hill", "alignment":"ventrue", "holder":"Nollaig Archambault", "posX":"75%", "posY":"35%", "maxHolderLineLength":"10"},
                 {"territoryName":"Sparkbrook", "alignment":"enemy contested", "holder":"Gangrel vs Carthian", "posX":"56%", "posY":"53.4%", "maxHolderLineLength":"12"}
@@ -242,7 +242,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Be careful what you wish for...",
+            "title":"Week 16 - Be careful what you wish for...",
             "territoryChanges":[
                 {"territoryName":"Selly Oak", "alignment":"daeva contested", "holder":"Destabilised", "posX":"36%", "posY":"65.8%", "maxHolderLineLength":"0"},
                 {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Ethel", "posX":"56%", "posY":"53.4%", "maxHolderLineLength":"12"},
@@ -252,7 +252,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Okay, I like it... Picasso",
+            "title":"Week 17 - Okay, I like it... Picasso",
             "territoryChanges":[
                 {"territoryName":"Selly Oak", "alignment":"gangrel", "holder":"Ethel Cabbage", "posX":"36%", "posY":"65.8%", "maxHolderLineLength":"0"},
                 {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Mr Hawthorn", "posX":"56%", "posY":"53.4%", "maxHolderLineLength":"0"},
@@ -262,32 +262,32 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"...and Lord Marcae has frenzied again",
+            "title":"Week 18 - ...and Lord Marcae has frenzied again",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Jesus take the Wheel",
+            "title":"Week 19 - Jesus take the Wheel",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Dog Days",
+            "title":"Week 20 - Dog Days",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Seeing Red",
+            "title":"Week 21 - Seeing Red",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Storm Re:Born",
+            "title":"Week 22 - Storm Re:Born",
             "territoryChanges":[],
             "adjacencyChanges":[]
         },
         {
-            "title":"Band in the Rain",
+            "title":"Week 23 - Band in the Rain",
             "territoryChanges":[
                 {"territoryName":"Kingstanding", "alignment":"nos", "holder":"Lord Streed", "posX":"49.5%", "posY":"10%", "maxHolderLineLength":"0"},
                 {"territoryName":"City Centre", "alignment":"invictus", "holder":"Baroness Dee", "posX":"45.5%", "posY":"40.9%", "maxHolderLineLength":"0"},
@@ -301,7 +301,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Fight Night",
+            "title":"Week 24 - Fight Night",
             "territoryChanges":[
                 {"territoryName":"Selly Oak", "alignment":"gangrel", "holder":"Fairfax", "posX":null, "posY":null, "maxHolderLineLength":"0"},
                 {"territoryName":"Ladywood", "alignment":"invictus", "holder":"Lord Marcae", "posX":null, "posY":null, "maxHolderLineLength":"12"},
