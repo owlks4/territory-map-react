@@ -66,7 +66,7 @@ function Gantt(props) {
         <div style = {{display:'flex', justifyContent:"space-between"}}>
         {
             props.weeks.map((wk) =>  <>{
-                <span>
+                <span style={{width:((1/props.weeks.length) * 100) + "%",textAlign:"center"}}>
                     {(props.weeks.indexOf(wk)) % 2 == 0 ? props.weeks.indexOf(wk)+1 : null}
                 </span>
             } </>)
@@ -89,7 +89,7 @@ function Gantt(props) {
         }
      </div>
      {legend}
-     <h5>Holder</h5>
+     <h5>Holder (colours not significant)</h5>
      <div className="gantt-area">
         {
             holderTenures.map((tenure) => <>{
