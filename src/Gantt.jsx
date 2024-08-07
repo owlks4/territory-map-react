@@ -10,18 +10,6 @@ function getTerritoryByName(territoryChanges, requiredTerritoryName){
     return null;
 }
 
-const holderTenureCols = ['#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080'];
-
-function getHolderTenuresColor(tenure, holderTenures){
-    switch(tenure.holder.toLowerCase()){
-        case "???":
-        case "unclaimed":
-            return "rgb(58,65,74)";
-        default:
-            return holderTenureCols[holderTenures.indexOf(tenure) % (holderTenureCols.length - 1)]
-    }
-}
-
 function doTenureAnalysis(weeks, t, property){
     let curTenure = {
         numWeeks: 0,
@@ -56,8 +44,6 @@ function doTenureAnalysis(weeks, t, property){
 
 function Gantt(props) {
 
-    let weekNumber = props.weekNumber;
-
     let alignmentTenures = doTenureAnalysis(props.weeks, props.t, "alignment");
     let holderTenures = doTenureAnalysis(props.weeks, props.t, "holder");
 
@@ -89,11 +75,11 @@ function Gantt(props) {
         }
      </div>
      {legend}
-     <h5>Holder (colours not significant)</h5>
+     <h5>Holder</h5>
      <div className="gantt-area">
         {
             holderTenures.map((tenure) => <>{
-                <div title={tenure.holder +", "+tenure.numWeeks+" weeks"} style={{boxSizing:"border-box", backgroundColor:getHolderTenuresColor(tenure, holderTenures),
+                <div title={tenure.holder +", "+tenure.numWeeks+" weeks"} style={{boxSizing:"border-box", backgroundColor:holderTenures.indexOf(tenure) % 2 == 0 ? "#efefef" : "#afafaf",
                 cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
                 </div>
             }</>)

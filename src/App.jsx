@@ -454,7 +454,7 @@ function App (props){
             })
         } style={{fontSize:10}}>
           <Popup>
-            <Gantt t={props.t} weekNumber={week} weeks={currentYearJson.weeks}/>
+            <Gantt t={props.t} weeks={currentYearJson.weeks}/>
           </Popup>
           </Marker>
       );
