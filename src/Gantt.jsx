@@ -23,15 +23,15 @@ function doTenureAnalysis(weeks, t, property){
         territoryState = getTerritoryByName(weeks[i].territoryChanges, t.territoryName);
 
         if (territoryState != null){
-            if (curTenure[property] != null){ //if it's actually valid to conclude a tenure right now (as we might be before the initial acquisition of a value)
-                if ((territoryState[property] != curTenure[property])){ //then there's been a change in ownership, so push the current tenure
+            if (curTenure.value != null){ //if it's actually valid to conclude a tenure right now (as we might be before the initial acquisition of a value)
+                if ((territoryState[property] != curTenure.value)){ //then there's been a change in ownership, so push the current tenure                    
                     tenures.push(curTenure);
                     curTenure = { //and a new tenure begins
                         numWeeks: 0
                     }
                 }
             }
-            curTenure[property] = territoryState[property]; //this is here so that the first week picks up the correct value
+            curTenure.value = territoryState[property]; //this is here so that the first week picks up the correct value
         }
         curTenure.numWeeks = curTenure.numWeeks + 1;
         if (i == weeks.length - 1){
@@ -42,9 +42,13 @@ function doTenureAnalysis(weeks, t, property){
     return tenures;
 }
 
+function getWeekSuffixStr(num){
+    return num == 1 ? " week" : " weeks"; //space at beginning is [sic]
+}
+
 function Gantt(props) {
 
-    let alignmentTenures = doTenureAnalysis(props.weeks, props.t, "alignment");
+    let alignmentTenures = doTenureAnalysis(props.weeks, props.t, props.t.useFlipside ? "flipside" : "alignment");
     let holderTenures = doTenureAnalysis(props.weeks, props.t, "holder");
 
     let legend = 
@@ -64,12 +68,12 @@ function Gantt(props) {
 
     return (
     <>
-    <h4><strong>{"Alignment history of "+props.t.territoryName}</strong></h4>
+    <h4 style={{whiteSpace:"nowrap"}}><strong>{"Alignment history of "}<span style={{display:"inline-block",transform: props.t.useFlipside ? "rotate(180deg)":"inherit"}}>{props.t.territoryName}</span></strong> <span href="#" className={props.t.useFlipside ? "flip-button on" : "flip-button"} title="Flip territory" onClick={()=>{props.t.useFlipside = !props.t.useFlipside; props.refreshFunc()}}>🔄</span></h4>
     <h5>Alignment</h5>
      <div style={{display:'flex', border:"1px solid black", width:"290px", height:"1.5em"}}>
         {
             alignmentTenures.map((tenure) => <>{
-                <div title={tenure.alignment +", "+tenure.numWeeks+" weeks"} className={tenure.alignment} style={{boxSizing:"border-box", cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
+                <div title={tenure.value +", "+tenure.numWeeks+getWeekSuffixStr(tenure.numWeeks)} className={tenure.value} style={{boxSizing:"border-box", cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
                 </div>
             }</>)
         }
@@ -79,7 +83,7 @@ function Gantt(props) {
      <div className="gantt-area">
         {
             holderTenures.map((tenure) => <>{
-                <div title={tenure.holder +", "+tenure.numWeeks+" weeks"} style={{boxSizing:"border-box", backgroundColor:holderTenures.indexOf(tenure) % 2 == 0 ? "#efefef" : "#afafaf",
+                <div title={tenure.value +", "+tenure.numWeeks+getWeekSuffixStr(tenure.numWeeks)} style={{boxSizing:"border-box", backgroundColor:holderTenures.indexOf(tenure) % 2 == 0 ? "#efefef" : "#afafaf",
                 cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
                 </div>
             }</>)

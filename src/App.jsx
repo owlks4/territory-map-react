@@ -75,6 +75,7 @@ function App (props){
   let [covenantPrecedence,setCovenantPrecedence] = useState(DEFAULT_PRECEDENCE);
   let [highlightedCategory,setHighlightedCategory] = useState(null);
   let [windowFontSize,setWindowFontSize] = useState("1em");
+  let [alternator,setAlternator] = useState(false); //alternator only exists so that we can toggle its truthiness from elsewhere, which arbitrarily triggers a rerender on components that have 'alternator' as a prop
 
     function changeWindowFontSize(){
       setWindowFontSize((window.innerWidth < 1000 ? (window.innerWidth/2500) : (window.innerWidth/1920)) +"em");
@@ -111,9 +112,10 @@ function App (props){
               json.weeks.forEach((week, weekIndex) => {
                 week.territoryChanges.forEach((territoryChange) => { //Some one-off input sanitising on first load
                   territoryChange.alignment = adjustClanOrCovenantSpelling(territoryChange.alignment);
+                  territoryChange.flipside = territoryChange.flipside == null ? adjustClanOrCovenantSpelling(territoryChange.alignment) : adjustClanOrCovenantSpelling(territoryChange.flipside);
                   territoryChange.posX = territoryChange.posX == null ? null : parseFloat(territoryChange.posX.replace("%",""));
                   territoryChange.posY = territoryChange.posY == null ? null : parseFloat(territoryChange.posY.replace("%",""));
-                  territoryChange.maxHolderLineLength = parseFloat(territoryChange.maxHolderLineLength);
+                  territoryChange.maxHolderLineLength = parseFloat(territoryChange.maxHolderLineLength);                  
                 });
                 newLoadedWeeks.push({weekNumber:weekIndex+1, title:"Week "+(weekIndex+1)+" - "+week.title});
               });
@@ -157,7 +159,14 @@ function App (props){
 
       for (let i = 0; i < territories.length; i++){
         let t = territories[i];
-        let alignment = t.alignment.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
+
+        let alignment = null;
+        if (t.useFlipside && t.flipside != null){
+          alignment = t.flipside.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
+        } else {
+          alignment = t.alignment.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
+        }
+
         if (alignment[0] in dict){
           dict[alignment[0]]++;
         } else {
@@ -305,10 +314,13 @@ function App (props){
 
               week.territoryChanges.forEach((territoryChange) => {
                   let alreadyExistingVersion = getTerritoryByName(territoryChange.territoryName);
-                  if (alreadyExistingVersion == null){   //then push a new one
-                      territories.push(deepCopyJSON(territoryChange)); //but ensure a deep copy if pushing this territory for the first time. Otherwise it would gradually degrade the ground truth data.
+                  if (alreadyExistingVersion == null){   //then push a new one       
+                      let freshCopy = deepCopyJSON(territoryChange);             
+                      freshCopy.useFlipside = false;  
+                      territories.push(freshCopy); //but ensure a deep copy if pushing this territory for the first time. Otherwise it would gradually degrade the ground truth data.
                   } else {    //then just update its properties
                     alreadyExistingVersion.alignment = territoryChange.alignment;
+                    alreadyExistingVersion.flipside = territoryChange.flipside == null ? territoryChange.alignment : territoryChange.flipside;
                     alreadyExistingVersion.holder = territoryChange.holder;
                     if (territoryChange.posX != null){
                       alreadyExistingVersion.posX = territoryChange.posX;
@@ -327,8 +339,7 @@ function App (props){
                 } else {    //then just update its properties
                   alreadyExistingVersion.refresh(adjacencyChange);
                 }
-              }
-              );
+              });
             }
           setWeekTitle(json.weeks[requiredWeek-1].title);
         }
@@ -366,7 +377,7 @@ function App (props){
           existingWeeksScrollElement.scrollTop = weeksScrollPosition;
           }
       }
-
+  
       render() {
         return (<div id="panel">
           <h2 onClick={()=>{if(isReady){cycleYear();}}} className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", marginBottom:'0.5em',
@@ -449,12 +460,18 @@ function App (props){
       return (
       <Marker position={props.position} icon={
         divIcon({
-          html:"<div style=font-size:"+territoryFontSize+";>"+renderToStaticMarkup(
-          <Territory fadedOut={highlightedCategory == null ? false : (!props.t.alignment.includes(highlightedCategory))} t={props.t}/>)+"</div>"
+          html:"<div style=font-size:"+territoryFontSize+";>"+
+          (
+          props.t.useFlipside ? 
+          renderToStaticMarkup(<Territory fadedOut={highlightedCategory == null ? false : (!props.t.flipside.includes(highlightedCategory))} t={props.t}/>)
+          :
+          renderToStaticMarkup(<Territory fadedOut={highlightedCategory == null ? false : (!props.t.alignment.includes(highlightedCategory))} t={props.t}/>)
+          )
+          +"</div>"
             })
         } style={{fontSize:10}}>
           <Popup>
-            <Gantt t={props.t} weeks={currentYearJson.weeks}/>
+            <Gantt t={props.t} weeks={currentYearJson.weeks} refreshFunc={() => {setAlternator(!alternator)}}/>
           </Popup>
           </Marker>
       );
@@ -487,7 +504,7 @@ function App (props){
                       </LayerGroup>
                       <LayerGroup>
                         {territories.map((t) => <>
-                        <MapTerritory position={[-t.posY * 0.01 * VERTICAL_SCALE_FACTOR, t.posX * 0.01 * HORIZONTAL_SCALE_FACTOR]} t={t}/>
+                        <MapTerritory alternator={alternator} position={[-t.posY * 0.01 * VERTICAL_SCALE_FACTOR, t.posX * 0.01 * HORIZONTAL_SCALE_FACTOR]} t={t}/>
                         </>)}
                       </LayerGroup>
                     </>

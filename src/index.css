@@ -35,6 +35,27 @@ h5 {
     margin-bottom:0.25em;
 }
 
+.flipside:after {
+    content:"🔄";
+    position:absolute;
+    top:0;
+    right:0;
+    font-size:2em;
+    transform:translate(50%,-50%);
+    opacity:0.9;
+}
+
+.flip-button {
+    cursor:pointer;
+    opacity:0.6;
+    filter:grayscale();
+}
+
+.flip-button.on {
+    opacity:0.9;
+    filter:unset;
+}
+
 #canvas {
     transform: translate(-50%,-50%);
     user-select:none;
