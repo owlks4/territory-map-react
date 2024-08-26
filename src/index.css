@@ -47,13 +47,19 @@ h5 {
 
 .flip-button {
     cursor:pointer;
-    opacity:0.6;
     filter:grayscale();
 }
 
+.flip-button:hover {
+    filter:grayscale() brightness(120%);
+}
+
 .flip-button.on {
-    opacity:0.9;
     filter:unset;
+}
+
+.flip-button.on:hover {
+    filter:brightness(120%);
 }
 
 #canvas {
@@ -81,7 +87,7 @@ h5 {
     width:fit-content;
     font-family: sans-serif;
     border: 0.1em solid rgb(94,94,94);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
     z-index: 1;
     cursor:pointer;
     transition: opacity 0.045s;
@@ -364,12 +370,14 @@ hr {
 }
 
 #pastWeeks {         /* The element that scrolls when on PC. Mobile has a different one (weeksScroll). */
+    margin-top:0;
     overflow-y: auto;
 }
 
 @media only screen and (max-width: 1000px)
     {
     #pastWeeks {
+        margin-top:0.75em;
         overflow-y: unset;
     }
     .weeksScroll {

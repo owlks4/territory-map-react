@@ -122,6 +122,7 @@ function App (props){
             }
           });
 
+      weeksScrollPosition = 9999999999;
       setYear(newYearNumber);
       changeWeek(highestWeekFound);
       redrawCanvasAccordingToWeek(highestWeekFound);
@@ -417,11 +418,29 @@ function App (props){
               <br/>
               {window.innerWidth >= 1000 ? <ClanCovPrecedence/> : <></>}
             </div>
-            <div id="pastWeeks" className="panelBox">
-              <h2 style={{whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+            {
+              window.innerWidth >= 1000 ?
+              <>
+              <h2 style={{marginTop:"1em", whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
                 {window.innerWidth < 1000 ? "Select past week:" : "Select past week"}
               </h2>
               <hr/>
+              </>
+            : 
+            <></>
+            }
+            <div id="pastWeeks" className="panelBox">
+              {
+                window.innerWidth < 1000 ?
+                <>
+                <h2 style={{whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+                  {window.innerWidth < 1000 ? "Select past week:" : "Select past week"}
+                </h2>
+                <hr/>
+                </>
+              : 
+              <></>
+              }
               <div className="weeksScroll" id="weeks-scroll-mobile">
                 <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")}
                                                  onClick={() => { 
@@ -471,7 +490,7 @@ function App (props){
             })
         } style={{fontSize:10}}>
           <Popup>
-            <Gantt t={props.t} weeks={currentYearJson.weeks} refreshFunc={() => {setAlternator(!alternator)}}/>
+            <Gantt t={props.t} weeks={currentYearJson.weeks} refreshFunc={() => {setAlternator(!alternator);  updatePrecedence();}}/>
           </Popup>
           </Marker>
       );
