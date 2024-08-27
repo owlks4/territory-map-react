@@ -14,8 +14,16 @@ let currentYearJson = null;
 
 const DEFAULT_PRECEDENCE = "N/A by territory";
 
-const HORIZONTAL_SCALE_FACTOR = 1.3;
-const VERTICAL_SCALE_FACTOR = 0.8;
+let HORIZONTAL_SCALE_FACTOR = 1.3;
+let VERTICAL_SCALE_FACTOR = 0.8;
+
+const EDIT_MODE = false;
+
+if (EDIT_MODE){
+  alert("Warning: Edit mode is active.\n\nControls:\nClick on the map to create a territory in that location\n\nCtrl-click to load a custom image as the canvas background (intended to be used as a guide, also please use 1920 by 1080 and letterbox if necessary!)\n\nShift-click to dump to JSON on the console.")
+}
+
+let MAP = null;
 
 let weeksScrollPosition = 0;
 
@@ -25,7 +33,11 @@ let canvas = document.createElement("canvas");
 canvas.width = 1920;
 canvas.height = 1080;
 
+let customCanvasBackground = null;
+
 let isReady = false;
+
+let territorySize = "1em";
 
 function deepCopyJSON(json){
   return JSON.parse(JSON.stringify(json));
@@ -74,7 +86,7 @@ function App (props){
   let [clanPrecedence,setClanPrecedence] = useState(DEFAULT_PRECEDENCE);
   let [covenantPrecedence,setCovenantPrecedence] = useState(DEFAULT_PRECEDENCE);
   let [highlightedCategory,setHighlightedCategory] = useState(null);
-  let [windowFontSize,setWindowFontSize] = useState("1em");
+  let [windowFontSize,setWindowFontSize] = useState("1em"); //this exists for mobile adjustment purposes
   let [alternator,setAlternator] = useState(false); //alternator only exists so that we can toggle its truthiness from elsewhere, which arbitrarily triggers a rerender on components that have 'alternator' as a prop
 
     function changeWindowFontSize(){
@@ -85,10 +97,10 @@ function App (props){
       changeYear(DEFAULT_YEAR);
       changeWindowFontSize();
     }, []); //ignore intelliense and keep this empty array; it makes this useEffect run only after the very first render, which is intended behaviour
-
+    
     async function changeYear(newYearNumber){
 
-      if (year == newYearNumber){
+      if (!EDIT_MODE && year == newYearNumber){
         console.log("Did not attempt to change year, because that year was already selected.");
         return;
       }
@@ -102,6 +114,10 @@ function App (props){
         territories.pop();
       }
 
+      while (adjacencies.length > 0){
+        adjacencies.pop();
+      }      
+
       let filename = "./json/y"+newYearNumber+".json";
       await fetch(filename)
           .then(response => response.json())
@@ -109,34 +125,38 @@ function App (props){
             if (json != ""){
               currentYearJson = json;
               highestWeekFound = json.weeks.length;
+              HORIZONTAL_SCALE_FACTOR = json.HORIZONTAL_SCALE_FACTOR;
+              VERTICAL_SCALE_FACTOR = json.VERTICAL_SCALE_FACTOR;
+              territorySize = json.territorySize;
               json.weeks.forEach((week, weekIndex) => {
                 week.territoryChanges.forEach((territoryChange) => { //Some one-off input sanitising on first load
                   territoryChange.alignment = adjustClanOrCovenantSpelling(territoryChange.alignment);
                   territoryChange.flipside = territoryChange.flipside == null ? adjustClanOrCovenantSpelling(territoryChange.alignment) : adjustClanOrCovenantSpelling(territoryChange.flipside);
-                  territoryChange.posX = territoryChange.posX == null ? null : parseFloat(territoryChange.posX.replace("%",""));
-                  territoryChange.posY = territoryChange.posY == null ? null : parseFloat(territoryChange.posY.replace("%",""));
+                  territoryChange.posX = territoryChange.posX == null ? null : parseFloat(typeof territoryChange.posX === "string" ? territoryChange.posX.replace("%","") : territoryChange.posX);
+                  territoryChange.posY = territoryChange.posY == null ? null : parseFloat(typeof territoryChange.posY === "string" ? territoryChange.posY.replace("%","") : territoryChange.posY);
                   territoryChange.maxHolderLineLength = parseFloat(territoryChange.maxHolderLineLength);                  
                 });
                 newLoadedWeeks.push({weekNumber:weekIndex+1, title:"Week "+(weekIndex+1)+" - "+week.title});
               });
             }
           });
-
-      weeksScrollPosition = 9999999999;
       setYear(newYearNumber);
       changeWeek(highestWeekFound);
       redrawCanvasAccordingToWeek(highestWeekFound);
       updatePrecedence(highestWeekFound);
       setLoadedWeeks(newLoadedWeeks);
+      if (MAP != null){
+        MAP.setView([-0.5 * VERTICAL_SCALE_FACTOR, 0.5 * HORIZONTAL_SCALE_FACTOR], 13 / HORIZONTAL_SCALE_FACTOR < 9.2 ? 9.2 : 13 / HORIZONTAL_SCALE_FACTOR)
+      }
       isReady = true;
     }
 
     function cycleYear(){
       let index = VALID_YEARS.indexOf(year);
-      if (index < VALID_YEARS.length - 1){
-        index++;
+      if (index > 0){
+        index--;
       } else {
-        index = 0;
+        index = VALID_YEARS.length - 1;
       }
       changeYear(VALID_YEARS[index]);
     }
@@ -345,14 +365,65 @@ function App (props){
           setWeekTitle(json.weeks[requiredWeek-1].title);
         }
 
+    function loadCustomCanvasBackground(file){
+          let reader = new FileReader();
+            
+          reader.readAsDataURL(file);
+            
+          reader.onload = function() {
+            console.log(reader.result);
+            customCanvasBackground = new Image();
+            customCanvasBackground.src = reader.result;
+            redrawCanvasAccordingToWeek(-1);
+            setWeekTitle(String(Date.now()));
+            alert("The background might be a bit shy, but should appear on the next canvas redraw!")
+          };
+            
+          reader.onerror = function() {
+            console.log(reader.error);
+          };
+    }
+
+    function handleSpecialMapClick(e){
+          if (e.originalEvent.ctrlKey){
+            let fileInput = document.createElement("input");
+            fileInput.type = "file";
+            fileInput.accept = "image/png";
+            fileInput.click();
+            fileInput.oninput = (fileInputEvent) => {loadCustomCanvasBackground(fileInputEvent.target.files[0])};
+          } else if (e.originalEvent.shiftKey){
+            dumpJSON();  
+            alert("JSON dumped to console.");          
+          } else {
+            let name = prompt("Name for this territory?");
+            let newTerritoryChange = {"territoryName":name, "alignment":"unclaimed", "holder":"Unclaimed",
+                                      "posX":(e.latlng.lng / HORIZONTAL_SCALE_FACTOR / 0.01), "posY":-(e.latlng.lat / VERTICAL_SCALE_FACTOR / 0.01),
+                                      "maxHolderLineLength":"0"};
+            currentYearJson.weeks[0].territoryChanges.push(newTerritoryChange);
+            setAlternator(!alternator); 
+            changeWeek(1);
+            setWeekTitle(String(Date.now()))
+          }    
+    }
+
+    function dumpJSON(){
+      console.log(JSON.stringify(currentYearJson).replaceAll("{","\n{\n").replaceAll("[","[\n").replaceAll("}","\n}").replaceAll("]","\n]"));
+    }
+
     function redrawCanvasAccordingToWeek(week){
 
       if (canvas == null){
         return;
       }
 
-      setAdjacencies(adjacencies);
       let ctx = canvas.getContext("2d");
+
+      if (customCanvasBackground != null){
+        ctx.drawImage(customCanvasBackground,0,0,1920,1080);
+        return;
+      }
+
+      setAdjacencies(adjacencies);
       ctx.imageSmoothingEnabled = true;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.strokeStyle = "#505050";
@@ -454,7 +525,7 @@ function App (props){
               {
                 screen.orientation.type.includes("landscape") ? 
                 <>
-                  <br/><br/><br/><br/><br/><br/><br/>
+                  <br/><br/><br/><br/>
                 </>
                 : null
               }
@@ -482,13 +553,13 @@ function App (props){
           html:"<div style=font-size:"+territoryFontSize+";>"+
           (
           props.t.useFlipside ? 
-          renderToStaticMarkup(<Territory fadedOut={highlightedCategory == null ? false : (!props.t.flipside.includes(highlightedCategory))} t={props.t}/>)
+          renderToStaticMarkup(<Territory tSize={territorySize} fadedOut={highlightedCategory == null ? false : (!props.t.flipside.includes(highlightedCategory))} t={props.t}/>)
           :
-          renderToStaticMarkup(<Territory fadedOut={highlightedCategory == null ? false : (!props.t.alignment.includes(highlightedCategory))} t={props.t}/>)
+          renderToStaticMarkup(<Territory tSize={territorySize} fadedOut={highlightedCategory == null ? false : (!props.t.alignment.includes(highlightedCategory))} t={props.t}/>)
           )
           +"</div>"
             })
-        } style={{fontSize:10}}>
+        } >
           <Popup>
             <Gantt t={props.t} weeks={currentYearJson.weeks} refreshFunc={() => {setAlternator(!alternator);  updatePrecedence();}}/>
           </Popup>
@@ -508,7 +579,8 @@ function App (props){
               </h1>
               <div onMouseEnter={() => {setHighlightedCategory(null)}} style={{height:'100%'}}>
                 <MapContainer style={{height:"100%", maxWidth:"100vw", backgroundColor:'#ffffff', borderTop:"1px solid #ddd"}}
-                                      center={mapCentre} zoom={10} crs={CRS.Simple} zoomDelta={0.5} minZoom={8} maxZoom={10.5}>
+                                      center={mapCentre} zoom={10} crs={CRS.Simple} zoomDelta={0.5} minZoom={8} maxZoom={10.5}
+                                      whenReady={(map) => {MAP = map.target; map.target.on("click", function (e) {if (EDIT_MODE){handleSpecialMapClick(e);}});}}>
                   {
                   isReady
                     ?                  

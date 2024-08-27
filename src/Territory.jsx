@@ -45,7 +45,7 @@ function Territory (props) {
     return (
     <>
      <div title={props.t.useFlipside ? "You flipped this territory!" : null} className={"territory "+ (props.t.useFlipside && props.t.flipside != null ? props.t.flipside : props.t.alignment) + (props.t.useFlipside ? " flipside": "")} id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
-     style={{zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
+     style={{fontSize:props.tSize, zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
         <div className="territoryText" style={{whiteSpace:"nowrap"}}>
             {props.t.territoryName}
         </div>

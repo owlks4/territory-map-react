@@ -1,0 +1,208 @@
+{
+    "territorySize":"1.05em",
+    "HORIZONTAL_SCALE_FACTOR":1.97,
+    "VERTICAL_SCALE_FACTOR":1.21,
+    "weeks":[
+    
+    {
+    "title":"Here we go again...","territoryChanges":[
+    {"territoryName":"Kingstanding","alignment":"enemy","holder":"???","posX":49.35396634615384,"posY":2.761263705474124,"maxHolderLineLength":"0"},
+    {"territoryName":"Short Heath","alignment":"enemy","holder":"???","posX":54.23677884615384,"posY":10.455268061480867,"maxHolderLineLength":"0"},
+    {"territoryName":"Erdington","alignment":"ventrue","holder":"Mr Vincent Polk (NPC)","posX":56.94110576923077,"posY":17.782891257677765,"maxHolderLineLength":"12"},
+    {"territoryName":"Ward End","alignment":"enemy","holder":"???","posX":62.72536057692307,"posY":25.721149720224407,"maxHolderLineLength":"0"},
+    {"territoryName":"Castle Bromwich","alignment":"ordo","holder":"Stg. James (NPC)","posX":74.44411057692307,"posY":23.889243921175176,"maxHolderLineLength":"15"},
+    {
+    "territoryName":"Fordbridge","alignment":"enemy","holder":"???","posX":81.28004807692307,"posY":39.399379686458616,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Birmingham Airport","alignment":"enemy","holder":"???","posX":92.24759615384615,"posY":45.50573234995603,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Catherine-de-Barnes","alignment":"enemy","holder":"???","posX":91.19591346153845,"posY":57.96269178349075,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Solihull","alignment":"nos","holder":"Dr Harry Grimes (NPC)","posX":87.59014423076923,"posY":64.55755266006796,"maxHolderLineLength":"20"
+    },
+    {
+    "territoryName":"Shirley","alignment":"enemy","holder":"???","posX":76.54747596153845,"posY":60.89374106196951,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Olton","alignment":"enemy","holder":"???","posX":80.22836538461539,"posY":53.68824491904256,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Sheldon","alignment":"unclaimed","holder":"Available","posX":80.30348557692307,"posY":45.74998645649592,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Blossomfield","alignment":"enemy","holder":"???","posX":80.0030048076923,"posY":68.4656183647063,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Cheswick Green","alignment":"enemy","holder":"???","posX":79.92788461538461,"posY":75.7932415609032,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Blythe Valley","alignment":"enemy","holder":"???","posX":85.18629807692307,"posY":81.53321306459078,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Earlswood","alignment":"enemy","holder":"???","posX":77.22355769230768,"posY":86.29616814211876,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Tidbury Green","alignment":"crone","holder":"Ronan Quinn (NPC)","posX":64.15264423076923,"posY":88.98296331405761,"maxHolderLineLength":"12"
+    },
+    {
+    "territoryName":"Hollywood","alignment":"enemy","holder":"???","posX":57.24158653846154,"posY":84.58638939633947,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Wythall","alignment":"enemy","holder":"???","posX":52.05829326923077,"posY":90.57061500656694,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Druid's Heath","alignment":"enemy","holder":"???","posX":52.95973557692307,"posY":77.62514735995242,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Yardley Wood","alignment":"enemy","holder":"???","posX":63.25120192307691,"posY":68.9541265777861,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Hall Green","alignment":"unclaimed","holder":"Available","posX":68.73497596153845,"posY":56.61929419752132,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Tyseley","alignment":"enemy","holder":"???","posX":70.46274038461539,"posY":49.65805216113427,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Yardley","alignment":"enemy","holder":"???","posX":70.2373798076923,"posY":42.696810124747216,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Small Heath","alignment":"unclaimed","holder":"Available","posX":62.87560096153846,"posY":44.28446181725654,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Sparkbrook","alignment":"enemy","holder":"???","posX":59.79567307692307,"posY":51.97846617326329,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Balsall Heath","alignment":"unclaimed","holder":"Available","posX":51.90805288461539,"posY":54.17675313212236,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Moseley","alignment":"enemy","holder":"???","posX":52.6592548076923,"posY":60.405232848889725,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Kings Heath","alignment":"unclaimed","holder":"Available","posX":52.50901442307691,"posY":66.26733140584724,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Stirchley","alignment":"enemy","holder":"???","posX":44.17067307692307,"posY":66.02307729930735,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Bournville","alignment":"enemy","holder":"???","posX":39.58834134615384,"posY":72.00730290953481,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Kings Norton","alignment":"unclaimed","holder":"Available","posX":44.47115384615384,"posY":77.99152851976227,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Headley Heath","alignment":"enemy","holder":"???","posX":44.621394230769226,"posY":84.58638939633947,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Weatheroak","alignment":"mekhet","holder":"Arthur Pendlebury (NPC)","posX":43.41947115384615,"posY":95.45569713736488,"maxHolderLineLength":"3"
+    },
+    {
+    "territoryName":"Hopwood","alignment":"enemy","holder":"???","posX":35.30649038461539,"posY":88.12807394116798,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Northfield","alignment":"unclaimed","holder":"Available","posX":35.53185096153846,"posY":79.5791802122716,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Rubery","alignment":"enemy","holder":"???","posX":25.916466346153843,"posY":82.38810243748041,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Marlbrook","alignment":"invictus","holder":"Lord Jonah Redwyn (NPC)","posX":22.310697115384613,"posY":89.59359858040736,"maxHolderLineLength":"15"
+    },
+    {
+    "territoryName":"Frankley","alignment":"daeva","holder":"Prof. Hismyonie Kallis (NPC)","posX":25.465745192307693,"posY":74.44984397493377,"maxHolderLineLength":"18"
+    },
+    {
+    "territoryName":"Bartley Green","alignment":"enemy","holder":"???","posX":33.12800480769231,"posY":68.34349131143637,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Selly Oak","alignment":"enemy","holder":"???","posX":39.58834134615384,"posY":58.93970820965034,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Edgbaston","alignment":"personal","holder":"Prince Thompson","posX":43.26923076923077,"posY":52.10059322653323,"maxHolderLineLength":"10"
+    },
+    {
+    "territoryName":"The Rack","alignment":"court","holder":"Praxis","posX":43.56971153846153,"posY":44.1623347639866,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"City Centre","alignment":"personal","holder":"Prince Thompson","posX":48.90324519230769,"posY":39.399379686458616,"maxHolderLineLength":"10"
+    },
+    {
+    "territoryName":"Digbeth","alignment":"personal","holder":"Prince Thompson","posX":55.13822115384615,"posY":43.918080657446694,"maxHolderLineLength":"10"
+    },
+    {
+    "territoryName":"Saltley","alignment":"enemy","holder":"???","posX":55.51382211538461,"posY":30.117723637942543,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Gravelly Hill","alignment":"enemy","holder":"???","posX":55.43870192307691,"posY":24.255625080985027,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Aston","alignment":"unclaimed","holder":"Available","posX":49.20372596153846,"posY":30.239850691212492,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Witton","alignment":"enemy","holder":"???","posX":49.20372596153846,"posY":19.981178216536836,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Harborne","alignment":"enemy","holder":"???","posX":35.00600961538461,"posY":52.22272027980318,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Quinton","alignment":"enemy","holder":"???","posX":26.81790865384615,"posY":52.10059322653323,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Halesowen","alignment":"lance","holder":"Anton le Chavalier (NPC)","posX":15.099158653846153,"posY":51.97846617326329,"maxHolderLineLength":"16"
+    },
+    {
+    "territoryName":"Black Heath","alignment":"enemy","holder":"???","posX":22.085336538461537,"posY":46.48274877611561,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Bearwood","alignment":"unclaimed","holder":"Available","posX":33.203125,"posY":43.063191284557064,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Summerfield","alignment":"personal","holder":"Prince Thompson","posX":37.48497596153846,"posY":35.85769514163011,"maxHolderLineLength":"10"
+    },
+    {
+    "territoryName":"Jewellery Quarter","alignment":"personal","holder":"Prince Thompson","posX":43.26923076923077,"posY":35.24705987528037,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Lozells","alignment":"enemy","holder":"???","posX":43.26923076923077,"posY":25.965403826764298,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Perry Barr","alignment":"enemy","holder":"???","posX":43.79507211538461,"posY":17.050128938058076,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Great Barr","alignment":"carthian","holder":"Prof. Jack Wallis (NPC)","posX":39.66346153846153,"posY":9.844632795131124,"maxHolderLineLength":"14"
+    },
+    {
+    "territoryName":"Yew Tree","alignment":"enemy","holder":"???","posX":28.695913461538456,"posY":8.745489315701588,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Stone Cross","alignment":"enemy","holder":"???","posX":28.395432692307693,"posY":16.683747778248232,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Hamstead","alignment":"enemy","holder":"???","posX":36.73377403846153,"posY":18.8820347371073,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Handsworth","alignment":"unclaimed","holder":"Available","posX":37.03425480769231,"posY":25.23264150714461,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"West Bromwich","alignment":"enemy","holder":"???","posX":28.695913461538456,"posY":24.744133294064817,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Smethwick","alignment":"enemy","holder":"???","posX":32.60216346153846,"posY":30.972613010832184,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Langley Green","alignment":"enemy","holder":"???","posX":28.01983173076923,"posY":36.34620335470991,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Oldbury","alignment":"gangrel","holder":"Charlotte Hall","posX":23.662860576923077,"posY":30.606231851022336,"maxHolderLineLength":"0"
+    },
+    {
+    "territoryName":"Rowley Regis","alignment":"enemy","holder":"???","posX":19.381009615384613,"posY":36.468330407979856,"maxHolderLineLength":"0"
+    }
+    ],"adjacencyChanges":[
+        {"adjacencyName":"TEST", "x1":"52%", "y1":"9.6%", "x2":"64%", "y2":"14%", "sideOrTop1":"side", "sideOrTop2":"side"}
+    ]
+    }
+    ]
+    }

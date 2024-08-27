@@ -321,7 +321,7 @@ hr {
 .weeksScroll {
     overflow: hidden auto;
     height:"fit-content";
-    flex-direction: column;
+    flex-direction: column-reverse;
     display:flex;
     padding-right: 2em;
     padding-bottom: 1em;
@@ -381,7 +381,7 @@ hr {
         overflow-y: unset;
     }
     .weeksScroll {
-        flex-direction: row;
+        flex-direction: row-reverse;
         flex-wrap: wrap;
         padding-right: 0em;
         align-content: flex-start;
