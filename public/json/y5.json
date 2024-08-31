@@ -1,208 +1,505 @@
-{
-    "territorySize":"1.05em",
-    "HORIZONTAL_SCALE_FACTOR":1.97,
-    "VERTICAL_SCALE_FACTOR":1.21,
-    "weeks":[
-    
-    {
-    "title":"Here we go again...","territoryChanges":[
-    {"territoryName":"Kingstanding","alignment":"enemy","holder":"???","posX":49.35396634615384,"posY":2.761263705474124,"maxHolderLineLength":"0"},
-    {"territoryName":"Short Heath","alignment":"enemy","holder":"???","posX":54.23677884615384,"posY":10.455268061480867,"maxHolderLineLength":"0"},
-    {"territoryName":"Erdington","alignment":"ventrue","holder":"Mr Vincent Polk (NPC)","posX":56.94110576923077,"posY":17.782891257677765,"maxHolderLineLength":"12"},
-    {"territoryName":"Ward End","alignment":"enemy","holder":"???","posX":62.72536057692307,"posY":25.721149720224407,"maxHolderLineLength":"0"},
-    {"territoryName":"Castle Bromwich","alignment":"ordo","holder":"Stg. James (NPC)","posX":74.44411057692307,"posY":23.889243921175176,"maxHolderLineLength":"15"},
-    {
-    "territoryName":"Fordbridge","alignment":"enemy","holder":"???","posX":81.28004807692307,"posY":39.399379686458616,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Birmingham Airport","alignment":"enemy","holder":"???","posX":92.24759615384615,"posY":45.50573234995603,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Catherine-de-Barnes","alignment":"enemy","holder":"???","posX":91.19591346153845,"posY":57.96269178349075,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Solihull","alignment":"nos","holder":"Dr Harry Grimes (NPC)","posX":87.59014423076923,"posY":64.55755266006796,"maxHolderLineLength":"20"
-    },
-    {
-    "territoryName":"Shirley","alignment":"enemy","holder":"???","posX":76.54747596153845,"posY":60.89374106196951,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Olton","alignment":"enemy","holder":"???","posX":80.22836538461539,"posY":53.68824491904256,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Sheldon","alignment":"unclaimed","holder":"Available","posX":80.30348557692307,"posY":45.74998645649592,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Blossomfield","alignment":"enemy","holder":"???","posX":80.0030048076923,"posY":68.4656183647063,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Cheswick Green","alignment":"enemy","holder":"???","posX":79.92788461538461,"posY":75.7932415609032,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Blythe Valley","alignment":"enemy","holder":"???","posX":85.18629807692307,"posY":81.53321306459078,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Earlswood","alignment":"enemy","holder":"???","posX":77.22355769230768,"posY":86.29616814211876,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Tidbury Green","alignment":"crone","holder":"Ronan Quinn (NPC)","posX":64.15264423076923,"posY":88.98296331405761,"maxHolderLineLength":"12"
-    },
-    {
-    "territoryName":"Hollywood","alignment":"enemy","holder":"???","posX":57.24158653846154,"posY":84.58638939633947,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Wythall","alignment":"enemy","holder":"???","posX":52.05829326923077,"posY":90.57061500656694,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Druid's Heath","alignment":"enemy","holder":"???","posX":52.95973557692307,"posY":77.62514735995242,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Yardley Wood","alignment":"enemy","holder":"???","posX":63.25120192307691,"posY":68.9541265777861,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Hall Green","alignment":"unclaimed","holder":"Available","posX":68.73497596153845,"posY":56.61929419752132,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Tyseley","alignment":"enemy","holder":"???","posX":70.46274038461539,"posY":49.65805216113427,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Yardley","alignment":"enemy","holder":"???","posX":70.2373798076923,"posY":42.696810124747216,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Small Heath","alignment":"unclaimed","holder":"Available","posX":62.87560096153846,"posY":44.28446181725654,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Sparkbrook","alignment":"enemy","holder":"???","posX":59.79567307692307,"posY":51.97846617326329,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Balsall Heath","alignment":"unclaimed","holder":"Available","posX":51.90805288461539,"posY":54.17675313212236,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Moseley","alignment":"enemy","holder":"???","posX":52.6592548076923,"posY":60.405232848889725,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Kings Heath","alignment":"unclaimed","holder":"Available","posX":52.50901442307691,"posY":66.26733140584724,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Stirchley","alignment":"enemy","holder":"???","posX":44.17067307692307,"posY":66.02307729930735,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Bournville","alignment":"enemy","holder":"???","posX":39.58834134615384,"posY":72.00730290953481,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Kings Norton","alignment":"unclaimed","holder":"Available","posX":44.47115384615384,"posY":77.99152851976227,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Headley Heath","alignment":"enemy","holder":"???","posX":44.621394230769226,"posY":84.58638939633947,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Weatheroak","alignment":"mekhet","holder":"Arthur Pendlebury (NPC)","posX":43.41947115384615,"posY":95.45569713736488,"maxHolderLineLength":"3"
-    },
-    {
-    "territoryName":"Hopwood","alignment":"enemy","holder":"???","posX":35.30649038461539,"posY":88.12807394116798,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Northfield","alignment":"unclaimed","holder":"Available","posX":35.53185096153846,"posY":79.5791802122716,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Rubery","alignment":"enemy","holder":"???","posX":25.916466346153843,"posY":82.38810243748041,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Marlbrook","alignment":"invictus","holder":"Lord Jonah Redwyn (NPC)","posX":22.310697115384613,"posY":89.59359858040736,"maxHolderLineLength":"15"
-    },
-    {
-    "territoryName":"Frankley","alignment":"daeva","holder":"Prof. Hismyonie Kallis (NPC)","posX":25.465745192307693,"posY":74.44984397493377,"maxHolderLineLength":"18"
-    },
-    {
-    "territoryName":"Bartley Green","alignment":"enemy","holder":"???","posX":33.12800480769231,"posY":68.34349131143637,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Selly Oak","alignment":"enemy","holder":"???","posX":39.58834134615384,"posY":58.93970820965034,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Edgbaston","alignment":"personal","holder":"Prince Thompson","posX":43.26923076923077,"posY":52.10059322653323,"maxHolderLineLength":"10"
-    },
-    {
-    "territoryName":"The Rack","alignment":"court","holder":"Praxis","posX":43.56971153846153,"posY":44.1623347639866,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"City Centre","alignment":"personal","holder":"Prince Thompson","posX":48.90324519230769,"posY":39.399379686458616,"maxHolderLineLength":"10"
-    },
-    {
-    "territoryName":"Digbeth","alignment":"personal","holder":"Prince Thompson","posX":55.13822115384615,"posY":43.918080657446694,"maxHolderLineLength":"10"
-    },
-    {
-    "territoryName":"Saltley","alignment":"enemy","holder":"???","posX":55.51382211538461,"posY":30.117723637942543,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Gravelly Hill","alignment":"enemy","holder":"???","posX":55.43870192307691,"posY":24.255625080985027,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Aston","alignment":"unclaimed","holder":"Available","posX":49.20372596153846,"posY":30.239850691212492,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Witton","alignment":"enemy","holder":"???","posX":49.20372596153846,"posY":19.981178216536836,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Harborne","alignment":"enemy","holder":"???","posX":35.00600961538461,"posY":52.22272027980318,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Quinton","alignment":"enemy","holder":"???","posX":26.81790865384615,"posY":52.10059322653323,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Halesowen","alignment":"lance","holder":"Anton le Chavalier (NPC)","posX":15.099158653846153,"posY":51.97846617326329,"maxHolderLineLength":"16"
-    },
-    {
-    "territoryName":"Black Heath","alignment":"enemy","holder":"???","posX":22.085336538461537,"posY":46.48274877611561,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Bearwood","alignment":"unclaimed","holder":"Available","posX":33.203125,"posY":43.063191284557064,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Summerfield","alignment":"personal","holder":"Prince Thompson","posX":37.48497596153846,"posY":35.85769514163011,"maxHolderLineLength":"10"
-    },
-    {
-    "territoryName":"Jewellery Quarter","alignment":"personal","holder":"Prince Thompson","posX":43.26923076923077,"posY":35.24705987528037,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Lozells","alignment":"enemy","holder":"???","posX":43.26923076923077,"posY":25.965403826764298,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Perry Barr","alignment":"enemy","holder":"???","posX":43.79507211538461,"posY":17.050128938058076,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Great Barr","alignment":"carthian","holder":"Prof. Jack Wallis (NPC)","posX":39.66346153846153,"posY":9.844632795131124,"maxHolderLineLength":"14"
-    },
-    {
-    "territoryName":"Yew Tree","alignment":"enemy","holder":"???","posX":28.695913461538456,"posY":8.745489315701588,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Stone Cross","alignment":"enemy","holder":"???","posX":28.395432692307693,"posY":16.683747778248232,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Hamstead","alignment":"enemy","holder":"???","posX":36.73377403846153,"posY":18.8820347371073,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Handsworth","alignment":"unclaimed","holder":"Available","posX":37.03425480769231,"posY":25.23264150714461,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"West Bromwich","alignment":"enemy","holder":"???","posX":28.695913461538456,"posY":24.744133294064817,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Smethwick","alignment":"enemy","holder":"???","posX":32.60216346153846,"posY":30.972613010832184,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Langley Green","alignment":"enemy","holder":"???","posX":28.01983173076923,"posY":36.34620335470991,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Oldbury","alignment":"gangrel","holder":"Charlotte Hall","posX":23.662860576923077,"posY":30.606231851022336,"maxHolderLineLength":"0"
-    },
-    {
-    "territoryName":"Rowley Regis","alignment":"enemy","holder":"???","posX":19.381009615384613,"posY":36.468330407979856,"maxHolderLineLength":"0"
-    }
-    ],"adjacencyChanges":[
-        {"adjacencyName":"TEST", "x1":"52%", "y1":"9.6%", "x2":"64%", "y2":"14%", "sideOrTop1":"side", "sideOrTop2":"side"}
-    ]
-    }
-    ]
-    }
+{"territorySize":"1.05em",
+"HORIZONTAL_SCALE_FACTOR":2.3,
+"VERTICAL_SCALE_FACTOR":1.21,
+"weeks":[
+    {"title":"Here we go again...","territoryChanges":[
+    {"territoryName":"Kingstanding","alignment":"enemy","holder":"???","posX":49.35396634615384,"posY":2.761263705474124,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Short Heath","alignment":"enemy","holder":"???","posX":54.23677884615384,"posY":10.455268061480867,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Erdington","alignment":"ventrue","holder":"Mr Vincent Polk (NPC)","posX":56.94110576923077,"posY":17.782891257677765,"maxHolderLineLength":12,"flipside":"ventrue"},
+    {"territoryName":"Ward End","alignment":"enemy","holder":"???","posX":62.72536057692307,"posY":25.721149720224407,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Castle Bromwich","alignment":"ordo","holder":"Stg. James (NPC)","posX":74.44411057692307,"posY":23.889243921175176,"maxHolderLineLength":15,"flipside":"ordo"},
+    {"territoryName":"Fordbridge","alignment":"enemy","holder":"???","posX":81.28004807692307,"posY":38.65,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Birmingham Airport","alignment":"enemy","holder":"???","posX":92.24759615384615,"posY":45.50573234995603,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Catherine-de-Barnes","alignment":"enemy","holder":"???","posX":91.19591346153845,"posY":57,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Solihull","alignment":"nosferatu","holder":"Dr Harry Grimes (NPC)","posX":87.59014423076923,"posY":64.55755266006796,"maxHolderLineLength":20,"flipside":"nosferatu"},
+    {"territoryName":"Shirley","alignment":"enemy","holder":"???","posX":76.54747596153845,"posY":60.89374106196951,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Olton","alignment":"enemy","holder":"???","posX":80.22836538461539,"posY":53.68824491904256,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Sheldon","alignment":"unclaimed","holder":"Available","posX":80.30348557692307,"posY":46.1,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Blossomfield","alignment":"enemy","holder":"???","posX":80.0030048076923,"posY":68.4656183647063,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Cheswick Green","alignment":"enemy","holder":"???","posX":79.92788461538461,"posY":75.7932415609032,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Blythe Valley","alignment":"enemy","holder":"???","posX":85.18629807692307,"posY":81.53321306459078,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Earlswood","alignment":"enemy","holder":"???","posX":77.22355769230768,"posY":86.29616814211876,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Tidbury Green","alignment":"crone","holder":"Ronan Quinn (NPC)","posX":64.15264423076923,"posY":88.98296331405761,"maxHolderLineLength":12,"flipside":"crone"},
+    {"territoryName":"Hollywood","alignment":"enemy","holder":"???","posX":57.24158653846154,"posY":84.58638939633947,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Wythall","alignment":"enemy","holder":"???","posX":52.05829326923077,"posY":90.57061500656694,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Druid's Heath","alignment":"enemy","holder":"???","posX":52.95973557692307,"posY":77.62514735995242,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Yardley Wood","alignment":"enemy","holder":"???","posX":63.25120192307691,"posY":68.9541265777861,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Hall Green","alignment":"unclaimed","holder":"Available","posX":68.73497596153845,"posY":57.5,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Tyseley","alignment":"enemy","holder":"???","posX":70.46274038461539,"posY":49.65805216113427,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Yardley","alignment":"enemy","holder":"???","posX":70.2373798076923,"posY":42.696810124747216,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Small Heath","alignment":"unclaimed","holder":"Available","posX":62.87560096153846,"posY":44.28446181725654,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Sparkbrook","alignment":"enemy","holder":"???","posX":59.79567307692307,"posY":51.97846617326329,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Balsall Heath","alignment":"unclaimed","holder":"Available","posX":51.90805288461539,"posY":53,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Moseley","alignment":"enemy","holder":"???","posX":52.6592548076923,"posY":60.405232848889725,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Kings Heath","alignment":"unclaimed","holder":"Available","posX":52.50901442307691,"posY":68,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Stirchley","alignment":"enemy","holder":"???","posX":44.6,"posY":66.02307729930735,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Bournville","alignment":"enemy","holder":"???","posX":39.58834134615384,"posY":72.00730290953481,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Kings Norton","alignment":"unclaimed","holder":"Available","posX":45.5,"posY":76.5,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Headley Heath","alignment":"enemy","holder":"???","posX":44.621394230769226,"posY":84.58638939633947,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Weatheroak","alignment":"mekhet","holder":"Arthur Pendlebury (NPC)","posX":43.41947115384615,"posY":95.45569713736488,"maxHolderLineLength":3,"flipside":"mekhet"},
+    {"territoryName":"Hopwood","alignment":"enemy","holder":"???","posX":35.30649038461539,"posY":88.12807394116798,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Northfield","alignment":"unclaimed","holder":"Available","posX":35,"posY":79.5791802122716,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Rubery","alignment":"enemy","holder":"???","posX":25.916466346153843,"posY":82.38810243748041,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baron Jonah Redwyn (NPC)","posX":22.310697115384613,"posY":89.59359858040736,"maxHolderLineLength":15,"flipside":"invictus"},
+    {"territoryName":"Frankley","alignment":"daeva","holder":"Prof. Hismyonie Kallis (NPC)","posX":25.465745192307693,"posY":74.44984397493377,"maxHolderLineLength":18,"flipside":"daeva"},
+    {"territoryName":"Bartley Green","alignment":"enemy","holder":"???","posX":33.12800480769231,"posY":68.34349131143637,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Selly Oak","alignment":"enemy","holder":"???","posX":39,"posY":59.5,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Edgbaston","alignment":"personal","holder":"Prince Thompson","posX":43.26923076923077,"posY":52.10059322653323,"maxHolderLineLength":10,"flipside":"personal"},
+    {"territoryName":"The Rack","alignment":"court","holder":"Praxis","posX":44,"posY":45.25,"maxHolderLineLength":0,"flipside":"court"},
+    {"territoryName":"City Centre","alignment":"personal","holder":"Prince Thompson","posX":50,"posY":39.5,"maxHolderLineLength":10,"flipside":"personal"},
+    {"territoryName":"Digbeth","alignment":"personal","holder":"Prince Thompson","posX":55.13822115384615,"posY":44,"maxHolderLineLength":10,"flipside":"personal"},
+    {"territoryName":"Saltley","alignment":"enemy","holder":"???","posX":56,"posY":33,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Gravelly Hill","alignment":"enemy","holder":"???","posX":55.43870192307691,"posY":25,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Aston","alignment":"unclaimed","holder":"Available","posX":50,"posY":30.239850691212492,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Witton","alignment":"enemy","holder":"???","posX":49.20372596153846,"posY":19.981178216536836,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Harborne","alignment":"enemy","holder":"???","posX":35.00600961538461,"posY":52.22272027980318,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Quinton","alignment":"enemy","holder":"???","posX":26.81790865384615,"posY":52.10059322653323,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Halesowen","alignment":"lance","holder":"Anton le Chavalier (NPC)","posX":15.099158653846153,"posY":51.97846617326329,"maxHolderLineLength":16,"flipside":"lance"},
+    {"territoryName":"Black Heath","alignment":"enemy","holder":"???","posX":22.085336538461537,"posY":45,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Bearwood","alignment":"unclaimed","holder":"Available","posX":33.203125,"posY":44.5,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"Summerfield","alignment":"personal","holder":"Prince Thompson","posX":37.6,"posY":36.5,"maxHolderLineLength":10,"flipside":"personal"},
+    {"territoryName":"Jewellery Quarter","alignment":"personal","holder":"Prince Thompson","posX":43.9,"posY":36.5,"maxHolderLineLength":0,"flipside":"personal"},
+    {"territoryName":"Lozells","alignment":"enemy","holder":"???","posX":43.26923076923077,"posY":25.965403826764298,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Perry Barr","alignment":"enemy","holder":"???","posX":43.79507211538461,"posY":17.050128938058076,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Great Barr","alignment":"carthian","holder":"Prof. Jack Wallis (NPC)","posX":39.66346153846153,"posY":9.844632795131124,"maxHolderLineLength":14,"flipside":"carthian"},
+    {"territoryName":"Yew Tree","alignment":"enemy","holder":"???","posX":28.695913461538456,"posY":8.745489315701588,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Stone Cross","alignment":"enemy","holder":"???","posX":28.395432692307693,"posY":16.683747778248232,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Hamstead","alignment":"enemy","holder":"???","posX":36.73377403846153,"posY":18,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Handsworth","alignment":"unclaimed","holder":"Available","posX":37.03425480769231,"posY":25.23264150714461,"maxHolderLineLength":0,"flipside":"unclaimed"},
+    {"territoryName":"West Bromwich","alignment":"enemy","holder":"???","posX":28.695913461538456,"posY":23.8,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Smethwick","alignment":"enemy","holder":"???","posX":32.60216346153846,"posY":30.972613010832184,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Langley Green","alignment":"enemy","holder":"???","posX":28.01983173076923,"posY":37,"maxHolderLineLength":0,"flipside":"enemy"},
+    {"territoryName":"Oldbury","alignment":"gangrel","holder":"Charlotte Hall (NPC)","posX":23.662860576923077,"posY":30.606231851022336,"maxHolderLineLength":16,"flipside":"gangrel"},
+    {"territoryName":"Rowley Regis","alignment":"enemy","holder":"???","posX":19.381009615384613,"posY":37,"maxHolderLineLength":0,"flipside":"enemy"}
+    ],
+    "adjacencyChanges":[
+    {"adjacencyName":"ADJ_KNG_SHT","x1":50.265704314720814,"y1":3.602660145786518,"x2":53.983581852791886,"y2":9,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_SHT_ERD","x1":55.024587563451774,"y1":11.677176064460784,"x2":56.66045368020305,"y2":15.5,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_ERD_WDE","x1":58,"y1":17.0063565707858,"x2":62.509914340101524,"y2":25.627459624098705,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WDE_CST","x1":63.5,"y1":24.838637011899845,"x2":73,"y2":23.223733828164992,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_CST_FRD","x1":76.09256027918781,"y1":25.484598285393783,"x2":80.9010152284264,"y2":37.354136685844956,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_FRD_AIR","x1":82,"y1":38.96903986957982,"x2":92.0546478426396,"y2":43.32927846566392,"sideOrTop1":"side","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_AIR_CDB","x1":91.70764593908629,"y1":46.478339673946884,"x2":90.716211928934,"y2":55.92552329879577,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_CDB_SOL","x1":90.81535532994924,"y1":57.5,"x2":89.17948921319797,"y2":62,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_SOL_BLO","x1":87.04790609137056,"y1":64.88823596852421,"x2":80.60358502538071,"y2":67.95655201762044,"sideOrTop1":"top","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BLO_SHI","x1":78.67028870558376,"y1":67.22984558493975,"x2":76.19170368020305,"y2":60.93172316837383,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_SHI_SOL","x1":76.78656408629442,"y1":60.124271576506395,"x2":85.65989847715736,"y2":63.27333278478936,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SOL_OLT","x1":86.1556154822335,"y1":62.70811667048216,"x2":79.90958121827411,"y2":54.14912979668745,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_OLT_SHD","x1":80.10786802030456,"y1":52.93795240888629,"x2":79.95915291878173,"y2":46.23610419638665,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_SHD_AIR","x1":80.85144352791879,"y1":45.42865260451923,"x2":91.12991751269035,"y2":45.10567196777226,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"BLO_CHS","x1":79.6959918478261,"y1":68.26613995693168,"x2":79.73845108695653,"y2":75.04873332861807,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_CHS_ERL","x1":79.56861413043478,"y1":76.50214619397944,"x2":76.97860054347827,"y2":85.62634918208136,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_ERL_BLY","x1":77.7428668478261,"y1":85.7070943412681,"x2":84.5788043478261,"y2":81.02387510843701,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_ERL_TID","x1":76.38417119565219,"y1":86.1108201372018,"x2":64.53804347826087,"y2":88.77541039036431,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_TID_HLY","x1":63.731317934782616,"y1":87.72572332093667,"x2":57.659646739130444,"y2":83.76921052078626,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_TID_WYT","x1":63.22180706521739,"y1":89.58286198223173,"x2":52.43716032608696,"y2":90.71329421084614,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WYT_HLY","x1":52.352241847826086,"y1":89.502116823045,"x2":56.13111413043479,"y2":84.17293631671998,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WYT_DRU","x1":52.00020996157865,"y1":89.88252062320491,"x2":52.72076714349429,"y2":77.60699895728432,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_DRU_HLY","x1":53.62146362088884,"y1":77.20754302441227,"x2":56.92401737133552,"y2":83.77351972943954,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HEA_WYT","x1":44.24252717391305,"y1":84.81979793962138,"x2":50.908627717391305,"y2":89.74525265001267,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WYT_WEA","x1":51.07846467391305,"y1":90.87568487862707,"x2":44.28498641304348,"y2":95.23592347471117,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WEA_HOP","x1":42.81310589215425,"y1":94.90522247366717,"x2":35.637557288911005,"y2":88.225054869422,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HOP_MAR","x1":34.25648935690603,"y1":87.99667307098626,"x2":23.02780660538731,"y2":89.65244110964532,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_MAR_RUB","x1":22.09708691207961,"y1":88.39634121824882,"x2":25.36961744661314,"y2":82.57260535813765,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_RUB_HOP","x1":26.09017462852878,"y1":82.45841445891978,"x2":34.10637327734027,"y2":86.96895497802547,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_RUB_NTH","x1":26.270313924007688,"y1":81.77326906361257,"x2":34.91700010699536,"y2":78.80430568394806,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_NTH_BTG","x1":35.307301913866326,"y1":78.57592388551234,"x2":32.9654910726405,"y2":68.86969745199374,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BTG_FRK","x1":31.61444635654868,"y1":68.52712475434012,"x2":26.210267492181387,"y2":72.40961532774757,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_FRK_RUB","x1":25.5797799580052,"y1":75.26438780819421,"x2":25.759919253484114,"y2":81.08812366830537,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_NTH_BNV","x1":35.60753407299785,"y1":78.46404081779093,"x2":38.82001817570508,"y2":71.95515956237257,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BNV_KGN","x1":39.81078430083908,"y1":72.3548277096351,"x2":43.533663074069885,"y2":76,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_KGN_HEA","x1":44.34428990372498,"y1":77,"x2":44.43435955146443,"y2":83.65972673220384,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_KGN_DRU","x1":45.15491673338007,"y1":76,"x2":51.66995458653398,"y2":76.92246367834976,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_DRU_YDW","x1":53.8916725641072,"y1":76.57851158715802,"x2":63.0787766335316,"y2":69.44158038604141,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_YDW_HLG","x1":63.288939144923674,"y1":67.84290779699128,"x2":68.4829554978989,"y2":57.051867820902935,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HLG_SHI","x1":69.17348946390139,"y1":56.99477237129401,"x2":75.77859696479476,"y2":60.591785696656785,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HLG_OLT","x1":69.7139073503381,"y1":55.742996348103524,"x2":79.50147573802555,"y2":53.17370111570153,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_OLT_TYS","x1":79.591545385765,"y1":52.774032968439,"x2":70.85478955503788,"y2":48.77735149581369,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HLG_TYS","x1":68.69311800929097,"y1":55.28623275123206,"x2":70.25432523677485,"y2":50.318928635254885,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_TYS_YDL","x1":70.43446453225376,"y1":48.439924997129246,"x2":70.13423237312225,"y2":43.30133453232527,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_YDL_SHD","x1":70.88481277095103,"y1":42.21652098975555,"x2":79.4714525221124,"y2":45.5851525166826,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_YDL_FRD","x1":70.85478955503788,"y1":41.81685284249302,"x2":80.16198648811489,"y2":38.21983951713024,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_YDL_WDE","x1":69.7180706521739,"y1":41.22232638596262,"x2":62.33016304347827,"y2":25.884197479876715,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_KGN_STR","x1":44.4,"y1":76,"x2":44.4,"y2":66.49132206628636,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BNV_STR","x1":39.911684782608695,"y1":70.36708970725,"x2":43.60563858695652,"y2":66.24908658872613,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_STR_KGH","x1":44.794497282608695,"y1":65.28014467848521,"x2":51.46059782608696,"y2":67,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_DRU_KGH","x1":52.69191576086957,"y1":76.66521212381593,"x2":52.09748641304348,"y2":67,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_KGH_YDW","x1":53.20142663043479,"y1":67,"x2":62.24524456521739,"y2":68.59069620514167,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_KGH_MOS","x1":52.26732336956522,"y1":67,"x2":52.26732336956522,"y2":60.677670604840884,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_MOS_HLG","x1":52.989130434782616,"y1":60.03170933134694,"x2":67.55264945652173,"y2":56.31743200875678,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BTG_SLY","x1":33.62771739130435,"y1":67.54093410659672,"x2":38.34069293478261,"y2":58.73971175524177,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SLY_BNV","x1":39.23233695652174,"y1":59.143437551175495,"x2":39.189877717391305,"y2":70.60925015569296,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SLY_STR","x1":39.869225543478265,"y1":59.06269239198875,"x2":43.096127717391305,"y2":64.39187289831376,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_QUI_BTG","x1":27.131453804347828,"y1":52.84655311504479,"x2":32.608695652173914,"y2":66.89621081353802,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_QUI_HBN","x1":27.088994565217394,"y1":51.796866045617136,"x2":34.47690217391305,"y2":52.03910152317738,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HBN_BTG","x1":34.60427989130435,"y1":52.52357247829783,"x2":33.24558423913044,"y2":66.97695597272477,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HBN_SLY","x1":35.45346467391305,"y1":52.765807955858044,"x2":38.68036684782609,"y2":58,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SLY_EDG","x1":39.444633152173914,"y1":58,"x2":42.37432065217392,"y2":52.281337000737594,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HBN_EDG","x1":35.495923913043484,"y1":51.554630568056915,"x2":42.28940217391305,"y2":51.796866045617136,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_EDG_BSL","x1":43.56317934782609,"y1":52.11984668236411,"x2":51.12092391304348,"y2":53,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BSL_MOS","x1":51.54551630434783,"y1":54.13847566203268,"x2":52.352241847826086,"y2":59.46765616835769,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BSL_SPK","x1":52.819293478260875,"y1":53,"x2":58.678668478260875,"y2":51.63807677546599,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SPK_TYS","x1":60.49678006500056,"y1":51.92171287812057,"x2":70.07418594129594,"y2":49.181131296891785,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_QUI_HLO","x1":15.667459239130435,"y1":51.640027532515454,"x2":26.154891304347828,"y2":51.801517850888935,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_TYS_SMH","x1":69.68388413442497,"y1":48.669314813919755,"x2":63.34898557674997,"y2":44.33006064364084,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SMH_YDL","x1":63.22889271309736,"y1":43.47362889950686,"x2":69.83400021399072,"y2":42.33171990732819,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SPK_SMH","x1":60.10647825812959,"y1":51.01022824788601,"x2":62.23812658796336,"y2":44.27296519403191,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BSL_DIG","x1":51.79004745018659,"y1":52.152137240064675,"x2":54.46211366645708,"y2":44.33006064364084,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SPK_DIG","x1":59.205781780735045,"y1":51.23861004632174,"x2":55.482903007504234,"y2":44.21586974442299,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_DIG_SMH","x1":55.51292622341739,"y1":43.35943800028899,"x2":61.90787121291869,"y2":44.04458339559618,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_DIG_SLT","x1":55.122624416546415,"y1":42.84557895380859,"x2":55.72308873480946,"y2":33.481925217943584,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SLT_SMH","x1":56.293529837159326,"y1":33.19644796989892,"x2":62.448289099355414,"y2":43.016865302635395,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_SLT_WDE","x1":56.50369234855139,"y1":32.682588923418514,"x2":61.90787121291869,"y2":25.774039520737624,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SLT_GRV","x1":55.66304230298314,"y1":31.99744352811132,"x2":55.21269406428587,"y2":25.431466823084026,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_GRV_ERD","x1":55.362810143851625,"y1":24.410353903026934,"x2":56.53371556446455,"y2":18.129854446044305,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_RCK_DIG","x1":44.52442919920389,"y1":45.25,"x2":53.98174221184665,"y2":43.70670594133196,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_RCK_EDG","x1":43.74382558546195,"y1":46,"x2":43.05329161945945,"y2":50.386873545577124,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_RCK_CTC","x1":44.61449884694334,"y1":44.75,"x2":48.457470483826754,"y2":40.50936076323172,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_RCK_JWL","x1":43.68377915363564,"y1":45,"x2":43.41357021041728,"y2":35.77033233849504,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_RCK_SMR","x1":42.72303624441479,"y1":45,"x2":38.33964672109465,"y2":37.02643222989156,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SMR_JWL","x1":38.279600289268345,"y1":35.54195054005931,"x2":42.27268800571752,"y2":34.85680514475211,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SMR_LZL","x1":38.15950742561574,"y1":35.54195054005931,"x2":42.87315232398055,"y2":25.550246858496028,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_LZL_PBR","x1":43.143361267198905,"y1":24.75091056397097,"x2":43.68377915363564,"y2":17.61397936285434,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_PBR_KNG","x1":43.713802369548795,"y1":15.907641467093624,"x2":48.697656211131964,"y2":2.4902108089943695,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_PBR_WTN","x1":44.52442919920389,"y1":16.64988231200975,"x2":48.337377620174145,"y2":19.847227490110004,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WTN_SHO","x1":49.50828304078706,"y1":18.876604846758138,"x2":53.56141718906253,"y2":10.255191955809257,"sideOrTop1":"top","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WTN_ERD","x1":49.718445552179126,"y1":19.25,"x2":55.96327446211466,"y2":16.250214164747224,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WTN_GRV","x1":49.68842233626597,"y1":20.303991086981465,"x2":54.40206723463078,"y2":24.186481660388907,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_AST_GRV","x1":50.49904916592106,"y1":29.09669032675715,"x2":54.16188150732556,"y2":25.214199753349703,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_AST_SLT","x1":50.58911881366053,"y1":30.067312970109004,"x2":55.122624416546415,"y2":32.69370365211993,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_AST_CTC","x1":49.59835268852651,"y1":30.40988566776261,"x2":49.898584847658036,"y2":39.37387125636509,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_AST_LZL","x1":48.96786515435033,"y1":29.21088122597501,"x2":43.50363985815673,"y2":25.956440598265832,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_AST_JWL","x1":49.1780276657424,"y1":30.181503869326875,"x2":44.94475422198801,"y2":35.46366258999685,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_JWL_CTC","x1":44.79463814242225,"y1":37.37718978373977,"x2":48.81774907478458,"y2":39.20258490753829,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_CTC_DIG","x1":50.73923489322628,"y1":40.17320755089015,"x2":53.771579700454595,"y2":42.571216434465335,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_JWL_LZL","x1":43.44359342633043,"y1":34.57785348921472,"x2":43.023268403546304,"y2":26.299013295919433,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HBN_BRW","x1":34.77411684782609,"y1":51.16110873207423,"x2":32.86345108695652,"y2":43.40957345014694,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_BRW_SMR","x1":33.5,"y1":43,"x2":36.17527173913044,"y2":36.1425091233401,"sideOrTop1":"top","sideOrTop2":"top"},
+    {"adjacencyName":"ADJ_LZL_HND","x1":42.422804085283275,"y1":24.86735624108769,"x2":37.55904310735271,"y2":24.638974442651957,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HND_HAM","x1":37.048648436829126,"y1":24.58187899304302,"x2":36.5082305503924,"y2":18.815238582540793,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_HAM_GBR","x1":36.83848592543707,"y1":18.130093187233598,"x2":39.00015747118398,"y2":9.908348443547242,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_GBR_PBR","x1":40.71148077823363,"y1":10.365112040418705,"x2":43.29347734676467,"y2":16.30303879974774,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_GBR_YEW","x1":38.3696699370078,"y1":8.366771304106052,"x2":29.092496219843945,"y2":7.910007707234586,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_YEW_SNX","x1":28.3719390379283,"y1":8.994821249804314,"x2":27.771474719665267,"y2":15.617893404440544,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SNX_HAM","x1":28.972403356191332,"y1":16.131752450920942,"x2":36.117928743521425,"y2":18.52976133449613,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SNX_WSB","x1":28.131753310623093,"y1":17.273661443099602,"x2":28.582101549320367,"y2":23.896733597735828,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WSB_HND","x1":29.422751594888606,"y1":24.410592644216223,"x2":36.23802160717403,"y2":24.810260791478758,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_WSB_SMW","x1":28.492031901580912,"y1":25.15283348913236,"x2":31.854632083853893,"y2":30.005946705891656,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SMW_SMR","x1":33.32576966359832,"y1":31.262046597288183,"x2":36.23802160717403,"y2":34.5735826746063,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_SMW_BRW","x1":32.33500353846432,"y1":31.604619294941777,"x2":32.51514283394323,"y2":44,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BRW_LGY","x1":32.485119618030076,"y1":43,"x2":28.52205511749406,"y2":37.542546054270815,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_LGY_SMW","x1":28.3719390379283,"y1":36.286446162874284,"x2":31.344237413330315,"y2":31.204951147679253,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_LGY_OLD","x1":27.08094075366278,"y1":36.229350713265354,"x2":24.378851321479136,"y2":30.74818755080778,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_OLD_WSB","x1":23.568224491824036,"y1":29.320801310584464,"x2":27.381172912794298,"y2":24.52478354343409,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_ROW_OLD","x1":19.30492783215651,"y1":36.058064364438565,"x2":22.757597662168948,"y2":30.862378450025652,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_ROW_BLA","x1":18.82455637754608,"y1":37.199973356617214,"x2":21.19639043468506,"y2":43.994331860080244,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BLA_LGY","x1":22.51741193486373,"y1":43.88014096086237,"x2":27.02089432183648,"y2":36.91449610857256,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BLA_HAO","x1":20.986227923293,"y1":45.19333630186784,"x2":15.762188354404612,"y2":50.21773586745394,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_BLA_QUI","x1":22.727574446255797,"y1":45.02204995304104,"x2":26.240290708094538,"y2":50.8457858131522,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_CHS_BLY","x1":81.18277582916204,"y1":75.37881744860138,"x2":84.78556173874024,"y2":80.23193066536068,"sideOrTop1":"side","sideOrTop2":"side"}
+    ]},
+        {
+        "title":"The Curious Incident of the Canal in the Night Time",
+        "territoryChanges":[
+            {"territoryName":"Jewellery Quarter","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":0,"flipside":"invictus"},
+            {"territoryName":"Hopwood","alignment":"invictus","holder":"???","maxHolderLineLength":0,"flipside":"invictus"}
+
+            ],
+        "adjacencyChanges":[]
+        },
+        {
+        "title":"Much Ado about Nos-Things",
+        "territoryChanges":[
+            {"territoryName":"Lozells","alignment":"invictus","holder":"Cheri von Varley","maxHolderLineLength":10,"flipside":"gangrel"},
+            {"territoryName":"Perry Barr","alignment":"carthian","holder":"Martin Skidalsky","maxHolderLineLength":0,"flipside":"nosferatu"},
+            {"territoryName":"Handsworth","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":3,"flipside":"lance"},
+            {"territoryName":"Summerfield","alignment":"invictus","holder":"Lady Everglade","maxHolderLineLength":3,"flipside":"nosferatu"},
+            {"territoryName":"Bearwood","alignment":"lance","holder":"The Bishop","maxHolderLineLength":0,"flipside":"lance"},
+            {"territoryName":"Black Heath","alignment":"lance","holder":"Layla Finch","maxHolderLineLength":0,"flipside":"nosferatu"},
+            {"territoryName":"Aston","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
+            {"territoryName":"City Centre","alignment":"crone","holder":"Old Tom","maxHolderLineLength":0,"flipside":"ventrue"},
+            {"territoryName":"Small Heath","alignment":"carthian","holder":"Sabine Sabot","maxHolderLineLength":0,"flipside":"nos"},
+            {"territoryName":"Edgbaston","alignment":"carthian","holder":"Mrs Sirinis","maxHolderLineLength":0,"flipside":"mekhet"},
+            {"territoryName":"Balsall Heath","alignment":"crone","holder":"Koronis","maxHolderLineLength":0,"flipside":"mekhet"},
+            {"territoryName":"Hall Green","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":10,"flipside":"invictus"},
+            {"territoryName":"Kings Heath","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":3,"flipside":"gangrel"},
+            {"territoryName":"Northfield","alignment":"daeva","holder":"Delilah Cain","maxHolderLineLength":3,"flipside":"lance"},
+            {"territoryName":"Rubery","alignment":"invictus","holder":"Thomas Grey","maxHolderLineLength":0,"flipside":"daeva"},
+            {"territoryName":"Hopwood","alignment":"invictus","holder":"Lady Geneva Clarke","maxHolderLineLength":0,"flipside":"mekhet"},
+            {"territoryName":"Kings Norton","alignment":"invictus","holder":"Matron Winthrope","maxHolderLineLength":0,"flipside":"nos"},
+            {"territoryName":"Sheldon","alignment":"nos","holder":"Martin Skidalsky","maxHolderLineLength":0,"flipside":"carthian"},
+            {"territoryName":"Great Barr","alignment":"carthian","holder":"Watt (NPC)","maxHolderLineLength":0,"flipside":"carthian"},
+            {"territoryName":"Solihull","alignment":"nos","holder":"Damien Burro (NPC)","maxHolderLineLength":0,"flipside":"nos"}
+            ],
+        "adjacencyChanges":[]
+        },
+        {
+        "title":"Harper Better Faster Stronger",
+        "territoryChanges":[
+            {"territoryName":"West Bromwich","alignment":"enemy contested","holder":"Gangrel vs Mekhet","maxHolderLineLength":9,"flipside":null},
+            {"territoryName":"Hamstead","alignment":"carthian","holder":"Lance Drachen","maxHolderLineLength":0,"flipside":"mekhet"},
+            {"territoryName":"Perry Barr","alignment":"carthian","holder":"Lance Drachen","maxHolderLineLength":3,"flipside":"mekhet"},
+            {"territoryName":"Witton","alignment":"ventrue","holder":"Lord Throckmorton","maxHolderLineLength":3,"flipside":"invictus"},
+            {"territoryName":"Lozells","alignment":"invictus","holder":"Lord London","maxHolderLineLength":3,"flipside":"invictus"},
+            {"territoryName":"Bearwood","alignment":"lance","holder":"Theophania Learie","maxHolderLineLength":3,"flipside":"mekhet"},
+            {"territoryName":"Selly Oak","alignment":"ordo","holder":"Tia","maxHolderLineLength":3,"flipside":"mekhet"},
+            {"territoryName":"Balsall Heath","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":3,"flipside":"gangrel"},
+            {"territoryName":"Kings Heath","alignment":"crone","holder":"Ms Prosperity Virginia","maxHolderLineLength":16,"flipside":"daeva"},
+            {"territoryName":"Digbeth","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":3,"flipside":"lance"},
+            {"territoryName":"Druid's Heath","alignment":"invictus","holder":"Lord Throckmorton","maxHolderLineLength":3,"flipside":"ventrue"},
+            {"territoryName":"Wythall","alignment":"mekhet","holder":"Koronis","maxHolderLineLength":3,"flipside":"crone"},
+            {"territoryName":"Catherine-de-Barnes","alignment":"nos","holder":"Milo Longbridge","maxHolderLineLength":0,"flipside":"ordo"}
+            ],
+        "adjacencyChanges":[]
+        },
+        {
+            "title":"Porridge Pot, Trotter and Plots",
+            "territoryChanges":[
+                {"territoryName":"West Bromwich","alignment":"mekhet","holder":"Lady Geneva Clarke","maxHolderLineLength":12,"flipside":"invictus"},
+                {"territoryName":"Hamstead","alignment":"carthian","holder":"Cole Davidson","maxHolderLineLength":0,"flipside":"ventrue"},
+                {"territoryName":"Saltley","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
+                {"territoryName":"City Centre","alignment":"crone","holder":"Ms Prosperity Virginia","maxHolderLineLength":1,"flipside":"daeva"},
+                {"territoryName":"Stirchley","alignment":"daeva","holder":"Ms Prosperity Virginia","maxHolderLineLength":12,"flipside":"crone"},
+                {"territoryName":"Wythall","alignment":"crone","holder":"Koronis","maxHolderLineLength":3,"flipside":"mekhet"},
+                {"territoryName":"Olton","alignment":"nos","holder":"Vic","maxHolderLineLength":0,"flipside":"carthian"},
+                {"territoryName":"Shirley","alignment":"nos","holder":"Vic","maxHolderLineLength":0,"flipside":"carthian"},
+                {"territoryName":"Druid's Heath","alignment":"invictus","holder":"Lord Cinder","maxHolderLineLength":0,"flipside":"ventrue"},
+                {"territoryName":"Small Heath","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":3,"flipside":"gangrel"},
+                {"territoryName":"Balsall Heath","alignment":"carthian","holder":"Sabine Sabot","maxHolderLineLength":0,"flipside":"nos"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Arm-ed and Dangerous",
+            "territoryChanges":[
+                {"territoryName":"Yardley","alignment":"ordo","holder":"Theodor Christmas","maxHolderLineLength":0,"flipside":"mekhet"},
+                {"territoryName":"Fordbridge","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":0,"flipside":"gangrel"},
+                {"territoryName":"Smethwick","alignment":"invictus","holder":"Lord Cinder","maxHolderLineLength":0,"flipside":"ventrue"},
+                {"territoryName":"Hollywood","alignment":"crone","holder":"Old Tom","maxHolderLineLength":0,"flipside":"ventrue"},
+                {"territoryName":"Perry Barr","alignment":"carthian","holder":"???","maxHolderLineLength":0,"flipside":"carthian"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Old Tom who Cried Wyrm",
+            "territoryChanges":[
+                {"territoryName":"Kingstanding","alignment":"carthian","holder":"Mrs Sirinis","maxHolderLineLength":0,"flipside":"mekhet"},
+                {"territoryName":"Short Heath","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Lozells","alignment":"mekhet","holder":"Arthur Pendlebury (NPC)","maxHolderLineLength":3,"flipside":"mekhet"},
+                {"territoryName":"Bearwood","alignment":"mekhet","holder":"Theophania Learie","maxHolderLineLength":3,"flipside":"lance"},
+                {"territoryName":"Halesowen","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":0,"flipside":"lance"},
+                {"territoryName":"Edgbaston","alignment":"mekhet","holder":"Mrs Sirinis","maxHolderLineLength":0,"flipside":"carthian"},
+                {"territoryName":"Sparkbrook","alignment":"mekhet","holder":"Tia","maxHolderLineLength":0,"flipside":"ordo"},
+                {"territoryName":"Rubery","alignment":"invictus","holder":"Lord Grey","maxHolderLineLength":0,"flipside":"daeva"},
+                {"territoryName":"Headley Heath","alignment":"invictus","holder":"Madame St Laurence","maxHolderLineLength":0,"flipside":"ventrue"},
+                {"territoryName":"Weatheroak","alignment":"invictus","holder":"Lord London","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Earlswood","alignment":"crone","holder":"Selvaggio","maxHolderLineLength":0,"flipside":"gangrel"},
+                {"territoryName":"Druid's Heath","alignment":"invictus","holder":"Lord Harbour","maxHolderLineLength":0,"flipside":"mekhet"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"How do you solve a problem like a Neonate?",
+            "territoryChanges":[
+                {"territoryName":"Kingstanding","alignment":"carthian","holder":"Cole Davidson","maxHolderLineLength":0,"flipside":"ventrue"},
+                {"territoryName":"Perry Barr","alignment":"carthian","holder":"Vic","maxHolderLineLength":0,"flipside":"nos"},
+                {"territoryName":"Hamstead","alignment":"carthian","holder":"Mrs Sirinis","maxHolderLineLength":0,"flipside":"mekhet"},
+                {"territoryName":"Lozells","alignment":"mekhet","holder":"Theophania","maxHolderLineLength":0,"flipside":"lance"},
+                {"territoryName":"Langley Green","alignment":"lance","holder":"Theophania","maxHolderLineLength":0,"flipside":"mekhet"},
+                {"territoryName":"Bearwood","alignment":"lance","holder":"Gabriel Cain","maxHolderLineLength":0,"flipside":"lance"},
+                {"territoryName":"Harborne","alignment":"lance","holder":"Gabriel Cain","maxHolderLineLength":0,"flipside":"lance"},
+                {"territoryName":"Halesowen","alignment":"lance","holder":"Harper Marigold","maxHolderLineLength":0,"flipside":"mekhet"},
+                {"territoryName":"Bartley Green","alignment":"daeva","holder":"Larry Trotter","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Moseley","alignment":"enemy contested","holder":"Carthian vs Daeva","maxHolderLineLength":0,"flipside":"enemy contested"},
+                {"territoryName":"Tyseley","alignment":"gangrel","holder":"Paula Brunyan","maxHolderLineLength":0,"flipside":"ordo"},
+                {"territoryName":"Birmingham Airport","alignment":"enemy ordo-contesting","holder":"Contested","maxHolderLineLength":0,"flipside":"enemy ordo-outline"},
+                {"territoryName":"Short Heath","alignment":"ventrue","holder":"Althea St Laurence","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Erdington","alignment":"ventrue","holder":"Dahlia Jones","maxHolderLineLength":0,"flipside":"personal"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Be Still My Beating Heart...",
+            "territoryChanges":[
+                {"territoryName":"Ward End","alignment":"carthian","holder":"Martin Skidalsky","maxHolderLineLength":0,"flipside":"nos"},
+                {"territoryName":"Birmingham Airport","alignment":"ordo","holder":"Milo Longbridge","maxHolderLineLength":0,"flipside":"nos"},
+                {"territoryName":"Moseley","alignment":"carthian","holder":"Maxie","maxHolderLineLength":0,"flipside":"gangrel"},
+                {"territoryName":"Bartley Green","alignment":"daeva","holder":"Duncan Caterra","maxHolderLineLength":3,"flipside":"ordo"},
+                {"territoryName":"Bournville","alignment":"daeva","holder":"Larry Trotter","maxHolderLineLength":3,"flipside":"invictus"},
+                {"territoryName":"Olton","alignment":"nos","holder":"Octavia","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Smethwick","alignment":"ventrue","holder":"Lord Cinder","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Saltley","alignment":"ventrue","holder":"Dahlia Jones","maxHolderLineLength":0,"flipside":"personal"},
+                {"territoryName":"Yew Tree","alignment":"enemy contested","holder":"Carthians vs Mekhet","maxHolderLineLength":0,"flipside":"enemy contested"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Whose Prince is it Anyway?",
+            "territoryChanges":[
+                {"territoryName":"Yew Tree","alignment":"carthian","holder":"Lance Drachen","maxHolderLineLength":0,"flipside":"mekhet"},
+                {"territoryName":"Ward End","alignment":"carthian","holder":"Sabine Sabot","maxHolderLineLength":0,"flipside":"nos"},
+                {"territoryName":"Lozells","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":3,"flipside":"lance"},
+                {"territoryName":"Summerfield","alignment":"lance","holder":"Theophania","maxHolderLineLength":3,"flipside":"mekhet"},
+                {"territoryName":"Witton","alignment":"invictus","holder":"Lord Mortimer Throckmorton","maxHolderLineLength":15,"flipside":"ventrue"},
+                {"territoryName":"Halesowen","alignment":"invictus","holder":"Lady Everglade","maxHolderLineLength":3,"flipside":"nos"},
+                {"territoryName":"Quinton","alignment":"lance","holder":"Layla Finch","maxHolderLineLength":3,"flipside":"nos"},
+                {"territoryName":"Bournville","alignment":"daeva","holder":"Delilah Cain","maxHolderLineLength":3,"flipside":"lance"},
+                {"territoryName":"Northfield","alignment":"daeva","holder":"Thomas Grey","maxHolderLineLength":3,"flipside":"invictus"},
+                {"territoryName":"Blossomfield","alignment":"nos","holder":"Martin Skidalsky","maxHolderLineLength":3,"flipside":"carthian"},
+                {"territoryName":"Hall Green","alignment":"gangrel","holder":"Paula Brunyan","maxHolderLineLength":3,"flipside":"ordo"},
+                {"territoryName":"Tyseley","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":0,"flipside":"invictus"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"[Due to reduced GCS services, there will be no funny downtime name this week]",
+            "territoryChanges":[
+                {"territoryName":"Gravelly Hill","alignment":"enemy contested","holder":"Invictus vs Ventrue","maxHolderLineLength":12,"flipside":"enemy contested"},
+                {"territoryName":"Smethwick","alignment":"lance","holder":"Layla Finch","maxHolderLineLength":0,"flipside":"nos"},
+                {"territoryName":"Bearwood","alignment":"lance","holder":"Sybil","maxHolderLineLength":3,"flipside":"gangrel"},
+                {"territoryName":"Quinton","alignment":"invictus","holder":"Alder Lord Grey","maxHolderLineLength":10,"flipside":"daeva"},
+                {"territoryName":"Northfield","alignment":"daeva","holder":"ALDER LORD Grey","maxHolderLineLength":10,"flipside":"invictus"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Morgue than you bargained for",
+            "territoryChanges":[
+                {"territoryName":"Stone Cross","alignment":"enemy gangrel-contesting","holder":"Contested","maxHolderLineLength":12,"flipside":"enemy gangrel-contesting"},
+                {"territoryName":"Witton","alignment":"ventrue","holder":"Lord Mortimer Throckmorton","maxHolderLineLength":15,"flipside":"invictus"},
+                {"territoryName":"Gravelly Hill","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
+                {"territoryName":"Rowley Regis","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Yardley Wood","alignment":"invictus","holder":"Sir Isaac Blackthorn (NPC)","maxHolderLineLength":12,"flipside":"invictus"},
+                {"territoryName":"Cheswick Green","alignment":"crone","holder":"Old Tom","maxHolderLineLength":0,"flipside":"ventrue"},
+                {"territoryName":"Weatheroak","alignment":"personal","holder":"Harper Marigold","maxHolderLineLength":3,"flipside":"personal"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"The Earl-y Bird gets the Worm",
+            "territoryChanges":[
+                {"territoryName":"Stone Cross","alignment":"gangrel","holder":"Bartholomew Torch","maxHolderLineLength":0,"flipside":"ordo"},
+                {"territoryName":"Balsall Heath","alignment":"daeva","holder":"Ms Prosperity Virginia","maxHolderLineLength":15,"flipside":"crone"},
+                {"territoryName":"Weatheroak","alignment":"daeva","holder":"Ms Prosperity Virginia","maxHolderLineLength":15,"flipside":"crone"},
+                {"territoryName":"Tidbury Green","alignment":"crone","holder":"Ms Prosperity Virginia","maxHolderLineLength":15,"flipside":"daeva"},
+                {"territoryName":"Blythe Valley","alignment":"crone","holder":"Ms Prosperity Virginia","maxHolderLineLength":15,"flipside":"daeva"},
+                {"territoryName":"Blossomfield","alignment":"nos","holder":"Crumpet","maxHolderLineLength":0,"flipside":"ordo"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Once Questioned, Twice Died",
+            "territoryChanges":[
+                {"territoryName":"Oldbury","alignment":"gangrel","holder":"Selvaggio","maxHolderLineLength":12,"flipside":"crone"},
+                {"territoryName":"Aston","alignment":"ventrue","holder":"Henry Forest","maxHolderLineLength":3,"flipside":"invictus"},
+                {"territoryName":"Tyseley","alignment":"gangrel","holder":"Sluice","maxHolderLineLength":12,"flipside":"gangrel"},
+                {"territoryName":"Northfield","alignment":"daeva","holder":"Ms Prosperity Virginia","maxHolderLineLength":16,"flipside":"crone"},
+                {"territoryName":"Weatheroak","alignment":"invictus","holder":"Madame St Laurence","maxHolderLineLength":12,"flipside":"ventrue"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Under Pressure",
+            "territoryChanges":[
+                {"territoryName":"Hamstead","alignment":"mekhet","holder":"Mrs Sirinis","maxHolderLineLength":12,"flipside":"carthian"},
+                {"territoryName":"Lozells","alignment":"mekhet contested","holder":"Destabilised","maxHolderLineLength":12,"flipside":"mekhet contested"},
+                {"territoryName":"Bartley Green","alignment":"ordo","holder":"Duncan Caterra","maxHolderLineLength":12,"flipside":"daeva"},
+                {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baroness von Stacke","maxHolderLineLength":15,"flipside":"ventrue"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"A Change of Heart",
+            "territoryChanges":[
+                {"territoryName":"Lozells","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":12,"flipside":"invictus"}               
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Standing on the Precipice",
+            "territoryChanges":[
+                {"territoryName":"Marlbrook","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":15,"flipside":"invictus"},
+                {"territoryName":"Rubery","alignment":"invictus","holder":"Baroness von Stacke","maxHolderLineLength":15,"flipside":"ventrue"},
+                {"territoryName":"Druid's Heath","alignment":"crone","holder":"Thomas Carver","maxHolderLineLength":15,"flipside":"ventrue"},
+                {"territoryName":"Tidbury Green","alignment":"crone","holder":"Ms Prosperity Virginia","maxHolderLineLength":15,"flipside":"daeva"},
+                {"territoryName":"Kings Heath","alignment":"invictus","holder":"Lord Harbour","maxHolderLineLength":15,"flipside":"mekhet"}
+                ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Jumping the Shark",
+            "territoryChanges":[
+                {"territoryName":"Harborne","alignment":"daeva","holder":"Delilah Cain","maxHolderLineLength":15,"flipside":"lance"},
+                {"territoryName":"Yardley","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":15,"flipside":"gangrel"},
+                {"territoryName":"Fordbridge","alignment":"ordo","holder":"Theodor Christmas","maxHolderLineLength":0,"flipside":"mekhet"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Jumping the Shark",
+            "territoryChanges":[
+                {"territoryName":"Harborne","alignment":"daeva","holder":"Delilah Cain","maxHolderLineLength":15,"flipside":"lance"},
+                {"territoryName":"Yardley","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":15,"flipside":"gangrel"},
+                {"territoryName":"Fordbridge","alignment":"ordo","holder":"Theodor Christmas","maxHolderLineLength":0,"flipside":"mekhet"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Lord Thomas Grey, Master of Heralsherince",
+            "territoryChanges":[
+                {"territoryName":"Yew Tree","alignment":"carthian contested","holder":"Destabilised","maxHolderLineLength":15,"flipside":"carthian contested"},
+                {"territoryName":"West Bromwich","alignment":"mekhet","holder":"To be assigned","maxHolderLineLength":12,"flipside":"mekhet"},
+                {"territoryName":"Kingstanding","alignment":"carthian","holder":"To be assigned","maxHolderLineLength":12,"flipside":"carthian"},
+                {"territoryName":"Ward End","alignment":"carthian contested","holder":"Destabilised","maxHolderLineLength":15,"flipside":"carthian contested"},
+                {"territoryName":"Moseley","alignment":"gangrel","holder":"Maxie","maxHolderLineLength":15,"flipside":"carthian"},
+                {"territoryName":"Kings Norton","alignment":"invictus","holder":"Lord Throckmorton","maxHolderLineLength":15,"flipside":"ventrue"},
+                {"territoryName":"Hopwood","alignment":"invictus","holder":"Mr Lopez","maxHolderLineLength":15,"flipside":"ventrue"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"I wasn't Voidborn yesterday",
+            "territoryChanges":[
+                {"territoryName":"Yew Tree","alignment":"enemy contested","holder":"Carthian vs Crone","maxHolderLineLength":12,"flipside":null},
+                {"territoryName":"Ward End","alignment":"enemy contested","holder":"Carthian vs Ordo","maxHolderLineLength":12,"flipside":null},
+                {"territoryName":"West Bromwich","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":0,"flipside":"lance"},
+                {"territoryName":"Bearwood","alignment":"lance","holder":"To be assigned","maxHolderLineLength":9,"flipside":null},
+                {"territoryName":"Blossomfield","alignment":"personal","holder":"Crumpet","maxHolderLineLength":9,"flipside":null},
+                {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baroness von Stacke","maxHolderLineLength":15,"flipside":"ventrue"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Amo Amas Ammutseba",
+            "territoryChanges":[
+                {"territoryName":"Yew Tree","alignment":"crone","holder":"Koronis","maxHolderLineLength":12,"flipside":"mekhet"},
+                {"territoryName":"Ward End","alignment":"ordo","holder":"Duncan Caterra","maxHolderLineLength":12,"flipside":"daeva"},
+                {"territoryName":"Blossomfield","alignment":"nos","holder":"Martin Skidalsky","maxHolderLineLength":12,"flipside":"carthian"},
+                {"territoryName":"Moseley","alignment":"carthian","holder":"Maxie","maxHolderLineLength":12,"flipside":"gangrel"},
+                {"territoryName":"Kingstanding","alignment":"carthian","holder":"Jason Baker","maxHolderLineLength":12,"flipside":"daeva"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"The Hours Creep on Apace",
+            "territoryChanges":[
+                {"territoryName":"Handsworth","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Lozells","alignment":"personal","holder":"Cheri von Varley","maxHolderLineLength":12,"flipside":"personal"},
+                {"territoryName":"Halesowen","alignment":"nos","holder":"Hortensia Everglade","maxHolderLineLength":12,"flipside":"nos"},
+                {"territoryName":"Harborne","alignment":"lance","holder":"Delilah Cain","maxHolderLineLength":12,"flipside":"daeva"},
+                {"territoryName":"Moseley","alignment":"enemy contested","holder":"Carthians vs ???","maxHolderLineLength":0,"flipside":"enemy contested"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Finale",
+            "territoryChanges":[
+                {"territoryName":"Halesowen","alignment":"invictus","holder":"Baroness von Stacke","maxHolderLineLength":12,"flipside":"nos"},
+                {"territoryName":"Moseley","alignment":"carthian","holder":"Maxie","maxHolderLineLength":12,"flipside":"gangrel"},
+                {"territoryName":"Bearwood","alignment":"lance","holder":"Theophania","maxHolderLineLength":12,"flipside":"mekhet"},
+                {"territoryName":"Northfield","alignment":"enemy blighted","holder":"Blighted","maxHolderLineLength":12,"flipside":null},
+                {"territoryName":"Yardley Wood","alignment":"personal","holder":"Sir Isaac Blackthorn (NPC)","maxHolderLineLength":12,"flipside":null}
+            ],
+            "adjacencyChanges":[]
+        }
+    ]}

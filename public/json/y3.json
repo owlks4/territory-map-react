@@ -1,0 +1,213 @@
+{
+"territorySize":"1.05em",
+"HORIZONTAL_SCALE_FACTOR":1.3,
+"VERTICAL_SCALE_FACTOR":0.8,
+"specialTerritoryCSS":"old-style",
+"weeks":[
+        {"title":"New Beginnings",
+        "territoryChanges":[
+            {"territoryName":"Sutton Coldfield","alignment":"invictus","holder":"Invictus","posX":65.4296875,"posY":14.485460819389163,"maxHolderLineLength":"0"},
+            {"territoryName":"Great Barr","alignment":"unclaimed","holder":"Not declared","posX":54.91286057692307,"posY":14.485460819389163,"maxHolderLineLength":"0"},
+            {"territoryName":"Short Heath","alignment":"unclaimed","holder":"Not declared","posX":63.8,"posY":24.5,"maxHolderLineLength":"0"},
+            {"territoryName":"Minworth","alignment":"unclaimed","holder":"Not declared","posX":71.89002403846153,"posY":27.797309625813522,"maxHolderLineLength":"0"},
+            {"territoryName":"Erdington","alignment":"unclaimed","holder":"Not declared","posX":63.4014423076923,"posY":35.5,"maxHolderLineLength":"0"},
+            {"territoryName":"Castle Bromwich","alignment":"crone","holder":"Crone","posX":70.3125,"posY":44.5,"maxHolderLineLength":"0"},
+            {"territoryName":"Shard End","alignment":"unclaimed","holder":"Not declared","posX":66,"posY":55,"maxHolderLineLength":"0"},
+            {"territoryName":"Yardley","alignment":"unclaimed","holder":"Not declared","posX":60.17127403846154,"posY":46.97125698919541,"maxHolderLineLength":"0"},
+            {"territoryName":"Lozells","alignment":"ordo","holder":"Ordo Dracul","posX":54.23677884615384,"posY":35.5,"maxHolderLineLength":"0"},
+            {"territoryName":"Aston","alignment":"unclaimed","holder":"Not declared","posX":53.75,"posY":24.5,"maxHolderLineLength":"0"},
+            {"territoryName":"Hamstead","alignment":"unclaimed","holder":"Not declared","posX":44.25,"posY":24.5,"maxHolderLineLength":"0"},
+            {"territoryName":"Handsworth","alignment":"unclaimed","holder":"Not declared","posX":44.921875,"posY":35.5,"maxHolderLineLength":"0"},
+            {"territoryName":"Smethwick","alignment":"lance","holder":"Lance","posX":35.90745192307692,"posY":36,"maxHolderLineLength":"0"},
+            {"territoryName":"Bearwood","alignment":"gangrel","holder":"Gangrel","posX":31.5,"posY":47.09338404246536,"maxHolderLineLength":"0"},
+            {"territoryName":"Jewellery Quarter","alignment":"unclaimed","holder":"Not declared","posX":41.5,"posY":47.09338404246536,"maxHolderLineLength":"0"},
+            {"territoryName":"City Centre","alignment":"unclaimed","holder":"Not declared","posX":51.457331730769226,"posY":47.09338404246536,"maxHolderLineLength":"0"},
+            {"territoryName":"Bordesley","alignment":"carthian","holder":"Carthian","posX":57.24158653846154,"posY":56.98567535733117,"maxHolderLineLength":"0"},
+            {"territoryName":"Fordbridge","alignment":"unclaimed","holder":"Not declared","posX":65.05408653846153,"posY":66.02307729930735,"maxHolderLineLength":"0"},
+            {"territoryName":"Airport/NEC","alignment":"daeva","holder":"Daeva","posX":62.5,"posY":75.7932415609032,"maxHolderLineLength":"0"},
+            {"territoryName":"Sheldon","alignment":"unclaimed","holder":"Not declared","posX":55.51382211538461,"posY":66.63371256565709,"maxHolderLineLength":"0"},
+            {"territoryName":"Acocks Green","alignment":"unclaimed","holder":"Not declared","posX":51.6826923076923,"posY":75.30473334782342,"maxHolderLineLength":"0"},
+            {"territoryName":"King's Heath","alignment":"unclaimed","holder":"Not declared","posX":41.16586538461539,"posY":75.42686040109336,"maxHolderLineLength":"0"},
+            {"territoryName":"Selly Oak","alignment":"unclaimed","holder":"Not declared","posX":47.02524038461539,"posY":66.63371256565709,"maxHolderLineLength":"0"},
+            {"territoryName":"Deritend","alignment":"unclaimed","holder":"Not declared","posX":48.30228365384615,"posY":56.86354830406122,"maxHolderLineLength":"0"},
+            {"territoryName":"The Rack","alignment":"court","holder":"Court","posX":39.21274038461539,"posY":56.61929419752132,"maxHolderLineLength":"0"},
+            {"territoryName":"Edgbaston","alignment":"ventrue","holder":"Ventrue","posX":31.400240384615383,"posY":56.98567535733117,"maxHolderLineLength":"0"},
+            {"territoryName":"Bartley Green","alignment":"unclaimed","holder":"Not declared","posX":28.62079326923077,"posY":66.87796667219699,"maxHolderLineLength":"0"},
+            {"territoryName":"Northfield","alignment":"unclaimed","holder":"Not declared","posX":38.16105769230769,"posY":66.1452043525773,"maxHolderLineLength":"0"},
+            {"territoryName":"Bournville","alignment":"unclaimed","holder":"Not declared","posX":31.099759615384613,"posY":76.40387682725294,"maxHolderLineLength":"0"},
+            {"territoryName":"Warstock","alignment":"unclaimed","holder":"Not declared","posX":38.16105769230769,"posY":87.51743867481824,"maxHolderLineLength":"0"},
+            {"territoryName":"Sparkhill","alignment":"nosferatu","holder":"Nosferatu","posX":48.00180288461539,"posY":85.31915171595917,"maxHolderLineLength":"0"},
+            {"territoryName":"Longbridge","alignment":"mekhet","holder":"Mekhet","posX":28.245192307692307,"posY":88.98296331405761,"maxHolderLineLength":"0"}
+        ],
+        "adjacencyChanges":[]
+        },
+        {"title":"Not So Free Real Estate",
+        "territoryChanges":[],
+        "adjacencyChanges":[]
+        },
+        {"title":"Drink Up Thy Vitae / I am a Vitae Drinker",
+        "territoryChanges":[
+            {"territoryName":"Sutton Coldfield","alignment":"invictus","holder":"Invictus","maxHolderLineLength":"0"},
+            {"territoryName":"Great Barr","alignment":"invictus","holder":"Lord De Villiers","maxHolderLineLength":"0"},
+            {"territoryName":"Short Heath","alignment":"invictus","holder":"Lord De Villiers","maxHolderLineLength":"0"},
+            {"territoryName":"Minworth","alignment":"invictus","holder":"Portillo","maxHolderLineLength":"0"},
+            {"territoryName":"Erdington","alignment":"lance","holder":"The Pardoner","maxHolderLineLength":"0"},
+            {"territoryName":"Castle Bromwich","alignment":"crone","holder":"Crone","maxHolderLineLength":"0"},
+            {"territoryName":"Shard End","alignment":"crone","holder":"Rhinanon","maxHolderLineLength":"0"},
+            {"territoryName":"Yardley","alignment":"crone","holder":"Fioonnghuala","maxHolderLineLength":"0"},
+            {"territoryName":"Lozells","alignment":"ordo","holder":"Ordo Dracul","maxHolderLineLength":"0"},
+            {"territoryName":"Aston","alignment":"invictus","holder":"Mr Mikhel Bryathanov","maxHolderLineLength":"0"},
+            {"territoryName":"Hamstead","alignment":"invictus","holder":"Lord De Villiers","maxHolderLineLength":"0"},
+            {"territoryName":"Handsworth","alignment":"lance","holder":"Marcello","maxHolderLineLength":"0"},
+            {"territoryName":"Smethwick","alignment":"lance","holder":"Lance","maxHolderLineLength":"0"},
+            {"territoryName":"Bearwood","alignment":"gangrel","holder":"Gangrel","maxHolderLineLength":"0"},
+            {"territoryName":"Jewellery Quarter","alignment":"gangrel","holder":"Mar","maxHolderLineLength":"0"},
+            {"territoryName":"City Centre","alignment":"personal","holder":"Alborix","maxHolderLineLength":"0"},
+            {"territoryName":"Bordesley","alignment":"carthian","holder":"Carthian","maxHolderLineLength":"0"},
+            {"territoryName":"Fordbridge","alignment":"crone","holder":"Akachi","maxHolderLineLength":"0"},
+            {"territoryName":"Airport/NEC","alignment":"daeva","holder":"Daeva","maxHolderLineLength":"0"},
+            {"territoryName":"Sheldon","alignment":"carthian","holder":"Frostbone","maxHolderLineLength":"0"},
+            {"territoryName":"Acocks Green","alignment":"crone","holder":"Doris","maxHolderLineLength":"0"},
+            {"territoryName":"King's Heath","alignment":"mekhet","holder":"Dr Max Milton","maxHolderLineLength":"0"},
+            {"territoryName":"Selly Oak","alignment":"daeva","holder":"Verite","maxHolderLineLength":"0"},
+            {"territoryName":"Deritend","alignment":"unclaimed","holder":"Not claimed","maxHolderLineLength":"0"},
+            {"territoryName":"The Rack","alignment":"court","holder":"Court","maxHolderLineLength":"0"},
+            {"territoryName":"Edgbaston","alignment":"ventrue","holder":"Ventrue","maxHolderLineLength":"0"},
+            {"territoryName":"Bartley Green","alignment":"ordo","holder":"James Atherington","maxHolderLineLength":"0"},
+            {"territoryName":"Northfield","alignment":"carthian","holder":"Frostbone","maxHolderLineLength":"0"},
+            {"territoryName":"Bournville","alignment":"mekhet","holder":"Ovidu","maxHolderLineLength":"0"},
+            {"territoryName":"Warstock","alignment":"personal","holder":"Cheshire","maxHolderLineLength":"0"},
+            {"territoryName":"Sparkhill","alignment":"nosferatu","holder":"Nosferatu","maxHolderLineLength":"0"},
+            {"territoryName":"Longbridge","alignment":"mekhet","holder":"Mekhet","maxHolderLineLength":"0"}
+        ],
+        "adjacencyChanges":[]
+        },
+        {
+        "title":"I used to be a stable Prince like you, then I took a Carthian to the knee",
+        "territoryChanges":[
+            {"territoryName":"City Centre","alignment":"crone","holder":"Alborix","maxHolderLineLength":"0"},
+            {"territoryName":"Sutton Coldfield","alignment":"invictus","holder":"Lady Arcrop","maxHolderLineLength":"0"},
+            {"territoryName":"Minworth","alignment":"invictus","holder":"Mr Portillo","maxHolderLineLength":"0"},
+            {"territoryName":"Short Heath","alignment":"invictus","holder":"Mr LaRoy","maxHolderLineLength":"0"},
+            {"territoryName":"Aston","alignment":"invictus","holder":"Mr Mikhel","maxHolderLineLength":"0"},
+            {"territoryName":"Hamstead","alignment":"invictus","holder":"Mx Sewers","maxHolderLineLength":"0"},
+            {"territoryName":"Smethwick","alignment":"lance","holder":"Rev. Priestly","maxHolderLineLength":"0"},
+            {"territoryName":"Lozells","alignment":"ordo","holder":"Infinity","maxHolderLineLength":"0"},
+            {"territoryName":"Castle Bromwich","alignment":"crone","holder":"Mesmero","maxHolderLineLength":"0"},
+            {"territoryName":"Bearwood","alignment":"gangrel","holder":"Melric Harper","maxHolderLineLength":"0"},
+            {"territoryName":"Edgbaston","alignment":"ventrue","holder":"Mimely","maxHolderLineLength":"0"},
+            {"territoryName":"Deritend","alignment":"ventrue","holder":"Carlotta DiBello","maxHolderLineLength":"0"},
+            {"territoryName":"Bordesley","alignment":"carthian","holder":"Bobby","maxHolderLineLength":"0"},
+            {"territoryName":"Airport/NEC","alignment":"daeva","holder":"Zachary Quast","maxHolderLineLength":"0"},
+            {"territoryName":"Sparkhill","alignment":"nosferatu","holder":"Dr Goode","maxHolderLineLength":"0"},
+            {"territoryName":"Longbridge","alignment":"mekhet","holder":"Thompson","maxHolderLineLength":"0"}
+        ],
+        "adjacencyChanges":[]
+        },
+        {
+            "title":"Majesty 3, Auspex 4, Computers 3: Powerpoint",
+            "territoryChanges":[
+                {"territoryName":"Short Heath","alignment":"invictus","holder":"Mr LaRoy","maxHolderLineLength":"0"},
+                {"territoryName":"Aston","alignment":"invictus","holder":"Mr Mikhel Bryathanov","maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Lil Bottom X",
+            "territoryChanges":[],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"(No record of changes this week)",
+            "territoryChanges":[],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"(No record of changes this week)",
+            "territoryChanges":[],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Poetic Kings(ton) Justice / A Sonnet of Dragons / A Song of Vice and Ire",
+            "territoryChanges":[
+                {"territoryName":"Great Barr","alignment":"invictus","holder":"Lord De Villiers","maxHolderLineLength":"0"},
+                {"territoryName":"Bearwood","alignment":"gangrel","holder":"Infinity","maxHolderLineLength":"0"},
+                {"territoryName":"Selly Oak","alignment":"daeva","holder":"Verite","maxHolderLineLength":"0"},
+                {"territoryName":"Acocks Green","alignment":"crone contested","holder":"Doris","maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"I'm shocked",
+            "territoryChanges":[
+                {"territoryName":"Acocks Green","alignment":"crone","holder":"Doris","maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"And a Gail blows through Elysium",
+            "territoryChanges":[
+                {"territoryName":"Warstock","alignment":"mekhet","holder":"Cheshire","maxHolderLineLength":"0"},
+                {"territoryName":"Short Heath","alignment":"daeva","holder":"Mr LaRoy","maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"My Name is Earl",
+            "territoryChanges":[],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"GIVE HIM THE CHAIR",
+            "territoryChanges":[
+                {"territoryName":"Short Heath","alignment":"invictus","holder":"Mr LaRoy","maxHolderLineLength":"0"},
+                {"territoryName":"Castle Bromwich","alignment":"crone","holder":"Fioonnghuala","maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Holy Orbital Drop Cannon",
+            "territoryChanges":[
+                {"territoryName":"Warstock","alignment":"invictus","holder":"Cheshire","maxHolderLineLength":"0"},
+                {"territoryName":"Edgbaston","alignment":"ventrue","holder":"Amalia Bane","maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Fire Breeding Dragons / On the Warpath",
+            "territoryChanges":[
+                {"territoryName":"Short Heath","alignment":"daeva","holder":"Mr LaRoy","maxHolderLineLength":"0"},
+                {"territoryName":"Handsworth","alignment":"mekhet","holder":"Marcello","maxHolderLineLength":"0"},
+                {"territoryName":"City Centre","alignment":"ventrue","holder":"Alborix","maxHolderLineLength":"0"},
+                {"territoryName":"Longbridge","alignment":"lance","holder":"Thompson","maxHolderLineLength":"0"},
+                {"territoryName":"Warstock","alignment":"mekhet","holder":"Mx. Rook","maxHolderLineLength":"0"},
+                {"territoryName":"Bournville","alignment":"mekhet","holder":"Mx. Rook","maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Bleeding Week",
+            "territoryChanges":[],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"A Hundred Reasons to Cry, A Thousand Reasons to Smile",
+            "territoryChanges":[
+                {"territoryName":"Sutton Coldfield","alignment":"invictus contested","holder":"Lady Arcrop","maxHolderLineLength":"0"},
+                {"territoryName":"Hamstead","alignment":"invictus contested","holder":"Mx Sewers","maxHolderLineLength":"0"},
+                {"territoryName":"Bordesley","alignment":"carthian","holder":"O'Rourke","maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"(No record of changes this week)",
+            "territoryChanges":[],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"(No record of changes this week)",
+            "territoryChanges":[],
+            "adjacencyChanges":[]
+        }
+    ]
+}

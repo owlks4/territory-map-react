@@ -3,29 +3,35 @@ import './index.css'
 import Territory from './Territory.jsx';
 import Gantt from './Gantt.jsx';
 import LegendElement from './legendElement.jsx';
+import WeekTitle from "./WeekTitle.jsx";
 import { MapContainer, LayerGroup, Marker, useMapEvents, ImageOverlay, Popup} from 'react-leaflet'
 import { divIcon, CRS } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 const DEFAULT_YEAR = 6;
-const VALID_YEARS = [6,7];
+const VALID_YEARS = [5,6,7];
+const LOWEST_YEAR_IF_NOT_SHIFT_CLICKING = 6;
 
 let currentYearJson = null;
 
-const DEFAULT_PRECEDENCE = "N/A by territory";
+const DEFAULT_PRECEDENCE = "N/A by territory (all tied)";
 
 let HORIZONTAL_SCALE_FACTOR = 1.3;
 let VERTICAL_SCALE_FACTOR = 0.8;
 
 const EDIT_MODE = false;
 
+let edit_mode_new_adjacency_first_coord = null;
+
 if (EDIT_MODE){
-  alert("Warning: Edit mode is active.\n\nControls:\nClick on the map to create a territory in that location\n\nCtrl-click to load a custom image as the canvas background (intended to be used as a guide, also please use 1920 by 1080 and letterbox if necessary!)\n\nShift-click to dump to JSON on the console.")
+  alert("Warning: Edit mode is active.\n\nControls:\nClick on the map to create a territory in that location\n\nCtrl-click to load a custom image as the canvas background (intended to be used as a guide, also please use 1920 by 1080 and letterbox if necessary!)\n\nAlt-click somewhere to start an adjacency and alt-click again in a new location to end it.\n\nShift-click to dump to JSON on the console.\n\nThe visuals will often lag behind your changes and require you to toggle the week to update (year change won't count and will erase your changes!), so I recommend having a dummy second week that you can toggle to. Your changes only affect the first week, as any subsequent updates after the initial positioning of territories can easily be made via manual JSON edits.")
 }
 
 let MAP = null;
 
 let weeksScrollPosition = 0;
+
+let specialCSS = null;
 
 let storedTerritoryFontSize = "1em";
 
@@ -38,6 +44,18 @@ let customCanvasBackground = null;
 let isReady = false;
 
 let territorySize = "1em";
+
+window.onresize = ()=>{
+  if (window.innerWidth > window.innerHeight){
+    document.body.style = "font-size:"+(window.innerWidth / 1920 * 16)+"px";
+  } else {
+    document.body.style = "font-size:16px";
+  }
+};
+
+if (window.innerWidth > window.innerHeight){
+  window.onresize();
+}
 
 function deepCopyJSON(json){
   return JSON.parse(JSON.stringify(json));
@@ -127,6 +145,7 @@ function App (props){
               highestWeekFound = json.weeks.length;
               HORIZONTAL_SCALE_FACTOR = json.HORIZONTAL_SCALE_FACTOR;
               VERTICAL_SCALE_FACTOR = json.VERTICAL_SCALE_FACTOR;
+              specialCSS = json.specialTerritoryCSS;
               territorySize = json.territorySize;
               json.weeks.forEach((week, weekIndex) => {
                 week.territoryChanges.forEach((territoryChange) => { //Some one-off input sanitising on first load
@@ -136,7 +155,7 @@ function App (props){
                   territoryChange.posY = territoryChange.posY == null ? null : parseFloat(typeof territoryChange.posY === "string" ? territoryChange.posY.replace("%","") : territoryChange.posY);
                   territoryChange.maxHolderLineLength = parseFloat(territoryChange.maxHolderLineLength);                  
                 });
-                newLoadedWeeks.push({weekNumber:weekIndex+1, title:"Week "+(weekIndex+1)+" - "+week.title});
+                newLoadedWeeks.push({weekNumber:weekIndex+1, title:week.title});
               });
             }
           });
@@ -151,9 +170,14 @@ function App (props){
       isReady = true;
     }
 
-    function cycleYear(){
+    let imageOverlay = null;
+    refreshImageOverlay();
+
+    function cycleYear(shiftKey){
       let index = VALID_YEARS.indexOf(year);
-      if (index > 0){
+      let useLowerBarrier = !shiftKey && VALID_YEARS.includes(LOWEST_YEAR_IF_NOT_SHIFT_CLICKING);
+
+      if (index > (useLowerBarrier ? VALID_YEARS.indexOf(LOWEST_YEAR_IF_NOT_SHIFT_CLICKING) : 0)){
         index--;
       } else {
         index = VALID_YEARS.length - 1;
@@ -385,7 +409,22 @@ function App (props){
     }
 
     function handleSpecialMapClick(e){
-          if (e.originalEvent.ctrlKey){
+          if (e.originalEvent.altKey){
+              if (edit_mode_new_adjacency_first_coord == null){
+                edit_mode_new_adjacency_first_coord = [e.latlng.lng / HORIZONTAL_SCALE_FACTOR / 0.01, -(e.latlng.lat / VERTICAL_SCALE_FACTOR / 0.01)];
+              } else {
+                let secondCoord = [e.latlng.lng / HORIZONTAL_SCALE_FACTOR / 0.01, -(e.latlng.lat / VERTICAL_SCALE_FACTOR / 0.01)];
+                let nameForAdjacency = prompt("Name for this adjacency?");
+                let newAdjacencyChange = {"adjacencyName":nameForAdjacency, "x1":edit_mode_new_adjacency_first_coord[0], "y1":edit_mode_new_adjacency_first_coord[1], "x2":secondCoord[0], "y2":secondCoord[1], "sideOrTop1":"side", "sideOrTop2":"side"};
+                currentYearJson.weeks[0].adjacencyChanges.push(newAdjacencyChange);
+                refreshImageOverlay();
+                setAlternator(!alternator); 
+                changeWeek(1);
+                setWeekTitle(String(Date.now()))
+                edit_mode_new_adjacency_first_coord = null;
+              }
+          }
+          else if (e.originalEvent.ctrlKey){
             let fileInput = document.createElement("input");
             fileInput.type = "file";
             fileInput.accept = "image/png";
@@ -396,18 +435,20 @@ function App (props){
             alert("JSON dumped to console.");          
           } else {
             let name = prompt("Name for this territory?");
-            let newTerritoryChange = {"territoryName":name, "alignment":"unclaimed", "holder":"Unclaimed",
-                                      "posX":(e.latlng.lng / HORIZONTAL_SCALE_FACTOR / 0.01), "posY":-(e.latlng.lat / VERTICAL_SCALE_FACTOR / 0.01),
-                                      "maxHolderLineLength":"0"};
-            currentYearJson.weeks[0].territoryChanges.push(newTerritoryChange);
-            setAlternator(!alternator); 
-            changeWeek(1);
-            setWeekTitle(String(Date.now()))
+            if (name != null){
+              let newTerritoryChange = {"territoryName":name, "alignment":"unclaimed", "holder":"Unclaimed",
+                "posX":(e.latlng.lng / HORIZONTAL_SCALE_FACTOR / 0.01), "posY":-(e.latlng.lat / VERTICAL_SCALE_FACTOR / 0.01),
+                "maxHolderLineLength":"0"};
+                currentYearJson.weeks[0].territoryChanges.push(newTerritoryChange);
+                setAlternator(!alternator); 
+                changeWeek(1);
+                setWeekTitle(String(Date.now()))
+            }
           }    
     }
 
     function dumpJSON(){
-      console.log(JSON.stringify(currentYearJson).replaceAll("{","\n{\n").replaceAll("[","[\n").replaceAll("}","\n}").replaceAll("]","\n]"));
+      console.log(JSON.stringify(currentYearJson).replaceAll("[","[\n").replaceAll("},","},\n").replaceAll("]","\n]"));
     }
 
     function redrawCanvasAccordingToWeek(week){
@@ -439,6 +480,17 @@ function App (props){
                           (a.x2/100) * canvas.width, (a.y2/100) * canvas.height);
         ctx.stroke();
         }
+      refreshImageOverlay();
+    }
+
+    function refreshImageOverlay(){
+      imageOverlay = <ImageOverlay
+                        notify={imageOverlay == null ? true : !imageOverlay.props.notify}
+                        url={canvas.toDataURL()}
+                        bounds={[[-VERTICAL_SCALE_FACTOR,0],[0,HORIZONTAL_SCALE_FACTOR]]}
+                        opacity={0.5}
+                        zIndex={10}
+                      />;
     }
 
     class Panel extends Component {
@@ -452,7 +504,7 @@ function App (props){
   
       render() {
         return (<div id="panel">
-          <h2 onClick={()=>{if(isReady){cycleYear();}}} className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", marginBottom:'0.5em',
+          <h2 onClick={(e)=>{if(isReady){cycleYear(e.shiftKey);}}} className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", marginBottom:'0.5em',
             color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
             {"Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")}
           </h2>
@@ -519,7 +571,7 @@ function App (props){
                                                     weeksScrollPosition = existingWeeksScrollElement == null ? 0 : existingWeeksScrollElement.scrollTop;
                                                     week != wk.weekNumber ? changeWeek(wk.weekNumber) : null;
                                                     }}>
-                                                {window.innerWidth > 1000 ? wk.title : "Wk"+wk.weekNumber}
+                                                {window.innerWidth > 1000 ? <WeekTitle number={wk.weekNumber} title={wk.title}/> : "Wk"+wk.weekNumber}
                                             </h4></>)}</>
               </div>
               {
@@ -550,12 +602,12 @@ function App (props){
       return (
       <Marker position={props.position} icon={
         divIcon({
-          html:"<div style=font-size:"+territoryFontSize+";>"+
+          html:"<div style='font-size:"+territoryFontSize+"; pointer-events:"+(EDIT_MODE ? "none" : "all")+"'>"+
           (
           props.t.useFlipside ? 
-          renderToStaticMarkup(<Territory tSize={territorySize} fadedOut={highlightedCategory == null ? false : (!props.t.flipside.includes(highlightedCategory))} t={props.t}/>)
+          renderToStaticMarkup(<Territory specialCSS={specialCSS} tSize={territorySize} fadedOut={highlightedCategory == null ? false : (!props.t.flipside.includes(highlightedCategory))} t={props.t}/>)
           :
-          renderToStaticMarkup(<Territory tSize={territorySize} fadedOut={highlightedCategory == null ? false : (!props.t.alignment.includes(highlightedCategory))} t={props.t}/>)
+          renderToStaticMarkup(<Territory specialCSS={specialCSS} tSize={territorySize} fadedOut={highlightedCategory == null ? false : (!props.t.alignment.includes(highlightedCategory))} t={props.t}/>)
           )
           +"</div>"
             })
@@ -574,7 +626,7 @@ function App (props){
         <div className="bigFlex">
         {window.innerWidth < 1000 ? <Panel/> : <></>}
           <div id="displayParent" style={{fontSize:windowFontSize, width:"100%", height:"100%"}}>
-              <h1 onClick={()=>{if(isReady){cycleYear();}}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
+              <h1 onClick={(e)=>{if(isReady){cycleYear(e.shiftKey);}}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
                 {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")) : "I recommend you use this on PC instead!"}
               </h1>
               <div onMouseEnter={() => {setHighlightedCategory(null)}} style={{height:'100%'}}>
@@ -586,12 +638,7 @@ function App (props){
                     ?                  
                     <>
                       <LayerGroup>
-                        <ImageOverlay
-                          url={canvas.toDataURL()}
-                          bounds={[[-VERTICAL_SCALE_FACTOR,0],[0,HORIZONTAL_SCALE_FACTOR]]}
-                          opacity={0.5}
-                          zIndex={10}
-                        />
+                        {imageOverlay}
                       </LayerGroup>
                       <LayerGroup>
                         {territories.map((t) => <>

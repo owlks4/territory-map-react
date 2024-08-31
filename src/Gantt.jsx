@@ -57,7 +57,7 @@ function Gantt(props) {
         {
             props.weeks.map((wk) =>  <>{
                 <span style={{width:((1/props.weeks.length) * 100) + "%",textAlign:"center"}}>
-                    {(props.weeks.indexOf(wk)) % 2 == 0 ? props.weeks.indexOf(wk)+1 : null}
+                    {(props.weeks.indexOf(wk)) % 2 == 0 || props.weeks.length < 6 ? props.weeks.indexOf(wk)+1 : null}
                 </span>
             } </>)
         }

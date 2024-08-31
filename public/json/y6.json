@@ -307,11 +307,16 @@
             "territoryChanges":[
                 {"territoryName":"Selly Oak", "alignment":"gangrel", "holder":"Fairfax", "maxHolderLineLength":"0","flipside":"crone"},
                 {"territoryName":"Ladywood", "alignment":"invictus", "holder":"Lord Marcae", "maxHolderLineLength":"12","flipside":"daeva"},
-                {"territoryName":"Kings Heath", "alignment":"ordo", "holder":"Ebony Webb", "maxHolderLineLength":"7.5","flipside":"ventrue"},
+                {"territoryName":"Kings Heath", "alignment":"ordo", "holder":"Ebony Webb", "maxHolderLineLength":"0","flipside":"ventrue"},
                 {"territoryName":"Kings Norton", "alignment":"ordo", "holder":"Chester Willard", "maxHolderLineLength":"0","flipside":"daeva"},
                 {"territoryName":"Acocks Green", "alignment":"enemy", "holder":"Langman and Co", "maxHolderLineLength":"0"},
                 {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"Lord Hawthorn", "maxHolderLineLength":"0","flipside":"invictus"}
             ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Finale",
+            "territoryChanges":[],
             "adjacencyChanges":[]
         }
     ]
