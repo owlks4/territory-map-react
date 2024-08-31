@@ -27,6 +27,14 @@ h5 {
     margin-bottom:0.5em;
 }
 
+.graph-button {
+    cursor:pointer;
+}
+
+.graph-button:hover {
+    filter: brightness(90%);
+}
+
 .gantt-area {
     display:flex;
     border:1px solid black;
@@ -518,6 +526,8 @@ hr {
 #displayParent {
     display:flex;
     flex-direction: column;
+    width:100%;
+    height:100%;
 }
 
 @media only screen and (max-width: 1000px) and (orientation: portrait)

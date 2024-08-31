@@ -7,9 +7,10 @@ import WeekTitle from "./WeekTitle.jsx";
 import { MapContainer, LayerGroup, Marker, useMapEvents, ImageOverlay, Popup} from 'react-leaflet'
 import { divIcon, CRS } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
+import LineGraph from './linegraph.jsx';
 
 const DEFAULT_YEAR = 6;
-const VALID_YEARS = [5,6,7];
+const VALID_YEARS = [3,5,6,7];
 const LOWEST_YEAR_IF_NOT_SHIFT_CLICKING = 6;
 
 let currentYearJson = null;
@@ -45,6 +46,8 @@ let isReady = false;
 
 let territorySize = "1em";
 
+let atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation = false;
+
 window.onresize = ()=>{
   if (window.innerWidth > window.innerHeight){
     document.body.style = "font-size:"+(window.innerWidth / 1920 * 16)+"px";
@@ -55,6 +58,66 @@ window.onresize = ()=>{
 
 if (window.innerWidth > window.innerHeight){
   window.onresize();
+}
+
+function isClan(input){
+  switch (input){
+    case "ventrue":
+    case "daeva":
+    case "mekhet":
+    case "gangrel":
+    case "nosferatu":
+      return true;
+    default:
+      return false;
+  }
+}
+
+function isCovenant(input){
+  switch (input){
+    case "invictus":
+    case "carthian":
+    case "crone":
+    case "lance":
+    case "ordo":
+      return true;
+    default:
+      return false;
+  }
+}
+
+function getAlignmentStatsForCurrentWeek(territories, clanOrCov){
+    let dict = {};
+
+    atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation = false;
+
+    for (let i = 0; i < territories.length; i++){
+      let t = territories[i];
+
+      let alignment = null;
+      if (t.useFlipside && t.flipside != null){
+        atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation = true;
+        alignment = t.flipside.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
+      } else {
+        alignment = t.alignment.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
+      }
+
+      if (clanOrCov == "holder"){ //sneaky hack lol
+        alignment[0] = t.holder;
+      }
+
+      if ((clanOrCov == "clan" && !isClan(alignment[0])) || (clanOrCov == "covenant" && !isCovenant(alignment[0])) || (clanOrCov == "holder" && (alignment[0] == "???" || alignment[0] == "Unclaimed" || alignment[0] == "Unassigned" || alignment[0] == "Undeclared" || alignment[0].toUpperCase() == "DESTABILISED" || alignment[0].toLowerCase().includes(" vs ")))){
+        continue;
+      }
+
+      if (alignment[0] in dict){
+        dict[alignment[0]]++;
+      } else {
+        dict[alignment[0]] = 1;
+      }
+    }
+
+    return dict;
 }
 
 function deepCopyJSON(json){
@@ -93,6 +156,22 @@ class Adjacency {
   }
 }
 
+const alignmentColors = {
+  "ventrue":"rgb(117,7,163)",
+  "daeva":"rgb(4,0,255)",
+  "mekhet":"rgb(49,189,223)",
+  "gangrel":"rgb(124,214,174)",
+  "nos":"rgb(130,117,91)",
+  "nosferatu":"rgb(130,117,91)",
+  "invictus":"rgb(232,19,19)",
+  "carthian":"rgb(239,95,158)",
+  "crone":"rgb(0,138,14)",
+  "lance":"rgb(224,193,16)",
+  "ordo":"rgb(250,120,17)",
+  "court":"rgb(16,113,229)",
+  "personal":"rgb(84,90,100)"
+}
+
 function App (props){
 
   let [territories,setTerritories] = useState([]);
@@ -106,9 +185,49 @@ function App (props){
   let [highlightedCategory,setHighlightedCategory] = useState(null);
   let [windowFontSize,setWindowFontSize] = useState("1em"); //this exists for mobile adjustment purposes
   let [alternator,setAlternator] = useState(false); //alternator only exists so that we can toggle its truthiness from elsewhere, which arbitrarily triggers a rerender on components that have 'alternator' as a prop
+  let [lineGraph,setLineGraph] = useState(null);
 
     function changeWindowFontSize(){
       setWindowFontSize((window.innerWidth < 1000 ? (window.innerWidth/2500) : (window.innerWidth/1920)) +"em");
+    }
+
+    function showLineGraph(territories, changeWeek, clanOrCov){
+
+      let datasets = {};
+      let labels = [];
+    
+      for (let i = 1; i <= currentYearJson.weeks.length; i++){ //the reason for the weird for loop definition is because weeks are 1-based rather than 0-based, and we're not actually iterating over the weeks array, but calling changeWeek(), which uses the 1-based index
+        changeWeek(i);
+        labels.push(i);
+        let dict = getAlignmentStatsForCurrentWeek(territories, clanOrCov);
+        let existingAlignments = Object.keys(datasets);
+        existingAlignments.forEach(existing => {
+          if (!(existing in dict)){
+            datasets[existing].data.push(0);
+          }
+        })
+        Object.keys(dict).forEach((alignment)=>{
+          if (!existingAlignments.includes(alignment)){
+            datasets[alignment] = {
+              label: alignment,
+              data: i > 1 ? Array(i-1).fill(0) : [], //since this faction only just emerged, make sure all previous weeks where it wasn't present have the value 0
+              fill: false,
+              borderColor: alignmentColors[alignment],
+              backgroundColor: alignmentColors[alignment],
+              tension: 0.1
+            }
+          }
+          datasets[alignment].data.push(dict[alignment]);
+        });
+      }
+    
+      const stats = {
+        labels: labels,
+        datasets:Object.keys(datasets).map((key)=>datasets[key])
+      };
+
+      let title = "Weekly territory ownership by "+ clanOrCov + (year == DEFAULT_YEAR ? "" : " (Y"+year+")");
+      setLineGraph(<LineGraph setLineGraph={setLineGraph} displayLegend={clanOrCov != "holder"} stats={stats} title={atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation ? [title,"⚠️ includes user-flipped territories"] : title}/>);
     }
 
     useEffect(() => { //Only runs after initial render
@@ -193,7 +312,6 @@ function App (props){
     }
 
     function updatePrecedence(){
-      let dict = {};
       let highestClan = DEFAULT_PRECEDENCE;
       let highestClanNumber = 0;
       let maxConcurrentClans = 0;
@@ -202,22 +320,7 @@ function App (props){
       let highestCovenantNumber = 0;
       let maxConcurrentCovenants = 0;
 
-      for (let i = 0; i < territories.length; i++){
-        let t = territories[i];
-
-        let alignment = null;
-        if (t.useFlipside && t.flipside != null){
-          alignment = t.flipside.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
-        } else {
-          alignment = t.alignment.split(" "); //in case the territory is contested, because it would be (e.g.) "daeva contested" and thus needs to count as just "daeva"
-        }
-
-        if (alignment[0] in dict){
-          dict[alignment[0]]++;
-        } else {
-          dict[alignment[0]] = 1;
-        }
-      }
+      let dict = getAlignmentStatsForCurrentWeek(territories);
 
       for (let i = 0; i < Object.keys(dict).length; i++){
         let key = Object.keys(dict)[i];
@@ -258,7 +361,13 @@ function App (props){
       <div style = {screen.orientation.type.includes("portrait") ? {maxHeight:"4em", overflowY:"auto"} : {}} onMouseEnter={() => {setHighlightedCategory(null)}}>
         <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
           <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-            Clan precedence:
+            <span>Clan precedence</span>
+            {
+              window.innerWidth < 1000 ?
+              <></>
+              :
+              <span className="graph-button" title="View as a graph" onClick={(e) => {showLineGraph(territories, changeWeek, e.shiftKey ? "holder" : "clan")}}> 📈</span>
+            }            
           </h2>
           <h2 style={{marginTop: "0.15em", marginRight:"0em", marginBottom: "1em", color:"black", whiteSpace:"break-spaces",
             width:"fit-content", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
@@ -267,7 +376,13 @@ function App (props){
         </div>
         <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
           <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:0, fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-            Covenant precedence:
+          <span>Covenant precedence</span>
+            {
+              window.innerWidth < 1000 ?
+              <></>
+              :
+              <span className="graph-button" title="View as a graph" onClick={(e)=>{showLineGraph(territories, changeWeek, e.shiftKey ? "holder" : "covenant")}}> 📈</span>
+            }  
           </h2>
           <h2 style={{marginTop: "0.15em", marginRight:"0em", color:"black", width:"fit-content", whiteSpace:"break-spaces", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
             {covenantPrecedence}
@@ -301,32 +416,6 @@ function App (props){
         input = "lance";
       }
       return input;
-    }
-
-    function isClan(input){
-      switch (input){
-        case "ventrue":
-        case "daeva":
-        case "mekhet":
-        case "gangrel":
-        case "nosferatu":
-          return true;
-        default:
-          return false;
-      }
-    }
-
-    function isCovenant(input){
-      switch (input){
-        case "invictus":
-        case "carthian":
-        case "crone":
-        case "lance":
-        case "ordo":
-          return true;
-        default:
-          return false;
-      }
     }
 
       function getTerritoryByName(territoryName){
@@ -625,7 +714,7 @@ function App (props){
     <>
         <div className="bigFlex">
         {window.innerWidth < 1000 ? <Panel/> : <></>}
-          <div id="displayParent" style={{fontSize:windowFontSize, width:"100%", height:"100%"}}>
+          <div id="displayParent" style={{fontSize:windowFontSize}}>
               <h1 onClick={(e)=>{if(isReady){cycleYear(e.shiftKey);}}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
                 {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")) : "I recommend you use this on PC instead!"}
               </h1>
@@ -654,6 +743,7 @@ function App (props){
                     </Marker>
                   }
                 </MapContainer>
+                {lineGraph == null ? <></> : lineGraph}
               </div>
           </div>
           {window.innerWidth >= 1000 ? <Panel/> : <></>}
