@@ -436,16 +436,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"Jumping the Shark",
-            "territoryChanges":[
-                {"territoryName":"Harborne","alignment":"daeva","holder":"Delilah Cain","maxHolderLineLength":15,"flipside":"lance"},
-                {"territoryName":"Yardley","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":15,"flipside":"gangrel"},
-                {"territoryName":"Fordbridge","alignment":"ordo","holder":"Theodor Christmas","maxHolderLineLength":0,"flipside":"mekhet"}
-            ],
-            "adjacencyChanges":[]
-        },
-        {
-            "title":"Lord Thomas Grey, Master of Heralsherince",
+            "title":"",
             "territoryChanges":[
                 {"territoryName":"Yew Tree","alignment":"carthian contested","holder":"Destabilised","maxHolderLineLength":15,"flipside":"carthian contested"},
                 {"territoryName":"West Bromwich","alignment":"mekhet","holder":"To be assigned","maxHolderLineLength":12,"flipside":"mekhet"},
