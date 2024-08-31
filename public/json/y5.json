@@ -40,7 +40,7 @@
     {"territoryName":"Hopwood","alignment":"enemy","holder":"???","posX":35.30649038461539,"posY":88.12807394116798,"maxHolderLineLength":0,"flipside":"enemy"},
     {"territoryName":"Northfield","alignment":"unclaimed","holder":"Available","posX":35,"posY":79.5791802122716,"maxHolderLineLength":0,"flipside":"unclaimed"},
     {"territoryName":"Rubery","alignment":"enemy","holder":"???","posX":25.916466346153843,"posY":82.38810243748041,"maxHolderLineLength":0,"flipside":"enemy"},
-    {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baron Jonah Redwyn (NPC)","posX":22.310697115384613,"posY":89.59359858040736,"maxHolderLineLength":15,"flipside":"invictus"},
+    {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baron Jonah Redwyn (NPC)","posX":22.310697115384613,"posY":90.5,"maxHolderLineLength":15,"flipside":"invictus"},
     {"territoryName":"Frankley","alignment":"daeva","holder":"Prof. Hismyonie Kallis (NPC)","posX":25.465745192307693,"posY":74.44984397493377,"maxHolderLineLength":18,"flipside":"daeva"},
     {"territoryName":"Bartley Green","alignment":"enemy","holder":"???","posX":33.12800480769231,"posY":68.34349131143637,"maxHolderLineLength":0,"flipside":"enemy"},
     {"territoryName":"Selly Oak","alignment":"enemy","holder":"???","posX":39,"posY":59.5,"maxHolderLineLength":0,"flipside":"enemy"},
@@ -100,7 +100,7 @@
     {"adjacencyName":"ADJ_WYT_WEA","x1":51.07846467391305,"y1":90.87568487862707,"x2":44.28498641304348,"y2":95.23592347471117,"sideOrTop1":"side","sideOrTop2":"side"},
     {"adjacencyName":"ADJ_WEA_HOP","x1":42.81310589215425,"y1":94.90522247366717,"x2":35.637557288911005,"y2":88.225054869422,"sideOrTop1":"side","sideOrTop2":"side"},
     {"adjacencyName":"ADJ_HOP_MAR","x1":34.25648935690603,"y1":87.99667307098626,"x2":23.02780660538731,"y2":89.65244110964532,"sideOrTop1":"side","sideOrTop2":"side"},
-    {"adjacencyName":"ADJ_MAR_RUB","x1":22.09708691207961,"y1":88.39634121824882,"x2":25.36961744661314,"y2":82.57260535813765,"sideOrTop1":"side","sideOrTop2":"side"},
+    {"adjacencyName":"ADJ_MAR_RUB","x1":22.09708691207961,"y1":88.39634121824882,"x2":25.36961744661314,"y2":82.57260535813765,"sideOrTop1":"top","sideOrTop2":"top"},
     {"adjacencyName":"ADJ_RUB_HOP","x1":26.09017462852878,"y1":82.45841445891978,"x2":34.10637327734027,"y2":86.96895497802547,"sideOrTop1":"side","sideOrTop2":"side"},
     {"adjacencyName":"ADJ_RUB_NTH","x1":26.270313924007688,"y1":81.77326906361257,"x2":34.91700010699536,"y2":78.80430568394806,"sideOrTop1":"side","sideOrTop2":"side"},
     {"adjacencyName":"ADJ_NTH_BTG","x1":35.307301913866326,"y1":78.57592388551234,"x2":32.9654910726405,"y2":68.86969745199374,"sideOrTop1":"side","sideOrTop2":"side"},
@@ -201,7 +201,7 @@
         {
         "title":"The Curious Incident of the Canal in the Night Time",
         "territoryChanges":[
-            {"territoryName":"Jewellery Quarter","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":0,"flipside":"invictus"},
+            {"territoryName":"Jewellery Quarter","alignment":"gangrel","holder":"Cheri Von Varley","maxHolderLineLength":0,"flipside":"invictus"},
             {"territoryName":"Hopwood","alignment":"invictus","holder":"???","maxHolderLineLength":0,"flipside":"invictus"}
 
             ],
@@ -210,21 +210,21 @@
         {
         "title":"Much Ado about Nos-Things",
         "territoryChanges":[
-            {"territoryName":"Lozells","alignment":"invictus","holder":"Cheri von Varley","maxHolderLineLength":10,"flipside":"gangrel"},
+            {"territoryName":"Lozells","alignment":"invictus","holder":"Cheri Von Varley","maxHolderLineLength":10,"flipside":"gangrel"},
             {"territoryName":"Perry Barr","alignment":"carthian","holder":"Martin Skidalsky","maxHolderLineLength":0,"flipside":"nosferatu"},
             {"territoryName":"Handsworth","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":3,"flipside":"lance"},
-            {"territoryName":"Summerfield","alignment":"invictus","holder":"Lady Everglade","maxHolderLineLength":3,"flipside":"nosferatu"},
+            {"territoryName":"Summerfield","alignment":"invictus","holder":"Lady Hortensia Everglade","maxHolderLineLength":3,"flipside":"nosferatu"},
             {"territoryName":"Bearwood","alignment":"lance","holder":"The Bishop","maxHolderLineLength":0,"flipside":"lance"},
             {"territoryName":"Black Heath","alignment":"lance","holder":"Layla Finch","maxHolderLineLength":0,"flipside":"nosferatu"},
-            {"territoryName":"Aston","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
+            {"territoryName":"Aston","alignment":"ventrue","holder":"Lady Alecto Von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
             {"territoryName":"City Centre","alignment":"crone","holder":"Old Tom","maxHolderLineLength":0,"flipside":"ventrue"},
             {"territoryName":"Small Heath","alignment":"carthian","holder":"Sabine Sabot","maxHolderLineLength":0,"flipside":"nos"},
             {"territoryName":"Edgbaston","alignment":"carthian","holder":"Mrs Sirinis","maxHolderLineLength":0,"flipside":"mekhet"},
             {"territoryName":"Balsall Heath","alignment":"crone","holder":"Koronis","maxHolderLineLength":0,"flipside":"mekhet"},
-            {"territoryName":"Hall Green","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":10,"flipside":"invictus"},
+            {"territoryName":"Hall Green","alignment":"gangrel","holder":"Cheri Von Varley","maxHolderLineLength":10,"flipside":"invictus"},
             {"territoryName":"Kings Heath","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":3,"flipside":"gangrel"},
             {"territoryName":"Northfield","alignment":"daeva","holder":"Delilah Cain","maxHolderLineLength":3,"flipside":"lance"},
-            {"territoryName":"Rubery","alignment":"invictus","holder":"Thomas Grey","maxHolderLineLength":0,"flipside":"daeva"},
+            {"territoryName":"Rubery","alignment":"invictus","holder":"Lord Grey","maxHolderLineLength":0,"flipside":"daeva"},
             {"territoryName":"Hopwood","alignment":"invictus","holder":"Lady Geneva Clarke","maxHolderLineLength":0,"flipside":"mekhet"},
             {"territoryName":"Kings Norton","alignment":"invictus","holder":"Matron Winthrope","maxHolderLineLength":0,"flipside":"nos"},
             {"territoryName":"Sheldon","alignment":"nos","holder":"Martin Skidalsky","maxHolderLineLength":0,"flipside":"carthian"},
@@ -239,14 +239,14 @@
             {"territoryName":"West Bromwich","alignment":"enemy contested","holder":"Gangrel vs Mekhet","maxHolderLineLength":9,"flipside":null},
             {"territoryName":"Hamstead","alignment":"carthian","holder":"Lance Drachen","maxHolderLineLength":0,"flipside":"mekhet"},
             {"territoryName":"Perry Barr","alignment":"carthian","holder":"Lance Drachen","maxHolderLineLength":3,"flipside":"mekhet"},
-            {"territoryName":"Witton","alignment":"ventrue","holder":"Lord Throckmorton","maxHolderLineLength":3,"flipside":"invictus"},
+            {"territoryName":"Witton","alignment":"ventrue","holder":"Lord Mortimer Throckmorton","maxHolderLineLength":3,"flipside":"invictus"},
             {"territoryName":"Lozells","alignment":"invictus","holder":"Lord London","maxHolderLineLength":3,"flipside":"invictus"},
-            {"territoryName":"Bearwood","alignment":"lance","holder":"Theophania Learie","maxHolderLineLength":3,"flipside":"mekhet"},
+            {"territoryName":"Bearwood","alignment":"lance","holder":"Theophania","maxHolderLineLength":0,"flipside":"mekhet"},
             {"territoryName":"Selly Oak","alignment":"ordo","holder":"Tia","maxHolderLineLength":3,"flipside":"mekhet"},
             {"territoryName":"Balsall Heath","alignment":"ordo","holder":"Bartholomew Torch","maxHolderLineLength":3,"flipside":"gangrel"},
             {"territoryName":"Kings Heath","alignment":"crone","holder":"Ms Prosperity Virginia","maxHolderLineLength":16,"flipside":"daeva"},
             {"territoryName":"Digbeth","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":3,"flipside":"lance"},
-            {"territoryName":"Druid's Heath","alignment":"invictus","holder":"Lord Throckmorton","maxHolderLineLength":3,"flipside":"ventrue"},
+            {"territoryName":"Druid's Heath","alignment":"invictus","holder":"Lord Mortimer Throckmorton","maxHolderLineLength":3,"flipside":"ventrue"},
             {"territoryName":"Wythall","alignment":"mekhet","holder":"Koronis","maxHolderLineLength":3,"flipside":"crone"},
             {"territoryName":"Catherine-de-Barnes","alignment":"nos","holder":"Milo Longbridge","maxHolderLineLength":0,"flipside":"ordo"}
             ],
@@ -257,7 +257,7 @@
             "territoryChanges":[
                 {"territoryName":"West Bromwich","alignment":"mekhet","holder":"Lady Geneva Clarke","maxHolderLineLength":12,"flipside":"invictus"},
                 {"territoryName":"Hamstead","alignment":"carthian","holder":"Cole Davidson","maxHolderLineLength":0,"flipside":"ventrue"},
-                {"territoryName":"Saltley","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
+                {"territoryName":"Saltley","alignment":"ventrue","holder":"Lady Alecto Von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
                 {"territoryName":"City Centre","alignment":"crone","holder":"Ms Prosperity Virginia","maxHolderLineLength":1,"flipside":"daeva"},
                 {"territoryName":"Stirchley","alignment":"daeva","holder":"Ms Prosperity Virginia","maxHolderLineLength":12,"flipside":"crone"},
                 {"territoryName":"Wythall","alignment":"crone","holder":"Koronis","maxHolderLineLength":3,"flipside":"mekhet"},
@@ -284,9 +284,9 @@
             "title":"Old Tom who Cried Wyrm",
             "territoryChanges":[
                 {"territoryName":"Kingstanding","alignment":"carthian","holder":"Mrs Sirinis","maxHolderLineLength":0,"flipside":"mekhet"},
-                {"territoryName":"Short Heath","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Short Heath","alignment":"ventrue","holder":"Lady Alecto Von Stacke","maxHolderLineLength":0,"flipside":"invictus"},
                 {"territoryName":"Lozells","alignment":"mekhet","holder":"Arthur Pendlebury (NPC)","maxHolderLineLength":3,"flipside":"mekhet"},
-                {"territoryName":"Bearwood","alignment":"mekhet","holder":"Theophania Learie","maxHolderLineLength":3,"flipside":"lance"},
+                {"territoryName":"Bearwood","alignment":"mekhet","holder":"Theophania","maxHolderLineLength":0,"flipside":"lance"},
                 {"territoryName":"Halesowen","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":0,"flipside":"lance"},
                 {"territoryName":"Edgbaston","alignment":"mekhet","holder":"Mrs Sirinis","maxHolderLineLength":0,"flipside":"carthian"},
                 {"territoryName":"Sparkbrook","alignment":"mekhet","holder":"Tia","maxHolderLineLength":0,"flipside":"ordo"},
@@ -313,7 +313,7 @@
                 {"territoryName":"Moseley","alignment":"enemy contested","holder":"Carthian vs Daeva","maxHolderLineLength":0,"flipside":"enemy contested"},
                 {"territoryName":"Tyseley","alignment":"gangrel","holder":"Paula Brunyan","maxHolderLineLength":0,"flipside":"ordo"},
                 {"territoryName":"Birmingham Airport","alignment":"enemy ordo-contesting","holder":"Contested","maxHolderLineLength":0,"flipside":"enemy ordo-outline"},
-                {"territoryName":"Short Heath","alignment":"ventrue","holder":"Althea St Laurence","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Short Heath","alignment":"ventrue","holder":"Madame St Laurence","maxHolderLineLength":0,"flipside":"invictus"},
                 {"territoryName":"Erdington","alignment":"ventrue","holder":"Dahlia Jones","maxHolderLineLength":0,"flipside":"personal"}
                 ],
             "adjacencyChanges":[]
@@ -339,15 +339,15 @@
                 {"territoryName":"Yew Tree","alignment":"carthian","holder":"Lance Drachen","maxHolderLineLength":0,"flipside":"mekhet"},
                 {"territoryName":"Ward End","alignment":"carthian","holder":"Sabine Sabot","maxHolderLineLength":0,"flipside":"nos"},
                 {"territoryName":"Lozells","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":3,"flipside":"lance"},
-                {"territoryName":"Summerfield","alignment":"lance","holder":"Theophania","maxHolderLineLength":3,"flipside":"mekhet"},
+                {"territoryName":"Summerfield","alignment":"lance","holder":"Theophania","maxHolderLineLength":0,"flipside":"mekhet"},
                 {"territoryName":"Witton","alignment":"invictus","holder":"Lord Mortimer Throckmorton","maxHolderLineLength":15,"flipside":"ventrue"},
-                {"territoryName":"Halesowen","alignment":"invictus","holder":"Lady Everglade","maxHolderLineLength":3,"flipside":"nos"},
+                {"territoryName":"Halesowen","alignment":"invictus","holder":"Lady Hortensia Everglade","maxHolderLineLength":3,"flipside":"nos"},
                 {"territoryName":"Quinton","alignment":"lance","holder":"Layla Finch","maxHolderLineLength":3,"flipside":"nos"},
                 {"territoryName":"Bournville","alignment":"daeva","holder":"Delilah Cain","maxHolderLineLength":3,"flipside":"lance"},
-                {"territoryName":"Northfield","alignment":"daeva","holder":"Thomas Grey","maxHolderLineLength":3,"flipside":"invictus"},
+                {"territoryName":"Northfield","alignment":"daeva","holder":"Lord Grey","maxHolderLineLength":3,"flipside":"invictus"},
                 {"territoryName":"Blossomfield","alignment":"nos","holder":"Martin Skidalsky","maxHolderLineLength":3,"flipside":"carthian"},
                 {"territoryName":"Hall Green","alignment":"gangrel","holder":"Paula Brunyan","maxHolderLineLength":3,"flipside":"ordo"},
-                {"territoryName":"Tyseley","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":0,"flipside":"invictus"}
+                {"territoryName":"Tyseley","alignment":"gangrel","holder":"Cheri Von Varley","maxHolderLineLength":0,"flipside":"invictus"}
                 ],
             "adjacencyChanges":[]
         },
@@ -367,8 +367,8 @@
             "territoryChanges":[
                 {"territoryName":"Stone Cross","alignment":"enemy gangrel-contesting","holder":"Contested","maxHolderLineLength":12,"flipside":"enemy gangrel-contesting"},
                 {"territoryName":"Witton","alignment":"ventrue","holder":"Lord Mortimer Throckmorton","maxHolderLineLength":15,"flipside":"invictus"},
-                {"territoryName":"Gravelly Hill","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
-                {"territoryName":"Rowley Regis","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Gravelly Hill","alignment":"ventrue","holder":"Lady Alecto Von Stacke","maxHolderLineLength":12,"flipside":"invictus"},
+                {"territoryName":"Rowley Regis","alignment":"gangrel","holder":"Cheri Von Varley","maxHolderLineLength":0,"flipside":"invictus"},
                 {"territoryName":"Yardley Wood","alignment":"invictus","holder":"Sir Isaac Blackthorn (NPC)","maxHolderLineLength":12,"flipside":"invictus"},
                 {"territoryName":"Cheswick Green","alignment":"crone","holder":"Old Tom","maxHolderLineLength":0,"flipside":"ventrue"},
                 {"territoryName":"Weatheroak","alignment":"personal","holder":"Harper Marigold","maxHolderLineLength":3,"flipside":"personal"}
@@ -404,22 +404,23 @@
                 {"territoryName":"Hamstead","alignment":"mekhet","holder":"Mrs Sirinis","maxHolderLineLength":12,"flipside":"carthian"},
                 {"territoryName":"Lozells","alignment":"mekhet contested","holder":"Destabilised","maxHolderLineLength":12,"flipside":"mekhet contested"},
                 {"territoryName":"Bartley Green","alignment":"ordo","holder":"Duncan Caterra","maxHolderLineLength":12,"flipside":"daeva"},
-                {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baroness von Stacke","maxHolderLineLength":15,"flipside":"ventrue"}
+                {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baroness Alecto Von Stacke","maxHolderLineLength":18,"flipside":"ventrue"},
+                {"territoryName":"Gravelly Hill","alignment":"ventrue","holder":"Baroness Alecto Von Stacke","maxHolderLineLength":18,"flipside":"invictus"}
                 ],
             "adjacencyChanges":[]
         },
         {
             "title":"A Change of Heart",
             "territoryChanges":[
-                {"territoryName":"Lozells","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":12,"flipside":"invictus"}               
+                {"territoryName":"Lozells","alignment":"gangrel","holder":"Cheri Von Varley","maxHolderLineLength":12,"flipside":"invictus"}               
                 ],
             "adjacencyChanges":[]
         },
         {
             "title":"Standing on the Precipice",
             "territoryChanges":[
-                {"territoryName":"Marlbrook","alignment":"ventrue","holder":"Alecto von Stacke","maxHolderLineLength":15,"flipside":"invictus"},
-                {"territoryName":"Rubery","alignment":"invictus","holder":"Baroness von Stacke","maxHolderLineLength":15,"flipside":"ventrue"},
+                {"territoryName":"Marlbrook","alignment":"ventrue","holder":"Baroness Alecto Von Stacke","maxHolderLineLength":18,"flipside":"invictus"},
+                {"territoryName":"Rubery","alignment":"invictus","holder":"Baroness Alecto Von Stacke","maxHolderLineLength":18,"flipside":"ventrue"},
                 {"territoryName":"Druid's Heath","alignment":"crone","holder":"Thomas Carver","maxHolderLineLength":15,"flipside":"ventrue"},
                 {"territoryName":"Tidbury Green","alignment":"crone","holder":"Ms Prosperity Virginia","maxHolderLineLength":15,"flipside":"daeva"},
                 {"territoryName":"Kings Heath","alignment":"invictus","holder":"Lord Harbour","maxHolderLineLength":15,"flipside":"mekhet"}
@@ -443,7 +444,7 @@
                 {"territoryName":"Kingstanding","alignment":"carthian","holder":"To be assigned","maxHolderLineLength":12,"flipside":"carthian"},
                 {"territoryName":"Ward End","alignment":"carthian contested","holder":"Destabilised","maxHolderLineLength":15,"flipside":"carthian contested"},
                 {"territoryName":"Moseley","alignment":"gangrel","holder":"Maxie","maxHolderLineLength":15,"flipside":"carthian"},
-                {"territoryName":"Kings Norton","alignment":"invictus","holder":"Lord Throckmorton","maxHolderLineLength":15,"flipside":"ventrue"},
+                {"territoryName":"Kings Norton","alignment":"invictus","holder":"Lord Mortimer Throckmorton","maxHolderLineLength":15,"flipside":"ventrue"},
                 {"territoryName":"Hopwood","alignment":"invictus","holder":"Mr Lopez","maxHolderLineLength":15,"flipside":"ventrue"}
             ],
             "adjacencyChanges":[]
@@ -456,7 +457,7 @@
                 {"territoryName":"West Bromwich","alignment":"mekhet","holder":"Harper Marigold","maxHolderLineLength":0,"flipside":"lance"},
                 {"territoryName":"Bearwood","alignment":"lance","holder":"To be assigned","maxHolderLineLength":9,"flipside":null},
                 {"territoryName":"Blossomfield","alignment":"personal","holder":"Crumpet","maxHolderLineLength":9,"flipside":null},
-                {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baroness von Stacke","maxHolderLineLength":15,"flipside":"ventrue"}
+                {"territoryName":"Marlbrook","alignment":"invictus","holder":"Baroness Alecto Von Stacke","maxHolderLineLength":18,"flipside":"ventrue"}
             ],
             "adjacencyChanges":[]
         },
@@ -474,8 +475,8 @@
         {
             "title":"The Hours Creep on Apace",
             "territoryChanges":[
-                {"territoryName":"Handsworth","alignment":"gangrel","holder":"Cheri von Varley","maxHolderLineLength":0,"flipside":"invictus"},
-                {"territoryName":"Lozells","alignment":"personal","holder":"Cheri von Varley","maxHolderLineLength":12,"flipside":"personal"},
+                {"territoryName":"Handsworth","alignment":"gangrel","holder":"Cheri Von Varley","maxHolderLineLength":0,"flipside":"invictus"},
+                {"territoryName":"Lozells","alignment":"personal","holder":"Cheri Von Varley","maxHolderLineLength":12,"flipside":"personal"},
                 {"territoryName":"Halesowen","alignment":"nos","holder":"Hortensia Everglade","maxHolderLineLength":12,"flipside":"nos"},
                 {"territoryName":"Harborne","alignment":"lance","holder":"Delilah Cain","maxHolderLineLength":12,"flipside":"daeva"},
                 {"territoryName":"Moseley","alignment":"enemy contested","holder":"Carthians vs ???","maxHolderLineLength":0,"flipside":"enemy contested"}
@@ -485,9 +486,9 @@
         {
             "title":"Finale",
             "territoryChanges":[
-                {"territoryName":"Halesowen","alignment":"invictus","holder":"Baroness von Stacke","maxHolderLineLength":12,"flipside":"nos"},
+                {"territoryName":"Halesowen","alignment":"invictus","holder":"Baroness Alecto Von Stacke","maxHolderLineLength":18,"flipside":"ventrue"},
                 {"territoryName":"Moseley","alignment":"carthian","holder":"Maxie","maxHolderLineLength":12,"flipside":"gangrel"},
-                {"territoryName":"Bearwood","alignment":"lance","holder":"Theophania","maxHolderLineLength":12,"flipside":"mekhet"},
+                {"territoryName":"Bearwood","alignment":"lance","holder":"Theophania","maxHolderLineLength":0,"flipside":"mekhet"},
                 {"territoryName":"Northfield","alignment":"enemy blighted","holder":"Blighted","maxHolderLineLength":12,"flipside":null},
                 {"territoryName":"Yardley Wood","alignment":"personal","holder":"Sir Isaac Blackthorn (NPC)","maxHolderLineLength":12,"flipside":null}
             ],

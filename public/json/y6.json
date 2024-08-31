@@ -118,7 +118,7 @@
                 {"territoryName":"Acocks Green", "alignment":"gangrel", "holder":"Lykofron", "maxHolderLineLength":"0", "flipside":"crone"},
                 {"territoryName":"Kings Heath", "alignment":"ordo", "holder":"Chester Willard", "maxHolderLineLength":"0", "flipside":"daeva"},
                 {"territoryName":"Bournville", "alignment":"crone", "holder":"Keir of Haworth", "maxHolderLineLength":"0", "flipside":"ventrue"},
-                {"territoryName":"Quinton", "alignment":"daeva", "holder":"Acacia Smith", "maxHolderLineLength":"0", "flipside":"carthian"},
+                {"territoryName":"Quinton", "alignment":"daeva", "holder":"Kai Smith", "maxHolderLineLength":"0", "flipside":"carthian"},
                 {"territoryName":"Weoley", "alignment":"carthian", "holder":"Cora Gettins","maxHolderLineLength":"0", "flipside":"daeva"}
             ],
             "adjacencyChanges":[]
@@ -129,7 +129,7 @@
                 {"territoryName":"Lozells", "alignment":"invictus", "holder":"Mr Hawthorn", "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Ward End", "alignment":"enemy contested", "holder":"Lance vs Ventrue", "maxHolderLineLength":"9"},
                 {"territoryName":"Ladywood", "alignment":"invictus", "holder":"Madame Lee", "maxHolderLineLength":"0", "flipside":"ventrue"},
-                {"territoryName":"Selly Oak", "alignment":"carthian", "holder":"Acacia Smith", "maxHolderLineLength":"0","flipside":"daeva"},
+                {"territoryName":"Selly Oak", "alignment":"carthian", "holder":"Kai Smith", "maxHolderLineLength":"0","flipside":"daeva"},
                 {"territoryName":"Moseley", "alignment":"crone", "holder":"Fang",  "maxHolderLineLength":"0","flipside":"gangrel"},
                 {"territoryName":"Yardley Wood", "alignment":"gangrel", "holder":"Alice Maddocks", "maxHolderLineLength":"6","flipside":"crone"}
             ],
@@ -164,7 +164,7 @@
                 {"territoryName":"Bordesley Green", "alignment":"ventrue", "holder":"Lady Carrington", "maxHolderLineLength":"0","flipside":"invictus"},
                 {"territoryName":"Selly Oak", "alignment":"carthian", "holder":"Levi Rose", "maxHolderLineLength":"0","flipside":"daeva"},
                 {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"Lykofron", "maxHolderLineLength":"0","flipside":"crone"},
-                {"territoryName":"Northfield", "alignment":"daeva", "holder":"Acacia Smith", "maxHolderLineLength":"0","flipside":"carthian"}
+                {"territoryName":"Northfield", "alignment":"daeva", "holder":"Kai Smith", "maxHolderLineLength":"0","flipside":"carthian"}
             ],
             "adjacencyChanges":[]
         },
@@ -229,7 +229,7 @@
             "title":"Raeden Shadow Legends",
             "territoryChanges":[
                 {"territoryName":"Erdington", "alignment":"lance", "holder":"Father Ward", "maxHolderLineLength":"0","flipside":"gangrel"},
-                {"territoryName":"Hodge Hill", "alignment":"personal", "holder":"Lucy Dee", "maxHolderLineLength":"0"},
+                {"territoryName":"Hodge Hill", "alignment":"personal", "holder":"Lady Dee", "maxHolderLineLength":"0"},
                 {"territoryName":"Sparkbrook", "alignment":"carthian contested", "holder":"DESTABILISED", "maxHolderLineLength":"0"},
                 {"territoryName":"Yardley", "alignment":"personal", "holder":"Isaac Sterling", "maxHolderLineLength":"6"}
             ],
@@ -247,8 +247,8 @@
             "title":"Be careful what you wish for...",
             "territoryChanges":[
                 {"territoryName":"Selly Oak", "alignment":"daeva contested", "holder":"Destabilised", "maxHolderLineLength":"0"},
-                {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Ethel", "maxHolderLineLength":"12","flipside":"crone"},
-                {"territoryName":"Yardley", "alignment":"mekhet", "holder":"Oswald Numeon", "maxHolderLineLength":"6","flipside":"invictus"},
+                {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Ethel Cabbage", "maxHolderLineLength":"12","flipside":"crone"},
+                {"territoryName":"Yardley", "alignment":"mekhet", "holder":"Mr Numeon", "maxHolderLineLength":"6","flipside":"invictus"},
                 {"territoryName":"Moseley", "alignment":"gangrel", "holder":"Fang", "maxHolderLineLength":"0","flipside":"crone"}
             ],
             "adjacencyChanges":[]
@@ -305,7 +305,7 @@
         {
             "title":"Fight Night",
             "territoryChanges":[
-                {"territoryName":"Selly Oak", "alignment":"gangrel", "holder":"Fairfax", "maxHolderLineLength":"0","flipside":"crone"},
+                {"territoryName":"Selly Oak", "alignment":"gangrel", "holder":"Stargazer Fairfax", "maxHolderLineLength":"0","flipside":"crone"},
                 {"territoryName":"Ladywood", "alignment":"invictus", "holder":"Lord Marcae", "maxHolderLineLength":"12","flipside":"daeva"},
                 {"territoryName":"Kings Heath", "alignment":"ordo", "holder":"Ebony Webb", "maxHolderLineLength":"0","flipside":"ventrue"},
                 {"territoryName":"Kings Norton", "alignment":"ordo", "holder":"Chester Willard", "maxHolderLineLength":"0","flipside":"daeva"},

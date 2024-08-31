@@ -7,10 +7,11 @@ import WeekTitle from "./WeekTitle.jsx";
 import { MapContainer, LayerGroup, Marker, useMapEvents, ImageOverlay, Popup} from 'react-leaflet'
 import { divIcon, CRS } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
-import LineGraph from './linegraph.jsx';
+import LineGraph from './LineGraph.jsx';
+import detitle from './detitle.jsx';
 
 const DEFAULT_YEAR = 6;
-const VALID_YEARS = [3,5,6,7];
+const VALID_YEARS = [5,6,7];
 const LOWEST_YEAR_IF_NOT_SHIFT_CLICKING = 6;
 
 let currentYearJson = null;
@@ -103,10 +104,10 @@ function getAlignmentStatsForCurrentWeek(territories, clanOrCov){
       }
 
       if (clanOrCov == "holder"){ //sneaky hack lol
-        alignment[0] = t.holder;
+        alignment[0] = detitle(t.holder);
       }
 
-      if ((clanOrCov == "clan" && !isClan(alignment[0])) || (clanOrCov == "covenant" && !isCovenant(alignment[0])) || (clanOrCov == "holder" && (alignment[0] == "???" || alignment[0] == "Unclaimed" || alignment[0] == "Unassigned" || alignment[0] == "Undeclared" || alignment[0].toUpperCase() == "DESTABILISED" || alignment[0].toLowerCase().includes(" vs ")))){
+      if ((clanOrCov == "clan" && !isClan(alignment[0])) || (clanOrCov == "covenant" && !isCovenant(alignment[0])) || (clanOrCov == "holder" && (alignment[0] == "???" || alignment[0] == "Unclaimed" || alignment[0] == "Unassigned" || alignment[0].includes("NPC") || alignment[0] == "To be assigned" || alignment[0] == "Available" || alignment[0] == "Undeclared" || alignment[0] == "Praxis" || alignment[0] == "Contested" || alignment[0] == "Blighted" || alignment[0].toUpperCase() == "DESTABILISED" || alignment[0].toLowerCase().includes(" vs ")))){
         continue;
       }
 
@@ -156,7 +157,7 @@ class Adjacency {
   }
 }
 
-const alignmentColors = {
+const ALIGNMENT_COLOURS = {
   "ventrue":"rgb(117,7,163)",
   "daeva":"rgb(4,0,255)",
   "mekhet":"rgb(49,189,223)",
@@ -195,10 +196,24 @@ function App (props){
 
       let datasets = {};
       let labels = [];
-    
+
+      let storedWeek = week;
+
+      let detitledPeopleTrueNames = {}
+
       for (let i = 1; i <= currentYearJson.weeks.length; i++){ //the reason for the weird for loop definition is because weeks are 1-based rather than 0-based, and we're not actually iterating over the weeks array, but calling changeWeek(), which uses the 1-based index
         changeWeek(i);
         labels.push(i);
+
+        if (clanOrCov == "holder"){
+          territories.forEach(t => {
+            let detitledHolder = detitle(t.holder);
+            if (t.holder != detitledHolder){
+              detitledPeopleTrueNames[detitledHolder] = t.holder; //and this will happily be replaced by the most recent title by the time we reach the end of the list
+            }
+          });
+        }
+
         let dict = getAlignmentStatsForCurrentWeek(territories, clanOrCov);
         let existingAlignments = Object.keys(datasets);
         existingAlignments.forEach(existing => {
@@ -212,22 +227,32 @@ function App (props){
               label: alignment,
               data: i > 1 ? Array(i-1).fill(0) : [], //since this faction only just emerged, make sure all previous weeks where it wasn't present have the value 0
               fill: false,
-              borderColor: alignmentColors[alignment],
-              backgroundColor: alignmentColors[alignment],
+              borderColor: ALIGNMENT_COLOURS[alignment],
+              backgroundColor: ALIGNMENT_COLOURS[alignment],
               tension: 0.1
             }
           }
           datasets[alignment].data.push(dict[alignment]);
         });
       }
-    
+
+      if (clanOrCov == "holder"){
+        Object.keys(datasets).forEach(key => {
+          let alignment = datasets[key].label;
+          if (alignment in detitledPeopleTrueNames){
+            datasets[key].label = detitledPeopleTrueNames[alignment]; //restore a detitled person to their most recent name, now that we're done comparing
+          }
+      });
+      }
+      
       const stats = {
         labels: labels,
         datasets:Object.keys(datasets).map((key)=>datasets[key])
       };
 
       let title = "Weekly territory ownership by "+ clanOrCov + (year == DEFAULT_YEAR ? "" : " (Y"+year+")");
-      setLineGraph(<LineGraph setLineGraph={setLineGraph} displayLegend={clanOrCov != "holder"} stats={stats} title={atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation ? [title,"⚠️ includes user-flipped territories"] : title}/>);
+      setLineGraph(<LineGraph setLineGraph={setLineGraph} displayLegend={clanOrCov != "holder"} stats={stats} title={clanOrCov != "holder" && atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation ? [title,"(includes territories that you flipped)"] : title}/>);
+      changeWeek(storedWeek);
     }
 
     useEffect(() => { //Only runs after initial render

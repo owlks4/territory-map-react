@@ -1,4 +1,5 @@
 import './index.css'
+import detitle from './detitle';
 
 function getTerritoryByName(territoryChanges, requiredTerritoryName){
     for (let i = 0; i < territoryChanges.length; i++){
@@ -24,20 +25,31 @@ function doTenureAnalysis(weeks, t, property){
 
         if (territoryState != null){
             if (curTenure.value != null){ //if it's actually valid to conclude a tenure right now (as we might be before the initial acquisition of a value)
-                if ((territoryState[property] != curTenure.value)){ //then there's been a change in ownership, so push the current tenure                    
+                if ((territoryState[property] != curTenure.value) && !(property == "holder" && detitle(territoryState[property]) == curTenure.value)){ //then there's been a change in ownership, so push the current tenure                    
                     tenures.push(curTenure);
                     curTenure = { //and a new tenure begins
                         numWeeks: 0
                     }
                 }
             }
-            curTenure.value = territoryState[property]; //this is here so that the first week picks up the correct value
+            curTenure.value = territoryState[property]; //this is here so that the first week picks up the correct value            
+            if (property == "holder"){
+                curTenure.alt = curTenure.value;
+                console.log(detitle(curTenure.value))
+                curTenure.value = detitle(curTenure.value)
+            }
         }
         curTenure.numWeeks = curTenure.numWeeks + 1;
         if (i == weeks.length - 1){
             tenures.push(curTenure);
         }
     }
+
+    tenures.forEach((tenure)=>{
+        if (tenure.alt != null){
+            tenure.value = tenure.alt;
+        }
+    })
 
     return tenures;
 }
