@@ -436,7 +436,7 @@
             "adjacencyChanges":[]
         },
         {
-            "title":"",
+            "title":"Lord Thomas Grey, Master of Heralsherince",
             "territoryChanges":[
                 {"territoryName":"Yew Tree","alignment":"carthian contested","holder":"Destabilised","maxHolderLineLength":15,"flipside":"carthian contested"},
                 {"territoryName":"West Bromwich","alignment":"mekhet","holder":"To be assigned","maxHolderLineLength":12,"flipside":"mekhet"},
