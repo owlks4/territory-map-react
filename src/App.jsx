@@ -11,7 +11,7 @@ import LineGraph from './LineGraph.jsx';
 import detitle from './detitle.jsx';
 
 const DEFAULT_YEAR = 6;
-const VALID_YEARS = [5,6,7];
+const VALID_YEARS = [3,4,5,6,7];
 const LOWEST_YEAR_IF_NOT_SHIFT_CLICKING = 6;
 
 let currentYearJson = null;
@@ -87,8 +87,12 @@ function isCovenant(input){
   }
 }
 
-function getAlignmentStatsForCurrentWeek(territories, clanOrCov){
+function getAlignmentStatsForCurrentWeek(territories, clanOrCov, skipHolderBlacklist){
     let dict = {};
+
+    if (skipHolderBlacklist == null){
+      skipHolderBlacklist = false;
+    }
 
     atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation = false;
 
@@ -107,7 +111,7 @@ function getAlignmentStatsForCurrentWeek(territories, clanOrCov){
         alignment[0] = detitle(t.holder);
       }
 
-      if ((clanOrCov == "clan" && !isClan(alignment[0])) || (clanOrCov == "covenant" && !isCovenant(alignment[0])) || (clanOrCov == "holder" && (alignment[0] == "???" || alignment[0] == "Unclaimed" || alignment[0] == "Unassigned" || alignment[0].includes("NPC") || alignment[0] == "To be assigned" || alignment[0] == "Available" || alignment[0] == "Undeclared" || alignment[0] == "Praxis" || alignment[0] == "Contested" || alignment[0] == "Blighted" || alignment[0].toUpperCase() == "DESTABILISED" || alignment[0].toLowerCase().includes(" vs ")))){
+      if ((clanOrCov == "clan" && !isClan(alignment[0])) || (clanOrCov == "covenant" && !isCovenant(alignment[0])) || (!skipHolderBlacklist && (clanOrCov == "holder" && (alignment[0] == "???" || alignment[0] == "????" || alignment[0] == "Unclaimed" || alignment[0] == "Unassigned" || alignment[0].includes("NPC") || alignment[0] == "" || alignment[0] == "To be assigned" || alignment[0] == "Available" || alignment[0] == "Not declared" || alignment[0] == "Undeclared" || alignment[0] == "Praxis" || alignment[0] == "Contested" || alignment[0] == "Blighted" || alignment[0].includes("Domain of") || alignment[0].toUpperCase() == "DESTABILISED" || alignment[0].toLowerCase().includes(" vs "))))){
         continue;
       }
 
@@ -161,16 +165,18 @@ const ALIGNMENT_COLOURS = {
   "ventrue":"rgb(117,7,163)",
   "daeva":"rgb(4,0,255)",
   "mekhet":"rgb(49,189,223)",
-  "gangrel":"rgb(124,214,174)",
+  "gangrel":"rgb(124,214,163)",
   "nos":"rgb(130,117,91)",
   "nosferatu":"rgb(130,117,91)",
   "invictus":"rgb(232,19,19)",
   "carthian":"rgb(239,95,158)",
-  "crone":"rgb(0,138,14)",
-  "lance":"rgb(224,193,16)",
+  "crone":"rgb(5,176,23)",
+  "lance":"rgb(227,193,2)",
   "ordo":"rgb(250,120,17)",
   "court":"rgb(16,113,229)",
-  "personal":"rgb(84,90,100)"
+  "personal":"rgb(84,90,100)",
+  "enemy":"rgb(58,65,74)",
+  "unclaimed":"rgb(190,190,190)"
 }
 
 function App (props){
@@ -192,7 +198,11 @@ function App (props){
       setWindowFontSize((window.innerWidth < 1000 ? (window.innerWidth/2500) : (window.innerWidth/1920)) +"em");
     }
 
-    function showLineGraph(territories, changeWeek, clanOrCov){
+    function showLineGraph(clanOrCov, mustEqual,skipHolderBlacklist){
+
+      if(skipHolderBlacklist == null){
+        skipHolderBlacklist = false;
+      }
 
       let datasets = {};
       let labels = [];
@@ -214,7 +224,7 @@ function App (props){
           });
         }
 
-        let dict = getAlignmentStatsForCurrentWeek(territories, clanOrCov);
+        let dict = getAlignmentStatsForCurrentWeek(territories, clanOrCov, skipHolderBlacklist);
         let existingAlignments = Object.keys(datasets);
         existingAlignments.forEach(existing => {
           if (!(existing in dict)){
@@ -222,6 +232,9 @@ function App (props){
           }
         })
         Object.keys(dict).forEach((alignment)=>{
+          if ((mustEqual != null && detitle(alignment) != detitle(mustEqual)) || (clanOrCov == "alignment" && mustEqual == null && (alignment == "enemy" || alignment == "unclaimed" || alignment == "personal" || alignment == "court"))){ //the string "alignment" in this line is [sic].
+            return;
+          }
           if (!existingAlignments.includes(alignment)){
             datasets[alignment] = {
               label: alignment,
@@ -251,7 +264,14 @@ function App (props){
       };
 
       let title = "Weekly territory ownership by "+ clanOrCov + (year == DEFAULT_YEAR ? "" : " (Y"+year+")");
-      setLineGraph(<LineGraph setLineGraph={setLineGraph} displayLegend={clanOrCov != "holder"} stats={stats} title={clanOrCov != "holder" && atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation ? [title,"(includes territories that you flipped)"] : title}/>);
+
+      if (mustEqual != null){
+        title = "Weekly territory ownership ("+mustEqual+(year == DEFAULT_YEAR ? ")" : ", Y"+year+")");
+      } else if (clanOrCov == "alignment"){
+        title = "Weekly territory ownership (all alignments"+(year == DEFAULT_YEAR ? ")" : ", Y"+year+")");
+      }
+
+      setLineGraph(<LineGraph setLineGraph={setLineGraph} displayLegend={stats.datasets.length <= 12} stats={stats} title={clanOrCov != "holder" && atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation ? [title,"(may include territories that you flipped)"] : title}/>);
       changeWeek(storedWeek);
     }
 
@@ -383,31 +403,21 @@ function App (props){
 
     function ClanCovPrecedence(props){
       return (
-      <div style = {screen.orientation.type.includes("portrait") ? {maxHeight:"4em", overflowY:"auto"} : {}} onMouseEnter={() => {setHighlightedCategory(null)}}>
-        <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
+      <div className="clan-cov-precedence-holder" onMouseEnter={() => {setHighlightedCategory(null)}}>
+        <div>
           <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:"2em", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
             <span>Clan precedence</span>
-            {
-              window.innerWidth < 1000 ?
-              <></>
-              :
-              <span className="graph-button" title="View as a graph" onClick={(e) => {showLineGraph(territories, changeWeek, e.shiftKey ? "holder" : "clan")}}> 📈</span>
-            }            
+              <span className="graph-button" title="Click to view as a graph" onClick={(e) => {showLineGraph("clan", null)}}> 📈</span>       
           </h2>
-          <h2 style={{marginTop: "0.15em", marginRight:"0em", marginBottom: "1em", color:"black", whiteSpace:"break-spaces",
+          <h2 style={{marginTop: "0.15em", marginRight:"0em", marginBottom: window.innerWidth < 1000 ? "0.6em" : "1em", color:"black", whiteSpace:"break-spaces",
             width:"fit-content", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
             {clanPrecedence}
           </h2>
         </div>
-        <div style = {screen.orientation.type.includes("portrait") ? {display:"inline-block"} : {}}>
+        <div>
           <h2 style={{width:"fit-content", maxWidth:"100%", marginRight:0, fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
           <span>Covenant precedence</span>
-            {
-              window.innerWidth < 1000 ?
-              <></>
-              :
-              <span className="graph-button" title="View as a graph" onClick={(e)=>{showLineGraph(territories, changeWeek, e.shiftKey ? "holder" : "covenant")}}> 📈</span>
-            }  
+              <span className="graph-button" title="Click to view as a graph" onClick={(e)=>{showLineGraph("covenant", null)}}> 📈</span>
           </h2>
           <h2 style={{marginTop: "0.15em", marginRight:"0em", color:"black", width:"fit-content", whiteSpace:"break-spaces", fontSize:window.innerWidth < 1000 ? "0.8em": "0.9em"}}>
             {covenantPrecedence}
@@ -431,6 +441,8 @@ function App (props){
         input = "nosferatu";
       } else if (input == "carthians"){
         input = "carthian";
+      } else if (input == "venture"){
+        input = "ventrue";
       } else if (input == "circle"){
         input = "crone";
       } else if (input == "ordo dracul"){
@@ -439,6 +451,8 @@ function App (props){
         input = "invictus";
       } else if (input == "lancea"){
         input = "lance";
+      } else if (input == "mehket"){
+        input = "mekhet";
       }
       return input;
     }
@@ -615,69 +629,57 @@ function App (props){
           existingWeeksScrollElement.scrollTop = weeksScrollPosition;
           }
       }
-  
+
       render() {
         return (<div id="panel">
-          <h2 onClick={(e)=>{if(isReady){cycleYear(e.shiftKey);}}} className="panelBox" style={{marginLeft:'0em', marginTop:'0.75em', textAlign:"center", marginBottom:'0.5em',
-            color:"rgb(50,50,50)", width:"100%", height:"fit-content", display:window.innerWidth < 1000 ? 'inherit' : 'none'}}>
+          <h2 onClick={(e)=>{if(isReady){cycleYear(e.shiftKey);}}} style={{marginLeft:'0em', margin:"0.5em 0", textAlign:"center",
+            color:"rgb(50,50,50)", width:"100%", height:"1em", display:window.innerWidth < 1000 ? 'inline-block' : 'none'}}>
             {"Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")}
           </h2>
-          <div id="panelFlex" className="flex" >
-            <div id="legend" className="panelBox" style={{height:"fit-content"}}>
+          <div id="panelFlex" className="flex">
+          <div id="legend" className="panelBox" style={{height:window.innerwidth < 1000 ? "100%" : "fit-content", width:screen.orientation.type.includes("landscape") ? "fit-content" : "100%"}}>
               <h2 style={{fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
                 Legend
               </h2>
               <hr/>
-              <div onMouseLeave={() => {setHighlightedCategory(null)}} id="key" style={{overflow:'auto', width:"fit-content"}}>
-                <div onMouseLeave={() => {setHighlightedCategory(null)}}>
-                  <div className="legend-territories-row">
-                    <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Nosferatu" setHighlightedCategory={setHighlightedCategory}/>
-                  </div>
-                  <div className="legend-territories-row" style={{marginTop:"0.25em"}}>
-                    <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategory}/>
-                    <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory}/>
-                  </div>
-                </div>
-                <div className="legend-territories-row" style={{marginTop:"0.5em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
-                  <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory}/>
-                  <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory}/>
-                </div>
+              <div onMouseLeave={() => {setHighlightedCategory(null)}} id="key" style={{overflow:'auto', width:screen.orientation.type.includes("landscape") ? "fit-content" : "unset", paddingRight: screen.orientation.type.includes("landscape") ? "1.5em" : "unset"}}>
+                    <div onMouseLeave={() => {setHighlightedCategory(null)}}>
+                      <div className="legend-territories-row">
+                        <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","ventrue")} : ()=>{}}/>
+                        <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","daeva")} : ()=>{}}/>
+                        <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","mekhet")} : ()=>{}}/>
+                        <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","gangrel")} : ()=>{}}/>
+                        <LegendElement alignment="Nosferatu" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","nosferatu")} : ()=>{}}/>
+                      </div>
+                      <div className="legend-territories-row" style={{marginTop:"0.25em"}}>
+                        <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","invictus")} : ()=>{}}/>
+                        <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","carthian")} : ()=>{}}/>
+                        <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","lance")} : ()=>{}}/>
+                        <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","crone")} : ()=>{}}/>
+                        <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","ordo")} : ()=>{}}/>
+                      </div>
+                    </div>
+                    <div className="legend-territories-row" style={{marginTop: window.innerWidth > 1000 ? "0.5em" : "0.25em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
+                      <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment","court")} : ()=>{}}/>
+                      <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("holder",null)} : ()=>{}}/>
+                      <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment","enemy")} : ()=>{}}/>
+                      <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment",null)} : ()=>{}}/>
+                    </div>
               </div>
-              <br/>
-              {window.innerWidth >= 1000 ? <ClanCovPrecedence/> : <></>}
-            </div>
-            {
-              window.innerWidth >= 1000 ?
-              <>
-              <h2 style={{marginTop:"1em", whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                {window.innerWidth < 1000 ? "Select past week:" : "Select past week"}
+              {
+                screen.orientation.type.includes("landscape") ?
+                <>
+                <ClanCovPrecedence/>
+                </>
+                :
+                <></>
+                }
+              </div>
+            <div id="pastWeeks" className="panelBox">
+              <h2 style={{marginTop:window.innerWidth >= 1000 ? "1em" : "0em", whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
+              {window.innerWidth < 1000 ? "Select past week:" : "Select past week"}
               </h2>
               <hr/>
-              </>
-            : 
-            <></>
-            }
-            <div id="pastWeeks" className="panelBox">
-              {
-                window.innerWidth < 1000 ?
-                <>
-                <h2 style={{whiteSpace:"nowrap", fontSize:window.innerWidth < 1000 ? "0.8em": "1.06em"}}>
-                  {window.innerWidth < 1000 ? "Select past week:" : "Select past week"}
-                </h2>
-                <hr/>
-                </>
-              : 
-              <></>
-              }
               <div className="weeksScroll" id="weeks-scroll-mobile">
                 <>{loadedWeeks.map((wk) => <><h4 className={"weekOption"+ (wk.weekNumber == week ? " selected" : "")}
                                                  onClick={() => { 
@@ -685,19 +687,23 @@ function App (props){
                                                     weeksScrollPosition = existingWeeksScrollElement == null ? 0 : existingWeeksScrollElement.scrollTop;
                                                     week != wk.weekNumber ? changeWeek(wk.weekNumber) : null;
                                                     }}>
-                                                {window.innerWidth > 1000 ? <WeekTitle number={wk.weekNumber} title={wk.title}/> : "Wk"+wk.weekNumber}
+                                                {window.innerWidth >= 1000 ? <WeekTitle number={wk.weekNumber} title={wk.title}/> : "Wk"+wk.weekNumber}
                                             </h4></>)}</>
-              </div>
-              {
-                screen.orientation.type.includes("landscape") ? 
+                {
+                screen.orientation.type.includes("landscape") && window.innerWidth < 1000 ? 
                 <>
-                  <br/><br/><br/><br/>
+                  <div className="spacer"></div>
+                  <div className="spacer"></div>
+                  <div className="spacer"></div>
+                  <div className="spacer"></div>
                 </>
-                : null
+                :
+                <></>
               }
+              </div>
             </div>
           </div>
-          {window.innerWidth < 1000 ? <ClanCovPrecedence/> : <></>}
+          {screen.orientation.type.includes("portrait") ? <ClanCovPrecedence/> : <></>}
       </div>
       );
       }
@@ -726,9 +732,14 @@ function App (props){
           +"</div>"
             })
         } >
+          {
+          props.t.preventGantt ?
+          <></>
+          :
           <Popup>
-            <Gantt t={props.t} weeks={currentYearJson.weeks} refreshFunc={() => {setAlternator(!alternator);  updatePrecedence();}}/>
+            <Gantt t={props.t} weeks={currentYearJson.weeks} showLineGraph={showLineGraph} refreshFunc={() => {setAlternator(!alternator);  updatePrecedence();}}/>
           </Popup>
+          }
           </Marker>
       );
     }
@@ -738,7 +749,6 @@ function App (props){
     return (
     <>
         <div className="bigFlex">
-        {window.innerWidth < 1000 ? <Panel/> : <></>}
           <div id="displayParent" style={{fontSize:windowFontSize}}>
               <h1 onClick={(e)=>{if(isReady){cycleYear(e.shiftKey);}}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
                 {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")) : "I recommend you use this on PC instead!"}
@@ -771,7 +781,7 @@ function App (props){
                 {lineGraph == null ? <></> : lineGraph}
               </div>
           </div>
-          {window.innerWidth >= 1000 ? <Panel/> : <></>}
+          <Panel/>
         </div>
     </>
   )

@@ -15,7 +15,9 @@ function LineGraph(props) {
 
     let canvasRef = createRef();
 
-    let canvas = <canvas ref={canvasRef} id="chart-js-canvas" width={window.innerWidth/2} height={window.innerHeight/2} style={{backgroundColor:"white",margin:0,padding:0,border:0}}></canvas>
+    let canvas = <canvas ref={canvasRef} id="chart-js-canvas" width={screen.orientation.type.includes("portrait") ? 512 : window.innerWidth/2}
+    style={{backgroundColor:"white",margin:0,padding:0,border:0}} height={screen.orientation.type.includes("portrait") ? 512 : window.innerHeight/2}>
+    </canvas>
     
     setLineGraph = props.setLineGraph;
 
@@ -38,6 +40,9 @@ function LineGraph(props) {
                             font: {weight:"bold", size:"25px"}
                         },
                         tooltip: {
+                            itemSort: function(a, b) {
+                                return a.dataset.label.split(" ").pop().localeCompare(b.dataset.label.split(" ").pop());
+                              },
                             callbacks: {
                               title: (tooltipItems) => {
                                 return "Week "+tooltipItems[0].label;
@@ -45,7 +50,7 @@ function LineGraph(props) {
                             }
                           }
                     },
-                    responsive: true,
+                    maintainAspectRatio:true,
                     scales: {
                         x: {
                             title: {
@@ -60,18 +65,20 @@ function LineGraph(props) {
                                 text:"Number of territories owned"
                             },
                             beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
                         }
                     }
                 }
             }); 
         } else {
-            console.log("will not create new chart (old one wasn't null, should have been set to null on closing the old chart overlay. This is probably fine though, as for some reason the creation function often calls twice.)")
+            console.log("will not create new chart (old one wasn't null, should have been set to null on closing the old chart overlay. This is probably fine though, as for some reason the creation function often calls twice. This notification was probably caused to appear by that redundant second call.)")
         }
       }, []);
     
-    return <div id="veil" onClick={(e)=>{if (e.target.id=="veil"){destroy()}}} style={{position:"absolute",width:"100vw",height:"100vh", display:"flex", justifyContent:"center",
-                        alignItems:"center", top:0,backgroundColor:"rgba(0,0,0,0.5)", zIndex:1000}}>
-        <div style={{width:"50%",height:"50%", backgroundColor:"white", border:"20px solid white", borderTop:"5px solid white"}}>            
+    return <div id="veil" onClick={(e)=>{if (e.target.id=="veil"){destroy()}}}>
+        <div id="line-graph-sizing">            
             {canvas}
         </div>
     </div>

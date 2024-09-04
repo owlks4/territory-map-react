@@ -35,7 +35,6 @@ function doTenureAnalysis(weeks, t, property){
             curTenure.value = territoryState[property]; //this is here so that the first week picks up the correct value            
             if (property == "holder"){
                 curTenure.alt = curTenure.value;
-                console.log(detitle(curTenure.value))
                 curTenure.value = detitle(curTenure.value)
             }
         }
@@ -85,7 +84,7 @@ function Gantt(props) {
      <div style={{display:'flex', border:"1px solid black", width:"290px", height:"1.5em"}}>
         {
             alignmentTenures.map((tenure) => <>{
-                <div title={tenure.value +", "+tenure.numWeeks+getWeekSuffixStr(tenure.numWeeks)} className={tenure.value} style={{boxSizing:"border-box", cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
+                <div onClick={()=>{(tenure.value.split(" ")[0] == "personal" ? props.showLineGraph("holder",null,false) : props.showLineGraph("alignment",tenure.value.split(" ")[0],true))}}  title={tenure.value +", "+tenure.numWeeks+getWeekSuffixStr(tenure.numWeeks)+"\n(Click to view their\nownership as a graph)"} className={tenure.value} style={{boxSizing:"border-box", cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
                 </div>
             }</>)
         }
@@ -95,7 +94,7 @@ function Gantt(props) {
      <div className="gantt-area">
         {
             holderTenures.map((tenure) => <>{
-                <div title={tenure.value +", "+tenure.numWeeks+getWeekSuffixStr(tenure.numWeeks)} style={{boxSizing:"border-box", backgroundColor:holderTenures.indexOf(tenure) % 2 == 0 ? "#efefef" : "#afafaf",
+                <div onClick={ ()=>{props.showLineGraph("holder",tenure.value,true)}} title={tenure.value +", "+tenure.numWeeks+getWeekSuffixStr(tenure.numWeeks)+"\n(Click to view their\nownership as a graph)"} style={{boxSizing:"border-box", backgroundColor:holderTenures.indexOf(tenure) % 2 == 0 ? "#efefef" : "#afafaf",
                 cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
                 </div>
             }</>)

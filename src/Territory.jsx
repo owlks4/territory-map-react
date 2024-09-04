@@ -15,11 +15,11 @@ function Territory (props) {
    
     if (_holder != null){
         _holder = _holder.trim();
-        if (specialCSS == "old-style"){
-            splitHolder =  _holder.replaceAll("  "," ").split(" ");
-        } else {
+       // if (specialCSS == "old-style"){
+        //    splitHolder =  _holder.replaceAll("  "," ").split(" ");
+       // } else {
             splitHolder = ("("+_holder+"").replaceAll("  "," ").split(" ");
-        }
+       // }
     }
     
     let holderSegments = [];
@@ -47,30 +47,42 @@ function Territory (props) {
         }
         holderFull = <>{holderSegments.map((s) => s)}</>
     } else {
-        if (specialCSS == "old-style"){
-            holderFull = <>{_holder}</>
-        } else {
+       // if (specialCSS == "old-style"){
+       //     holderFull = <>{_holder}</>
+       // } else {
             holderFull = <>{"("+_holder+")"}</>
-        }        
+      //  }        
     }
 
     let [id] = useState(props.t.territoryName.toLowerCase().replaceAll(" ","-"));
     let [mouseOver, setMouseOver] = useState(false);    
 
-    return (
-    <>
-     <div title={props.t.useFlipside ? "You flipped this territory!" : null} className={"territory "+ specialCSS + " " + (props.t.useFlipside && props.t.flipside != null ? props.t.flipside : props.t.alignment) + (props.t.useFlipside ? " flipside": "")}id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
-     style={{fontSize:props.tSize, zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
-        <div className="territoryText territory-name" style={{whiteSpace:"nowrap"}}>
-            {props.t.territoryName}
-        </div>
-        {_holder != null ? 
-            <div className="territoryText">
-                {holderFull}
-            </div> : null}
-    </div>
-    </>
-  )
+    if (props.t.isForeignDomain){
+        return (
+            <>
+                <div className={"territory foreign-domain "+props.t.alignment}>
+                    <div className="territoryText territory-name">
+                        {props.t.holder + " ("+props.t.territoryName+")"}
+                    </div>
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+             <div title={props.t.useFlipside ? "You flipped this territory!" : null} className={"territory "+ specialCSS + " " + (props.t.useFlipside && props.t.flipside != null ? props.t.flipside : props.t.alignment) + (props.t.useFlipside ? " flipside": "")}id={id} onMouseEnter={() => {setMouseOver(true)}} onMouseLeave={() => {setMouseOver(false)}}
+             style={{fontSize:props.tSize, zIndex: (mouseOver ? 2 : 1), opacity:props.fadedOut ? 0.025 : 1}}>
+                <div className="territoryText territory-name" style={{whiteSpace:"nowrap"}}>
+                    {props.t.territoryName}
+                </div>
+                {_holder != null && _holder != "" ? 
+                    <div className="territoryText">
+                        {holderFull}
+                    </div> : null}
+            </div>
+            </>
+          )
+    }
 }
 
 export default Territory
