@@ -248,7 +248,7 @@
             "territoryChanges":[
                 {"territoryName":"Selly Oak", "alignment":"daeva contested", "holder":"Destabilised", "maxHolderLineLength":"0"},
                 {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Ethel Cabbage", "maxHolderLineLength":"12","flipside":"crone"},
-                {"territoryName":"Yardley", "alignment":"mekhet", "holder":"Mr Numeon", "maxHolderLineLength":"6","flipside":"invictus"},
+                {"territoryName":"Yardley", "alignment":"mekhet", "holder":"Mr Numeon", "maxHolderLineLength":"0","flipside":"invictus"},
                 {"territoryName":"Moseley", "alignment":"gangrel", "holder":"Fang", "maxHolderLineLength":"0","flipside":"crone"}
             ],
             "adjacencyChanges":[]
@@ -297,7 +297,6 @@
                 {"territoryName":"Harborne", "alignment":"gangrel", "holder":"Lord Hawthorn", "maxHolderLineLength":"0","flipside":"invictus"},
                 {"territoryName":"Ladywood", "alignment":"invictus", "holder":"Baroness Themis", "maxHolderLineLength":"6","flipside":"ventrue"},
                 {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Lord Hawthorn", "maxHolderLineLength":"0","flipside":"invictus"},
-                {"territoryName":"Yardley", "alignment":"mekhet", "holder":"Mr Numeon", "maxHolderLineLength":"0","flipside":"invictus"},
                 {"territoryName":"Acocks Green", "alignment":"gangrel contested", "holder":"DESTABILISED", "maxHolderLineLength":"0"}
             ],
             "adjacencyChanges":[]
