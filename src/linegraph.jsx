@@ -73,7 +73,7 @@ function LineGraph(props) {
                 }
             }); 
         } else {
-            console.log("will not create new chart (old one wasn't null, should have been set to null on closing the old chart overlay. This is probably fine though, as for some reason the creation function often calls twice. This notification was probably caused to appear by that redundant second call.)")
+            console.log("will not create new chart (old one wasn't null, should have been set to null on closing the old chart overlay. This is probably fine though, as for some reason the creation function often calls twice (maybe due to being run on localhost?). This notification was probably caused to appear by that redundant second call.)")
         }
       }, []);
     

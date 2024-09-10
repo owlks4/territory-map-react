@@ -10,8 +10,42 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import LineGraph from './LineGraph.jsx';
 import detitle from './detitle.jsx';
 
-const DEFAULT_YEAR = 6;
+let DEFAULT_YEAR = 6;
 const VALID_YEARS = [3,4,5,6,7];
+let isReady = false;
+let isReadyForHashChanges = false;
+
+let externalChangeYear = null;
+let externalChangeWindowFontSize = null;
+let ignoreHashChanges = false;
+
+window.onhashchange = ()=>{
+  if (ignoreHashChanges){
+    return;
+  }
+  if (window.location.hash != null){
+    let upperCaseHash = window.location.hash.toUpperCase();
+    let isolatedYearNumber = parseInt(upperCaseHash[upperCaseHash.indexOf("Y") + 1]);
+
+    console.log("Hash change... seemingly to Year "+isolatedYearNumber)
+
+    if (VALID_YEARS.includes(isolatedYearNumber)){
+      if (isReadyForHashChanges){
+        externalChangeYear(isolatedYearNumber);                    
+        externalChangeWindowFontSize();
+      } else {
+        DEFAULT_YEAR = isolatedYearNumber;
+      }
+    } else {
+      console.log("Will not honour the hash change because the provided year was not in our list of years...")
+    }
+  }  
+};
+
+if(window.location.hash) {
+  window.onhashchange();
+}
+
 const LOWEST_YEAR_IF_NOT_SHIFT_CLICKING = 6;
 
 let currentYearJson = null;
@@ -42,8 +76,6 @@ canvas.width = 1920;
 canvas.height = 1080;
 
 let customCanvasBackground = null;
-
-let isReady = false;
 
 let territorySize = "1em";
 
@@ -194,6 +226,9 @@ function App (props){
   let [alternator,setAlternator] = useState(false); //alternator only exists so that we can toggle its truthiness from elsewhere, which arbitrarily triggers a rerender on components that have 'alternator' as a prop
   let [lineGraph,setLineGraph] = useState(null);
 
+  externalChangeYear = changeYear;
+  externalChangeWindowFontSize = changeWindowFontSize;
+
     function changeWindowFontSize(){
       setWindowFontSize((window.innerWidth < 1000 ? (window.innerWidth/2500) : (window.innerWidth/1920)) +"em");
     }
@@ -263,12 +298,12 @@ function App (props){
         datasets:Object.keys(datasets).map((key)=>datasets[key])
       };
 
-      let title = "Weekly territory ownership by "+ clanOrCov + (year == DEFAULT_YEAR ? "" : " (Y"+year+")");
+      let title = "Weekly territory ownership by "+ clanOrCov + (year == VALID_YEARS[VALID_YEARS.length-1] ? "" : " (Y"+year+")");
 
       if (mustEqual != null){
-        title = "Weekly territory ownership ("+mustEqual+(year == DEFAULT_YEAR ? ")" : ", Y"+year+")");
+        title = "Weekly territory ownership ("+mustEqual+(year == VALID_YEARS[VALID_YEARS.length-1] ? ")" : ", Y"+year+")");
       } else if (clanOrCov == "alignment"){
-        title = "Weekly territory ownership (all alignments"+(year == DEFAULT_YEAR ? ")" : ", Y"+year+")");
+        title = "Weekly territory ownership (all alignments"+(year == VALID_YEARS[VALID_YEARS.length-1] ? ")" : ", Y"+year+")");
       }
 
       setLineGraph(<LineGraph setLineGraph={setLineGraph} displayLegend={stats.datasets.length <= 12} stats={stats} title={clanOrCov != "holder" && atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation ? [title,"(may include territories that you flipped)"] : title}/>);
@@ -278,6 +313,7 @@ function App (props){
     useEffect(() => { //Only runs after initial render
       changeYear(DEFAULT_YEAR);
       changeWindowFontSize();
+      isReadyForHashChanges = true;
     }, []); //ignore intelliense and keep this empty array; it makes this useEffect run only after the very first render, which is intended behaviour
     
     async function changeYear(newYearNumber){
@@ -634,7 +670,7 @@ function App (props){
         return (<div id="panel">
           <h2 onClick={(e)=>{if(isReady){cycleYear(e.shiftKey);}}} style={{marginLeft:'0em', margin:"0.5em 0", textAlign:"center",
             color:"rgb(50,50,50)", width:"100%", height:"1em", display:window.innerWidth < 1000 ? 'inline-block' : 'none'}}>
-            {"Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")}
+            {"Territory Map History" + (year==VALID_YEARS[VALID_YEARS.length-1] || year <= 0 ? "" : " (Y"+year+")")}
           </h2>
           <div id="panelFlex" className="flex">
           <div id="legend" className="panelBox" style={{height:window.innerwidth < 1000 ? "100%" : "fit-content", width:screen.orientation.type.includes("landscape") ? "fit-content" : "100%"}}>
@@ -748,10 +784,10 @@ function App (props){
 
     return (
     <>
-        <div className="bigFlex">
+        <div className="bigFlex" style={{overflowY:props.allowScroll}}>
           <div id="displayParent" style={{fontSize:windowFontSize}}>
               <h1 onClick={(e)=>{if(isReady){cycleYear(e.shiftKey);}}} style={window.innerWidth < 1000 ? {display:"none"}: {}}>
-                {window.innerWidth > 1000 ? ("Territory Map History" + (year==DEFAULT_YEAR || year <= 0 ? "" : " (Y"+year+")")) : "I recommend you use this on PC instead!"}
+                {window.innerWidth > 1000 ? ("Territory Map History" + (year==VALID_YEARS[VALID_YEARS.length-1] || year <= 0 ? "" : " (Y"+year+")")) : "I recommend you use this on PC instead!"}
               </h1>
               <div onMouseEnter={() => {setHighlightedCategory(null)}} style={{height:'100%'}}>
                 <MapContainer style={{height:"100%", maxWidth:"100vw", backgroundColor:'#ffffff', borderTop:"1px solid #ddd"}}

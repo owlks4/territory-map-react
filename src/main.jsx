@@ -11,6 +11,8 @@ let wrapped = <Wrapped/>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+document.getElementById('root').style = USE_WRAPPED ? "overflow-y:auto" : "";
+
 root.render(
   <React.StrictMode>
     {USE_WRAPPED ? wrapped : <></>}

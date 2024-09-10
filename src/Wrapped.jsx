@@ -1,4 +1,4 @@
-import { useEffect, createRef } from "react";
+import { useState, createRef } from "react";
 
 class Achievement {
     constructor(magnitude, text){
@@ -236,34 +236,39 @@ function Wrapped (props){
         </option>
     </select>;
 
+    let [wrappedActivated, setWrappedActivated] = useState(false)
+
     return (
-    <div className="wrapped-fullscreen" style={{padding:isMobile?"10vw":"0"}}>
-        <audio autoPlay={true} src="/snow.mp3" loop={true}></audio>
-        <div>
-            <div style={{fontSize:isMobile?"3em":"5em"}}>
-                Territory Map
-                <div className="fancy-font" style={{fontSize:isMobile?"1.25em":"1.5em"}}>
-                    Wrapped
-                </div>
-            </div>
-            <div style={{fontSize:"1.5em", textAlign:"left", display:"flex", flexDirection:"row", justifyContent:"space-evenly"}}>
+        wrappedActivated ?
+            <div className="wrapped-fullscreen" style={{padding:isMobile?"10vw":"0"}}>
+                <audio autoPlay={true} src="/snow.mp3" loop={true}></audio>
                 <div>
-                    Your clan
+                    <div style={{fontSize:isMobile?"3em":"5em"}}>
+                        Territory Map
+                        <div className="fancy-font" style={{fontSize:isMobile?"1.25em":"1.5em"}}>
+                            Wrapped
+                        </div>
+                    </div>
+                    <div style={{fontSize:"1.5em", textAlign:"left", display:"flex", flexDirection:"row", justifyContent:"space-evenly"}}>
+                        <div>
+                            Your clan
+                            <br/>
+                            {clanSelector}
+                        </div>
+                        <div>
+                            Your Covenant
+                            <br/>
+                            {covSelector}
+                        </div>
+                    </div>
                     <br/>
-                    {clanSelector}
-                </div>
-                <div>
-                    Your Covenant
-                    <br/>
-                    {covSelector}
+                    <div style={{textAlign:"center"}}>
+                        <button type="button" className="wrapped-start-button" onClick={() => {console.log(getAchievementsForClanAndCov(clanSelectorRef.current.value, covSelectorRef.current.value))}}>Start</button>
+                    </div>
                 </div>
             </div>
-            <br/>
-            <div style={{textAlign:"center"}}>
-                <button type="button" className="wrapped-start-button" onClick={() => {console.log(getAchievementsForClanAndCov(clanSelectorRef.current.value, covSelectorRef.current.value))}}>Start</button>
-            </div>
-        </div>
-    </div>
+        :
+        <div className="wrapped-ribbon" onClick={()=>{setWrappedActivated(true); document.getElementById('root').style = ""; document.getElementById("root").scrollTop = 0; document.title = "Territory Map Wrapped"}}>Click here for Territory Map Wrapped!</div>
     );
 }
 
