@@ -10,7 +10,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import LineGraph from './LineGraph.jsx';
 import detitle from './detitle.jsx';
 
-let DEFAULT_YEAR = 6;
+let DEFAULT_YEAR = 7;
 const VALID_YEARS = [3,4,5,6,7];
 let isReady = false;
 let isReadyForHashChanges = false;

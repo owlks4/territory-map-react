@@ -4,7 +4,11 @@ import App from './App.jsx'
 import Wrapped from './Wrapped.jsx'
 import './index.css'
 
-const USE_WRAPPED = false;
+let USE_WRAPPED = false;
+
+if (window.location.hash == "#wrapped"){
+  USE_WRAPPED = true;
+}
 
 let app = <App/>;
 let wrapped = <Wrapped/>

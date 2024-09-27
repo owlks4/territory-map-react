@@ -11,11 +11,37 @@ function destroy(){
     setLineGraph(null);
 }
 
+function downloadGraphDataJson(e, stats,name){
+    let forDownload = "";
+    let a = document.createElement("a");
+    let downloadType = null;
+
+    if (e.ctrlKey){
+        a.download = name+".csv";
+        forDownload = "";
+        downloadType = "text/csv";
+        stats.labels.forEach(label => {forDownload += ",Week "+label});
+        stats.datasets.forEach(dataset => {
+            forDownload += "\n"+dataset.label;
+            dataset.data.forEach(item => {forDownload += ","+item});
+        });
+    } else if (e.shiftKey){
+        forDownload = JSON.stringify(stats);
+        a.download = name+".json";
+        downloadType = "application/json";
+    }
+    
+    const blob = new Blob([forDownload], {type:downloadType});
+    a.href = URL.createObjectURL(blob);
+    a.click();
+    URL.revokeObjectURL(blob);
+}
+
 function LineGraph(props) {
 
     let canvasRef = createRef();
 
-    let canvas = <canvas ref={canvasRef} id="chart-js-canvas" width={screen.orientation.type.includes("portrait") ? 512 : window.innerWidth/2}
+    let canvas = <canvas onClick={(e)=>{downloadGraphDataJson(e,props.stats,props.title)}} ref={canvasRef} id="chart-js-canvas" width={screen.orientation.type.includes("portrait") ? 512 : window.innerWidth/2}
     style={{backgroundColor:"white",margin:0,padding:0,border:0}} height={screen.orientation.type.includes("portrait") ? 512 : window.innerHeight/2}>
     </canvas>
     
