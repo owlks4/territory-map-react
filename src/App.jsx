@@ -7,6 +7,7 @@ import WeekTitle from "./WeekTitle.jsx";
 import { MapContainer, LayerGroup, Marker, useMapEvents, ImageOverlay, Popup} from 'react-leaflet'
 import { divIcon, CRS } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
+import {setWrappedStats} from "./Wrapped.jsx";
 import LineGraph from './LineGraph.jsx';
 import detitle from './detitle.jsx';
 
@@ -211,6 +212,8 @@ const ALIGNMENT_COLOURS = {
   "unclaimed":"rgb(190,190,190)"
 }
 
+let firstTimeLoad = true;
+
 function App (props){
 
   let [territories,setTerritories] = useState([]);
@@ -233,7 +236,7 @@ function App (props){
       setWindowFontSize((window.innerWidth < 1000 ? (window.innerWidth/2500) : (window.innerWidth/1920)) +"em");
     }
 
-    function showLineGraph(clanOrCov, mustEqual,skipHolderBlacklist){
+    function showLineGraph(clanOrCov, mustEqual, skipHolderBlacklist, reserveAnalysisForWrapped){
 
       if(skipHolderBlacklist == null){
         skipHolderBlacklist = false;
@@ -306,14 +309,18 @@ function App (props){
         title = "Weekly territory ownership (all alignments"+(year == VALID_YEARS[VALID_YEARS.length-1] ? ")" : ", Y"+year+")");
       }
 
-      setLineGraph(<LineGraph setLineGraph={setLineGraph} displayLegend={stats.datasets.length <= 12} stats={stats} title={clanOrCov != "holder" && atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation ? [title,"(may include territories that you flipped)"] : title}/>);
-      changeWeek(storedWeek);
+      if (reserveAnalysisForWrapped){
+          setWrappedStats(stats);
+      } else {
+        setLineGraph(<LineGraph setLineGraph={setLineGraph} displayLegend={stats.datasets.length <= 12} stats={stats} title={clanOrCov != "holder" && atLeastOneTerritoryIsInAFlippedStateOnLastStatsCalculation ? [title,"(may include territories that you flipped)"] : title}/>);
+        changeWeek(storedWeek);
+      }
     }
 
     useEffect(() => { //Only runs after initial render
       changeYear(DEFAULT_YEAR);
       changeWindowFontSize();
-      isReadyForHashChanges = true;
+      isReadyForHashChanges = true;      
     }, []); //ignore intelliense and keep this empty array; it makes this useEffect run only after the very first render, which is intended behaviour
     
     async function changeYear(newYearNumber){
@@ -368,6 +375,14 @@ function App (props){
         MAP.setView([-0.5 * VERTICAL_SCALE_FACTOR, 0.5 * HORIZONTAL_SCALE_FACTOR], 13 / HORIZONTAL_SCALE_FACTOR < 9.2 ? 9.2 : 13 / HORIZONTAL_SCALE_FACTOR)
       }
       isReady = true;
+      if (firstTimeLoad){
+        firstTimeLoad = false;
+        if (props.USE_WRAPPED){
+          isReady = false;
+          showLineGraph(null,null,false,true); //actually reserves it for wrapped     
+          isReady = true;
+        }        
+      }
     }
 
     let imageOverlay = null;

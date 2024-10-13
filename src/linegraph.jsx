@@ -12,6 +12,11 @@ function destroy(){
 }
 
 function downloadGraphDataJson(e, stats,name){
+
+    if (!e.ctrlKey && !e.shiftKey){
+        return;
+    }
+
     let forDownload = "";
     let a = document.createElement("a");
     let downloadType = null;

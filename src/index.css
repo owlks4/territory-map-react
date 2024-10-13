@@ -278,6 +278,7 @@ h5 {
     width:100vw;
     height: fit-content;
     color:rgb(235, 255, 241);
+    background-color:darkred;
     background: url("./clansbg.png") repeat;
     animation: slide 8s linear infinite;
     box-sizing: border-box;

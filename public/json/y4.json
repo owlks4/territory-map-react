@@ -219,7 +219,7 @@
         "title":"Unhappy Neighbours",
         "territoryChanges":[
             {"territoryName":"Yew Tree","alignment":"enemy","holder":"Domain of West Brom","maxHolderLineLength":0},
-            {"territoryName":"Witton","alignment":"daeva","holder":"Harold Gorden","maxHolderLineLength":0,"flipside":"daeva"},
+            {"territoryName":"Witton","alignment":"daeva","holder":"Harold 'The Flash' Gordon","maxHolderLineLength":14,"flipside":"invictus"},
             {"territoryName":"Harborne","alignment":"lance","holder":"Adrien Thomas","maxHolderLineLength":0,"flipside":"ventrue"},
             {"territoryName":"Tidbury Green","alignment":"gangrel","holder":"Fir Grey","maxHolderLineLength":0,"flipside":"carthian"},
             {"territoryName":"Solihull","alignment":"carthian","holder":"Sempronia","maxHolderLineLength":0,"flipside":"gangrel"}
@@ -255,7 +255,7 @@
         "title":"Pocket Rock-it",
         "territoryChanges":[
             {"territoryName":"Ward End","alignment":"ordo","holder":"Anna Clarke","maxHolderLineLength":0,"flipside":"daeva"},
-            {"territoryName":"Perry Barr","alignment":"daeva","holder":"Leonora Carvelli","maxHolderLineLength":0,"flipside":"daeva"},
+            {"territoryName":"Perry Barr","alignment":"daeva","holder":"Leonora Carvelli","maxHolderLineLength":3,"flipside":"daeva"},
             {"territoryName":"Handsworth","alignment":"enemy","holder":"Domain of West Brom","maxHolderLineLength":12,"flipside":"enemy"},
             {"territoryName":"Aston","alignment":"ventrue","holder":"Leonora Kyley","maxHolderLineLength":0,"flipside":"carthian"},
             {"territoryName":"Sparkbrook","alignment":"invictus","holder":"Vitya Kaganovic","maxHolderLineLength":0,"flipside":"mekhet"},
@@ -286,7 +286,7 @@
             {"territoryName":"Short Heath","alignment":"ordo","holder":"Vel Blackelm","maxHolderLineLength":0,"flipside":"daeva"},
             {"territoryName":"Erdington","alignment":"ordo","holder":"Jacob Brass","maxHolderLineLength":0,"flipside":"gangrel"},
             {"territoryName":"Lozells","alignment":"enemy","holder":"Joel's Boyz","maxHolderLineLength":0},
-            {"territoryName":"Witton","alignment":"daeva","holder":"Baroness Ossipovna","maxHolderLineLength":0, "flipside":"crone"},
+            {"territoryName":"Witton","alignment":"daeva","holder":"Baroness Ossipovna","maxHolderLineLength":3, "flipside":"crone"},
             {"territoryName":"Yardley","alignment":"mekhet","holder":"Tyler Savage","maxHolderLineLength":0, "flipside":"mekhet"},
             {"territoryName":"Fordbridge","alignment":"personal","holder":"Lady Svetlana","maxHolderLineLength":0},
             {"territoryName":"Birmingham Airport","alignment":"personal","holder":"Lady Svetlana","maxHolderLineLength":0},
@@ -446,7 +446,7 @@
         {
         "title":"A Secret to Take From Your Grave",
         "territoryChanges":[
-            {"territoryName":"Lozells","alignment":"daeva","holder":"Baroness Ossipovna","maxHolderLineLength":0, "flipside":"crone"},
+            {"territoryName":"Lozells","alignment":"daeva","holder":"Baroness Ossipovna","maxHolderLineLength":3, "flipside":"crone"},
             {"territoryName":"Sheldon","alignment":"mekhet","holder":"Cheryl Dickson","maxHolderLineLength":0, "flipside":"crone"},
             {"territoryName":"Blythe Valley","alignment":"gangrel","holder":"Rowan Galton","maxHolderLineLength":0, "flipside":"crone"},
             {"territoryName":"Bearwood","alignment":"nos","holder":"Janus Frost","maxHolderLineLength":0, "flipside":"lance"},

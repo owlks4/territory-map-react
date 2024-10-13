@@ -6,11 +6,11 @@ import './index.css'
 
 let USE_WRAPPED = false;
 
-if (window.location.hash == "#wrapped"){
+if (window.location.hash.includes("#wrapped")){
   USE_WRAPPED = true;
 }
 
-let app = <App/>;
+let app = <App USE_WRAPPED={USE_WRAPPED}/>;
 let wrapped = <Wrapped/>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

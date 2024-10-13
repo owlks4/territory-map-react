@@ -8,6 +8,12 @@ class Achievement {
     }
 }
 
+let stats = null;
+
+function setWrappedStats(_stats){
+    stats = _stats;
+}
+
 // easy ideas for achievements:
 // * ended the current run as the clan with the most territory
 // * ended the current run as the covenant with the most territory
@@ -195,6 +201,8 @@ function Wrapped (props){
 
     console.log(clanSelectorRef);
 
+    console.log(stats);
+
     let clanSelector =
     <select ref={clanSelectorRef} id="clan-selector" className="big-select">
         <option id="wrapped-ventrue" value="ventrue">
@@ -273,3 +281,5 @@ function Wrapped (props){
 }
 
 export default Wrapped
+
+export {setWrappedStats}
