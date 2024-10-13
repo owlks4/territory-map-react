@@ -104,6 +104,13 @@
                 {"adjacencyName":"ADJ_NTH_WLY", "x1":"17%", "y1":"84%", "x2":"22%", "y2":"73%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_NTH_KSN", "x1":"18%", "y1":"85%", "x2":"31%", "y2":"88%", "sideOrTop1":"side", "sideOrTop2":"side"}
             ]
+        },
+        {
+            "title":"Praxis Anaphylaxis",
+            "territoryChanges":[
+                {"territoryName":"Edgbaston", "alignment":"daeva", "holder":"Pat Carver", "maxHolderLineLength":"0", "flipside":"carthian"}
+            ],
+            "adjacencyChanges":[]
         }
     ]
 }
