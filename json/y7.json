@@ -68,7 +68,7 @@
                 {"adjacencyName":"ADJ_LZS_AST", "x1":"23.5%", "y1":"31.5%", "x2":"34%", "y2":"33%", "sideOrTop1":"side", "sideOrTop2":"side"},
                 {"adjacencyName":"ADJ_PBR_AST", "x1":"35%", "y1":"19%", "x2":"35%", "y2":"33%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_HDS_LZS", "x1":"10%", "y1":"28%", "x2":"20.5%", "y2":"31.5%", "sideOrTop1":"side", "sideOrTop2":"side"},
-                {"adjacencyName":"ADJ_LZS_SMR", "x1":"22.5%", "y1":"33.5%", "x2":"22%", "y2":"42.5%", "sideOrTop1":"top", "sideOrTop2":"top"},
+                {"adjacencyName":"ADJ_LZS_SMR", "x1":"22%", "y1":"33.5%", "x2":"22%", "y2":"42.5%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_HDS_QTN", "x1":"7.5%", "y1":"30%", "x2":"8.5%", "y2":"57%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_SMR_QTN", "x1":"21%", "y1":"45%", "x2":"11%", "y2":"57%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_AST_LDY", "x1":"34%", "y1":"34.5%", "x2":"35%", "y2":"49%", "sideOrTop1":"top", "sideOrTop2":"top"},
@@ -109,6 +109,23 @@
             "title":"Praxis Anaphylaxis",
             "territoryChanges":[
                 {"territoryName":"Edgbaston", "alignment":"daeva", "holder":"Pat Carver", "maxHolderLineLength":"0", "flipside":"carthian"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Bonnie Prince Charlie",
+            "territoryChanges":[
+                {"territoryName":"Witton", "alignment":"daeva", "holder":"Pat Carver", "maxHolderLineLength":"0", "flipside":"carthian"},
+                {"territoryName":"Edgbaston", "alignment":"daeva", "holder":"Damien O'Connell", "maxHolderLineLength":"3", "flipside":"carthian"},
+                {"territoryName":"Handsworth", "alignment":"ventrue", "holder":"Luke Bennett", "maxHolderLineLength":"0", "flipside":"invictus"},
+                {"territoryName":"Aston", "alignment":"invictus", "holder":"Lord Bracken", "maxHolderLineLength":"0", "flipside":"gangrel"},
+                {"territoryName":"Nechells", "alignment":"nos", "holder":"Vlana", "maxHolderLineLength":"0", "flipside":"personal"},
+                {"territoryName":"Harborne", "alignment":"mekhet", "holder":"Lord Finch", "maxHolderLineLength":"0", "flipside":"invictus"},
+                {"territoryName":"Weoley", "alignment":"carthian", "holder":"Damien O'Connell", "maxHolderLineLength":"3", "flipside":"daeva"},
+                {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"J.J. Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Kings Heath", "alignment":"lance", "holder":"Rosie Knight", "maxHolderLineLength":"0", "flipside":"gangrel"},
+                {"territoryName":"Marston Green", "alignment":"crone", "holder":"Agnes Yaganova", "maxHolderLineLength":"0", "flipside":"nos"},
+                {"territoryName":"Hodge Hill", "alignment":"ordo", "holder":"Annabella", "maxHolderLineLength":"0", "flipside":"daeva"}
             ],
             "adjacencyChanges":[]
         }
