@@ -125,7 +125,8 @@
                 {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"J.J. Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
                 {"territoryName":"Kings Heath", "alignment":"lance", "holder":"Rosie Knight", "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Marston Green", "alignment":"crone", "holder":"Agnes Yaganova", "maxHolderLineLength":"0", "flipside":"nos"},
-                {"territoryName":"Hodge Hill", "alignment":"ordo", "holder":"Annabella", "maxHolderLineLength":"0", "flipside":"daeva"}
+                {"territoryName":"Hodge Hill", "alignment":"ordo", "holder":"Annabella", "maxHolderLineLength":"0", "flipside":"daeva"},
+                {"territoryName":"Lea Hall", "alignment":"enemy contested", "holder":"Crone vs Ordo", "maxHolderLineLength":"0", "flipside":"enemy contested"}
             ],
             "adjacencyChanges":[]
         }
