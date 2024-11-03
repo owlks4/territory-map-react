@@ -176,6 +176,8 @@ class Adjacency {
     this.x2 = parseFloat(adjacencyChange.x2)
     this.y2 = parseFloat(adjacencyChange.y2)
 
+    this.isBold = adjacencyChange.isBold != null;
+
     if (adjacencyChange.sideOrTop1 == "side"){
       this.a1 = (this.x1 + this.x2) / 2
       this.b1 = this.y1;
@@ -228,6 +230,7 @@ function App (props){
   let [windowFontSize,setWindowFontSize] = useState("1em"); //this exists for mobile adjustment purposes
   let [alternator,setAlternator] = useState(false); //alternator only exists so that we can toggle its truthiness from elsewhere, which arbitrarily triggers a rerender on components that have 'alternator' as a prop
   let [lineGraph,setLineGraph] = useState(null);
+  let [urlForImageOverlay,setUrlForImageOverlay] = useState("");
 
   externalChangeYear = changeYear;
   externalChangeWindowFontSize = changeWindowFontSize;
@@ -320,7 +323,8 @@ function App (props){
     useEffect(() => { //Only runs after initial render
       changeYear(DEFAULT_YEAR);
       changeWindowFontSize();
-      isReadyForHashChanges = true;      
+      isReadyForHashChanges = true;
+      refreshImageOverlay();
     }, []); //ignore intelliense and keep this empty array; it makes this useEffect run only after the very first render, which is intended behaviour
     
     async function changeYear(newYearNumber){
@@ -385,9 +389,6 @@ function App (props){
       }
     }
 
-    let imageOverlay = null;
-    refreshImageOverlay();
-
     function cycleYear(shiftKey){
       let index = VALID_YEARS.indexOf(year);
       let useLowerBarrier = !shiftKey && VALID_YEARS.includes(LOWEST_YEAR_IF_NOT_SHIFT_CLICKING);
@@ -401,9 +402,9 @@ function App (props){
     }
 
     function changeWeek(newWeekNumber){    
-      redrawCanvasAccordingToWeek(newWeekNumber);
       setTerritoriesFromJSON(currentYearJson, newWeekNumber)
       setWeek(newWeekNumber);
+      redrawCanvasAccordingToWeek(newWeekNumber);
       updatePrecedence();
     }
 
@@ -630,7 +631,7 @@ function App (props){
       console.log(JSON.stringify(currentYearJson).replaceAll("[","[\n").replaceAll("},","},\n").replaceAll("]","\n]"));
     }
 
-    function redrawCanvasAccordingToWeek(week){
+    function redrawCanvasAccordingToWeek(){
 
       if (canvas == null){
         return;
@@ -647,10 +648,16 @@ function App (props){
       ctx.imageSmoothingEnabled = true;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.strokeStyle = "#505050";
-      ctx.lineWidth = 1.5;
+      
     
       for (let i = 0; i < adjacencies.length; i++){
         let a = adjacencies[i];
+
+        if (a.isBold){
+          ctx.lineWidth = 3;
+        } else {
+          ctx.lineWidth = 1.5;
+        }
 
         ctx.beginPath();        
         ctx.moveTo((a.x1/100) * canvas.width, (a.y1/100) * canvas.height);
@@ -659,17 +666,13 @@ function App (props){
                           (a.x2/100) * canvas.width, (a.y2/100) * canvas.height);
         ctx.stroke();
         }
-      refreshImageOverlay();
+       
+        refreshImageOverlay();
     }
 
     function refreshImageOverlay(){
-      imageOverlay = <ImageOverlay
-                        notify={imageOverlay == null ? true : !imageOverlay.props.notify}
-                        url={canvas.toDataURL()}
-                        bounds={[[-VERTICAL_SCALE_FACTOR,0],[0,HORIZONTAL_SCALE_FACTOR]]}
-                        opacity={0.5}
-                        zIndex={10}
-                      />;
+      let imgUrl = canvas.toDataURL();      
+      setUrlForImageOverlay(imgUrl);
     }
 
     class Panel extends Component {
@@ -813,7 +816,12 @@ function App (props){
                     ?                  
                     <>
                       <LayerGroup>
-                        {imageOverlay}
+                          <ImageOverlay
+                            url={urlForImageOverlay}
+                            bounds={[[-VERTICAL_SCALE_FACTOR,0],[0,HORIZONTAL_SCALE_FACTOR]]}
+                            opacity={0.5}
+                            zIndex={10}
+                          />
                       </LayerGroup>
                       <LayerGroup>
                         {territories.map((t) => <>
@@ -839,3 +847,4 @@ function App (props){
 }
 
 export default App
+export {isClan, isCovenant}

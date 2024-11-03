@@ -1,4 +1,5 @@
 import { useState, createRef } from "react";
+import {isClan, isCovenant} from "./App.jsx";
 
 class Achievement {
     constructor(magnitude, text){
@@ -14,6 +15,17 @@ function setWrappedStats(_stats){
     stats = _stats;
 }
 
+function getStatsDatasetWithLabel(label){
+    for (let i = 0; i < stats.datasets.length; i++){
+        let potential = stats.datasets[i];
+        if (potential.label == label){
+            return potential;
+        }
+    }
+    console.log("Couldn't find dataset with label: "+label);
+    return null;
+}
+
 // easy ideas for achievements:
 // * ended the current run as the clan with the most territory
 // * ended the current run as the covenant with the most territory
@@ -26,6 +38,7 @@ function setWrappedStats(_stats){
 // * was the clan with the highest rate of territory acquisition at some point
 // * was the covenant with the highest rate of territory acquisition at some point
 // * was the overall group with the highest rate of territory acquisition at some point
+// * if you weren't any of them, just display the week where your particular group had its personal best of territory acquisition
 
 // * won a territory battle at some point
 // * engaged in a territory battle at some point (and valiantly lost)
@@ -40,146 +53,98 @@ function setWrappedStats(_stats){
 let fallback = [
     new Achievement(2,"Overall, the domain was extremely unstable. That's in the top 1% of unstable domains worldwide!"),
     new Achievement(3,"The starter prince was overthrown, and a new one instated... surely, this will solve all our problems..."),
-    new Achievement(4,"But importantly, the territory map has NOTHING on all the bargains, conversations, and power plays going on in the thick of Elysium. Go team!")
 ];
 
 const TOTAL_NUMBER_OF_TERRITORIES_ON_MAP = 34;
 
-function getPeakCombinedOwnershipAchievement(clan,cov){
-    let combined = clan+"-"+cov;
-    let numberOfTerritoriesAtPeak = null;
-    let weekOfOccurrence = null;
-    let desc = null;
+function wasOnceTheFactionOfTypeWithTheMostTerritory(clan, cov, which){
 
-    switch (combined){
-        case "ventrue-invictus":
-        break;
-        case "ventrue-carthian":
-        break;
-        case "ventrue-lance":
-        break;
-        case "ventrue-crone":
-        break;
-        case "ventrue-ordo":
-        break;
-        case "daeva-invictus":
-        break;
-        case "daeva-carthian":
-        break;
-        case "daeva-lance":
-        break;
-        case "daeva-crone":
-        break;
-        case "daeva-ordo":
-        break;
-        case "mekhet-invictus":
-        break;
-        case "mekhet-carthian":
-        break;
-        case "mekhet-lance":
-        break;
-        case "mekhet-crone":
-        break;
-        case "mekhet-ordo":
-        break;
-        case "gangrel-invictus":
-            
-        break;
-        case "gangrel-carthian":
-            desc = "Soon it won't be only you whose shape shifts and changes by the hour - the very domain itself will live anew when the revolution comes."
-        break;
-        case "gangrel-lance":
-            desc = "A window back into the human world, where your protean efforts are placed fully behind the mission to set Kine back on the right path."
-        break;
-        case "gangrel-crone":
-            desc = "Feeding grounds... and useful for the odd ritual."
-        break;
-        case "gangrel-ordo":
-            desc = "A coming together of the wild and the urban, the past and the present, helping you seek out the great work."
-        break;
-        case "nosferatu-invictus":
-            desc = "A demonstration of the fact that the haunts are just as deserving of respect as anyone else - it's earning your position that counts."
-        break;
-        case "nosferatu-carthian":
-            desc = "A physical chain of land that embodies your revolutionary efforts to create a better world."
-        break;
-        case "nosferatu-lance":
-            desc = "These territories are your inroads back into the kine world, where the fear you strike as a member of the haunts is always for the greater good."
-        break;
-        case "nosferatu-crone":
-             desc = "An intricate network of places of power that surely draw from that wellspring of dark energy - the necropolis."
-        break;
-        case "nosferatu-ordo":
-            desc = "A veritable kingdom of spooky secrets - how remarkable."
-        break;
+    let factionsWithTheMostTerritory = null;
+    let mostTerritory = 0;
+
+    for (let i = 0; i < stats.datasets[0].data.length; i++){
+        stats.datasets.forEach(faction => {
+            if (faction.label == "enemy" || faction.label == "unclaimed"){
+                return;
+            }
+            if ((which == "clan" && isClan(faction.label)) || (which == "covenant" && isCovenant(faction.label)) || which == "any"){
+                if (faction.data[i] > mostTerritory){
+                    factionsWithTheMostTerritory = [faction.label];
+                    mostTerritory = faction.data[i];
+                } else if (mostTerritory != 0 && faction.data[i] == mostTerritory){
+                    if (!factionsWithTheMostTerritory.includes(faction.label)){
+                        factionsWithTheMostTerritory.push(faction.label);
+                    }                 
+                }
+            }
+        });
+    }
+
+    console.log("Factions with the most territory at any one time:");
+    console.log(factionsWithTheMostTerritory);
+
+    switch (which){
+        case "clan":
+            {
+            let succeeded = factionsWithTheMostTerritory.includes(clan);
+            return [succeeded, succeeded ? mostTerritory : null];
+            }            
+        case "covenant":
+            {
+            let succeeded = factionsWithTheMostTerritory.includes(cov);
+            return [succeeded, succeeded ? mostTerritory : null];
+            }    
         default:
-            alert("That combination ("+combined+") didn't exist.")
-        break;
+            {
+            let succeeded = factionsWithTheMostTerritory.includes(clan) || factionsWithTheMostTerritory.includes(cov);
+            return [succeeded, succeeded ? mostTerritory : null];
+            }    
     }
-    if (numberOfTerritoriesAtPeak == null || weekOfOccurrence == null || desc == null){
-        alert("WTF. You need to define more empirical data for the combined clan/cov peak ownership stats.");
-    }
-    return new Achievement(2,"The highest number of territories held by your clan and covenant at any one time was "+numberOfTerritoriesAtPeak+" in week "+weekOfOccurrence+".\n\nThat's "+(numberOfTerritoriesAtPeak/TOTAL_NUMBER_OF_TERRITORIES_ON_MAP*100)+"% of all territory!\n"+desc);
 }
 
-let achievementsByGroup = { //achievements have magnitude values so that the user's complete list (as combined from their different alliegances) can be put together in order of magnitude and build up to the end
-    "ventrue":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!"),
-        new Achievement(2,"And here's your second achievement... with a nice statistic too!"),
-        new Achievement(4,"But you *really* cooked with this one! (winning a fight etc)")
-    ],
-    "daeva":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "mekhet":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "gangrel":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "nosferatu":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "invictus":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "carthian":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "crone":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "lance":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "ordo":
-    [
-        new Achievement(1,"You did X, Y, and Z. Wow!")
-    ],
-    "unaligned":
-    [
-        new Achievement(-1,"A free spirit! A lone ranger! Well, obviously unaligned isn't a group that holds territory per se, so let's look at personal-aligned territories instead!")
-    ]
+function getPeakCombinedOwnershipAchievement(clan,cov){
+    let numberOfTerritoriesAtPeak = 0;
+    let weekOfOccurrence = null;
+
+    let clanData = getStatsDatasetWithLabel(clan);
+    let covData = getStatsDatasetWithLabel(cov);
+
+    for (let i = 0; i < stats.datasets[0].data.length; i++){
+        let combined = clanData.data[i] + (covData == null ? 0 : covData.data[i]);
+        if (combined > numberOfTerritoriesAtPeak){
+            numberOfTerritoriesAtPeak = combined;
+            weekOfOccurrence = [i + 1]
+        } else if (numberOfTerritoriesAtPeak != 0 && combined == numberOfTerritoriesAtPeak){
+            weekOfOccurrence.push[i + 1]
+        }
+    }
+
+    console.log("Peak combined ownership of "+clan+" and "+cov+" was "+numberOfTerritoriesAtPeak+" in " + "week "+weekOfOccurrence[0])
+
+    if (numberOfTerritoriesAtPeak == null || weekOfOccurrence == null){
+        alert("WTF. You need to define more empirical data for the combined clan/cov peak ownership stats.");
+    }
+    return new Achievement(1,"The highest number of territories held by your clan and covenant combined was "+numberOfTerritoriesAtPeak+", in week "+weekOfOccurrence+".\n\nThat's "+String(numberOfTerritoriesAtPeak/TOTAL_NUMBER_OF_TERRITORIES_ON_MAP*100).slice(0,4)+"% of all territory!\n");
 }
 
 function getAchievementsForClanAndCov(clan,cov){
     let myAchievements = [];
 
-    achievementsByGroup[clan].forEach(achievement => {myAchievements.push(achievement)});
-    achievementsByGroup[cov].forEach(achievement => {myAchievements.push(achievement)});
+    myAchievements.push(getPeakCombinedOwnershipAchievement(clan,cov));
 
-    if (cov != "unaligned"){
-        myAchievements.push(getPeakCombinedOwnershipAchievement(clan,cov))
-    }    
+    let anyFactionPeakOwnership = wasOnceTheFactionOfTypeWithTheMostTerritory(clan,cov,"any");
+    if (anyFactionPeakOwnership[0]){
+         myAchievements.push(new Achievement(5, "At one point, one of your factions had the most overall territory, with "+anyFactionPeakOwnership[1]+" territories!"))
+    } else {
+        let clanFactionPeakOwnership = wasOnceTheFactionOfTypeWithTheMostTerritory(clan,cov,"clan");
+        if (clanFactionPeakOwnership[0]){
+           myAchievements.push(new Achievement(5, "At one point, your clan had the most overall territory, with "+clanFactionPeakOwnership[1]+" territories!"))
+        }
+        let covenantFactionPeakOwnership = wasOnceTheFactionOfTypeWithTheMostTerritory(clan,cov,"covenant");
+        if (covenantFactionPeakOwnership[0]){
+            myAchievements.push(new Achievement(5, "At one point, your covenant had the most overall territory, with "+covenantFactionPeakOwnership[1]+" territories!"))
+        }
+    }
 
     let i_in_fallback = 0;
     while (myAchievements.length < 6){
@@ -189,19 +154,50 @@ function getAchievementsForClanAndCov(clan,cov){
 
     myAchievements.sort((a,b)=>{return a.magnitude == b.magnitude ? 0 : (a.magnitude < b.magnitude ? -1 : 1)});
 
+    myAchievements = myAchievements.filter((achievement) => achievement != null);
+
+    myAchievements.forEach((achievement, index) => {
+        achievement.achievementIndex = index;
+    });
+
     return myAchievements;
 }
 
+let indexOfCurrentlyViewedAchievement = -1;
+
 function Wrapped (props){
+
+    let [achievements,setAchievements] = useState([]);
+
+    function startWrapped(clan,cov){
+        setAchievements(getAchievementsForClanAndCov(clan,cov));
+        scrollToNextAchievement();
+    }
+
+    function scrollToNextAchievement(){
+        if (indexOfCurrentlyViewedAchievement > -1){
+            document.getElementById("achievement-"+indexOfCurrentlyViewedAchievement).className = "achievement achievement-leaves";
+        }        
+        indexOfCurrentlyViewedAchievement++;
+        document.getElementById("achievement-"+indexOfCurrentlyViewedAchievement).className = "achievement achievement-arrives";
+    }
+
+    function AchievementComponent(props){
+        return (
+            <div className={props.data.achievementIndex == 0 ? "achievement achievement-arrives" : "achievement achievement-antenatal"}
+                id={"achievement-"+props.data.achievementIndex}>
+                <h1>
+                {props.data.text}
+                </h1>
+                <button type="button" className="wrapped-start-button" onClick={() => {scrollToNextAchievement();}}>Next</button>
+            </div> 
+        );
+    }
 
     let isMobile = window.innerWidth < window.innerHeight;
     
     let clanSelectorRef = createRef();
     let covSelectorRef = createRef();
-
-    console.log(clanSelectorRef);
-
-    console.log(stats);
 
     let clanSelector =
     <select ref={clanSelectorRef} id="clan-selector" className="big-select">
@@ -250,7 +246,7 @@ function Wrapped (props){
         wrappedActivated ?
             <div className="wrapped-fullscreen" style={{padding:isMobile?"10vw":"0"}}>
                 <audio autoPlay={true} src="/snow.mp3" loop={true}></audio>
-                <div>
+                <div className={indexOfCurrentlyViewedAchievement == -1 ? "" : "achievement-leaves"}>
                     <div style={{fontSize:isMobile?"3em":"5em"}}>
                         Territory Map
                         <div className="fancy-font" style={{fontSize:isMobile?"1.25em":"1.5em"}}>
@@ -271,8 +267,17 @@ function Wrapped (props){
                     </div>
                     <br/>
                     <div style={{textAlign:"center"}}>
-                        <button type="button" className="wrapped-start-button" onClick={() => {console.log(getAchievementsForClanAndCov(clanSelectorRef.current.value, covSelectorRef.current.value))}}>Start</button>
+                        <button type="button" className="wrapped-start-button" onClick={() => {startWrapped(clanSelectorRef.current.value, covSelectorRef.current.value);}}>Start</button>
                     </div>
+                </div>
+                <div>
+                    {
+                    achievements.length > 0
+                    ?
+                    achievements.map(item => <AchievementComponent data={item}/>)
+                    :
+                    <></>
+                    }
                 </div>
             </div>
         :

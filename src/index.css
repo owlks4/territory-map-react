@@ -273,6 +273,33 @@ h5 {
     padding: 0.25em 1em;
 }
 
+.wrapped-instructions-ambient-position {
+    transform:translate(0vw,0vh);
+    transition: transform 0.5s;
+}
+
+.achievement {
+    text-align:center;
+    position:absolute;
+    left:50%;
+    top:50%;
+}
+
+.achievement-antenatal {
+    transform:translate(calc(100vw - 50%), 0vh);
+    transition: transform 0.5s;
+}
+
+.achievement-arrives {
+    transform:translate(-50%,0vh);
+    transition: transform 0.5s;
+}
+
+.achievement-leaves {
+    transform:translate(calc(-50% - 100vw),0vh);
+    transition: transform 0.5s;
+}
+
 .wrapped-ribbon {
     cursor:pointer;
     width:100vw;
