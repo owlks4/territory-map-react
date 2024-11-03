@@ -79,7 +79,7 @@
                 {"adjacencyName":"ADJ_WDN_BDG", "x1":"65%", "y1":"38.5%", "x2":"68%", "y2":"49%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_SMR_HBN", "x1":"23%", "y1":"46%", "x2":"22.5%", "y2":"56%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_QTN_HBN", "x1":"11%", "y1":"56.5%", "x2":"21%", "y2":"58%", "sideOrTop1":"side", "sideOrTop2":"side"},
-                {"adjacencyName":"ADJ_LDY_EDG", "x1":"35.25%", "y1":"53.75%", "x2":"43%", "y2":"59%", "sideOrTop1":"top", "sideOrTop2":"side"},
+                {"adjacencyName":"ADJ_LDY_EDG", "x1":"35.25%", "y1":"53.5%", "x2":"43%", "y2":"59%", "sideOrTop1":"top", "sideOrTop2":"side"},
                 {"adjacencyName":"ADJ_RCK_EDG", "x1":"46%", "y1":"51%", "x2":"46.25%", "y2":"58%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_EDG_SPK", "x1":"48.25%", "y1":"59%", "x2":"55.5%", "y2":"55%", "sideOrTop1":"side", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_HBN_SLY", "x1":"25%", "y1":"59%", "x2":"34%", "y2":"64%", "sideOrTop1":"side", "sideOrTop2":"side"},
@@ -88,7 +88,7 @@
                 {"adjacencyName":"ADJ_SPK_TYS", "x1":"58.5%", "y1":"55%", "x2":"64%", "y2":"61%", "sideOrTop1":"side", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_BDG_TYS", "x1":"68%", "y1":"51%", "x2":"66%", "y2":"61%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_TYS_ACK", "x1":"66.75%", "y1":"63.5%", "x2":"74%", "y2":"65%", "sideOrTop1":"side", "sideOrTop2":"side"},
-                {"adjacencyName":"ADJ_MSY_TYS", "x1":"55%", "y1":"68.5%", "x2":"64%", "y2":"63.5%", "sideOrTop1":"side", "sideOrTop2":"side"},
+                {"adjacencyName":"ADJ_MSY_TYS", "x1":"55%", "y1":"67.5%", "x2":"64%", "y2":"63.5%", "sideOrTop1":"side", "sideOrTop2":"side"},
                 {"adjacencyName":"ADJ_ACK_YDW", "x1":"76%", "y1":"67%", "x2":"68.5%", "y2":"76.5%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_KGH_YDW", "x1":"55%", "y1":"86%", "x2":"64%", "y2":"78%", "sideOrTop1":"side", "sideOrTop2":"side"},
                 {"adjacencyName":"ADJ_KGH_MSY", "x1":"53%", "y1":"82%", "x2":"54%", "y2":"70.25%", "sideOrTop1":"top", "sideOrTop2":"top"},
@@ -101,8 +101,13 @@
                 {"adjacencyName":"ADJ_QTN_BTG", "x1":"9.5%", "y1":"58.5%", "x2":"9%", "y2":"68%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_BTG_WLY", "x1":"11.5%", "y1":"70%", "x2":"20%", "y2":"72%", "sideOrTop1":"side", "sideOrTop2":"side"},
                 {"adjacencyName":"ADJ_BTG_NTH", "x1":"9%", "y1":"72%", "x2":"13.5%", "y2":"85%", "sideOrTop1":"top", "sideOrTop2":"side"},
-                {"adjacencyName":"ADJ_NTH_WLY", "x1":"17%", "y1":"84%", "x2":"22%", "y2":"73%", "sideOrTop1":"top", "sideOrTop2":"top"},
-                {"adjacencyName":"ADJ_NTH_KSN", "x1":"18%", "y1":"85%", "x2":"31%", "y2":"88%", "sideOrTop1":"side", "sideOrTop2":"side"}
+                {"adjacencyName":"ADJ_NTH_WLY", "x1":"17%", "y1":"84%", "x2":"21%", "y2":"73%", "sideOrTop1":"top", "sideOrTop2":"top"},
+                {"adjacencyName":"ADJ_NTH_KSN", "x1":"18%", "y1":"85%", "x2":"31%", "y2":"88%", "sideOrTop1":"side", "sideOrTop2":"side"},
+
+                {"adjacencyName":"ADJ_HHL_WTN", "x1":"-100%", "y1":"-100%",  "x2":"-100%", "y2":"-100%", "sideOrTop1":"top", "sideOrTop2":"top"},
+                {"adjacencyName":"ADJ_MSY_YDW", "x1":"-100%", "y1":"-100%",  "x2":"-100%", "y2":"-100%", "sideOrTop1":"side", "sideOrTop2":"top"},
+                {"adjacencyName":"ADJ_WLY_KSN", "x1":"-100%", "y1":"-100%",  "x2":"-100%", "y2":"-100%", "sideOrTop1":"top", "sideOrTop2":"top"},
+                {"adjacencyName":"ADJ_WLY_QTN", "x1":"-100%", "y1":"-100%",  "x2":"-100%", "y2":"-100%", "sideOrTop1":"top", "sideOrTop2":"top"}
             ]
         },
         {
@@ -129,6 +134,26 @@
                 {"territoryName":"Lea Hall", "alignment":"enemy contested", "holder":"Crone vs Ordo", "maxHolderLineLength":"0", "flipside":"enemy contested"}
             ],
             "adjacencyChanges":[]
+        },
+        {
+            "title":"Vive le centre ville",
+            "territoryChanges":[
+                {"territoryName":"Kings Norton", "alignment":"lance", "holder":"Misty", "maxHolderLineLength":"0", "flipside":"nos"},
+                {"territoryName":"Northfield", "alignment":"mekhet", "holder":"Elijah", "maxHolderLineLength":"0", "flipside":"ordo"},
+                {"territoryName":"Selly Oak", "alignment":"carthian", "holder":"Minty Badger", "maxHolderLineLength":"0", "flipside":"personal"},
+                {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"J.J. Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Yardley", "alignment":"crone", "holder":"Longwell Green", "maxHolderLineLength":"0", "flipside":"daeva"},
+                {"territoryName":"Lea Hall", "alignment":"ordo", "holder":"Theophrastus", "maxHolderLineLength":"0", "flipside":"gangrel"},
+                {"territoryName":"Erdington", "alignment":"nos", "holder":"Lord Ausdruck", "maxHolderLineLength":"0", "flipside":"invictus"},
+                {"territoryName":"Perry Barr", "alignment":"carthian", "holder":"Pat Carver", "maxHolderLineLength":"0", "flipside":"daeva"},
+                {"territoryName":"City Centre", "alignment":"enemy contested", "holder":"Invictus vs ???", "maxHolderLineLength":"0"}
+            ],
+            "adjacencyChanges":[
+                {"adjacencyName":"ADJ_HHL_WTN", "x1":"74%", "y1":"33%", "x2":"54%", "y2":"21%", "sideOrTop1":"top", "sideOrTop2":"top", "isBold":"true"},
+                {"adjacencyName":"ADJ_MSY_YDW", "x1":"55%", "y1":"68.5%", "x2":"65.5%", "y2":"75.5%", "sideOrTop1":"side", "sideOrTop2":"top"},
+                {"adjacencyName":"ADJ_WLY_KSN", "x1":"23%", "y1":"73%", "x2":"33%", "y2":"86.5%", "sideOrTop1":"top", "sideOrTop2":"top"},
+                {"adjacencyName":"ADJ_WLY_QTN", "x1":"22%", "y1":"70%","x2":"10%", "y2":"57%", "sideOrTop1":"top", "sideOrTop2":"top"}
+            ]
         }
     ]
 }
