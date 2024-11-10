@@ -232,6 +232,10 @@ h5 {
     border: 0.33em solid rgb(250,120,17);
 }
 
+.nos-contesting {
+    border: 0.33em solid rgb(130,117,91);
+}
+
 .gangrel-contesting {
     border: 0.33em solid rgb(184,222,205);
 }
