@@ -146,6 +146,7 @@
                 {"territoryName":"Lea Hall", "alignment":"ordo", "holder":"Theophrastus", "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Erdington", "alignment":"nos", "holder":"Lord Ausdruck", "maxHolderLineLength":"0", "flipside":"invictus"},
                 {"territoryName":"Perry Barr", "alignment":"carthian", "holder":"Pat Carver", "maxHolderLineLength":"0", "flipside":"daeva"},
+                {"territoryName":"Marston Green", "alignment":"crone", "holder":"Longwell Green", "maxHolderLineLength":"0", "flipside":"daeva"},
                 {"territoryName":"City Centre", "alignment":"enemy contested", "holder":"Invictus vs ???", "maxHolderLineLength":"0"}
             ],
             "adjacencyChanges":[
@@ -154,6 +155,19 @@
                 {"adjacencyName":"ADJ_WLY_KSN", "x1":"23%", "y1":"73%", "x2":"33%", "y2":"86.5%", "sideOrTop1":"top", "sideOrTop2":"top"},
                 {"adjacencyName":"ADJ_WLY_QTN", "x1":"22%", "y1":"70%","x2":"10%", "y2":"57%", "sideOrTop1":"top", "sideOrTop2":"top"}
             ]
+        },
+        {
+            "title":"Two Lords a-Leaving",
+            "territoryChanges":[
+                {"territoryName":"City Centre", "alignment":"enemy nos-contesting", "holder":"Rogue Kindred - The French?", "maxHolderLineLength":"17"},
+                {"territoryName":"Summerfield", "alignment":"mekhet", "holder":"???", "maxHolderLineLength":"0"},
+                {"territoryName":"Ladywood", "alignment":"daeva", "holder":"Callahan Landry", "maxHolderLineLength":"0", "flipside":"carthian"},
+                {"territoryName":"Bartley Green", "alignment":"ordo", "holder":"The Immaculate", "maxHolderLineLength":"0", "flipside":"ventrue"},
+                {"territoryName":"Quinton", "alignment":"enemy contested", "holder":"Ventrue vs Mekhet", "maxHolderLineLength":"0"},
+                {"territoryName":"Moseley", "alignment":"enemy contested", "holder":"Lance vs Gangrel", "maxHolderLineLength":"0"},
+                {"territoryName":"Castle Bromwich", "alignment":"nosferatu", "holder":"Lord Ausdruck", "maxHolderLineLength":"0", "flipside":"invictus"}
+            ],
+            "adjacencyChanges":[]
         }
     ]
 }
