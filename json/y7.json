@@ -189,6 +189,17 @@
                 {"territoryName":"Castle Bromwich", "alignment":"nos", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"lance"}
             ],
             "adjacencyChanges":[]
+        },
+        {
+            "title":"A Dance of Dragons",
+            "territoryChanges":[
+                {"territoryName":"Castle Bromwich", "alignment":"nos", "holder":"Agnes Yaganova", "maxHolderLineLength":"0", "flipside":"crone"},
+                {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Taylor Borden", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Bordesley Green", "alignment":"invictus", "holder":"Lord Ausdruck", "maxHolderLineLength":"0", "flipside":"nos"},
+                {"territoryName":"Bournville", "alignment":"carthian", "holder":"Harrison Miller", "maxHolderLineLength":"0", "flipside":"mekhet"},
+                {"territoryName":"Yardley Wood", "alignment":"lance", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"nos"}
+            ],
+            "adjacencyChanges":[]
         }
     ]
 }
