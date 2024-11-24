@@ -122,12 +122,12 @@
             "territoryChanges":[
                 {"territoryName":"Witton", "alignment":"daeva", "holder":"Pat Carver", "maxHolderLineLength":"0", "flipside":"carthian"},
                 {"territoryName":"Edgbaston", "alignment":"daeva", "holder":"Damien O'Connell", "maxHolderLineLength":"3", "flipside":"carthian"},
-                {"territoryName":"Handsworth", "alignment":"ventrue", "holder":"Luke Bennett", "maxHolderLineLength":"0", "flipside":"invictus"},
+                {"territoryName":"Handsworth", "alignment":"ventrue", "holder":"Lord Bennett", "maxHolderLineLength":"0", "flipside":"invictus"},
                 {"territoryName":"Aston", "alignment":"invictus", "holder":"Lord Bracken", "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Nechells", "alignment":"nos", "holder":"Vlana", "maxHolderLineLength":"0", "flipside":"personal"},
                 {"territoryName":"Harborne", "alignment":"mekhet", "holder":"Lord Finch", "maxHolderLineLength":"0", "flipside":"invictus"},
                 {"territoryName":"Weoley", "alignment":"carthian", "holder":"Damien O'Connell", "maxHolderLineLength":"3", "flipside":"daeva"},
-                {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"J.J. Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"JJ Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
                 {"territoryName":"Kings Heath", "alignment":"lance", "holder":"Rosie Knight", "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Marston Green", "alignment":"crone", "holder":"Agnes Yaganova", "maxHolderLineLength":"0", "flipside":"nos"},
                 {"territoryName":"Hodge Hill", "alignment":"ordo", "holder":"Annabella", "maxHolderLineLength":"0", "flipside":"daeva"},
@@ -141,7 +141,7 @@
                 {"territoryName":"Kings Norton", "alignment":"lance", "holder":"Misty", "maxHolderLineLength":"0", "flipside":"nos"},
                 {"territoryName":"Northfield", "alignment":"mekhet", "holder":"Elijah", "maxHolderLineLength":"0", "flipside":"ordo"},
                 {"territoryName":"Selly Oak", "alignment":"carthian", "holder":"Minty Badger", "maxHolderLineLength":"0", "flipside":"personal"},
-                {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"J.J. Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"JJ Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
                 {"territoryName":"Yardley", "alignment":"crone", "holder":"Longwell Green", "maxHolderLineLength":"0", "flipside":"daeva"},
                 {"territoryName":"Lea Hall", "alignment":"ordo", "holder":"Theophrastus", "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Erdington", "alignment":"nos", "holder":"Lord Ausdruck", "maxHolderLineLength":"0", "flipside":"invictus"},
@@ -166,6 +166,38 @@
                 {"territoryName":"Quinton", "alignment":"enemy contested", "holder":"Ventrue vs Mekhet", "maxHolderLineLength":"0"},
                 {"territoryName":"Moseley", "alignment":"enemy contested", "holder":"Lance vs Gangrel", "maxHolderLineLength":"0"},
                 {"territoryName":"Castle Bromwich", "alignment":"nosferatu", "holder":"Lord Ausdruck", "maxHolderLineLength":"0", "flipside":"invictus"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Crouching Cass Et, Staking Dragons",
+            "territoryChanges":[
+                {"territoryName":"City Centre", "alignment":"personal", "holder":"Charlie Holly", "maxHolderLineLength":"0"},
+                {"territoryName":"Summerfield", "alignment":"mekhet", "holder":"Michael Griffith",  "maxHolderLineLength":"0", "flipside":"ordo"},
+                {"territoryName":"Perry Barr", "alignment":"carthian", "holder":"Mortimyr Stone", "maxHolderLineLength":"0", "flipside":"nos"},
+                {"territoryName":"Kingstanding", "alignment":"carthian", "holder":"Magnus Steelbourne", "maxHolderLineLength":"3", "flipside":"daeva"},
+                {"territoryName":"Lozells", "alignment":"invictus", "holder":"Madame Mouse", "maxHolderLineLength":"0", "flipside":"gangrel"},
+                {"territoryName":"Handsworth", "alignment":"ventrue", "holder":"Lord Bennett", "maxHolderLineLength":"0", "flipside":"invictus"},
+                {"territoryName":"Quinton", "alignment":"ventrue", "holder":"Shield", "maxHolderLineLength":"0", "flipside":"ordo"},
+                {"territoryName":"Harborne", "alignment":"mekhet", "holder":"Harrison Miller", "maxHolderLineLength":"0", "flipside":"carthian"},
+                {"territoryName":"Kings Norton", "alignment":"lance", "holder":"Cassandra Rose", "maxHolderLineLength":"0", "flipside":"mekhet"},
+                {"territoryName":"Yardley Wood", "alignment":"enemy contested", "holder":"Lance vs ???", "maxHolderLineLength":"0"},
+                {"territoryName":"Moseley", "alignment":"gangrel", "holder":"JJ Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Acocks Green", "alignment":"gangrel", "holder":"Carmelia", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"Cara", "maxHolderLineLength":"0", "flipside":"ordo"},
+                {"territoryName":"Ward End", "alignment":"ordo", "holder":"Gospel Oak", "maxHolderLineLength":"0", "flipside":"mekhet"},
+                {"territoryName":"Castle Bromwich", "alignment":"nos", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"lance"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"A Dance of Dragons",
+            "territoryChanges":[
+                {"territoryName":"Castle Bromwich", "alignment":"nos", "holder":"Agnes Yaganova", "maxHolderLineLength":"0", "flipside":"crone"},
+                {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Taylor Borden", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Bordesley Green", "alignment":"invictus", "holder":"Lord Ausdruck", "maxHolderLineLength":"0", "flipside":"nos"},
+                {"territoryName":"Bournville", "alignment":"carthian", "holder":"Harrison Miller", "maxHolderLineLength":"0", "flipside":"mekhet"},
+                {"territoryName":"Yardley Wood", "alignment":"lance", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"nos"}
             ],
             "adjacencyChanges":[]
         }
