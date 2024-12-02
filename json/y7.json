@@ -200,6 +200,16 @@
                 {"territoryName":"Yardley Wood", "alignment":"lance", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"nos"}
             ],
             "adjacencyChanges":[]
+        },
+        {
+            "title":"Festive Frenzies",
+            "territoryChanges":[
+                {"territoryName":"Kingstanding", "alignment":"ordo", "holder":"The Immaculate", "maxHolderLineLength":"0", "flipside":"ventrue"},
+                {"territoryName":"Yardley", "alignment":"crone", "holder":"Edith", "maxHolderLineLength":"0", "flipside":"mekhet"},
+                {"territoryName":"Bartley Green", "alignment":"carthian", "holder":"Magnus Steelbourne", "maxHolderLineLength":"3", "flipside":"daeva"},
+                {"territoryName":"Quinton", "alignment":"ventrue", "holder":"Lord Bennett", "maxHolderLineLength":"0", "flipside":"invictus"}
+            ],
+            "adjacencyChanges":[]
         }
     ]
 }
