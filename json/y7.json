@@ -183,7 +183,7 @@
                 {"territoryName":"Kings Norton", "alignment":"lance", "holder":"Cassandra Rose", "maxHolderLineLength":"0", "flipside":"mekhet"},
                 {"territoryName":"Yardley Wood", "alignment":"enemy contested", "holder":"Lance vs ???", "maxHolderLineLength":"0"},
                 {"territoryName":"Moseley", "alignment":"gangrel", "holder":"JJ Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
-                {"territoryName":"Acocks Green", "alignment":"gangrel", "holder":"Carmelia", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Acocks Green", "alignment":"gangrel", "holder":"Carmelia", "maxHolderLineLength":"0", "flipside":"crone"},
                 {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"Cara", "maxHolderLineLength":"0", "flipside":"ordo"},
                 {"territoryName":"Ward End", "alignment":"ordo", "holder":"Gospel Oak", "maxHolderLineLength":"0", "flipside":"mekhet"},
                 {"territoryName":"Castle Bromwich", "alignment":"nos", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"lance"}
@@ -208,6 +208,17 @@
                 {"territoryName":"Yardley", "alignment":"crone", "holder":"Edith", "maxHolderLineLength":"0", "flipside":"mekhet"},
                 {"territoryName":"Bartley Green", "alignment":"carthian", "holder":"Magnus Steelbourne", "maxHolderLineLength":"3", "flipside":"daeva"},
                 {"territoryName":"Quinton", "alignment":"ventrue", "holder":"Lord Bennett", "maxHolderLineLength":"0", "flipside":"invictus"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"LIKELY STATE AS OF FIRST WEEK OF TERM 2",
+            "territoryChanges":[
+                {"territoryName":"Aston", "alignment":"crone", "holder":"Agnes Yaganova", "maxHolderLineLength":"0", "flipside":"nos"},
+                {"territoryName":"Ward End", "alignment":"invictus", "holder":"Lord Bracken", "maxHolderLineLength":"0", "flipside":"gangrel"},
+                {"territoryName":"Marston Green", "alignment":"mekhet", "holder":"Gospel Oak", "maxHolderLineLength":"0", "flipside":"ordo"},
+                {"territoryName":"Yardley Wood", "alignment":"lance", "holder":"Marilyn Laddusaw", "maxHolderLineLength":"0", "flipside":"ventrue"},
+                {"territoryName":"Nechells", "alignment":"nos", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"carthian"}
             ],
             "adjacencyChanges":[]
         }
