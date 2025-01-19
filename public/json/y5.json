@@ -1,6 +1,7 @@
 {"territorySize":"1.05em",
 "HORIZONTAL_SCALE_FACTOR":2.3,
 "VERTICAL_SCALE_FACTOR":1.21,
+"specialTerritoryCSS":"",
 "weeks":[
     {"title":"Here we go again...","territoryChanges":[
     {"territoryName":"Kingstanding","alignment":"enemy","holder":"???","posX":49.35396634615384,"posY":2.761263705474124,"maxHolderLineLength":0,"flipside":"enemy"},

@@ -2,6 +2,7 @@
    "territorySize":"1em",
    "HORIZONTAL_SCALE_FACTOR":1.3,
    "VERTICAL_SCALE_FACTOR":0.8,
+   "specialTerritoryCSS":"y7-after-change",
    "weeks":[
         {
             "title":"What's in the Box?!?!",
@@ -183,7 +184,7 @@
                 {"territoryName":"Kings Norton", "alignment":"lance", "holder":"Cassandra Rose", "maxHolderLineLength":"0", "flipside":"mekhet"},
                 {"territoryName":"Yardley Wood", "alignment":"enemy contested", "holder":"Lance vs ???", "maxHolderLineLength":"0"},
                 {"territoryName":"Moseley", "alignment":"gangrel", "holder":"JJ Jarvis", "maxHolderLineLength":"0", "flipside":"lance"},
-                {"territoryName":"Acocks Green", "alignment":"gangrel", "holder":"Carmelia", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Acocks Green", "alignment":"gangrel", "holder":"Carmelia", "maxHolderLineLength":"0", "flipside":"crone"},
                 {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"Cara", "maxHolderLineLength":"0", "flipside":"ordo"},
                 {"territoryName":"Ward End", "alignment":"ordo", "holder":"Gospel Oak", "maxHolderLineLength":"0", "flipside":"mekhet"},
                 {"territoryName":"Castle Bromwich", "alignment":"nos", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"lance"}
@@ -198,6 +199,27 @@
                 {"territoryName":"Bordesley Green", "alignment":"invictus", "holder":"Lord Ausdruck", "maxHolderLineLength":"0", "flipside":"nos"},
                 {"territoryName":"Bournville", "alignment":"carthian", "holder":"Harrison Miller", "maxHolderLineLength":"0", "flipside":"mekhet"},
                 {"territoryName":"Yardley Wood", "alignment":"lance", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"nos"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Festive Frenzies",
+            "territoryChanges":[
+                {"territoryName":"Kingstanding", "alignment":"ordo", "holder":"The Immaculate", "maxHolderLineLength":"0", "flipside":"ventrue"},
+                {"territoryName":"Yardley", "alignment":"crone", "holder":"Edith", "maxHolderLineLength":"0", "flipside":"mekhet"},
+                {"territoryName":"Bartley Green", "alignment":"carthian", "holder":"Magnus Steelbourne", "maxHolderLineLength":"3", "flipside":"daeva"},
+                {"territoryName":"Quinton", "alignment":"ventrue", "holder":"Lord Bennett", "maxHolderLineLength":"0", "flipside":"invictus"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Should auld appointments be forgot, and new courts were to rise...",
+            "territoryChanges":[
+                {"territoryName":"Aston", "alignment":"crone", "holder":"Agnes Yaganova", "maxHolderLineLength":"0", "flipside":"nos"},
+                {"territoryName":"Ward End", "alignment":"invictus", "holder":"Lord Bracken", "maxHolderLineLength":"0", "flipside":"gangrel"},
+                {"territoryName":"Marston Green", "alignment":"mekhet", "holder":"Gospel Oak", "maxHolderLineLength":"0", "flipside":"ordo"},
+                {"territoryName":"Yardley Wood", "alignment":"lance", "holder":"Marilyn Laddusaw", "maxHolderLineLength":"0", "flipside":"ventrue"},
+                {"territoryName":"Nechells", "alignment":"nos", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"carthian"}
             ],
             "adjacencyChanges":[]
         }

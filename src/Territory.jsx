@@ -26,10 +26,12 @@ function Territory (props) {
     let curSegment = "";
     let holderFull = null;
 
+    let endingChar = specialCSS == "y7-after-change" ? "," : ")";
+
     if (props.t.maxHolderLineLength > 0){       //breaks up the holder name onto separate lines
         for (let i = 0; i < splitHolder.length; i++){      
             if (curSegment.length + splitHolder[i].length <= props.t.maxHolderLineLength){
-                curSegment += splitHolder[i] + (i == splitHolder.length - 1 ? ")" : " ");
+                curSegment += splitHolder[i] + (i == splitHolder.length - 1 ? endingChar : " ");
                 if (i == splitHolder.length - 1){
                     holderSegments.push(<>{curSegment+""}</>);
                 }
@@ -39,7 +41,7 @@ function Territory (props) {
                     holderSegments.push(<>{curSegment+""}</>);
                     holderSegments.push(<br/>);
                 }
-                curSegment = splitHolder[i] + (i == splitHolder.length - 1 ? ")" : " "); //this is the segment that we decided wouldn't fit on the end of this line, so it instead forms the basis for the next line.""
+                curSegment = splitHolder[i] + (i == splitHolder.length - 1 ? endingChar : " "); //this is the segment that we decided wouldn't fit on the end of this line, so it instead forms the basis for the next line.""
                 if (i == splitHolder.length - 1){
                     holderSegments.push(<>{curSegment}</>);
                 }
@@ -47,11 +49,11 @@ function Territory (props) {
         }
         holderFull = <>{holderSegments.map((s) => s)}</>
     } else {
-       // if (specialCSS == "old-style"){
-       //     holderFull = <>{_holder}</>
-       // } else {
+        if (specialCSS == "y7-after-change"){
+            holderFull = <>{"("+_holder+","}</>
+        } else {
             holderFull = <>{"("+_holder+")"}</>
-      //  }        
+        }        
     }
 
     let [id] = useState(props.t.territoryName.toLowerCase().replaceAll(" ","-"));
@@ -75,10 +77,17 @@ function Territory (props) {
                 <div className="territoryText territory-name" style={{whiteSpace:"nowrap"}}>
                     {props.t.territoryName}
                 </div>
-                {_holder != null && _holder != "" ? 
+                {_holder != null && _holder != "" ?
+                <>
                     <div className="territoryText">
                         {holderFull}
-                    </div> : null}
+                    </div>
+                    {specialCSS == "y7-after-change" ?
+                    <div className="territoryText sentence-case">
+                      {props.t.alignment +")"}
+                    </div>  
+                    : null}                
+                </> : null}
             </div>
             </>
           )

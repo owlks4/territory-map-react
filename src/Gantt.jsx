@@ -84,7 +84,7 @@ function Gantt(props) {
      <div style={{display:'flex', border:"1px solid black", width:"290px", height:"1.5em"}}>
         {
             alignmentTenures.map((tenure) => <>{
-                <div onClick={()=>{(tenure.value.split(" ")[0] == "personal" ? props.showLineGraph("holder",null,false) : props.showLineGraph("alignment",tenure.value.split(" ")[0],true))}}  title={tenure.value +", "+tenure.numWeeks+getWeekSuffixStr(tenure.numWeeks)+"\n(Click to view their\nownership as a graph)"} className={tenure.value} style={{boxSizing:"border-box", cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
+                <div onClick={()=>{(tenure.value.split(" ")[0] == "personal" ? props.showLineGraph("holder",null,false) : props.showLineGraph("alignment",tenure.value.split(" ")[0],true))}}  title={tenure.value +", "+tenure.numWeeks+getWeekSuffixStr(tenure.numWeeks)+"\n(Click to view their\nownership as a graph)"} className={tenure.value +" "+props.specialCSS} style={{boxSizing:"border-box", cursor:"pointer", width:((tenure.numWeeks/props.weeks.length)*100)+"%"}}>
                 </div>
             }</>)
         }

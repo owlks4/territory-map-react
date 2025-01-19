@@ -698,26 +698,26 @@ function App (props){
               <hr/>
               <div onMouseLeave={() => {setHighlightedCategory(null)}} id="key" style={{overflow:'auto', width:screen.orientation.type.includes("landscape") ? "fit-content" : "unset", paddingRight: screen.orientation.type.includes("landscape") ? "1.5em" : "unset"}}>
                     <div onMouseLeave={() => {setHighlightedCategory(null)}}>
-                      <div className="legend-territories-row">
-                        <LegendElement alignment="Ventrue" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","ventrue")} : ()=>{}}/>
-                        <LegendElement alignment="Daeva" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","daeva")} : ()=>{}}/>
-                        <LegendElement alignment="Mekhet" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","mekhet")} : ()=>{}}/>
-                        <LegendElement alignment="Gangrel" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","gangrel")} : ()=>{}}/>
-                        <LegendElement alignment="Nosferatu" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","nosferatu")} : ()=>{}}/>
+                      <div className={"legend-territories-row"}>
+                        <LegendElement alignment="Ventrue" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","ventrue")} : ()=>{}}/>
+                        <LegendElement alignment="Daeva" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","daeva")} : ()=>{}}/>
+                        <LegendElement alignment="Mekhet" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","mekhet")} : ()=>{}}/>
+                        <LegendElement alignment="Gangrel" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","gangrel")} : ()=>{}}/>
+                        <LegendElement alignment="Nosferatu" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("clan","nosferatu")} : ()=>{}}/>
                       </div>
-                      <div className="legend-territories-row" style={{marginTop:"0.25em"}}>
-                        <LegendElement alignment="Invictus" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","invictus")} : ()=>{}}/>
-                        <LegendElement alignment="Carthian" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","carthian")} : ()=>{}}/>
-                        <LegendElement alignment="Lance" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","lance")} : ()=>{}}/>
-                        <LegendElement alignment="Crone" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","crone")} : ()=>{}}/>
-                        <LegendElement alignment="Ordo" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","ordo")} : ()=>{}}/>
+                      <div className={"legend-territories-row"} style={{marginTop:"0.25em"}}>
+                        <LegendElement alignment="Invictus" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","invictus")} : ()=>{}}/>
+                        <LegendElement alignment="Carthian" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","carthian")} : ()=>{}}/>
+                        <LegendElement alignment="Lance" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","lance")} : ()=>{}}/>
+                        <LegendElement alignment="Crone" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","crone")} : ()=>{}}/>
+                        <LegendElement alignment="Ordo" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("covenant","ordo")} : ()=>{}}/>
                       </div>
                     </div>
-                    <div className="legend-territories-row" style={{marginTop: window.innerWidth > 1000 ? "0.5em" : "0.25em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
-                      <LegendElement alignment="Court" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment","court")} : ()=>{}}/>
-                      <LegendElement alignment="Personal" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("holder",null)} : ()=>{}}/>
-                      <LegendElement alignment="Enemy" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment","enemy")} : ()=>{}}/>
-                      <LegendElement alignment="Unclaimed" setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment",null)} : ()=>{}}/>
+                    <div className={"legend-territories-row"} style={{marginTop: window.innerWidth > 1000 ? "0.5em" : "0.25em"}} onMouseLeave={() => {setHighlightedCategory(null)}}>
+                      <LegendElement alignment="Court" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment","court")} : ()=>{}}/>
+                      <LegendElement alignment="Personal" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("holder",null)} : ()=>{}}/>
+                      <LegendElement alignment="Enemy" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment","enemy")} : ()=>{}}/>
+                      <LegendElement alignment="Unclaimed" specialCSS={specialCSS} setHighlightedCategory={setHighlightedCategory} onClick={window.innerWidth > 1000 ? ()=>{showLineGraph("alignment",null)} : ()=>{}}/>
                     </div>
               </div>
               {
@@ -791,7 +791,7 @@ function App (props){
           <></>
           :
           <Popup>
-            <Gantt t={props.t} weeks={currentYearJson.weeks} showLineGraph={showLineGraph} refreshFunc={() => {setAlternator(!alternator);  updatePrecedence();}}/>
+            <Gantt t={props.t} specialCSS={specialCSS} weeks={currentYearJson.weeks} showLineGraph={showLineGraph} refreshFunc={() => {setAlternator(!alternator);  updatePrecedence();}}/>
           </Popup>
           }
           </Marker>
