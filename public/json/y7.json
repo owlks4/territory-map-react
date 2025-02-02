@@ -122,7 +122,7 @@
             "title":"Bonnie Prince Charlie",
             "territoryChanges":[
                 {"territoryName":"Witton", "alignment":"daeva", "holder":"Pat Carver", "maxHolderLineLength":"0", "flipside":"carthian"},
-                {"territoryName":"Edgbaston", "alignment":"daeva", "holder":"Damien O'Connell", "maxHolderLineLength":"3", "flipside":"carthian"},
+                {"territoryName":"Edgbaston", "alignment":"daeva", "holder":"Damien O'Connell", "maxHolderLineLength":"0", "flipside":"carthian"},
                 {"territoryName":"Handsworth", "alignment":"ventrue", "holder":"Lord Bennett", "maxHolderLineLength":"0", "flipside":"invictus"},
                 {"territoryName":"Aston", "alignment":"invictus", "holder":"Lord Bracken", "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Nechells", "alignment":"nos", "holder":"Vlana", "maxHolderLineLength":"0", "flipside":"personal"},
@@ -220,6 +220,21 @@
                 {"territoryName":"Marston Green", "alignment":"mekhet", "holder":"Gospel Oak", "maxHolderLineLength":"0", "flipside":"ordo"},
                 {"territoryName":"Yardley Wood", "alignment":"lance", "holder":"Marilyn Laddusaw", "maxHolderLineLength":"0", "flipside":"ventrue"},
                 {"territoryName":"Nechells", "alignment":"nos", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"carthian"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"When the party's over...",
+            "territoryChanges":[
+                {"territoryName":"Castle Bromwich", "alignment":"nos", "holder":"Vlana", "maxHolderLineLength":"0", "flipside":"personal"},
+                {"territoryName":"Perry Barr", "alignment":"carthian", "holder":"Magnus Steelbourne", "maxHolderLineLength":"0", "flipside":"daeva"},
+                {"territoryName":"Quinton", "alignment":"mekhet", "holder":"Cass Et", "maxHolderLineLength":"0", "flipside":"personal"},
+                {"territoryName":"Bartley Green", "alignment":"ventrue", "holder":"Leeroy Evans", "maxHolderLineLength":"0", "flipside":"crone"},
+                {"territoryName":"Moseley", "alignment":"lance", "holder":"JJ Jarvis", "maxHolderLineLength":"0", "flipside":"gangrel"},
+                {"territoryName":"Edgbaston", "alignment":"carthian", "holder":"Damien O'Connell", "maxHolderLineLength":"0", "flipside":"daeva"},
+                {"territoryName":"Tyseley", "alignment":"gangrel", "holder":"Rosie Knight", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"Kings Heath", "alignment":"lance", "holder":"Marilyn Laddusaw", "maxHolderLineLength":"3", "flipside":"ventrue"},
+                {"territoryName":"Yardley Wood", "alignment":"gangrel", "holder":"Cara", "maxHolderLineLength":"3", "flipside":"ordo"}
             ],
             "adjacencyChanges":[]
         }

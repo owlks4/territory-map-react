@@ -84,7 +84,7 @@ function Territory (props) {
                     </div>
                     {specialCSS == "y7-after-change" ?
                     <div className="territoryText sentence-case">
-                      {props.t.alignment +")"}
+                      {(props.t.useFlipside && props.t.flipside != null ? props.t.flipside : props.t.alignment) +")"}
                     </div>  
                     : null}                
                 </> : null}
