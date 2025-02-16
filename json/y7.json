@@ -237,6 +237,15 @@
                 {"territoryName":"Yardley Wood", "alignment":"gangrel", "holder":"Cara", "maxHolderLineLength":"3", "flipside":"ordo"}
             ],
             "adjacencyChanges":[]
+        },
+        {
+            "title":"Ballot Boxing!",
+            "territoryChanges":[
+                {"territoryName":"Witton", "alignment":"ventrue", "holder":"Lord Bennett", "maxHolderLineLength":"0", "flipside":"invictus"},
+                {"territoryName":"Weoley", "alignment":"carthian", "holder":"Bartholomew", "maxHolderLineLength":"0", "flipside":"mekhet"}
+ 
+            ],
+            "adjacencyChanges":[]
         }
     ]
 }
