@@ -49,7 +49,7 @@ function Territory (props) {
         }
         holderFull = <>{holderSegments.map((s) => s)}</>
     } else {
-        if (specialCSS == "y7-after-change"){
+        if (specialCSS == "y7-after-change" && !props.t.alignment.toLowerCase().includes("contested")){
             holderFull = <>{"("+_holder+","}</>
         } else {
             holderFull = <>{"("+_holder+")"}</>
@@ -82,7 +82,7 @@ function Territory (props) {
                     <div className="territoryText">
                         {holderFull}
                     </div>
-                    {specialCSS == "y7-after-change" ?
+                    {specialCSS == "y7-after-change" && !props.t.alignment.toLowerCase().includes("contested") ?
                     <div className="territoryText sentence-case">
                       {(props.t.useFlipside && props.t.flipside != null ? props.t.flipside : props.t.alignment) +")"}
                     </div>  
