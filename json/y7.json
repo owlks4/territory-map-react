@@ -279,12 +279,21 @@
                 {"territoryName":"Perry Barr", "alignment":"carthian", "holder":"Isaac Davis", "maxHolderLineLength":"0", "flipside":"mekhet"},
                 {"territoryName":"Aston", "alignment":"ordo", "holder":"Charlie Holly", "maxHolderLineLength":"0", "flipside":"mekhet"},
                 {"territoryName":"City Centre", "alignment":"crone", "holder":"Longwell Green", "maxHolderLineLength":"0", "flipside":"daeva"},
-                {"territoryName":"Summerfield", "alignment":"mekhet contested", "holder":"DESTABILISED",  "maxHolderLineLength":"0", "flipside":"mekhet contested"},
+                {"territoryName":"Summerfield", "alignment":"enemy contested", "holder":"DESTABILISED",  "maxHolderLineLength":"0", "flipside":"enemy contested"},
                 {"territoryName":"Sparkbrook", "alignment":"lance", "holder":"Taylor Borden",  "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Marston Green", "alignment":"ordo", "holder":"Lily Tailor",  "maxHolderLineLength":"0", "flipside":"gangrel"},
                 {"territoryName":"Lea Hall", "alignment":"mekhet", "holder":"Gospel Oak",  "maxHolderLineLength":"0", "flipside":"ordo"},
-                {"territoryName":"Yardley", "alignment":"crone", "holder":"Agnes Yaganova",  "maxHolderLineLength":"0", "flipside":"nos"},
                 {"territoryName":"Yardley", "alignment":"crone", "holder":"Agnes Yaganova",  "maxHolderLineLength":"0", "flipside":"nos"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Choo-choose your own adventure",
+            "territoryChanges":[
+                {"territoryName":"Castle Bromwich", "alignment":"crone", "holder":"Vlana", "maxHolderLineLength":"0", "flipside":"nos"},
+                {"territoryName":"Nechells", "alignment":"ventrue", "holder":"Lord Bennett", "maxHolderLineLength":"0", "flipside":"invictus"},
+                {"territoryName":"Summerfield", "alignment":"enemy contested", "holder":"Mekhet vs Daeva",  "maxHolderLineLength":"0", "flipside":"enemy contested"},
+                {"territoryName":"Yardley Wood", "alignment":"gangrel", "holder":"Madame Mouse", "maxHolderLineLength":"0", "flipside":"invictus"}
             ],
             "adjacencyChanges":[]
         }
