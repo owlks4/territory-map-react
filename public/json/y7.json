@@ -305,6 +305,27 @@
                 {"territoryName":"Ladywood", "alignment":"enemy contested", "holder":"DESTABILISED", "maxHolderLineLength":"0", "flipside":"enemy contested"}
             ],
             "adjacencyChanges":[]
+        },
+        {
+            "title":"Out with the New, In with the Old",
+            "territoryChanges":[
+                {"territoryName":"Erdington", "alignment":"nos", "holder":"Mair Jones", "maxHolderLineLength":"0", "flipside":"carthian"},
+                {"territoryName":"Witton", "alignment":"daeva", "holder":"Locus", "maxHolderLineLength":"0", "flipside":"crone"},
+                {"territoryName":"Lea Hall", "alignment":"personal", "holder":"Gospel Oak", "maxHolderLineLength":"0", "flipside":"personal"},
+                {"territoryName":"Sparkbrook", "alignment":"gangrel", "holder":"Taylor Borden", "maxHolderLineLength":"0", "flipside":"lance"},
+                {"territoryName":"The Rack", "alignment":"enemy contested", "holder":"DESTABILISED", "maxHolderLineLength":"0", "flipside":"enemy contested"},
+                {"territoryName":"Ladywood", "alignment":"daeva", "holder":"Valentina", "maxHolderLineLength":"0", "flipside":"personal"},
+                {"territoryName":"Northfield", "alignment":"enemy contested", "holder":"DESTABILISED", "maxHolderLineLength":"0", "flipside":"enemy contested"}
+            ],
+            "adjacencyChanges":[]
+        },
+        {
+            "title":"Finale",
+            "territoryChanges":[
+                {"territoryName":"Lea Hall", "alignment":"ordo", "holder":"Gospel Oak", "maxHolderLineLength":"0", "flipside":"mekhet"},
+                {"territoryName":"Summerfield", "alignment":"daeva", "holder":"Lady Glass", "maxHolderLineLength":"0", "flipside":"invictus"}
+            ],
+            "adjacencyChanges":[]
         }
     ]
 }
